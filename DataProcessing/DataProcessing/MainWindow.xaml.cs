@@ -27,7 +27,7 @@ namespace DataProcessing
 
         private void homepageButton(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Xin chào. Hồng đang test button xaml");
+            MessageBox.Show("Xin chào. abc Hồng đang test button xaml");
         }
     }
 }

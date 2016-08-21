@@ -28,3 +28,19 @@ D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.Properties.Re
 D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.csproj.GenerateResource.Cache
 D:\Project1\DataProcessing\DataProcessing\obj\Debug\Window1.g.cs
 D:\Project1\DataProcessing\DataProcessing\obj\Debug\Window1.baml
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\bin\Debug\DataProcessing.exe.config
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\bin\Debug\DataProcessing.exe
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\bin\Debug\DataProcessing.pdb
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.csprojResolveAssemblyReference.cache
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\MainWindow.g.cs
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\Window1.g.cs
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\App.g.cs
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing_MarkupCompile.cache
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing_MarkupCompile.lref
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\MainWindow.baml
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\Window1.baml
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.g.resources
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.Properties.Resources.resources
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.csproj.GenerateResource.Cache
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.exe
+C:\Users\Nam\Desktop\s\Project 1\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.pdb
