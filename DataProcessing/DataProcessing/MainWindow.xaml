@@ -17,7 +17,7 @@
             Width="500"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Background="Gray"
+            Background="Gray" Click="homepageButton"
             >
             <TextBlock
                 Text="This is the button"

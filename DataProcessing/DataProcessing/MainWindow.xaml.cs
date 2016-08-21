@@ -24,5 +24,10 @@ namespace DataProcessing
         {
             InitializeComponent();
         }
+
+        private void homepageButton(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Xin chào. Hồng đang test button xaml");
+        }
     }
 }

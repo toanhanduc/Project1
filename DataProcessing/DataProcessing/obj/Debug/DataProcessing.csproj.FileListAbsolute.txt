@@ -12,3 +12,17 @@ D:\Working\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.Prope
 D:\Working\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.csproj.GenerateResource.Cache
 D:\Working\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.exe
 D:\Working\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.pdb
+D:\Project1\DataProcessing\DataProcessing\bin\Debug\DataProcessing.exe.config
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.exe
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.pdb
+D:\Project1\DataProcessing\DataProcessing\bin\Debug\DataProcessing.exe
+D:\Project1\DataProcessing\DataProcessing\bin\Debug\DataProcessing.pdb
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.csprojResolveAssemblyReference.cache
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\MainWindow.g.cs
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\App.g.cs
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing_MarkupCompile.cache
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing_MarkupCompile.lref
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\MainWindow.baml
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.g.resources
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.Properties.Resources.resources
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.csproj.GenerateResource.Cache
