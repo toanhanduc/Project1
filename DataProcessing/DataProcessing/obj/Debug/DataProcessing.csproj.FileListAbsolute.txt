@@ -26,3 +26,5 @@ D:\Project1\DataProcessing\DataProcessing\obj\Debug\MainWindow.baml
 D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.g.resources
 D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.Properties.Resources.resources
 D:\Project1\DataProcessing\DataProcessing\obj\Debug\DataProcessing.csproj.GenerateResource.Cache
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\Window1.g.cs
+D:\Project1\DataProcessing\DataProcessing\obj\Debug\Window1.baml
