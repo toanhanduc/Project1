@@ -17,8 +17,12 @@
             Width="500"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
+<<<<<<< HEAD
             Background="Gray"
             Click="Button_Click"
+=======
+            Background="Gray" Click="homepageButton"
+>>>>>>> refs/remotes/origin/master
             >
             <TextBlock
                 Text="This is the button"

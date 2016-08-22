@@ -25,10 +25,16 @@ namespace DataProcessing
             InitializeComponent();
         }
 
+<<<<<<< HEAD
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService nav = NavigationService.GetNavigationService(this);
             nav.Navigate(new Uri("Page1.xaml", UriKind.RelativeOrAbsolute))
+=======
+        private void homepageButton(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Xin chào. Đây là Nam");
+>>>>>>> refs/remotes/origin/master
         }
     }
 }
