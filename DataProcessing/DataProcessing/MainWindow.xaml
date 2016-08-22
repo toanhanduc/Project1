@@ -18,6 +18,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Background="Gray"
+            Click="Button_Click"
             >
             <TextBlock
                 Text="This is the button"
