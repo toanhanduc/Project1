@@ -1,0 +1,31 @@
+﻿<Page x:Class="DataProcessing.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DataProcessing"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="Page1">
+
+    <Grid
+        Background="Gray">
+        <Button
+            Background="Aqua"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Click="Page1_Button"
+            >
+            <TextBlock
+                Text="To page 2"
+                FontSize="150"></TextBlock>
+        </Button>
+        <TextBlock
+            Text="Page #1"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            FontSize="150"
+            Margin="0 150 0 0"            
+            ></TextBlock>
+    </Grid>
+</Page>
