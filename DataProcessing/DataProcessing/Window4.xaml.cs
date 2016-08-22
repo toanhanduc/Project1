@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace DataProcessing
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Window4.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Window4 : Window
     {
-        public MainWindow()
+        public Window4()
         {
             InitializeComponent();
-        }
-
-        private void homepageButton(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Xin chào. Đây là Nam");
         }
     }
 }
