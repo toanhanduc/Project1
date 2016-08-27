@@ -1,0 +1,131 @@
+﻿<Page x:Class="DataProcessing.thietlapHeSo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DataProcessing"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="Colro Analysis">
+    <Grid>
+    <StackPanel
+        Height="1080"
+        Width="1920"
+        Background="White"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center">
+        <!--Start Top bar-->
+        <Grid>
+            <StackPanel
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center">
+        <Rectangle x:Name="toprec" Fill="#0e6633" 
+                   Height="170"
+                   Width="1920"
+                   Stroke="Transparent"
+                   StrokeThickness="0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center">
+        </Rectangle>
+        <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
+                   StrokeThickness="0"
+                   Height="17"
+                   Width="1920"
+                   Stroke="Transparent" 
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"/>
+        </StackPanel>
+            <TextBlock
+            FontFamily="Code Bold"
+            Foreground="White"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            FontSize="55"
+            Margin="35 35 0 0"            
+            >
+            Color
+            <LineBreak/>
+            Analysis
+        </TextBlock>
+        </Grid>
+        <!--End Top bar-->
+        <!--Start Mid-->
+        <Grid
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Margin="0 50 0 0">
+            <!--Start Browse Button-->
+            <Rectangle
+                Fill="#009e49" 
+                Height="90"
+                Width="1275"
+                Stroke="Transparent"
+                StrokeThickness="0"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">             
+            </Rectangle>
+            <TextBox
+                Background="White"
+                FontSize="40"
+                TextWrapping="NoWrap"
+                Height="60"
+                Width="1025"                
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin="15 0 0 0">
+            </TextBox>
+            <Button
+                Background="#55d455"
+                Height="60"
+                Width="180"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                BorderThickness="0"
+                Margin="0 0 15 0">
+                <TextBlock
+                    Text="Browse"
+                    Foreground="White"
+                    Background="Transparent"
+                    FontSize="40"
+                    FontFamily="Code Bold"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0 10 0 0"></TextBlock>
+            </Button>
+            <!--End Browse Button--> 
+            
+        </Grid>        
+        <!--End Mid-->        
+    </StackPanel>
+        <!--Start Btm-->        
+        <Grid
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center"
+            Margin="0 0 0 50 ">
+            <!--Start TimKiem Button-->
+            <Rectangle
+                Fill="#009e49" 
+                Height="90"
+                Width="485"
+                Stroke="Transparent"
+                StrokeThickness="0">                
+            </Rectangle>
+            <Button
+                Background="#55d455" 
+                Height="65"
+                Width="460"
+                BorderThickness="0">
+                <TextBlock
+                    Background="Transparent"
+                    Foreground="White"
+                    FontSize="40"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                    TIẾN HÀNH TÌM KIẾM
+                </TextBlock>
+            </Button>            
+            <!--End TimKiem Button-->
+        </Grid>
+        <!--End Btm-->            
+    </Grid>
+</Page>

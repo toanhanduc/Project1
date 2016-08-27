@@ -23,7 +23,7 @@ namespace DataProcessing
         public MainWindow()
         {
             InitializeComponent();
-            MainWindows.Content = new Page1();
+            MainWindows.Content = new thietlapHeSo();
         }
     }
 }

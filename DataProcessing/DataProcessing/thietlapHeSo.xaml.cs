@@ -18,17 +18,11 @@ namespace DataProcessing
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class thietlapHeSo : Page
     {
-        public Page1()
+        public thietlapHeSo()
         {
             InitializeComponent();
-        }
-
-        private void Page1_Button(object sender, RoutedEventArgs e)
-        {
-            Page2 P2 = new Page2();
-            this.NavigationService.Navigate(P2);
         }
     }
 }
