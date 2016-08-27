@@ -27,7 +27,11 @@ namespace DataProcessing
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Mở đường dẫn đến file xls, xlsx và điền đường dẫn vào textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void browseFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openfile = new OpenFileDialog();
@@ -41,7 +45,11 @@ namespace DataProcessing
             if (browsefile == true)
                 txtFilePath.Text = openfile.FileName;
         }
-
+        /// <summary>
+        /// Bắt đầu tìm kiếm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void startSearch(object sender, RoutedEventArgs e)
         {
             Excel.Application excel;
