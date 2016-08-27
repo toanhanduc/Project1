@@ -64,7 +64,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center">             
             </Rectangle>
-            <TextBox
+            <TextBox x:Name="txtFilePath"
                 Background="White"
                 FontSize="40"
                 TextWrapping="NoWrap"
@@ -81,7 +81,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"
                 BorderThickness="0"
-                Margin="0 0 15 0">
+                Margin="0 0 15 0" Click="browseFile">
                 <TextBlock
                     Text="Browse"
                     Foreground="White"
@@ -90,8 +90,8 @@
                     FontFamily="Code Bold"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Margin="0 10 0 0"></TextBlock>
-            </Button>
+                    Margin="0 10 0 0"/>
+                </Button>
             <!--End Browse Button--> 
             
         </Grid>        
@@ -114,7 +114,7 @@
                 Background="#55d455" 
                 Height="65"
                 Width="460"
-                BorderThickness="0">
+                BorderThickness="0" Click="startSearch">
                 <TextBlock
                     Background="Transparent"
                     Foreground="White"
