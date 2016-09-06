@@ -115,6 +115,7 @@
                         FontWeight="Regular"
                         >Khoảng thời gian tìm kiếm :</TextBlock>
                     <DatePicker
+                        x:Name="startd"
                         VerticalAlignment="Center"
                         FontSize="23"
                         Margin="360,0,-179,0"
@@ -126,6 +127,7 @@
                         tới
                     </TextBlock>
                     <DatePicker
+                        x:Name="endd"
                         VerticalAlignment="Center"
                         FontSize="23"
                         Margin="588,0,-407,0"
