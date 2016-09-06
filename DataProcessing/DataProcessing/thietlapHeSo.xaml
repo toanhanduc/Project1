@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DataProcessing"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Colro Analysis">
+      Title="Color Analysis">
     <Grid>
         <StackPanel
         Height="1080"
@@ -20,7 +20,7 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center">
                     <Rectangle 
-                        x:Name="toprec" Fill="#0e6633" 
+                        Fill="#0e6633" 
                         Height="170"
                         Width="1920"
                         Stroke="Transparent"
