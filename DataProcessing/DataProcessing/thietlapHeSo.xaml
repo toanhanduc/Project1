@@ -8,63 +8,66 @@
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Colro Analysis">
     <Grid>
-    <StackPanel
+        <StackPanel
         Height="1080"
         Width="1920"
         Background="White"
         VerticalAlignment="Center"
         HorizontalAlignment="Center">
-        <!--Start Top bar-->
-        <Grid>
+            <!--Start Top bar-->
+            <Grid>
+                <StackPanel
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center">
+                    <Rectangle 
+                        x:Name="toprec" Fill="#0e6633" 
+                        Height="170"
+                        Width="1920"
+                        Stroke="Transparent"
+                        StrokeThickness="0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center">
+                    </Rectangle>
+                    <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
+                               StrokeThickness="0"
+                               Height="17"
+                               Width="1920"
+                               Stroke="Transparent"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock
+                    FontFamily="Code Bold"
+                    Foreground="White"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    FontSize="55"
+                    Margin="35 35 0 0">
+                    Color
+                    <LineBreak/>
+                    Analysis
+                </TextBlock>
+            </Grid>
+            <!--End Top bar-->
+            <!--Start Mid-->
             <StackPanel
-            VerticalAlignment="Top"
-            HorizontalAlignment="Center">
-        <Rectangle x:Name="toprec" Fill="#0e6633" 
-                   Height="170"
-                   Width="1920"
-                   Stroke="Transparent"
-                   StrokeThickness="0"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center">
-        </Rectangle>
-        <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
-                   StrokeThickness="0"
-                   Height="17"
-                   Width="1920"
-                   Stroke="Transparent" 
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center"/>
-        </StackPanel>
-            <TextBlock
-            FontFamily="Code Bold"
-            Foreground="White"
+                Width="1275"
+                HorizontalAlignment="Center">
+                <!--Start Browse Button-->
+                <Grid
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
-            FontSize="55"
-            Margin="35 35 0 0"            
-            >
-            Color
-            <LineBreak/>
-            Analysis
-        </TextBlock>
-        </Grid>
-        <!--End Top bar-->
-        <!--Start Mid-->
-        <Grid
-            VerticalAlignment="Top"
-            HorizontalAlignment="Center"
             Margin="0 50 0 0">
-            <!--Start Browse Button-->
-            <Rectangle
+                    <Rectangle
                 Fill="#009e49" 
                 Height="90"
                 Width="1275"
                 Stroke="Transparent"
                 StrokeThickness="0"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center">             
-            </Rectangle>
-            <TextBox
+                HorizontalAlignment="Center">
+                    </Rectangle>
+                    <TextBox
                 Background="White"
                 FontSize="40"
                 TextWrapping="NoWrap"
@@ -73,31 +76,121 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
                 Margin="15 0 0 0">
-            </TextBox>
-            <Button
-                Background="#55d455"
-                Height="60"
-                Width="180"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                BorderThickness="0"
-                Margin="0 0 15 0">
+                    </TextBox>
+                    <Button
+                        Background="#55d455"
+                        Height="60"
+                        Width="180"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        BorderThickness="0"
+                        Margin="0 0 15 0">
+                        <TextBlock
+                            Text="Browse"
+                            Foreground="White"
+                            Background="Transparent"
+                            FontSize="40"
+                            FontFamily="Code Bold"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="0 10 0 0"></TextBlock>
+                    </Button>
+                </Grid>
+                <!--End Browse Button-->
                 <TextBlock
-                    Text="Browse"
-                    Foreground="White"
-                    Background="Transparent"
-                    FontSize="40"
-                    FontFamily="Code Bold"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Margin="0 10 0 0"></TextBlock>
-            </Button>
-            <!--End Browse Button--> 
-            
-        </Grid>        
-        <!--End Mid-->        
-    </StackPanel>
-        <!--Start Btm-->        
+                    HorizontalAlignment="Left"
+                    Margin="0 20 0 0"
+                    FontSize="57"
+                    FontWeight="Bold"
+                    Foreground="#009e49">Thiết lập tham số</TextBlock>
+                <!--Start Thoi gian tim kiem -->
+                <Grid VerticalAlignment="Center"
+                      HorizontalAlignment="Left"
+                      Margin="0 25 0 0">
+                    <TextBlock                        
+                        FontSize="27"
+                        FontWeight="Regular"
+                        >Khoảng thời gian tìm kiếm :</TextBlock>
+                    <DatePicker
+                        VerticalAlignment="Center"
+                        FontSize="23"
+                        Margin="360,0,-179,0"
+                        ></DatePicker>
+                    <TextBlock
+                        FontSize="27"
+                        FontWeight="Regular"
+                        Margin="540,0,-228,0">
+                        tới
+                    </TextBlock>
+                    <DatePicker
+                        VerticalAlignment="Center"
+                        FontSize="23"
+                        Margin="588,0,-407,0"
+                        ></DatePicker>
+                </Grid>
+                <!--End Thoi gian tim kiem -->
+                <!--Start So luong mau moi nhom-->
+                <StackPanel
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+                    <TextBlock                        
+                        FontSize="27"
+                        FontWeight="Regular"
+                        >Số lượng màu mỗi nhóm :</TextBlock>
+                    <Grid
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="0 10 0 0">
+                        <RadioButton
+                            Margin="0 0 0 0"
+                            Content="2"
+                            FontSize="23"
+                            Padding="5 -10 0 0 "
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                        ></RadioButton>
+                        <RadioButton
+                            Margin="70 0 0 0"
+                            Content="3"
+                            FontSize="23"
+                            Padding="5 -10 0 0 "
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                        ></RadioButton>
+                        <RadioButton
+                            Margin="140 0 0 0"
+                            Content="4"
+                            FontSize="23"
+                            Padding="5 -10 0 0 "
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                        ></RadioButton>
+                        <RadioButton
+                            Margin="210 0 0 0"
+                            Content="5"
+                            FontSize="23"
+                            Padding="5 -10 0 0 "
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                        ></RadioButton>
+                    </Grid>
+                </StackPanel>
+                <!--End So luong mau moi nhom-->
+                <!--Start Thoi gian tim kiem gioi han-->
+                <Grid VerticalAlignment="Center"
+                      HorizontalAlignment="Left">
+                    <TextBlock                        
+                        FontSize="27"
+                        FontWeight="Regular"
+                        >Thời gian tìm kiếm giới hạn :</TextBlock>
+                    <TextBox Margin="360,0,-80,0"></TextBox>
+                </Grid>
+                <!--End Thoi gian tim kiem gioi han-->
+            </StackPanel>
+            <!--End Mid-->
+        </StackPanel>
+        <!--Start Btm-->
         <Grid
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
@@ -108,7 +201,7 @@
                 Height="90"
                 Width="485"
                 Stroke="Transparent"
-                StrokeThickness="0">                
+                StrokeThickness="0">
             </Rectangle>
             <Button
                 Background="#55d455" 
@@ -123,9 +216,9 @@
                     HorizontalAlignment="Center">
                     TIẾN HÀNH TÌM KIẾM
                 </TextBlock>
-            </Button>            
+            </Button>
             <!--End TimKiem Button-->
         </Grid>
-        <!--End Btm-->            
+        <!--End Btm-->
     </Grid>
 </Page>
