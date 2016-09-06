@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DataProcessing"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Color Analysis">
+      Title="ColorAnalysis">
     <Grid>
         <StackPanel
         Height="1080"
