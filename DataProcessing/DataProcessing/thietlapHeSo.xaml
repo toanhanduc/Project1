@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DataProcessing"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Color Analysis">
+      Title="Colro Analysis">
     <Grid>
         <StackPanel
         Height="1080"
@@ -51,34 +51,10 @@
             <!--End Top bar-->
             <!--Start Mid-->
             <StackPanel
-<<<<<<< HEAD
-            VerticalAlignment="Top"
-            HorizontalAlignment="Center">
-        <Rectangle x:Name="toprec" Fill="#0e6633" 
-                   Height="170"
-                   Width="1920"
-                   Stroke="Transparent"
-                   StrokeThickness="0"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center">
-        </Rectangle>
-        <Rectangle x:Name="the2ndtoprec" Fill="#009e49"
-                   StrokeThickness="0"
-                   Height="17"
-                   Width="1920"
-                   Stroke="Transparent" 
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center"/>
-        </StackPanel>
-            <TextBlock
-            FontFamily="Code Bold"
-            Foreground="White"
-=======
                 Width="1275"
                 HorizontalAlignment="Center">
                 <!--Start Browse Button-->
                 <Grid
->>>>>>> refs/remotes/origin/toanhd
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Margin="0 50 0 0">
@@ -89,24 +65,18 @@
                 Stroke="Transparent"
                 StrokeThickness="0"
                 VerticalAlignment="Center"
-<<<<<<< HEAD
                 HorizontalAlignment="Center">
                     </Rectangle>
                     <TextBox
-=======
-                HorizontalAlignment="Center">             
-            </Rectangle>
-            <TextBox x:Name="txtFilePath"
->>>>>>> origin/master
-                Background="White"
-                FontSize="40"
-                TextWrapping="NoWrap"
-                Height="60"
-                Width="1025"                
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Margin="15 0 0 0">
-<<<<<<< HEAD
+                        x:Name="txtFilePath"
+                        Background="White"
+                        FontSize="40"
+                        TextWrapping="NoWrap"
+                        Height="60"
+                        Width="1025"     
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="15 0 0 0">
                     </TextBox>
                     <Button
                         Background="#55d455"
@@ -115,7 +85,8 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                         BorderThickness="0"
-                        Margin="0 0 15 0">
+                        Margin="0 0 15 0"
+                        Click="browseFile">
                         <TextBlock
                             Text="Browse"
                             Foreground="White"
@@ -128,20 +99,8 @@
                     </Button>
                 </Grid>
                 <!--End Browse Button-->
-=======
-            </TextBox>
-            <Button
-                Background="#55d455"
-                Height="60"
-                Width="180"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                BorderThickness="0"
-                Margin="0 0 15 0" Click="browseFile">
->>>>>>> origin/master
                 <TextBlock
                     VerticalAlignment="Center"
-<<<<<<< HEAD
                     HorizontalAlignment="Left"
                     Margin="0 20 0 0"
                     FontSize="57"
@@ -234,17 +193,6 @@
             <!--End Mid-->
         </StackPanel>
         <!--Start Btm-->
-=======
-                    HorizontalAlignment="Center"
-                    Margin="0 10 0 0"/>
-                </Button>
-            <!--End Browse Button--> 
-            
-        </Grid>        
-        <!--End Mid-->        
-    </StackPanel>
-        <!--Start Btm-->        
->>>>>>> origin/master
         <Grid
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
@@ -258,10 +206,11 @@
                 StrokeThickness="0">
             </Rectangle>
             <Button
+                Click="startSearch"
                 Background="#55d455" 
                 Height="65"
                 Width="460"
-                BorderThickness="0" Click="startSearch">
+                BorderThickness="0">
                 <TextBlock
                     Background="Transparent"
                     Foreground="White"
