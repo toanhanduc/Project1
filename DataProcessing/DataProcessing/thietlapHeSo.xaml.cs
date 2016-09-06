@@ -105,25 +105,17 @@ namespace DataProcessing
         }
 
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void RadioButton1_Checked(object sender, RoutedEventArgs e)
         {
-            Handle(sender as CheckBox);
+            MessageBox.Show("2 is check");
         }
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void RadioButton1_Unchecked(object sender, RoutedEventArgs e)
         {
-            Handle(sender as CheckBox);
+            MessageBox.Show("2 is uncheck");
         }
 
-        void Handle(CheckBox checkBox)
-        {
-            // Use IsChecked.
-            bool flag = checkBox.IsChecked.Value;
-
-            // Assign Window Title.
-            this.Title = "IsChecked = " + flag.ToString();
-            MessageBox.Show(Title);
-        }
+        
 
     }
 }

@@ -147,12 +147,14 @@
                         VerticalAlignment="Center"
                         Margin="0 10 0 0">
                         <RadioButton
-                            Margin="0 0 0 0"
+                            Margin="0,0,0,-0.2"
                             Content="2"
                             FontSize="23"
                             Padding="5 -10 0 0 "
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Checked="RadioButton1_Checked"
+                            Unchecked="RadioButton1_Unchecked"
                         ></RadioButton>
                         <RadioButton
                             Margin="70 0 0 0"
