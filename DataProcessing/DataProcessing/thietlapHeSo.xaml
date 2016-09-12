@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DataProcessing"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Colro Analysis">
+      Title="ColorAnalysis">
     <Grid>
         <StackPanel
         Height="1080"
@@ -20,7 +20,7 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center">
                     <Rectangle 
-                        x:Name="toprec" Fill="#0e6633" 
+                        Fill="#0e6633" 
                         Height="170"
                         Width="1920"
                         Stroke="Transparent"
@@ -147,12 +147,14 @@
                         VerticalAlignment="Center"
                         Margin="0 10 0 0">
                         <RadioButton
-                            Margin="0 0 0 0"
+                            Margin="0,0,0,-0.2"
                             Content="2"
                             FontSize="23"
                             Padding="5 -10 0 0 "
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Checked="RadioButton2_Checked"
+                            Unchecked="RadioButton2_Unchecked"
                         ></RadioButton>
                         <RadioButton
                             Margin="70 0 0 0"
@@ -161,6 +163,8 @@
                             Padding="5 -10 0 0 "
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
+                            Checked="RadioButton3_Checked"
+                            Unchecked="RadioButton3_Unchecked"
                         ></RadioButton>
                         <RadioButton
                             Margin="140 0 0 0"
@@ -169,6 +173,8 @@
                             Padding="5 -10 0 0 "
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
+                            Checked="RadioButton4_Checked"
+                            Unchecked="RadioButton4_Unchecked"
                         ></RadioButton>
                         <RadioButton
                             Margin="210 0 0 0"
@@ -177,6 +183,8 @@
                             Padding="5 -10 0 0 "
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
+                            Checked="RadioButton5_Checked"
+                            Unchecked="RadioButton5_Unchecked"
                         ></RadioButton>
                     </Grid>
                 </StackPanel>
