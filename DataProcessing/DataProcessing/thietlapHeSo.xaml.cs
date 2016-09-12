@@ -639,7 +639,7 @@ namespace DataProcessing
 
                 for (int j = i + 1; j < col - 4; j++) // chọn từng cột ở vòng 2, để lại 3 cột để ghép với 2 cột đã chọn
                 {
-                   
+
                     // THÊM ĐIỀU KIỆN ĐỂ SANG MÀU KHÁC
 
                     List<int> checkList2 = new List<int>(checkList1);
@@ -798,7 +798,7 @@ namespace DataProcessing
                     }
 
                 }
-            
+
             }
         }
 

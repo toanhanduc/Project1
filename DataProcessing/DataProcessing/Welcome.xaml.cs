@@ -16,14 +16,19 @@ using System.Windows.Shapes;
 namespace DataProcessing
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Welcome.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Welcome : Page
     {
-        public MainWindow()
+        public Welcome()
         {
             InitializeComponent();
-            MainWindows.Content = new Welcome();
+        }
+
+        private void gotothietlapHeso(object sender, RoutedEventArgs e)
+        {
+            thietlapHeSo tlhs = new thietlapHeSo();
+            this.NavigationService.Navigate(tlhs);
         }
     }
 }
