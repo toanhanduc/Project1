@@ -14,13 +14,16 @@
         VerticalAlignment="Center"
         HorizontalAlignment="Center">
         <!--Start Top bar-->
-        <StackPanel>
-            <Grid>
-                <Grid>
-                    <StackPanel
+        <Grid
+            Height="Auto"
+            Width="1280"
+            Background="White"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center">
+            <StackPanel
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center">
-                        <Rectangle 
+                <Rectangle 
                         Fill="#0e6633" 
                         Height="130"
                         Width="1280"
@@ -28,17 +31,17 @@
                         StrokeThickness="0"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center">
-                        </Rectangle>
-                        <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
-                               StrokeThickness="0"
-                               Height="15"
-                               Width="1280"
-                               Stroke="Transparent"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Grid>
-                <TextBlock
+                </Rectangle>
+                <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
+                           StrokeThickness="0"
+                           Height="15"
+                           Width="1280"
+                           Stroke="Transparent"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center"
+                           Margin="0"/>
+            </StackPanel>
+            <TextBlock
                     FontFamily="Code Bold"
                     Foreground="White"
                     VerticalAlignment="Center"
@@ -48,25 +51,39 @@
                     Color
                     <LineBreak/>
                     Analysis
-                </TextBlock>
-            </Grid>
-        </StackPanel>
+            </TextBlock>
+        </Grid>
         <!--End Top bar-->
-        <TextBlock
+        <StackPanel
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Center">
+            <TextBlock
             FontFamily="Code Bold"
             Foreground="#0e6633"
-            FontSize="60"
+            FontSize="40"
             TextAlignment="Center">Welcome
         <LineBreak></LineBreak>
         to the Color ananlysis</TextBlock>
+            <Viewbox
+            Width="200"
+            Height="Auto"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+                <MediaElement x:Name="myGif"
+                      UnloadedBehavior="Manual"
+                      Source="D:\Working\Project1\DataProcessing\DataProcessing\Assets\aaa.gif" 
+                      LoadedBehavior="Play"
+                      MediaEnded="myGif_MediaEnded"
+                      Stretch="UniformToFill"
+                      ></MediaElement>
+            </Viewbox>
+        </StackPanel>
         <!--Start Btm-->
+        <!--Start Sudung Button-->
         <Grid
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
-            Margin="0 0 0 80 ">
-            <!--Start TimKiem Button-->
+            Margin="0 0 0 70 ">
             <Rectangle
                 Fill="#009e49" 
                 Height="80"

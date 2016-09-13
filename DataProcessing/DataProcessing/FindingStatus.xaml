@@ -1,0 +1,255 @@
+﻿<Page x:Class="DataProcessing.FindingStatus"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DataProcessing"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="FindingStatus">
+    <Grid
+        Height="720"
+        Width="1280"
+        Background="White"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center">
+        <StackPanel>
+            <!--Start Top bar-->
+            <Grid
+            Height="Auto"
+            Width="1280"
+            Background="White"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center">
+                <Grid>
+                    <StackPanel
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center">
+                        <Rectangle 
+                        Fill="#0e6633" 
+                        Height="130"
+                        Width="1280"
+                        Stroke="Transparent"
+                        StrokeThickness="0"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center">
+                        </Rectangle>
+                        <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
+                               StrokeThickness="0"
+                               Height="15"
+                               Width="1280"
+                               Stroke="Transparent"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock
+                    FontFamily="Code Bold"
+                    Foreground="White"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    FontSize="40"
+                    Margin="35 0 0 15">
+                    Color
+                    <LineBreak/>
+                    Analysis
+                    </TextBlock>
+                </Grid>
+            </Grid>
+            <!--End Top bar-->
+            <!--Start Mid-->
+            <StackPanel>
+                <Grid
+                VerticalAlignment="Top"
+                Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0.7*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="0 15 0 0"
+                        FontSize="35"
+                        FontWeight="Bold"
+                        Foreground="#009e49">Trạng thái tìm kiếm</TextBlock>
+                        <TextBlock
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        FontSize="20"
+                        >Thời điểm tiến hành tìm kiếm</TextBlock>
+                    </StackPanel>
+                    <StackPanel
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="0 10 0 0"
+                    Grid.Column="1"
+                    Grid.Row="1">
+                        <Grid>
+                            <Border 
+                        Margin="0 5 0 0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        BorderBrush="#009e49"
+                        BorderThickness="5">
+                                <TextBlock                        
+                        FontSize="15"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Background="#55d455"
+                        Padding="10 5"
+                        >Tốc độ xử lý hiện tại :</TextBlock>
+                            </Border>
+                            <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="200 0 0 0">
+                            Sth here
+                            </TextBlock>
+                        </Grid>
+                        <Grid>
+                            <Border 
+                        Margin="0 5 0 0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        BorderBrush="#009e49"
+                        BorderThickness="5">
+                                <TextBlock                        
+                        FontSize="15"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Background="#55d455"
+                        Padding="10 5"
+                        >Thời gian đã xử lý:</TextBlock>
+                            </Border>
+                            <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="180 0 0 0">
+                            Sth here
+                            </TextBlock>
+                        </Grid>
+                        <Grid>
+                            <Border 
+                        Margin="0 5 0 0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        BorderBrush="#009e49"
+                        BorderThickness="5">
+                                <TextBlock                        
+                        FontSize="15"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Background="#55d455"
+                        Padding="10 5"
+                        >Ước lượng thời gian còn lại:</TextBlock>
+                            </Border>
+                            <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="240 0 0 0">
+                            Sth here
+                            </TextBlock>
+                        </Grid>
+                        <Grid>
+                            <Border 
+                        Margin="0 5 0 0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        BorderBrush="#009e49"
+                        BorderThickness="5">
+                                <TextBlock                        
+                        FontSize="15"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Background="#55d455"
+                        Padding="10 5"
+                        >Số nhóm màu đã tìm thấy:</TextBlock>
+                            </Border>
+                            <TextBlock
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Margin="230 0 0 0">
+                            Sth here
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0 10 0 0"
+                    Grid.Column="2"
+                    Grid.Row="1">
+                        <TextBlock
+                        HorizontalAlignment="Right">Khoảng thời gian tìm kiếm :</TextBlock>
+                        <TextBlock Foreground="#009e49">
+                        từ ngày 
+                        <TextBlock FontWeight="Bold">nn/tt/nn</TextBlock>
+                        đến ngày
+                        <TextBlock FontWeight="Bold">nn/tt/nn</TextBlock>
+                    </TextBlock>
+                        <TextBlock
+                        HorizontalAlignment="Right">Số lượng màu trong mỗi nhóm :</TextBlock>
+                        <TextBlock Foreground="#009e49"
+                               HorizontalAlignment="Right">
+                        <TextBlock FontWeight="Bold">ssss</TextBlock>
+                    </TextBlock>
+                        <TextBlock
+                        HorizontalAlignment="Right">Ngưỡng số lượng bán ra:</TextBlock>
+                        <TextBlock Foreground="#009e49"
+                               HorizontalAlignment="Right">
+                        <TextBlock FontWeight="Bold">ssss</TextBlock>
+                    </TextBlock>
+                    </StackPanel>
+                </Grid>
+                <ProgressBar
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        Height="50"
+                        Margin="0,30,0,0"
+                        VerticalAlignment="Top"
+                        Width="600"
+                        Foreground="Salmon"/>
+            </StackPanel>
+            <!--End Mid-->
+        </StackPanel>
+        <!--Start Btm-->
+        <Grid
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center"
+            Margin="0 0 0 50 ">
+            <!--Start TimKiem Button-->
+            <Rectangle
+                Fill="#009e49" 
+                Height="70"
+                Width="385"
+                Stroke="Transparent"
+                StrokeThickness="0">
+            </Rectangle>
+            <Button
+                Background="#55d455" 
+                Height="45"
+                Width="355"
+                BorderThickness="0">
+                <TextBlock
+                    Background="Transparent"
+                    Foreground="White"
+                    FontSize="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                    NGỪNG TÌM KIẾM
+                </TextBlock>
+            </Button>
+            <!--End TimKiem Button-->
+        </Grid>
+        <!--End Btm-->
+    </Grid>
+</Page>
