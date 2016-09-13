@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace DataProcessing
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FindingStatus.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FindingStatus : Page
     {
-        public MainWindow()
+        public FindingStatus()
         {
             InitializeComponent();
-            MainWindows.Content = new Welcome();
         }
     }
 }
