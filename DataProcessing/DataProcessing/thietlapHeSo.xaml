@@ -7,20 +7,24 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="ColorAnalysis">
-    <Grid>
-        <StackPanel
+    <Grid
         Height="720"
         Width="1280"
         Background="White"
         VerticalAlignment="Center"
         HorizontalAlignment="Center">
+        <StackPanel>
             <!--Start Top bar-->
-            <Grid>
-                <Grid>
-                    <StackPanel
+            <Grid
+            Height="Auto"
+            Width="1280"
+            Background="White"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center">
+                <StackPanel
                     VerticalAlignment="Top"
                     HorizontalAlignment="Center">
-                        <Rectangle 
+                    <Rectangle 
                         Fill="#0e6633" 
                         Height="130"
                         Width="1280"
@@ -28,16 +32,15 @@
                         StrokeThickness="0"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center">
-                        </Rectangle>
-                        <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
+                    </Rectangle>
+                    <Rectangle x:Name="the2ndtoprec" Fill="#009e49" 
                                StrokeThickness="0"
                                Height="15"
                                Width="1280"
                                Stroke="Transparent"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </Grid>
+                </StackPanel>
                 <TextBlock
                     FontFamily="Code Bold"
                     Foreground="White"
@@ -53,7 +56,9 @@
             <!--End Top bar-->
             <!--Start Mid-->
             <Grid
-                Margin="0 20 0 0">
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Margin="0 20 0 0">
                 <StackPanel            
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top">
@@ -120,7 +125,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             FontSize="20"
-                            Margin="290 0 0 0 "
+                            Margin="290 0 0 0 "                            
                         ></DatePicker>
                         <TextBlock
                             HorizontalAlignment="Left"
@@ -230,8 +235,8 @@
                     <!--End Ngưỡng số lượng bán ra-->
                 </StackPanel>
             </Grid>
+            <!--End Mid-->
         </StackPanel>
-        <!--End Mid-->
         <!--Start Btm-->
         <Grid
             VerticalAlignment="Bottom"
