@@ -71,7 +71,7 @@
             HorizontalAlignment="Center">
                 <MediaElement x:Name="myGif"
                       UnloadedBehavior="Manual"
-                      Source="D:\Working\Project1\DataProcessing\DataProcessing\Assets\aaa.gif" 
+                      Source="..\DataProcessing\Assets\aaa.gif" 
                       LoadedBehavior="Play"
                       MediaEnded="myGif_MediaEnded"
                       Stretch="UniformToFill"
