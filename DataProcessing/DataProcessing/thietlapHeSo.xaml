@@ -77,7 +77,7 @@
                         <TextBox
                         x:Name="txtFilePath"
                         Background="White"
-                        FontSize="40"
+                        FontSize="25"
                         TextWrapping="NoWrap"
                         Height="40"
                         Width="600"     

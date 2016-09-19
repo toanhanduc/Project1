@@ -45,7 +45,6 @@ namespace DataProcessing
         /// <param name="e"></param>
         private void startSearch(object sender, RoutedEventArgs e)
         {
-
             string startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
             string enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
             if (txtFilePath.Text.Length == 0)
@@ -175,6 +174,8 @@ namespace DataProcessing
                 }
 
             }
+            //FindingStatus fds = new FindingStatus();
+            //this.NavigationService.Navigate(fds);
         }
 
 
@@ -359,7 +360,7 @@ namespace DataProcessing
                     if (!checkList2.Any()) // full 1
                     {
                         Console.WriteLine("2 cột đã Full 1 roi !");
-                        for (int k = q + 1; k < col - 2; k++)
+                        for (int k = q + 1; k < col - 1; k++)
                         {
                             Console.WriteLine(color[i] + "-" + color[q] + "-" + color[k]);
                         }
