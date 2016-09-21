@@ -84,7 +84,9 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         FontSize="20"
-                        >Thời điểm tiến hành tìm kiếm</TextBlock>
+                        >Thời điểm tiến hành tìm kiếm <TextBlock
+                            TextWrapping="NoWrap"
+                            x:Name="timestart">abc</TextBlock></TextBlock>
                     </StackPanel>
                     <StackPanel
                     VerticalAlignment="Top"
