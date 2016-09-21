@@ -366,7 +366,7 @@ namespace DataProcessing
                     }
                     else
                     {
-                        for (int k = q + 1; k < col - 2; k++)
+                        for (int k = q + 1; k < col - 1; k++)
                         {
                             if (value[k] + value[q] + value[i] < biggestValue)
                             {
