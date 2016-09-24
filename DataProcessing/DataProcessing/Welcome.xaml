@@ -69,13 +69,17 @@
             Height="Auto"
             VerticalAlignment="Center"
             HorizontalAlignment="Center">
-                <MediaElement x:Name="myGif"
-                      UnloadedBehavior="Manual"
-                      Source="D:\Working\Project1\DataProcessing\DataProcessing\Assets\aaa.gif" 
-                      LoadedBehavior="Play"
-                      MediaEnded="myGif_MediaEnded"
-                      Stretch="UniformToFill"
-                      ></MediaElement>
+
+
+
+                <MediaElement 
+                    x:Name="myGif"
+                    UnloadedBehavior="Manual"
+                    Source="Assets\aaa.gif" 
+                    LoadedBehavior="Play"
+                    MediaEnded="myGif_MediaEnded"
+                    Stretch="UniformToFill"
+                    ></MediaElement>
             </Viewbox>
         </StackPanel>
         <!--Start Btm-->
