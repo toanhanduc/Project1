@@ -72,7 +72,11 @@
                 <MediaElement 
                     x:Name="myGif"
                     UnloadedBehavior="Manual"
+<<<<<<< HEAD
                     Source="D:\Working\Project1\DataProcessing\DataProcessing\Assets\aaa.gif" 
+=======
+                    Source="\Project1\DataProcessing\DataProcessing\Assets\aaa.gif" 
+>>>>>>> origin/master
                     LoadedBehavior="Play"
                     MediaEnded="myGif_MediaEnded"
                     Stretch="UniformToFill"
