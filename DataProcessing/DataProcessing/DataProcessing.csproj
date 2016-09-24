@@ -58,6 +58,7 @@
     <Compile Include="FindingStatus.xaml.cs">
       <DependentUpon>FindingStatus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FindingStatusNavigationParameter.cs" />
     <Compile Include="Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>

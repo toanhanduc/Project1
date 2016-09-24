@@ -65,6 +65,9 @@ namespace DataProcessing
             }
             else
             {
+                FindingStatus fds = new FindingStatus();
+                this.NavigationService.Navigate(fds, startd);
+                return;
                 int ngaybatdau = 0, ngayketthuc = 0;
                 Excel.Application excel;
                 excel = new Excel.Application();
@@ -194,7 +197,6 @@ namespace DataProcessing
                 {
                     MessageBox.Show("Chưa xong");
                 }
-
             }
             //FindingStatus fds = new FindingStatus();
             //this.NavigationService.Navigate(fds);
@@ -814,9 +816,6 @@ namespace DataProcessing
 
 
                         }
-
-
-
 
                     }
 
