@@ -193,7 +193,7 @@
                         HorizontalAlignment="Right">Khoảng thời gian tìm kiếm :</TextBlock>
                         <TextBlock Foreground="#009e49">
                         từ ngày 
-                        <TextBlock FontWeight="Bold">nn/tt/nn</TextBlock>
+                        <TextBlock x:Name="startday" FontWeight="Bold">nn/tt/nn</TextBlock>
                         đến ngày
                         <TextBlock FontWeight="Bold">nn/tt/nn</TextBlock>
                     </TextBlock>
@@ -211,15 +211,6 @@
                     </TextBlock>
                     </StackPanel>
                 </Grid>
-                <ProgressBar
-                        Grid.Column="1"
-                        Grid.Row="2"
-                        HorizontalAlignment="Center"
-                        Height="50"
-                        Margin="0,30,0,0"
-                        VerticalAlignment="Top"
-                        Width="600"
-                        Foreground="Salmon"/>
             </StackPanel>
             <!--End Mid-->
         </StackPanel>

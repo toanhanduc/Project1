@@ -20,9 +20,28 @@ namespace DataProcessing
     /// </summary>
     public partial class FindingStatus : Page
     {
+
         public FindingStatus()
         {
             InitializeComponent();
+            this.Loaded += FindingStatus_Loaded;
+
+        }
+
+        private void FindingStatus_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            this.NavigationService.LoadCompleted += LoadCompletedEventHandler;
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+        }
+
+        private void LoadCompletedEventHandler(object sender, NavigationEventArgs e)
+        {
+            var t = e.ExtraData;
         }
     }
 }

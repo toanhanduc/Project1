@@ -65,6 +65,9 @@ namespace DataProcessing
             }
             else
             {
+                FindingStatus fds = new FindingStatus();
+                this.NavigationService.Navigate(fds, startd);
+                return;
                 int ngaybatdau = 0, ngayketthuc = 0;
                 Excel.Application excel;
                 excel = new Excel.Application();
@@ -144,6 +147,28 @@ namespace DataProcessing
                 }
                 MessageBox.Show("Đọc hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
 
+                int tmp1, tmp2;
+                string tmp3 = "";
+                for(int i =0; i < value.Length; i++)
+                    for(int j = i + 1; j < value.Length; j++)
+                    {
+                        if (value[i] < value[j])
+                        {
+                            tmp1 = value[i];
+                            tmp3 = color[i];
+                            value[i] = value[j];
+                            color[i] = color[j];
+                            value[j] = tmp1;
+                            color[j] = tmp3;
+                            for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
+                            {
+                                tmp2 = zeroOne[i][n];
+                                zeroOne[i][n] = zeroOne[j][n];
+                                zeroOne[j][n] = tmp2;
+                            }
+                        }
+                    }
+
                 if (group2)
                 {
                     int timestart = Environment.TickCount;
@@ -172,7 +197,6 @@ namespace DataProcessing
                 {
                     MessageBox.Show("Chưa xong");
                 }
-
             }
             //FindingStatus fds = new FindingStatus();
             //this.NavigationService.Navigate(fds);
@@ -792,9 +816,6 @@ namespace DataProcessing
 
 
                         }
-
-
-
 
                     }
 
