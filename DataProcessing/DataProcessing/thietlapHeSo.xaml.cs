@@ -274,54 +274,70 @@ namespace DataProcessing
                     }
                 }
 
-                for (int q = i + 1; q < col - 1; q++) // duyệt các màu tiếp theo, có 10 màu
+                if (!checkList.Any())
                 {
-                    //                    if (value[q] < biggestValue - currentColumnValue) // giá trị cột hiện tại + giá trị cột mốc < giá trị sau khi ghép lớn nhất -> dừng lại
-                    //                    {
-                    //                            Console.WriteLine("Dung lai duoc roi");
-                    //                            Console.WriteLine(q);
-
-                    //            break;
-                    //                    }
-                    List<int> checkListTemp = new List<int>(checkList); // list so sánh theo ngày không bán được
-                    int currentCosts = 0; // Trọng số cột đang xét
-                                          //                    List<int> removeList = new List<int>();
-
-                    foreach (int temp in checkListTemp) // duyệt từng ngày của màu để đánh trọng số
+                    Console.WriteLine("cot 1 da full 1 roi");
+                    for (int j = i + 1; j < col - 1; j++)
                     {
-                        if (zeroOne[q][temp] == 1)
+                        Console.WriteLine(color[i] + "-" + color[j]);
+
+                        if (value[j] > value[j + 1])
                         {
-                            currentCosts++;
-                            //                            removeList.Add(temp);
+                            break;
+                        }
+                    }
+                    if (value[i] > value[i + 1] || value[i + 1] > value[i + 2])
+                    {
+                        break;
+                    }
+
+                }
+                else
+                {
+
+                    for (int j = i + 1; j < col - 1; j++) // duyệt các màu tiếp theo, có 10 màu
+                    {
+                        //                    if (value[q] < biggestValue - currentColumnValue) // giá trị cột hiện tại + giá trị cột mốc < giá trị sau khi ghép lớn nhất -> dừng lại
+                        //                    {
+                        //                            Console.WriteLine("Dung lai duoc roi");
+                        //                            Console.WriteLine(q);
+
+                        //            break;
+                        //                    }
+                        List<int> checkListTemp = new List<int>(checkList); // list so sánh theo ngày không bán được
+                        int currentCosts = 0; // Trọng số cột đang xét
+
+                        foreach (int temp in checkListTemp) // duyệt từng ngày của màu để đánh trọng số
+                        {
+                            if (zeroOne[j][temp] == 1)
+                            {
+                                currentCosts++;
+                            }
+
+                        }
+
+                        if (currentCosts + currentColumnValue > biggestValue)
+                        {
+                            Console.WriteLine("> bigvalue roi");
+                            biggestValue = currentCosts + currentColumnValue;
+                            Console.WriteLine("CLEAR");
+                            Console.WriteLine(color[i] + "-" + color[j]);
+                            Console.WriteLine(biggestValue);
+                            biggestCosts = currentCosts;
+                            Console.WriteLine();
+                        }
+                        else if (currentCosts + currentColumnValue == biggestValue)
+                        {
+                            Console.WriteLine("giong nhau roi");
+                            Console.WriteLine(color[i] + "-" + color[j]);
+                            Console.WriteLine(biggestValue);
+                            Console.WriteLine();
+
                         }
 
                     }
-
-                    if (currentCosts + currentColumnValue > biggestValue)
-                    {
-                        //                            Console.WriteLine("> bigvalue roi");
-                        biggestValue = currentCosts + currentColumnValue;
-                        Console.WriteLine("CLEAR");
-                        Console.WriteLine(color[i] + "-" + color[q]);
-                        Console.WriteLine(biggestValue);
-                        biggestCosts = currentCosts;
-                        Console.WriteLine();
-                    }
-                    else if (currentCosts + currentColumnValue == biggestValue)
-                    {
-                        //                            Console.WriteLine("giong nhau roi");
-                        Console.WriteLine(color[i] + "-" + color[q]);
-                        Console.WriteLine(biggestValue);
-                        Console.WriteLine();
-
-                    }
-                    /*         else
-                             {
-                                 Console.WriteLine("next");
-                             }
-                             */
                 }
-                //                Console.WriteLine(i);
+
             }
         }
 
@@ -358,78 +374,183 @@ namespace DataProcessing
                     }
                 }
 
-                for (int q = i + 1; q < col - 2; q++) // chọn từng cột trong vòng 2
+                if (!checkList1.Any())
                 {
-                    // THÊM ĐIỀU KIỆN DỪNG !
-                    //                    if (value[i] + value[q] + value[q + 1] < biggestValue)
-                    //                    {
-                    //                        Console.WriteLine("chon mau khac lam moc di");
-                    //                        break;
-                    //                    }
-
-                    List<int> checkList2 = new List<int>(checkList1);
-
-                    int currentCosts = 0; // trọng số cột hiện tại
-
-                    foreach (int temp in checkList1)
+                    Console.WriteLine("Cot dau tien da full 1");
+                    if (biggestValue < currentValue1)
                     {
-                        if (zeroOne[q][temp] == 1)
+                        Console.WriteLine("CLEAR");
+                        biggestValue = currentValue1;
+                        for (int j = i + 1; j < col - 2; j++)
                         {
-                            currentCosts++;
-                            checkList2.Remove(temp);
+                            for (int q = j + 1; q < col - 1; q++)
+                            {
+                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                if (value[q] > value[q + 1])
+                                {
+                                    break;
+                                }
+                            }
+                            if (value[j] > value[j + 1] || value[j + 1] > value[j + 2])
+                            {
+                                break;
+                            }
                         }
-                    }
-                    currentValue2 = currentValue1 + currentCosts;
-                    //biggestValue = currentValue2;
-                    if (!checkList2.Any()) // full 1
-                    {
-                        Console.WriteLine("2 cột đã Full 1 roi !");
-                        for (int k = q + 1; k < col - 1; k++)
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3])
                         {
-                            Console.WriteLine(color[i] + "-" + color[q] + "-" + color[k]);
+                            break;
                         }
                     }
                     else
                     {
-                        for (int k = q + 1; k < col - 1; k++)
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2])
                         {
-                            if (value[k] + value[q] + value[i] < biggestValue)
+                            break;
+                        }
+                        for (int j = i + 1; j < col - 2; j++)
+                        {
+                            for (int q = j + 1; q < col - 1; q++)
                             {
-                                Console.WriteLine("Chon mau khac lam cot 2 di");
-                            }
-
-                            currentCosts = 0; // trọng số cột hiện tại
-
-                            foreach (int temp in checkList2)
-                            {
-                                if (zeroOne[k][temp] == 1)
+                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                if (value[q] > value[q + 1])
                                 {
-                                    currentCosts++;
+                                    break;
                                 }
                             }
-
-                            if (currentCosts + currentValue2 > biggestValue)
+                            if (value[j] > value[j + 1] || value[j + 1] > value[j + 2])
                             {
-                                Console.WriteLine();
-                                Console.WriteLine("> biggest value roi");
-                                biggestValue = currentValue2 + currentCosts;
-                                Console.WriteLine(biggestValue);
-                                Console.WriteLine("CLEAR");
-                                Console.WriteLine(color[i] + "-" + color[q] + "-" + color[k]);
+                                break;
                             }
-                            else if (currentCosts + currentValue2 == biggestValue)
-                            {
-                                Console.WriteLine("giong nhau roi");
-                                Console.WriteLine(currentValue2 + currentCosts);
-                                Console.WriteLine(color[i] + "-" + color[q] + "-" + color[k]);
-                            }
-
+                        }
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3])
+                        {
+                            break;
                         }
                     }
-
-
+                    continue;
                 }
+                else
+                {
+                    for (int j = i + 1; j < col - 2; j++) // chọn từng cột trong vòng 2
+                    {
+                        // THÊM ĐIỀU KIỆN DỪNG !
+                        //                    if (value[i] + value[q] + value[q + 1] < biggestValue)
+                        //                    {
+                        //                        Console.WriteLine("chon mau khac lam moc di");
+                        //                        break;
+                        //                    }
 
+                        List<int> checkList2 = new List<int>(checkList1);
+
+                        int currentCosts = 0; // trọng số cột hiện tại
+
+                        foreach (int temp in checkList1)
+                        {
+                            if (zeroOne[j][temp] == 1)
+                            {
+                                currentCosts++;
+                                checkList2.Remove(temp);
+                            }
+                        }
+                        currentValue2 = currentValue1 + currentCosts;
+                        //biggestValue = currentValue2;
+                        if (!checkList2.Any()) // full 1
+                        {
+                            Console.WriteLine("2 cột đã Full 1 roi !");
+                            if (biggestValue < currentValue2)
+                            {
+                                Console.WriteLine("CLEAR");
+                                biggestValue = currentValue2;
+
+                                for (int q = j + 1; q < col - 1; q++)
+                                {
+                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    if (value[q] > value[q + 1])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2])
+                                {
+                                    break;
+                                }
+
+                            }
+                            else
+                            {
+                                if (value[j] > value[j + 1])
+                                {
+                                    break;
+                                }
+                                for (int q = j + 1; q < col - 1; q++)
+                                {
+                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    if (value[q] > value[q + 1])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2])
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            int compVar = 0; // bien so sanh
+                            for (int q = j + 1; q < col - 1; q++)
+                            {
+                                if (value[q] + value[j] + value[i] < biggestValue)
+                                {
+                                    Console.WriteLine("Chon mau khac lam cot 2 di");
+                                    break;
+                                }
+
+                                currentCosts = 0; // trọng số cột hiện tại
+
+                                foreach (int temp in checkList2)
+                                {
+                                    if (zeroOne[q][temp] == 1)
+                                    {
+                                        currentCosts++;
+                                    }
+                                }
+
+
+                                if (currentCosts + currentValue2 > biggestValue)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("> biggest value roi");
+                                    biggestValue = currentValue2 + currentCosts;
+                                    Console.WriteLine(biggestValue);
+                                    Console.WriteLine("CLEAR");
+                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+
+                                    compVar = value[q];
+                                }
+                                else if (currentCosts + currentValue2 == biggestValue)
+                                {
+                                    Console.WriteLine("giong nhau roi");
+
+                                    if (value[q] < compVar)
+                                    {
+                                        continue;
+                                    }
+
+                                    if (q < col - 2 && value[q] > value[q + 1])
+                                    {
+                                        compVar = value[q];
+                                    }
+
+                                    Console.WriteLine(currentValue2 + currentCosts);
+                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                }
+
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -468,149 +589,281 @@ namespace DataProcessing
 
                 if (!checkList1.Any()) // full 1
                 {
-                    Console.WriteLine("ngay mốc 1 đã full 1 rồi");
+                    Console.WriteLine("Cot dau tien da full 1");
                     if (biggestValue < currentValue1)
                     {
                         Console.WriteLine("CLEAR");
                         biggestValue = currentValue1;
-                    }
-                    for (int j = i + 1; j < col - 3; j++)
-                    {
-                        for (int q = j + 1; q < col - 2; q++)
+                        for (int j = i + 1; j < col - 3; j++)
                         {
-                            for (int k = q + 1; q < col - 1; q++)
+                            for (int q = j + 1; q < col - 2; q++)
                             {
-                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                for (int k = q + 1; k < col - 1; k++)
+                                {
+                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                    if (value[k] > value[k + 1])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[q] > value[q + 1] || value[q + 1] > value[q + 2])
+                                {
+                                    break;
+                                }
+
                             }
+                            if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3])
+                            {
+                                break;
+                            }
+                        }
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3] || value[i + 3] > value[i + 4])
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3])
+                        {
+                            break;
+                        }
+                        for (int j = i + 1; j < col - 3; j++)
+                        {
+                            for (int q = j + 1; q < col - 2; q++)
+                            {
+                                for (int k = q + 1; k < col - 1; k++)
+                                {
+                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+
+                                    if (value[k] > value[k + 1])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[q] > value[q + 1] || value[q + 1] > value[q + 2])
+                                {
+                                    break;
+                                }
+                            }
+                            if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3])
+                            {
+                                break;
+                            }
+                        }
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3] || value[i + 3] > value[i + 4])
+                        {
+                            break;
                         }
                     }
                     continue;
                 }
-
-                for (int j = i + 1; j < col - 3; j++) // chọn từng cột ở vòng 2, để lại 2 cột để ghép với 2 cột đã chọn
+                else
                 {
-                    // THÊM ĐIỀU KIỆN DỪNG
-                    //                    if ((biggestValue - currentValue1) % 3 == 0 && value[i] < (biggestValue - currentValue1) / 3)
-                    //                    {
-                    //                        Console.WriteLine("xong mau nay roi chon mau khac di !");
-                    //                        break;
-                    //                    }
-                    //                    if ((biggestValue - currentValue1) % 3 != 0 && value[i] == (biggestValue - currentValue1) / 3)
-                    //                    {
-                    //                        Console.WriteLine("xong mau nay roi chon mau khac di !");
-                    //                        break;
-                    //                    }
-                    List<int> checkList2 = new List<int>(checkList1);
-
-                    int currentCosts = 0; // trọng số cột hiện tại ở vòng 2
-
-                    foreach (int temp in checkList1)
+                    for (int j = i + 1; j < col - 3; j++) // chọn từng cột ở vòng 2, để lại 2 cột để ghép với 2 cột đã chọn
                     {
-                        if (zeroOne[j][temp] == 1)
-                        {
-                            currentCosts++;
-                            checkList2.Remove(temp);
-                        }
-                    }
+                        // THÊM ĐIỀU KIỆN DỪNG
+                        //                    if ((biggestValue - currentValue1) % 3 == 0 && value[i] < (biggestValue - currentValue1) / 3)
+                        //                    {
+                        //                        Console.WriteLine("xong mau nay roi chon mau khac di !");
+                        //                        break;
+                        //                    }
+                        //                    if ((biggestValue - currentValue1) % 3 != 0 && value[i] == (biggestValue - currentValue1) / 3)
+                        //                    {
+                        //                        Console.WriteLine("xong mau nay roi chon mau khac di !");
+                        //                        break;
+                        //                    }
+                        List<int> checkList2 = new List<int>(checkList1);
 
-                    currentValue2 = currentValue1 + currentCosts;
+                        int currentCosts = 0; // trọng số cột hiện tại ở vòng 2
 
-                    if (!checkList2.Any()) // full 1
-                    {
-                        Console.WriteLine("2 cot đa Full 1 roi !");
-                        if (biggestValue < currentValue2)
+                        foreach (int temp in checkList1)
                         {
-                            Console.WriteLine("CLEAR");
-                            biggestValue = currentValue2;
-                        }
-                        for (int q = j + 1; j < col - 2; j++)
-                        {
-                            for (int k = q + 1; q < col - 1; q++)
+                            if (zeroOne[j][temp] == 1)
                             {
-                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                currentCosts++;
+                                checkList2.Remove(temp);
                             }
                         }
-                        continue;
-                    }
-                    else
-                    {
-                        for (int q = j + 1; q < col - 2; q++) // chọn từng cột ở vòng 3, để lại 1 cột để ghép màu
+
+                        currentValue2 = currentValue1 + currentCosts;
+
+                        if (!checkList2.Any()) // full 1
                         {
-                            //THÊM ĐIỀU KIỆN DỪNG
-
-
-                            List<int> checkList3 = new List<int>(checkList2);
-
-                            currentCosts = 0;
-
-                            foreach (int temp in checkList2)
+                            Console.WriteLine("2 cột đã Full 1 roi !");
+                            if (biggestValue < currentValue2)
                             {
-                                if (zeroOne[q][temp] == 1)
+                                Console.WriteLine("CLEAR");
+                                biggestValue = currentValue2;
+
+                                for (int q = j + 1; q < col - 2; q++)
                                 {
-                                    currentCosts++;
-                                    checkList3.Remove(temp);
+                                    for (int k = q + 1; k < col - 1; k++)
+                                    {
+                                        Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+
+                                        if (value[k] > value[k + 1])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (value[q] > value[q + 1] || value[q + 1] > value[q + 2])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3])
+                                {
+                                    break;
                                 }
                             }
-
-                            currentValue3 = currentValue2 + currentCosts;
-
-                            if (!checkList3.Any()) // full 1
+                            else
                             {
-                                Console.WriteLine("3 cot đa Full 1 roi !");
-                                if (biggestValue < currentValue3)
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2])
                                 {
+                                    break;
+                                }
+                                for (int q = j + 1; q < col - 2; q++)
+                                {
+                                    for (int k = q + 1; k < col - 1; k++)
+                                    {
+                                        Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
 
-                                    Console.WriteLine("CLEAR");
-                                    biggestValue = currentValue3;
+                                        if (value[k] > value[k + 1])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (value[q] > value[q + 1] || value[q + 1] > value[q + 2])
+                                    {
+                                        break;
+                                    }
                                 }
-                                for (int k = q + 1; k < col - 1; k++)
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3])
                                 {
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                    break;
                                 }
-                                continue;
                             }
-
-                            for (int k = q + 1; k < col - 1; k++) // chọn màu ở vòng 4
+                        }
+                        else
+                        {
+                            for (int q = j + 1; q < col - 2; q++) // chọn từng cột ở vòng 3, để lại 1 cột để ghép màu
                             {
                                 //THÊM ĐIỀU KIỆN DỪNG
 
-                                List<int> checkList4 = new List<int>(checkList3);
+                                List<int> checkList3 = new List<int>(checkList2);
 
                                 currentCosts = 0;
 
-                                foreach (int temp in checkList3)
+                                foreach (int temp in checkList2)
                                 {
-                                    if (zeroOne[k][temp] == 1)
+                                    if (zeroOne[q][temp] == 1)
                                     {
                                         currentCosts++;
-                                        checkList4.Remove(temp);
+                                        checkList3.Remove(temp);
                                     }
                                 }
 
-                                if (currentValue3 + currentCosts > biggestValue)
-                                {
-                                    Console.WriteLine("> biggest value roi");
-                                    Console.WriteLine("CLEAR");
-                                    biggestValue = currentValue3 + currentCosts;
-                                    Console.WriteLine(biggestValue);
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
-                                }
-                                else if (currentValue3 + currentCosts == biggestValue)
-                                {
-                                    Console.WriteLine("giong nhau roi");
-                                    Console.WriteLine(biggestValue);
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
-                                }
+                                currentValue3 = currentValue2 + currentCosts;
 
+                                if (!checkList3.Any()) // full 1
+                                {
+                                    Console.WriteLine("3 cot da Full 1 roi !");
+                                    if (biggestValue < currentValue3)
+                                    {
+                                        Console.WriteLine("CLEAR");
+                                        biggestValue = currentValue3;
 
+                                        for (int k = q + 1; k < col - 1; k++)
+                                        {
+                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                            if (value[k] > value[k + 1])
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        if (value[q] > value[q + 1] || value[q + 1] > value[q + 2])
+                                        {
+                                            break;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        if (value[q] > value[q + 1])
+                                        {
+                                            break;
+                                        }
+                                        for (int k = q + 1; k < col - 1; k++)
+                                        {
+                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                            if (value[k] > value[k + 1])
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        if (value[q] > value[q + 1] || value[q + 1] > value[q + 2])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    int compVar = 0;
+                                    for (int k = q + 1; k < col - 1; k++) // chọn màu ở vòng 4
+                                    {
+                                        //THÊM ĐIỀU KIỆN DỪNG
+                                        if (value[k] + value[q] + value[j] + value[i] < biggestValue)
+                                        {
+                                            Console.WriteLine("Chon mau khac lam cot 3 di");
+                                            break;
+                                        }
+                                        currentCosts = 0;
+
+                                        foreach (int temp in checkList3)
+                                        {
+                                            if (zeroOne[k][temp] == 1)
+                                            {
+                                                currentCosts++;
+                                            }
+                                        }
+
+                                        if (currentValue3 + currentCosts > biggestValue)
+                                        {
+                                            Console.WriteLine("> biggest value roi");
+                                            Console.WriteLine("CLEAR");
+                                            biggestValue = currentValue3 + currentCosts;
+                                            Console.WriteLine(biggestValue);
+                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+
+                                            compVar = value[k];
+                                        }
+                                        else if (currentValue3 + currentCosts == biggestValue)
+                                        {
+                                            Console.WriteLine("giong nhau roi");
+
+                                            if (value[k] < compVar)
+                                            {
+                                                continue;
+                                            }
+
+                                            if (k < col - 2 && value[k] > value[k + 1])
+                                            {
+                                                compVar = value[k];
+                                            }
+
+                                            Console.WriteLine(biggestValue);
+                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                        }
+
+                                    }
+                                }
                             }
-
                         }
+
                     }
-
-
                 }
-
             }
         }
 
@@ -640,190 +893,386 @@ namespace DataProcessing
 
                 if (!checkList1.Any()) // full 1
                 {
-                    Console.WriteLine("ngay mốc 1 đã full 1 rồi");
+                    Console.WriteLine("cot dau tien da full 1");
                     if (biggestValue < currentValue1)
                     {
                         Console.WriteLine("CLEAR");
                         biggestValue = currentValue1;
-                    }
-                    for (int j = i + 1; j < col - 4; j++)
-                    {
-                        for (int q = j + 1; q < col - 3; q++)
+
+                        for (int j = i + 1; j < col - 4; j++)
                         {
-                            for (int k = q + 1; q < col - 2; q++)
+                            for (int q = j + 1; q < col - 3; q++)
                             {
-                                for (int l = k + 1; l < col - 1; l++)
+                                for (int k = q + 1; k < col - 2; k++)
                                 {
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+                                    for (int l = k + 1; l < col - 1; l++)
+                                    {
+                                        Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                        if (value[l] > value[l + 1])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (q < col - 3 && (value[q] > value[q + 1] || value[q + 1] > value[q + 2] || value[q + 2] > value[q + 3]))
+                                {
+                                    break;
                                 }
                             }
+                            if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3] || value[j + 3] > value[j + 4])
+                            {
+                                break;
+                            }
+                        }
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3] || value[i + 3] > value[i + 4] || value[i + 4] > value[i + 5])
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3] || value[i + 3] > value[i + 4])
+                        {
+                            break;
+                        }
+
+                        for (int j = i + 1; j < col - 4; j++)
+                        {
+                            for (int q = j + 1; q < col - 3; q++)
+                            {
+                                for (int k = q + 1; k < col - 2; k++)
+                                {
+                                    for (int l = k + 1; l < col - 1; l++)
+                                    {
+                                        Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                        if (value[l] > value[l + 1])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[q] > value[q + 1] || value[q + 1] > value[q + 2] || value[q + 2] > value[q + 3])
+                                {
+                                    break;
+                                }
+                            }
+                            if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3] || value[j + 3] > value[j + 4])
+                            {
+                                break;
+                            }
+                        }
+                        if (value[i] > value[i + 1] || value[i + 1] > value[i + 2] || value[i + 2] > value[i + 3] || value[i + 3] > value[i + 4] || value[i + 4] > value[i + 5])
+                        {
+                            break;
                         }
                     }
                     continue;
                 }
-
-                for (int j = i + 1; j < col - 4; j++) // chọn từng cột ở vòng 2, để lại 3 cột để ghép với 2 cột đã chọn
+                else
                 {
-
-                    // THÊM ĐIỀU KIỆN ĐỂ SANG MÀU KHÁC
-
-                    List<int> checkList2 = new List<int>(checkList1);
-
-                    int currentCosts = 0; // trọng số cột hiện tại ở vòng 2
-
-                    foreach (int temp in checkList1)
+                    for (int j = i + 1; j < col - 4; j++) // chọn từng cột ở vòng 2, để lại 3 cột để ghép với 2 cột đã chọn
                     {
-                        if (zeroOne[j][temp] == 1)
+
+                        // THÊM ĐIỀU KIỆN ĐỂ SANG MÀU KHÁC
+
+                        List<int> checkList2 = new List<int>(checkList1);
+
+                        int currentCosts = 0; // trọng số cột hiện tại ở vòng 2
+
+                        foreach (int temp in checkList1)
                         {
-                            currentCosts++;
-                            checkList2.Remove(temp);
-                        }
-                    }
-
-                    currentValue2 = currentValue1 + currentCosts;
-
-                    if (!checkList2.Any()) // full 1
-                    {
-                        Console.WriteLine("2 cot đa Full 1 roi !");
-
-                        if (biggestValue < currentValue2)
-                        {
-                            Console.WriteLine("CLEAR");
-                            biggestValue = currentValue2;
-                        }
-
-                        for (int q = j + 1; j < col - 2; j++)
-                        {
-                            for (int k = q + 1; q < col - 1; q++)
-                            {
-                                for (int l = k + 1; l < col - 1; l++)
-                                {
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
-                                }
-                            }
-                        }
-                        continue;
-                    }
-
-                    for (int q = j + 1; q < col - 3; q++) // chọn từng cột ở vòng 3, để lại 2 cột để ghép màu
-                    {
-                        //THÊM ĐIỀU KIỆN DỪNG
-
-
-                        List<int> checkList3 = new List<int>(checkList2);
-
-                        currentCosts = 0;
-
-                        foreach (int temp in checkList2)
-                        {
-                            if (zeroOne[q][temp] == 1)
+                            if (zeroOne[j][temp] == 1)
                             {
                                 currentCosts++;
-                                checkList3.Remove(temp);
+                                checkList2.Remove(temp);
                             }
                         }
 
-                        currentValue3 = currentValue2 + currentCosts;
+                        currentValue2 = currentValue1 + currentCosts;
 
-                        if (!checkList3.Any()) // full 1
+                        if (!checkList2.Any()) // full 1
                         {
-                            Console.WriteLine("3 cot đa Full 1 roi !");
-                            if (biggestValue < currentValue3)
-                            {
+                            Console.WriteLine("2 cot da Full 1 roi !");
 
+                            if (biggestValue < currentValue2)
+                            {
                                 Console.WriteLine("CLEAR");
-                                biggestValue = currentValue3;
-                            }
-                            for (int k = q + 1; k < col - 2; k++)
-                            {
-                                for (int l = k + 1; l < col - 1; l++)
+                                biggestValue = currentValue2;
+
+                                for (int q = j + 1; q < col - 3; q++)
                                 {
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+                                    for (int k = q + 1; k < col - 2; k++)
+                                    {
+                                        for (int l = k + 1; l < col - 1; l++)
+                                        {
+                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                            if (value[l] > value[l + 1])
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (q < (col - 5) && (value[q] > value[q + 1] || value[q + 1] > value[q + 2] || value[q + 2] > value[q + 3]))
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3] || value[j + 3] > value[j + 4])
+                                {
+                                    break;
                                 }
                             }
-                            continue;
+                            else
+                            {
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3])
+                                {
+                                    break;
+                                }
+
+                                for (int q = j + 1; q < col - 3; q++)
+                                {
+                                    for (int k = q + 1; k < col - 2; k++)
+                                    {
+                                        for (int l = k + 1; l < col - 1; l++)
+                                        {
+                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                            if (value[l] > value[l + 1])
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (value[q] > value[q + 1] || value[q + 1] > value[q + 2] || value[q + 2] > value[q + 3])
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (value[j] > value[j + 1] || value[j + 1] > value[j + 2] || value[j + 2] > value[j + 3] || value[j + 3] > value[j + 4])
+                                {
+                                    break;
+                                }
+                            }
                         }
-
-                        for (int k = q + 1; k < col - 2; k++) // chọn màu ở vòng 4, để lại 1 màu để ghép
+                        else
                         {
-                            //THÊM ĐIỀU KIỆN DỪNG
-
-                            List<int> checkList4 = new List<int>(checkList3);
-
-                            currentCosts = 0;
-
-                            foreach (int temp in checkList3)
-                            {
-                                if (zeroOne[k][temp] == 1)
-                                {
-                                    currentCosts++;
-                                    checkList4.Remove(temp);
-                                }
-                            }
-
-                            currentValue4 = currentValue3 + currentCosts;
-
-                            if (!checkList4.Any()) // full 1
-                            {
-                                Console.WriteLine("4 cot đa Full 1 roi !");
-                                if (biggestValue < currentValue3)
-                                {
-
-                                    Console.WriteLine("CLEAR");
-                                    biggestValue = currentValue4;
-                                }
-                                for (int l = k + 1; l < col - 1; l++)
-                                {
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
-
-                                }
-                                continue;
-                            }
-
-                            for (int l = k + 1; l < col - 1; l++)
+                            for (int q = j + 1; q < col - 3; q++) // chọn từng cột ở vòng 3, để lại 2 cột để ghép màu
                             {
                                 //THÊM ĐIỀU KIỆN DỪNG
 
-                                List<int> checkList5 = new List<int>(checkList4);
+
+                                List<int> checkList3 = new List<int>(checkList2);
 
                                 currentCosts = 0;
 
-                                foreach (int temp in checkList4)
+                                foreach (int temp in checkList2)
                                 {
-                                    if (zeroOne[l][temp] == 1)
+                                    if (zeroOne[q][temp] == 1)
                                     {
                                         currentCosts++;
-                                        checkList5.Remove(temp);
+                                        checkList3.Remove(temp);
                                     }
                                 }
 
-                                if (currentValue4 + currentCosts > biggestValue)
-                                {
-                                    Console.WriteLine("> biggest value roi");
-                                    Console.WriteLine("CLEAR");
-                                    biggestValue = currentValue4 + currentCosts;
-                                    Console.WriteLine(biggestValue);
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
-                                }
-                                else if (currentValue4 + currentCosts == biggestValue)
-                                {
-                                    Console.WriteLine("giong nhau roi");
-                                    Console.WriteLine(biggestValue);
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
-                                }
+                                currentValue3 = currentValue2 + currentCosts;
 
+                                if (!checkList3.Any()) // full 1
+                                {
+                                    Console.WriteLine("3 cot đa Full 1 roi !");
+                                    if (biggestValue < currentValue3)
+                                    {
+                                        Console.WriteLine("CLEAR");
+                                        biggestValue = currentValue3;
+
+                                        for (int k = q + 1; k < col - 2; k++)
+                                        {
+                                            for (int l = k + 1; l < col - 1; l++)
+                                            {
+                                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                                if (value[l] > value[l + 1])
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                            if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        if (value[q] > value[q + 1] || value[q + 1] > value[q + 2] || value[q + 2] > value[q + 3])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (value[q] > value[q + 1] || value[q + 1] > value[q + 2])
+                                        {
+                                            break;
+                                        }
+                                        for (int k = q + 1; k < col - 2; k++)
+                                        {
+                                            for (int l = k + 1; l < col - 1; l++)
+                                            {
+                                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                                if (value[l] > value[l + 1])
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                            if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        if (value[q] > value[q + 1] || value[q + 1] > value[q + 2] || value[q + 2] > value[q + 3])
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    for (int k = q + 1; k < col - 2; k++) // chọn màu ở vòng 4, để lại 1 màu để ghép
+                                    {
+                                        //THÊM ĐIỀU KIỆN DỪNG
+
+                                        List<int> checkList4 = new List<int>(checkList3);
+
+                                        currentCosts = 0;
+
+                                        foreach (int temp in checkList3)
+                                        {
+                                            if (zeroOne[k][temp] == 1)
+                                            {
+                                                currentCosts++;
+                                                checkList4.Remove(temp);
+                                            }
+                                        }
+
+                                        currentValue4 = currentValue3 + currentCosts;
+
+                                        if (!checkList4.Any()) // full 1
+                                        {
+                                            Console.WriteLine("4 cot đa Full 1 roi !");
+                                            if (biggestValue < currentValue3)
+                                            {
+                                                Console.WriteLine("CLEAR");
+                                                biggestValue = currentValue4;
+
+                                                for (int l = k + 1; l < col - 1; l++)
+                                                {
+                                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                                    if (value[l] > value[l + 1])
+                                                    {
+                                                        break;
+                                                    }
+                                                }
+                                                if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (value[k] > value[k + 1])
+                                                {
+                                                    break;
+                                                }
+                                                for (int l = k + 1; l < col - 1; l++)
+                                                {
+                                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                                    if (value[l] > value[l + 1])
+                                                    {
+                                                        break;
+                                                    }
+                                                }
+                                                if (value[k] > value[k + 1] || value[k + 1] > value[k + 2])
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            int compVar = 0;
+
+                                            for (int l = k + 1; l < col - 1; l++) // chon mau o vong 5
+                                            {
+                                                //THÊM ĐIỀU KIỆN DỪNG
+                                                if (value[l] + value[k] + value[q] + value[j] + value[i] < biggestValue)
+                                                {
+                                                    break;
+                                                }
+
+                                                currentCosts = 0;
+
+                                                foreach (int temp in checkList4)
+                                                {
+                                                    if (zeroOne[l][temp] == 1)
+                                                    {
+                                                        currentCosts++;
+                                                    }
+                                                }
+
+                                                if (currentValue4 + currentCosts > biggestValue)
+                                                {
+                                                    Console.WriteLine("> biggest value roi");
+                                                    Console.WriteLine("CLEAR");
+                                                    biggestValue = currentValue4 + currentCosts;
+                                                    Console.WriteLine(biggestValue);
+                                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+
+                                                    compVar = value[l];
+                                                }
+                                                else if (currentValue4 + currentCosts == biggestValue)
+                                                {
+                                                    Console.WriteLine("giong nhau roi");
+
+                                                    if (value[l] < compVar)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (l < col - 2 && value[l] > value[l + 1])
+                                                    {
+                                                        compVar = value[l];
+                                                    }
+
+                                                    Console.WriteLine(biggestValue);
+                                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
-
-
                         }
-
-
-
-
                     }
-
                 }
-
             }
         }
 
