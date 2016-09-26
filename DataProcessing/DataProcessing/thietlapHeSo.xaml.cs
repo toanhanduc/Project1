@@ -89,20 +89,20 @@ namespace DataProcessing
                 }
                 MessageBox.Show("Lưu hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
                 //Khoanh vùng ngày bắt đầu và kết thúc
-                //for (int row = 2; row <= WS.UsedRange.Rows.Count; row++)
-                //{
+                for (int row = 2; row <= WS.UsedRange.Rows.Count; row++)
+                {
 
-                //    string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("dd/M/yyyy");
-                //    if (cell == startdatetime)
-                //        ngaybatdau = row;
+                    string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("dd/M/yyyy");
+                    if (cell == startdatetime)
+                        ngaybatdau = row;
 
-                //    else if (cell == enddatetime)
-                //    {
-                //        ngayketthuc = row;
-                //        break;
-                //    }
+                    else if (cell == enddatetime)
+                    {
+                        ngayketthuc = row;
+                        break;
+                    }
 
-                //}
+                }
 
 
                 MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
