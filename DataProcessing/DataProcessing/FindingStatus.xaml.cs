@@ -22,7 +22,12 @@ namespace DataProcessing
     {
         public FindingStatus()
         {
+            thietlapHeSo setting = new thietlapHeSo();
+            start.Text = setting.startDatetime;
+            end.Text = setting.endDatetime;
             InitializeComponent();
         }
+
+        
     }
 }
