@@ -194,9 +194,9 @@
                         HorizontalAlignment="Right">Khoảng thời gian tìm kiếm :</TextBlock>
                         <TextBlock Foreground="#009e49">
                         từ ngày 
-                        <TextBlock FontWeight="Bold">nn/tt/nn</TextBlock>
+                        <TextBox x:Name="start" FontWeight="Bold"></TextBox>
                         đến ngày
-                        <TextBlock FontWeight="Bold">nn/tt/nn</TextBlock>
+                        <TextBlock x:Name="end" FontWeight="Bold">nn/tt/nn</TextBlock>
                     </TextBlock>
                         <TextBlock
                         HorizontalAlignment="Right">Số lượng màu trong mỗi nhóm :</TextBlock>

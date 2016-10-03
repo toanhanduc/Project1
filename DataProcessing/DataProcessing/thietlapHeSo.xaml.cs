@@ -13,7 +13,8 @@ namespace DataProcessing
     /// Interaction logic for Page1.xaml
     /// </summary>
     public partial class thietlapHeSo : Page
-    {
+    {   
+        private string startDate, endDate;
 
         public thietlapHeSo()
         {
@@ -39,12 +40,42 @@ namespace DataProcessing
                 txtFilePath.Text = openfile.FileName;
         }
         /// <summary>
+        /// Hàm get set lấy giá trị ngày bắt đầu để truyền đi
+        /// </summary>
+        public string startDatetime
+        {
+            get
+            {
+                return this.startDate;
+            }
+            set
+            {
+                this.startDate = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
+            }
+        }
+        /// <summary>
+        /// Hàm get set lấy giá trị ngày kết thúc để truyền đi
+        /// </summary>
+        public string endDatetime
+        {
+            get
+            {
+                return this.endDate;
+            }
+            set
+            {
+                this.endDate = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
+            }
+        }
+        /// <summary>
         /// Bắt đầu tìm kiếm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void startSearch(object sender, RoutedEventArgs e)
         {
+            string z = startDatetime;
+            string x = endDatetime;
             string startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
             string enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
             if (txtFilePath.Text.Length == 0)
@@ -167,6 +198,9 @@ namespace DataProcessing
                             }
                         }
                     }
+                
+                FindingStatus find = new FindingStatus();
+                this.NavigationService.Navigate(find);
 
                 if (group2)
                 {
@@ -255,6 +289,7 @@ namespace DataProcessing
         /// <param name="end"></param>
         private void processGroup2(String[] color, int[] value, int[][] zeroOne, int col, int row, int start, int end)
         {
+            string print = "";
             int currentColumnValue; // giá trị cột làm mốc
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int biggestCosts = 0; // trọng số lớn nhất
@@ -279,8 +314,9 @@ namespace DataProcessing
                     Console.WriteLine("cot 1 da full 1 roi");
                     for (int j = i + 1; j < col - 1; j++)
                     {
-                        Console.WriteLine(color[i] + "-" + color[j]);
-
+                        //Console.WriteLine(color[i] + "-" + color[j]);
+                        print += color[i] + "-" + color[j] + Environment.NewLine;
+                        Console.WriteLine(print);
                         if (value[j] > value[j + 1])
                         {
                             break;
@@ -320,24 +356,31 @@ namespace DataProcessing
                         {
                             Console.WriteLine("> bigvalue roi");
                             biggestValue = currentCosts + currentColumnValue;
-                            Console.WriteLine("CLEAR");
-                            Console.WriteLine(color[i] + "-" + color[j]);
-                            Console.WriteLine(biggestValue);
+                            // Console.WriteLine("CLEAR");
+                            // Console.WriteLine(color[i] + "-" + color[j]);
+                            // Console.WriteLine(biggestValue);
+                            print = "";
+                            print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
                             biggestCosts = currentCosts;
-                            Console.WriteLine();
+                            Console.WriteLine(print);
                         }
                         else if (currentCosts + currentColumnValue == biggestValue)
                         {
                             Console.WriteLine("giong nhau roi");
-                            Console.WriteLine(color[i] + "-" + color[j]);
-                            Console.WriteLine(biggestValue);
-                            Console.WriteLine();
+                            // Console.WriteLine(color[i] + "-" + color[j]);
+                            //  Console.WriteLine(biggestValue);
+                            print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+
 
                         }
 
                     }
                 }
 
+            }
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
+            {
+                writetext.WriteLine(print);
             }
         }
 
@@ -349,6 +392,7 @@ namespace DataProcessing
         /// <param name="zeroOne"></param>
         private void processGroup3(String[] color, int[] value, int[][] zeroOne, int col, int row, int start, int end)
         {
+            string print = "";
             int currentValue1; // giá trị ở vòng 1
             int currentValue2; // giá trị cột mốc thứ 2
             int biggestValue = 0;
@@ -380,12 +424,14 @@ namespace DataProcessing
                     if (biggestValue < currentValue1)
                     {
                         Console.WriteLine("CLEAR");
+                        print = "";
                         biggestValue = currentValue1;
                         for (int j = i + 1; j < col - 2; j++)
                         {
                             for (int q = j + 1; q < col - 1; q++)
                             {
-                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                print += color[i] + "-" + color[j] + "-" + color[q] + Environment.NewLine;
                                 if (value[q] > value[q + 1])
                                 {
                                     break;
@@ -411,7 +457,8 @@ namespace DataProcessing
                         {
                             for (int q = j + 1; q < col - 1; q++)
                             {
-                                Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                print = color[i] + "-" + color[j] + "-" + color[q];
                                 if (value[q] > value[q + 1])
                                 {
                                     break;
@@ -460,11 +507,13 @@ namespace DataProcessing
                             if (biggestValue < currentValue2)
                             {
                                 Console.WriteLine("CLEAR");
+                                print = "";
                                 biggestValue = currentValue2;
 
                                 for (int q = j + 1; q < col - 1; q++)
                                 {
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                  //  Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    print = color[i] + "-" + color[j] + "-" + color[q];
                                     if (value[q] > value[q + 1])
                                     {
                                         break;
@@ -484,7 +533,8 @@ namespace DataProcessing
                                 }
                                 for (int q = j + 1; q < col - 1; q++)
                                 {
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    // Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    print = color[i] + "-" + color[j] + "-" + color[q];
                                     if (value[q] > value[q + 1])
                                     {
                                         break;
@@ -523,10 +573,11 @@ namespace DataProcessing
                                     Console.WriteLine();
                                     Console.WriteLine("> biggest value roi");
                                     biggestValue = currentValue2 + currentCosts;
-                                    Console.WriteLine(biggestValue);
-                                    Console.WriteLine("CLEAR");
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
-
+                                    //Console.WriteLine(biggestValue);
+                                    //Console.WriteLine("CLEAR");
+                                    //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    print = "";
+                                    print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
                                     compVar = value[q];
                                 }
                                 else if (currentCosts + currentValue2 == biggestValue)
@@ -543,8 +594,9 @@ namespace DataProcessing
                                         compVar = value[q];
                                     }
 
-                                    Console.WriteLine(currentValue2 + currentCosts);
-                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    //Console.WriteLine(currentValue2 + currentCosts);
+                                    //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    print += color[i] + "-" + color[j] + "-" + color[q] + ": " + (currentValue2+currentCosts) + Environment.NewLine;
                                 }
 
                             }
@@ -552,10 +604,15 @@ namespace DataProcessing
                     }
                 }
             }
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
+            {
+                writetext.WriteLine(print);
+            }
         }
 
         private void processGroup4(String[] color, int[] value, int[][] zeroOne, int col, int row, int start, int end)
         {
+            string print = "";
             int currentValue1; // giá trị ở vòng 1
             int currentValue2; // giá trị ở vòng 2
             int currentValue3; // giá trị ở vòng 3
@@ -593,6 +650,7 @@ namespace DataProcessing
                     if (biggestValue < currentValue1)
                     {
                         Console.WriteLine("CLEAR");
+                        print = "";
                         biggestValue = currentValue1;
                         for (int j = i + 1; j < col - 3; j++)
                         {
@@ -601,6 +659,7 @@ namespace DataProcessing
                                 for (int k = q + 1; k < col - 1; k++)
                                 {
                                     Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                  //  print = color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k];
                                     if (value[k] > value[k + 1])
                                     {
                                         break;
@@ -694,6 +753,7 @@ namespace DataProcessing
                             if (biggestValue < currentValue2)
                             {
                                 Console.WriteLine("CLEAR");
+                                print = "";
                                 biggestValue = currentValue2;
 
                                 for (int q = j + 1; q < col - 2; q++)
@@ -772,6 +832,7 @@ namespace DataProcessing
                                     if (biggestValue < currentValue3)
                                     {
                                         Console.WriteLine("CLEAR");
+                                        print = "";
                                         biggestValue = currentValue3;
 
                                         for (int k = q + 1; k < col - 1; k++)
@@ -833,9 +894,11 @@ namespace DataProcessing
                                         {
                                             Console.WriteLine("> biggest value roi");
                                             Console.WriteLine("CLEAR");
+                                            print = "";
                                             biggestValue = currentValue3 + currentCosts;
-                                            Console.WriteLine(biggestValue);
-                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                            //Console.WriteLine(biggestValue);
+                                            //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                            print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
 
                                             compVar = value[k];
                                         }
@@ -853,8 +916,9 @@ namespace DataProcessing
                                                 compVar = value[k];
                                             }
 
-                                            Console.WriteLine(biggestValue);
-                                            Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                            //Console.WriteLine(biggestValue);
+                                            //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
+                                            print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                                         }
 
                                     }
@@ -865,11 +929,16 @@ namespace DataProcessing
                     }
                 }
             }
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
+            {
+                writetext.WriteLine(print);
+            }
         }
 
 
         private void processGroup5(String[] color, int[] value, int[][] zeroOne, int col, int row, int start, int end)
         {
+            string print = "";
             int currentValue1; // giá trị ở vòng 1
             int currentValue2; // giá trị ở vòng 2
             int currentValue3; // giá trị ở vòng 3
@@ -1242,10 +1311,11 @@ namespace DataProcessing
                                                 {
                                                     Console.WriteLine("> biggest value roi");
                                                     Console.WriteLine("CLEAR");
+                                                    print = "";
                                                     biggestValue = currentValue4 + currentCosts;
-                                                    Console.WriteLine(biggestValue);
-                                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
-
+                                                    //Console.WriteLine(biggestValue);
+                                                    //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
                                                     compVar = value[l];
                                                 }
                                                 else if (currentValue4 + currentCosts == biggestValue)
@@ -1262,8 +1332,9 @@ namespace DataProcessing
                                                         compVar = value[l];
                                                     }
 
-                                                    Console.WriteLine(biggestValue);
-                                                    Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+                                                    //Console.WriteLine(biggestValue);
+                                                    //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l]);
+                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                         }
@@ -1274,8 +1345,11 @@ namespace DataProcessing
                     }
                 }
             }
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
+            {
+                writetext.WriteLine(print);
+            }
         }
-
-
-    }
+    
+    } 
 }
