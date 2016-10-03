@@ -83,7 +83,7 @@
                         Width="600"     
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
-                        Margin="15 0 0 0">
+                        Margin="15 0 0 0" TextChanged="txtFilePath_TextChanged">
                         </TextBox>
                         <Button
                         Background="#55d455"
