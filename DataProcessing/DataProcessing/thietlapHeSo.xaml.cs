@@ -14,7 +14,7 @@ namespace DataProcessing
     /// </summary>
     public partial class thietlapHeSo : Page
     {   
-        private string startDate, endDate;
+        public static string startdatetime = "", enddatetime = "";
 
         public thietlapHeSo()
         {
@@ -39,34 +39,7 @@ namespace DataProcessing
             if (browsefile == true)
                 txtFilePath.Text = openfile.FileName;
         }
-        /// <summary>
-        /// Hàm get set lấy giá trị ngày bắt đầu để truyền đi
-        /// </summary>
-        public string startDatetime
-        {
-            get
-            {
-                return this.startDate;
-            }
-            set
-            {
-                this.startDate = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
-            }
-        }
-        /// <summary>
-        /// Hàm get set lấy giá trị ngày kết thúc để truyền đi
-        /// </summary>
-        public string endDatetime
-        {
-            get
-            {
-                return this.endDate;
-            }
-            set
-            {
-                this.endDate = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
-            }
-        }
+       
         /// <summary>
         /// Bắt đầu tìm kiếm
         /// </summary>
@@ -74,10 +47,8 @@ namespace DataProcessing
         /// <param name="e"></param>
         private void startSearch(object sender, RoutedEventArgs e)
         {
-            string z = startDatetime;
-            string x = endDatetime;
-            string startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
-            string enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
+            startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
+            enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
             if (txtFilePath.Text.Length == 0)
             {
                 MessageBox.Show("Bạn chưa chọn đường dẫn!");
@@ -275,6 +246,11 @@ namespace DataProcessing
         private void RadioButton5_Unchecked(object sender, RoutedEventArgs e)
         {
             group5 = false;
+        }
+
+        private void txtFilePath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         /// <summary>
