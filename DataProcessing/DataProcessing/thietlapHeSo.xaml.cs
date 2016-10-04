@@ -13,9 +13,9 @@ namespace DataProcessing
     /// Interaction logic for Page1.xaml
     /// </summary>
     public partial class thietlapHeSo : Page
-    {   
+    {
         public static string startdatetime = "", enddatetime = "";
-
+        public bool check = true;
         public thietlapHeSo()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace DataProcessing
             if (browsefile == true)
                 txtFilePath.Text = openfile.FileName;
         }
-       
+
         /// <summary>
         /// Bắt đầu tìm kiếm
         /// </summary>
@@ -47,6 +47,7 @@ namespace DataProcessing
         /// <param name="e"></param>
         private void startSearch(object sender, RoutedEventArgs e)
         {
+            string mamaunguoidungnhap = "E";
             startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
             enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
             if (txtFilePath.Text.Length == 0)
@@ -148,9 +149,33 @@ namespace DataProcessing
                 }
                 MessageBox.Show("Đọc hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
 
+                
+                string tmp4 = "";
+                int tmp5, tmp6;
+                for (int i = 0; i < WS.UsedRange.Columns.Count - 1; i++)
+                {
+                    if (color[i] == mamaunguoidungnhap)
+                    {
+                        tmp4 = color[i];
+                        tmp5 = value[i];
+                        color[i] = color[0];
+                        value[i] = value[0];
+                        color[0] = tmp4;
+                        value[0] = tmp5;
+                        for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
+                        {
+                            tmp6 = zeroOne[i][n];
+                            zeroOne[i][n] = zeroOne[0][n];
+                            zeroOne[0][n] = tmp6;
+                        }
+
+                    }
+                }
+
+                //sắp xếp mảng
                 int tmp1, tmp2;
                 string tmp3 = "";
-                for (int i = 0; i < value.Length; i++)
+                for (int i = 1; i < value.Length; i++)
                     for (int j = i + 1; j < value.Length; j++)
                     {
                         if (value[i] < value[j])
@@ -169,7 +194,7 @@ namespace DataProcessing
                             }
                         }
                     }
-                
+
                 FindingStatus find = new FindingStatus();
                 this.NavigationService.Navigate(find);
 
@@ -353,6 +378,11 @@ namespace DataProcessing
                     }
                 }
 
+                if(check == true)
+                {
+                    break;
+                }
+
             }
             using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
             {
@@ -488,7 +518,7 @@ namespace DataProcessing
 
                                 for (int q = j + 1; q < col - 1; q++)
                                 {
-                                  //  Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
+                                    //  Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
                                     print = color[i] + "-" + color[j] + "-" + color[q];
                                     if (value[q] > value[q + 1])
                                     {
@@ -572,18 +602,24 @@ namespace DataProcessing
 
                                     //Console.WriteLine(currentValue2 + currentCosts);
                                     //Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q]);
-                                    print += color[i] + "-" + color[j] + "-" + color[q] + ": " + (currentValue2+currentCosts) + Environment.NewLine;
+                                    print += color[i] + "-" + color[j] + "-" + color[q] + ": " + (currentValue2 + currentCosts) + Environment.NewLine;
                                 }
 
                             }
                         }
                     }
                 }
+
+                if (check == true)
+                {
+                    break;
+                }
             }
             using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
             {
                 writetext.WriteLine(print);
             }
+
         }
 
         private void processGroup4(String[] color, int[] value, int[][] zeroOne, int col, int row, int start, int end)
@@ -635,7 +671,7 @@ namespace DataProcessing
                                 for (int k = q + 1; k < col - 1; k++)
                                 {
                                     Console.WriteLine(color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k]);
-                                  //  print = color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k];
+                                    //  print = color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k];
                                     if (value[k] > value[k + 1])
                                     {
                                         break;
@@ -903,6 +939,11 @@ namespace DataProcessing
                         }
 
                     }
+                }
+
+                if (check == true)
+                {
+                    break;
                 }
             }
             using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
@@ -1320,12 +1361,17 @@ namespace DataProcessing
                         }
                     }
                 }
+
+                if (check == true)
+                {
+                    break;
+                }
             }
             using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
             {
                 writetext.WriteLine(print);
             }
         }
-    
-    } 
+
+    }
 }
