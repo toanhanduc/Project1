@@ -48,8 +48,8 @@ namespace DataProcessing
             Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
 
             // string mamaunguoidungnhap = "E";
-            startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("dd/M/yyyy");
-            enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("dd/M/yyyy");
+            startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("M/dd/yyyy");
+            enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("M/dd/yyyy");
             excelcontroller.readExcel(txtFilePath.Text);
             if (txtFilePath.Text.Length == 0)
             {

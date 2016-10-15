@@ -47,7 +47,7 @@ namespace DataProcessing.Controller
             //Khoanh vùng ngày bắt đầu và kết thúc
             for (int row = 2; row <= model.getRowCount(); row++)
             {
-                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("dd/M/yyyy");
+                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
                 if (cell == thietlapHeSo.startdatetime)
                     ngaybatdau = row;
 
