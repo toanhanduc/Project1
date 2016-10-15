@@ -134,7 +134,7 @@ namespace DataProcessing.Controller
                 //}
 
             }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt", true))
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
             {
                 writetext.WriteLine(print);
             }
@@ -540,7 +540,7 @@ namespace DataProcessing.Controller
                 //    break;
                 //}
             }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt", true))
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
             {
                 writetext.WriteLine(print);
             }
@@ -920,7 +920,7 @@ namespace DataProcessing.Controller
                 //    break;
                 //}
             }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt", true))
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
             {
                 writetext.WriteLine(print);
             }
@@ -1413,7 +1413,7 @@ namespace DataProcessing.Controller
 
                 Console.WriteLine(i);
             }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt", true))
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
             {
                 writetext.WriteLine(print);
             }
