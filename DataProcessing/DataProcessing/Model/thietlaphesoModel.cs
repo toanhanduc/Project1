@@ -4,9 +4,9 @@ namespace DataProcessing.Model
 {
     public class thietlaphesoModel
     {
-        
+
         private static int colcount = 1;
-        private static int rowcount = 1;       
+        private static int rowcount = 1;
         private static String[] color = new String[colcount - 1];
         private static int[] value = new int[colcount - 1];
         private static int[][] zeroOne = new int[colcount - 1][];
