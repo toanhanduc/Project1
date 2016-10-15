@@ -55,13 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FindingStatus.xaml.cs">
+    <Compile Include="Controller\AlgorithmController.cs" />
+    <Compile Include="Controller\ExcelController.cs" />
+    <Compile Include="Model\thietlaphesoModel.cs" />
+    <Compile Include="View\FindingStatus.xaml.cs">
       <DependentUpon>FindingStatus.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Welcome.xaml.cs">
+    <Compile Include="View\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
-    <Page Include="FindingStatus.xaml">
+    <Page Include="View\FindingStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -77,17 +80,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="thietlapHeSo.xaml">
+    <Page Include="View\thietlapHeSo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Welcome.xaml">
+    <Page Include="View\Welcome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="thietlapHeSo.xaml.cs">
+    <Compile Include="View\thietlapHeSo.xaml.cs">
       <DependentUpon>thietlapHeSo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">

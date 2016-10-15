@@ -13,16 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Model
+namespace DataProcessing
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FindingStatus.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FindingStatus : Page
     {
-        public MainWindow()
+        public FindingStatus()
         {
+
             InitializeComponent();
+            start.Text = thietlapHeSo.startdatetime;
+            end.Text = thietlapHeSo.enddatetime;
+
         }
     }
 }
