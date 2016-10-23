@@ -12,14 +12,14 @@ namespace DataProcessing.Controller
         public static int ngaybatdau = 0, ngayketthuc = 0;
         public void readExcel(String path)
         {
-            
+
             Excel.Application excel;
             excel = new Excel.Application();
             Excel.Workbook WB = excel.Workbooks.Open(path);
             WB = excel.ActiveWorkbook;
             Excel.Worksheet WS;
             WS = WB.ActiveSheet;
-            
+
             int start = Environment.TickCount;
 
             model.setColCount(WS.UsedRange.Columns.Count);
@@ -47,7 +47,7 @@ namespace DataProcessing.Controller
             //Khoanh vùng ngày bắt đầu và kết thúc
             for (int row = 2; row <= model.getRowCount(); row++)
             {
-                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("dd/M/yyyy");
+                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
                 if (cell == thietlapHeSo.startdatetime)
                     ngaybatdau = row;
 

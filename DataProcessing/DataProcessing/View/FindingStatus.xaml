@@ -212,7 +212,7 @@
                     </TextBlock>
                     </StackPanel>
                 </Grid>
-                <ProgressBar
+                <!--<ProgressBar
                         Grid.Column="1"
                         Grid.Row="2"
                         HorizontalAlignment="Center"
@@ -220,7 +220,7 @@
                         Margin="0,30,0,0"
                         VerticalAlignment="Top"
                         Width="600"
-                        Foreground="Salmon"/>
+                        Foreground="Salmon"/>-->
             </StackPanel>
             <!--End Mid-->
         </StackPanel>
@@ -230,7 +230,7 @@
             HorizontalAlignment="Center"
             Margin="0 0 0 50 ">
             <!--Start TimKiem Button-->
-            <Rectangle
+            <!--<Rectangle
                 Fill="#009e49" 
                 Height="70"
                 Width="385"
@@ -250,7 +250,7 @@
                     HorizontalAlignment="Center">
                     NGỪNG TÌM KIẾM
                 </TextBlock>
-            </Button>
+            </Button>-->
             <!--End TimKiem Button-->
         </Grid>
         <!--End Btm-->

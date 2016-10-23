@@ -156,14 +156,15 @@
                         <Grid
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Margin="280 10 0 0">
+                        Margin="280 10 0 0"
+                        Height="35">
                             <RadioButton
                             Margin="0,0,0,-0.2"
                             Content="2"
                             FontSize="20"
                             Padding="5 -9 0 0 "
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
+                            VerticalAlignment="Center"
                             Checked="RadioButton2_Checked"
                             Unchecked="RadioButton2_Unchecked"
                         ></RadioButton>
@@ -201,7 +202,7 @@
                     </Grid>
                     <!--End So luong mau moi nhom-->
                     <!--Start Thoi gian tim kiem gioi han-->
-                    <Grid VerticalAlignment="Center"
+                    <!--<Grid VerticalAlignment="Center"
                           HorizontalAlignment="Left"
                           Margin="0 7 0 0">
                         <TextBlock                        
@@ -214,10 +215,10 @@
                             Margin="300 0 0 0"
                             TextWrapping="NoWrap"
                             Width="70"></TextBox>
-                    </Grid>
+                    </Grid>-->
                     <!--End Thoi gian tim kiem gioi han-->
                     <!--Start Ngưỡng số lượng bán ra-->
-                    <Grid VerticalAlignment="Center"
+                    <!--<Grid VerticalAlignment="Center"
                           HorizontalAlignment="Left"
                           Margin="0 7 0 0">
                         <TextBlock                        
@@ -231,7 +232,7 @@
                             Margin="280 0 0 0"
                             TextWrapping="NoWrap"
                             Width="70"></TextBox>
-                    </Grid>
+                    </Grid>-->
                     <!--End Ngưỡng số lượng bán ra-->
                 </StackPanel>
             </Grid>

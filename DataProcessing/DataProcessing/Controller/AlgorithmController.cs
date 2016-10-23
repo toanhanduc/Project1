@@ -12,13 +12,6 @@ namespace DataProcessing.Controller
         /// <summary>
         /// Hàm xử lý nhóm 2 màu
         /// </summary>
-        /// <param name="color"></param>
-        /// <param name="value"></param>
-        /// <param name="zeroOne"></param>
-        /// <param name="col"></param>
-        /// <param name="row"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
         public void processGroup2()
         {
             thietlaphesoModel model = new thietlaphesoModel();
@@ -178,9 +171,6 @@ namespace DataProcessing.Controller
         /// <summary>
         /// Hàm xử lý nhóm 3 màu
         /// </summary>
-        /// <param name="color"></param>
-        /// <param name="value"></param>
-        /// <param name="zeroOne"></param>
         public void processGroup3()
         {
             thietlaphesoModel model = new thietlaphesoModel();
@@ -604,7 +594,9 @@ namespace DataProcessing.Controller
             }
 
         }
-
+        /// <summary>
+        /// Hàm xử lý nhóm 4 màu
+        /// </summary>
         public void processGroup4()
         {
             thietlaphesoModel model = new thietlaphesoModel();
@@ -1189,8 +1181,9 @@ namespace DataProcessing.Controller
                 writetext.WriteLine(print);
             }
         }
-
-
+        /// <summary>
+        /// Hàm xử lý nhóm 5 màu
+        /// </summary>
         public void processGroup5()
         {
             thietlaphesoModel model = new thietlaphesoModel();
