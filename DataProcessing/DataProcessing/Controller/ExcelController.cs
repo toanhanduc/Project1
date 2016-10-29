@@ -162,6 +162,8 @@ namespace DataProcessing.Controller
             model.setColor(color);
             model.setValue(value);
             model.setZeroOne(zeroOne);
+
+            excel.Quit();
         }
     }
 }
