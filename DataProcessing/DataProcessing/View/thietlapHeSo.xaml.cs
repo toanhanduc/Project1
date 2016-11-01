@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
+using System.Threading.Tasks;
 
 namespace DataProcessing
 {
@@ -11,8 +12,10 @@ namespace DataProcessing
     public partial class thietlapHeSo : Page
     {
         public static string startdatetime = "", enddatetime = "";
+        Controller.ExcelController excelcontroller = new Controller.ExcelController();
+        Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
         //public bool check = false;
-        
+
         public thietlapHeSo()
         {
             InitializeComponent();
@@ -36,16 +39,16 @@ namespace DataProcessing
             if (browsefile == true)
                 txtFilePath.Text = openfile.FileName;
         }
+        
 
         /// <summary>
         /// Bắt đầu tìm kiếm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void startSearch(object sender, RoutedEventArgs e)
+        public async void startSearch(object sender, RoutedEventArgs e)
         {
-            Controller.ExcelController excelcontroller = new Controller.ExcelController();
-            Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
+           
 
             // string mamaunguoidungnhap = "E";
             startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("M/dd/yyyy");
@@ -75,25 +78,26 @@ namespace DataProcessing
                 if (group2)
                 {
                     int timestart = Environment.TickCount;
+                    await Task.Run(new Action(tlhscontroller.processGroup21));
                     tlhscontroller.processGroup2();
                     MessageBox.Show("Mau 2 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                 }
                 else if (group3)
                 {
                     int timestart = Environment.TickCount;
-                    tlhscontroller.processGroup3();
+                    await Task.Run(new Action(tlhscontroller.processGroup3));                  
                     MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                 }
                 else if (group4)
                 {
                     int timestart = Environment.TickCount;
-                    tlhscontroller.processGroup4();
+                    await Task.Run(new Action(tlhscontroller.processGroup4));
                     MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                 }
                 else if (group5)
                 {
                     int timestart = Environment.TickCount;
-                    tlhscontroller.processGroup5();
+                    await Task.Run(new Action(tlhscontroller.processGroup2));
                     MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                 }
                 else
