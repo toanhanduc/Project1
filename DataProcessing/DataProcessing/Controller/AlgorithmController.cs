@@ -15,13 +15,14 @@ namespace DataProcessing.Controller
         /// 
         
         bool canStop = true;
-
+        thietlaphesoModel model = new thietlaphesoModel();
         public void processGroup2()
         {
-            thietlaphesoModel model = new thietlaphesoModel();
+            
             string print = "";
             int currentColumnValue; // giá trị cột làm mốc
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
+            int[] size = new int[model.getColCount() - 1];
             int[] value = model.getValue();
             int[][] zeroOne = model.getZeroOne();
             int[] index = model.getIndex();
