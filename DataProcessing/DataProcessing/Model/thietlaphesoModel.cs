@@ -11,6 +11,25 @@ namespace DataProcessing.Model
         private static int[] value = new int[colcount - 1];
         private static int[][] zeroOne = new int[colcount - 1][];
         private static int[] index = new int[colcount - 1];
+        private static int n = 0;
+
+
+        /// <summary>
+        /// Set giá trị n
+        /// </summary>
+        /// <param name="colcount1"></param>
+        public void setN(int n1)
+        {
+            n = n1;
+        }
+        /// <summary>
+        /// Get giá trị n
+        /// </summary>
+        /// <returns></returns>
+        public int getN()
+        {
+            return n;
+        }
         /// <summary>
         /// Set giá trị mảng cột
         /// </summary>
