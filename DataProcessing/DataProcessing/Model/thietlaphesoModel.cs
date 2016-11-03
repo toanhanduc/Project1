@@ -17,7 +17,7 @@ namespace DataProcessing.Model
         /// <summary>
         /// Set giá trị n
         /// </summary>
-        /// <param name="colcount1"></param>
+        /// <param name="n1"></param>
         public void setN(int n1)
         {
             n = n1;
