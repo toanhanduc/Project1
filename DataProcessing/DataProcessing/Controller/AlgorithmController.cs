@@ -170,19 +170,19 @@ namespace DataProcessing.Controller
                         {
                             if (j > i || j < i && currentValue2 < max[j])
                             {
-                                if (currentValue2 > biggestValue2)
+                                if (currentValue2 > biggestValue)
                                 {
-                                    biggestValue2 = currentValue2;
+                                    biggestValue = currentValue2;
                                     savedRound2.Clear();
                                     savedRound2.Add(j);
                                 }
-                                else if (currentValue2 == biggestValue2)
+                                else if (currentValue2 == biggestValue)
                                 {
                                     savedRound2.Add(j);
                                 }
                             }
                         }
-                        printOut += print;
+                        //printOut += print;
                     }
 
                     if (n > 2)
@@ -253,15 +253,15 @@ namespace DataProcessing.Controller
                                             {
                                                 if (colorOutIndex[x] > colorOutIndex[y])
                                                 {
-                                                    //String temp;
-                                                    //temp = colorOut[x];
-                                                    //colorOut[x] = colorOut[y];
-                                                    //colorOut[y] = temp;
+                                                    String temp;
+                                                    temp = colorOut[x];
+                                                    colorOut[x] = colorOut[y];
+                                                    colorOut[y] = temp;
 
-                                                    //int tempInt;
-                                                    //tempInt = colorOutIndex[x];
-                                                    //colorOutIndex[x] = colorOutIndex[y];
-                                                    //colorOutIndex[y] = tempInt;
+                                                    int tempInt;
+                                                    tempInt = colorOutIndex[x];
+                                                    colorOutIndex[x] = colorOutIndex[y];
+                                                    colorOutIndex[y] = tempInt;
                                                 }
                                             }
                                         }
@@ -286,21 +286,20 @@ namespace DataProcessing.Controller
                                             {
                                                 if (colorOutIndex[x] > colorOutIndex[y])
                                                 {
-                                                    //String temp;
-                                                    //temp = colorOut[x];
-                                                    //colorOut[x] = colorOut[y];
-                                                    //colorOut[y] = temp;
+                                                    String temp;
+                                                    temp = colorOut[x];
+                                                    colorOut[x] = colorOut[y];
+                                                    colorOut[y] = temp;
 
-                                                    //int tempInt;
-                                                    //tempInt = colorOutIndex[x];
-                                                    //colorOutIndex[x] = colorOutIndex[y];
-                                                    //colorOutIndex[y] = tempInt;
+                                                    int tempInt;
+                                                    tempInt = colorOutIndex[x];
+                                                    colorOutIndex[x] = colorOutIndex[y];
+                                                    colorOutIndex[y] = tempInt;
                                                 }
                                             }
                                         }
                                         print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
                                     }
-                                    printOut += print;
                                 }
                                 else
                                 {
@@ -387,24 +386,24 @@ namespace DataProcessing.Controller
                                                 colorOutIndex[2] = index[q];
                                                 colorOutIndex[3] = index[k];
 
-                                                //for (int x = 0; x < 4; x++)
-                                                //{
-                                                //    for (int y = x + 1; y < 4; y++)
-                                                //    {
-                                                //        if (colorOutIndex[x] > colorOutIndex[y])
-                                                //        {
-                                                //            String temp;
-                                                //            temp = colorOut[x];
-                                                //            colorOut[x] = colorOut[y];
-                                                //            colorOut[y] = temp;
+                                                for (int x = 0; x < 4; x++)
+                                                {
+                                                    for (int y = x + 1; y < 4; y++)
+                                                    {
+                                                        if (colorOutIndex[x] > colorOutIndex[y])
+                                                        {
+                                                            String temp;
+                                                            temp = colorOut[x];
+                                                            colorOut[x] = colorOut[y];
+                                                            colorOut[y] = temp;
 
-                                                //            int tempInt;
-                                                //            tempInt = colorOutIndex[x];
-                                                //            colorOutIndex[x] = colorOutIndex[y];
-                                                //            colorOutIndex[y] = tempInt;
-                                                //        }
-                                                //    }
-                                                //}
+                                                            int tempInt;
+                                                            tempInt = colorOutIndex[x];
+                                                            colorOutIndex[x] = colorOutIndex[y];
+                                                            colorOutIndex[y] = tempInt;
+                                                        }
+                                                    }
+                                                }
 
                                                 print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
 
@@ -424,24 +423,24 @@ namespace DataProcessing.Controller
                                                 colorOutIndex[2] = index[q];
                                                 colorOutIndex[3] = index[k];
 
-                                                //for (int x = 0; x < 4; x++)
-                                                //{
-                                                //    for (int y = x + 1; y < 4; y++)
-                                                //    {
-                                                //        if (colorOutIndex[x] > colorOutIndex[y])
-                                                //        {
-                                                //            String temp;
-                                                //            temp = colorOut[x];
-                                                //            colorOut[x] = colorOut[y];
-                                                //            colorOut[y] = temp;
+                                                for (int x = 0; x < 4; x++)
+                                                {
+                                                    for (int y = x + 1; y < 4; y++)
+                                                    {
+                                                        if (colorOutIndex[x] > colorOutIndex[y])
+                                                        {
+                                                            String temp;
+                                                            temp = colorOut[x];
+                                                            colorOut[x] = colorOut[y];
+                                                            colorOut[y] = temp;
 
-                                                //            int tempInt;
-                                                //            tempInt = colorOutIndex[x];
-                                                //            colorOutIndex[x] = colorOutIndex[y];
-                                                //            colorOutIndex[y] = tempInt;
-                                                //        }
-                                                //    }
-                                                //}
+                                                            int tempInt;
+                                                            tempInt = colorOutIndex[x];
+                                                            colorOutIndex[x] = colorOutIndex[y];
+                                                            colorOutIndex[y] = tempInt;
+                                                        }
+                                                    }
+                                                }
                                                 print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
                                             }
                                         }
@@ -545,24 +544,24 @@ namespace DataProcessing.Controller
                                                     colorOutIndex[3] = index[k];
                                                     colorOutIndex[4] = index[l];
 
-                                                    //for (int x = 0; x < 5; x++)
-                                                    //{
-                                                    //    for (int y = x + 1; y < 5; y++)
-                                                    //    {
-                                                    //        if (colorOutIndex[x] > colorOutIndex[y])
-                                                    //        {
-                                                    //            String temp;
-                                                    //            temp = colorOut[x];
-                                                    //            colorOut[x] = colorOut[y];
-                                                    //            colorOut[y] = temp;
+                                                    for (int x = 0; x < 5; x++)
+                                                    {
+                                                        for (int y = x + 1; y < 5; y++)
+                                                        {
+                                                            if (colorOutIndex[x] > colorOutIndex[y])
+                                                            {
+                                                                String temp;
+                                                                temp = colorOut[x];
+                                                                colorOut[x] = colorOut[y];
+                                                                colorOut[y] = temp;
 
-                                                    //            int tempInt;
-                                                    //            tempInt = colorOutIndex[x];
-                                                    //            colorOutIndex[x] = colorOutIndex[y];
-                                                    //            colorOutIndex[y] = tempInt;
-                                                    //        }
-                                                    //    }
-                                                    //}
+                                                                int tempInt;
+                                                                tempInt = colorOutIndex[x];
+                                                                colorOutIndex[x] = colorOutIndex[y];
+                                                                colorOutIndex[y] = tempInt;
+                                                            }
+                                                        }
+                                                    }
                                                     print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                                 else if (currentValue4 + currentCosts == biggestValue)
@@ -582,29 +581,29 @@ namespace DataProcessing.Controller
                                                     colorOutIndex[3] = index[k];
                                                     colorOutIndex[4] = index[l];
 
-                                                    //for (int x = 0; x < 5; x++)
-                                                    //{
-                                                    //    for (int y = x + 1; y < 5; y++)
-                                                    //    {
-                                                    //        if (colorOutIndex[x] > colorOutIndex[y])
-                                                    //        {
-                                                    //            String temp;
-                                                    //            temp = colorOut[x];
-                                                    //            colorOut[x] = colorOut[y];
-                                                    //            colorOut[y] = temp;
+                                                    for (int x = 0; x < 5; x++)
+                                                    {
+                                                        for (int y = x + 1; y < 5; y++)
+                                                        {
+                                                            if (colorOutIndex[x] > colorOutIndex[y])
+                                                            {
+                                                                String temp;
+                                                                temp = colorOut[x];
+                                                                colorOut[x] = colorOut[y];
+                                                                colorOut[y] = temp;
 
-                                                    //            int tempInt;
-                                                    //            tempInt = colorOutIndex[x];
-                                                    //            colorOutIndex[x] = colorOutIndex[y];
-                                                    //            colorOutIndex[y] = tempInt;
-                                                    //        }
-                                                    //    }
-                                                    //}
+                                                                int tempInt;
+                                                                tempInt = colorOutIndex[x];
+                                                                colorOutIndex[x] = colorOutIndex[y];
+                                                                colorOutIndex[y] = tempInt;
+                                                            }
+                                                        }
+                                                    }
                                                     print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
-
                                             printOut += print;
+
                                         }
                                     }
 
