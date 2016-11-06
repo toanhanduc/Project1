@@ -17,7 +17,7 @@ namespace DataProcessing.Controller
             List<int> value = new List<int>();
             
             //Đọc file txt output và xử lý sắp xếp
-            using (StreamReader sr = new StreamReader("write2.txt"))
+            using (StreamReader sr = new StreamReader("write.txt"))
             {
 
                 string line;
