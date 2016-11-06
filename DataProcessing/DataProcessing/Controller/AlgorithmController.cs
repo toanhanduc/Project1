@@ -1308,7 +1308,38 @@ namespace DataProcessing.Controller
                                         else // 4 cột không làm full 1
                                         {
                                             if (n == 4)
-                                            {
+                                            {                            
+                                                String[] colorOut = new String[4];
+                                                int[] colorOutIndex = new int[4];
+
+                                                colorOut[0] = color[i];
+                                                colorOut[1] = color[j];
+                                                colorOut[2] = color[q];
+                                                colorOut[3] = color[k];
+
+                                                colorOutIndex[0] = index[i];
+                                                colorOutIndex[1] = index[j];
+                                                colorOutIndex[2] = index[q];
+                                                colorOutIndex[3] = index[k];
+
+                                                for (int x = 0; x < 4; x++)
+                                                {
+                                                    for (int y = x + 1; y < 4; y++)
+                                                    {
+                                                        if (colorOutIndex[x] > colorOutIndex[y])
+                                                        {
+                                                            String temp;
+                                                            temp = colorOut[x];
+                                                            colorOut[x] = colorOut[y];
+                                                            colorOut[y] = temp;
+
+                                                            int tempInt;
+                                                            tempInt = colorOutIndex[x];
+                                                            colorOutIndex[x] = colorOutIndex[y];
+                                                            colorOutIndex[y] = tempInt;
+                                                        }
+                                                    }
+                                                }
                                                 print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + currentValue4 + Environment.NewLine;
                                                 continue;
                                             }
