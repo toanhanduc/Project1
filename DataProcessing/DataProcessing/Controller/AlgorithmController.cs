@@ -16,6 +16,7 @@ namespace DataProcessing.Controller
         bool canStop = true;
         string printOut = "";
         static int[] max;
+        int limitedInputValue = 0; // nguong gioi han dau vao
         thietlaphesoModel model = new thietlaphesoModel();
         public void readN(int n)
         {
@@ -1052,345 +1053,96 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroup2()//printAll()
+        public void processGroupAll2() // print All n = 2
         {
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
             string print = "";
-            int currentValue1; // giá trị ở vòng 1
-            int currentValue2; // giá trị ở vòng 2
-            int currentValue3; // giá trị ở vòng 3
-            int currentValue4; // giá trị ở vòng 4
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
             int[][] zeroOne = model.getZeroOne();
             int[] index = model.getIndex();
             string[] color = model.getColor();
 
-            for (int i = 0; i < model.getColCount() - n + 1; i++) // chọn từng cột mốc trong 9 colors ( do không chọn đến cột cuối cùng làm mốc )
+            n = 2;
+
+            for (int i = 0; i < model.getColCount() - n; i++)
             {
                 print = "";
-                biggestValue = 0;
-
-                List<int> checkList1 = new List<int>(); // list so sánh theo ngày không bán được
-                currentValue1 = value[i]; // giá trị cột làm mốc
-
-                for (int j = 0; j < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; j++) // duyệt từng ngày của màu
+                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                 {
-                    if (zeroOne[i][j] == 0) // tìm ngày không bán được để so
+                    biggestValue = 0;
+                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
                     {
-                        checkList1.Add(j);
+                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1)
+                        {
+                            biggestValue++;
+                        }
                     }
+                    if(biggestValue < limitedInputValue)
+                    {
+                        continue;
+                    }
+                    print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
                 }
-                // kiểm tra xem còn ô trống nào không
-                if (!checkList1.Any())
+                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
                 {
-                    biggestValue = value[i];
-
-                    if (n == 2)
-                    {
-                        for (int j = i + 1; j < model.getColCount() - n + 1; j++)
-                        {
-                            print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
-                        }
-                    }
-                    else
-                    {
-                        if (n == 3)
-                        {
-                            for (int j = i + 1; j < model.getColCount() - n + 1; j++)
-                            {
-                                for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                                {
-                                    print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (n == 4)
-                            {
-                                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
-                                {
-                                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                                    {
-                                        for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                        {
-                                            print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
-                                {
-                                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                                    {
-                                        for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                        {
-                                            for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                                            {
-                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-
+                    writetext.Write(print);
                 }
-                else // còn ô trống
-                {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++) // chọn từng cột ở vòng 2
-                    {
-                        List<int> checkList2 = new List<int>(checkList1);
-
-                        int currentCosts = 0; // trọng số cột hiện tại ở vòng 2
-
-                        foreach (int temp in checkList1) // tính trọng số màu ở vòng 2
-                        {
-                            if (zeroOne[j][temp] == 1)
-                            {
-                                currentCosts++;
-                                checkList2.Remove(temp);
-                            }
-                        }
-
-                        currentValue2 = currentValue1 + currentCosts;
-
-                        if (!checkList2.Any()) // 2 cột full 1
-                        {
-                            biggestValue = currentValue2;
-                            if (n == 2)
-                            {
-                                print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
-                            }
-                            else
-                            {
-                                if (n == 3)
-                                {
-                                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                                    {
-                                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
-                                    }
-                                }
-                                else
-                                {
-                                    if (n == 4)
-                                    {
-                                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                                        {
-                                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                            {
-                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-                                            }
-
-                                        }
-                                    }
-                                    else
-                                    {
-                                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                                        {
-                                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                            {
-                                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                                                {
-                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                        else // 2 cột không full 1
-                        {
-                            if (n == 2)
-                            {
-                                print += color[i] + "-" + color[j] + ": " + currentValue2 + Environment.NewLine;
-                            }
-
-                            for (int q = j + 1; q < model.getColCount() - n + 2; q++) // chọn từng cột ở vòng 3, để lại 2 cột để ghép màu
-                            {
-                                List<int> checkList3 = new List<int>(checkList2);
-
-                                currentCosts = 0;
-
-                                foreach (int temp in checkList2)
-                                {
-                                    if (zeroOne[q][temp] == 1)
-                                    {
-                                        currentCosts++;
-                                        checkList3.Remove(temp);
-                                    }
-                                }
-
-                                currentValue3 = currentValue2 + currentCosts;
-
-
-                                if (!checkList3.Any()) // 3 cột làm full 1
-                                {
-                                    biggestValue = currentValue3;
-                                    if (n == 3)
-                                    {
-                                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
-                                    }
-                                    else
-                                    {
-                                        if (n == 4)
-                                        {
-                                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                            {
-                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                            {
-                                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                                                {
-
-                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else // 3 cột không làm full 1
-                                {
-                                    if (n == 3)
-                                    {
-                                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
-                                        continue;
-                                    }
-
-                                    for (int k = q + 1; k < model.getColCount() - n + 3; k++) // chọn màu ở vòng 4, để lại 1 màu để ghép
-                                    {
-                                        List<int> checkList4 = new List<int>(checkList3);
-
-                                        currentCosts = 0;
-
-                                        foreach (int temp in checkList3)
-                                        {
-                                            if (zeroOne[k][temp] == 1)
-                                            {
-                                                currentCosts++;
-                                                checkList4.Remove(temp);
-                                            }
-                                        }
-
-                                        currentValue4 = currentValue3 + currentCosts;
-
-                                        if (!checkList4.Any()) // 4 cột làm full 1
-                                        {
-                                            biggestValue = currentValue4;
-                                            if (n == 4)
-                                            {
-                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-
-                                            }
-                                            else // n = 5
-                                            {
-                                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                                                {
-                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
-
-                                                }
-                                                
-                                            }
-                                        }
-                                        else // 4 cột không làm full 1
-                                        {
-                                            if (n == 4)
-                                            {                            
-                                                String[] colorOut = new String[4];
-                                                int[] colorOutIndex = new int[4];
-
-                                                colorOut[0] = color[i];
-                                                colorOut[1] = color[j];
-                                                colorOut[2] = color[q];
-                                                colorOut[3] = color[k];
-
-                                                colorOutIndex[0] = index[i];
-                                                colorOutIndex[1] = index[j];
-                                                colorOutIndex[2] = index[q];
-                                                colorOutIndex[3] = index[k];
-
-                                                for (int x = 0; x < 4; x++)
-                                                {
-                                                    for (int y = x + 1; y < 4; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + currentValue4 + Environment.NewLine;
-                                                continue;
-                                            }
-                                            for (int l = k + 1; l < model.getColCount() - n + 4; l++) // chon mau o vong 5
-                                            {
-                                                currentCosts = 0;
-
-                                                foreach (int temp in checkList4)
-                                                {
-                                                    if (zeroOne[l][temp] == 1)
-                                                    {
-                                                        currentCosts++;
-                                                    }
-                                                }
-
-
-                                                biggestValue = currentValue4 + currentCosts;
-                                                
-                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
-                                            }
-                                            
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                printOut += print;
-            }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write2.txt"))
-            {
-                writetext.WriteLine(printOut);
             }
         }
 
-
-
-
-
-
-        public void processGroup() // test n = 4
+        public void processGroup() // print All n = 3
         {
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
             string print = "";
-            int currentValue1; // giá trị ở vòng 1
-            int currentValue2; // giá trị ở vòng 2
-            int currentValue3; // giá trị ở vòng 3
-            int currentValue4; // giá trị ở vòng 4
+            int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
+            int[] value = model.getValue();
+            int[][] zeroOne = model.getZeroOne();
+            int[] index = model.getIndex();
+            string[] color = model.getColor();
+
+            n = 3;
+
+            for (int i = 0; i < model.getColCount() - n; i++)
+            {
+                print = "";
+                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                {
+                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                    {
+                        biggestValue = 0;
+                        for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                        {
+                            if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1)
+                            {
+                                biggestValue++;
+                            }
+                        }
+
+                        if (biggestValue < limitedInputValue)
+                        {
+                            continue;
+                        }
+                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
+                    }
+                }
+                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                {
+                    writetext.Write(print);
+                }
+            }
+        }
+
+        public void processGroupAll4() // print All n = 4
+        {
+            thietlaphesoModel model = new thietlaphesoModel();
+
+            int n = model.getN();
+            string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
             int[][] zeroOne = model.getZeroOne();
@@ -1399,134 +1151,88 @@ namespace DataProcessing.Controller
 
             n = 4;
 
-            for (int i = 0; i < model.getColCount() - n + 1; i++)
+            for (int i = 0; i < model.getColCount() - n; i++)
             {
-                print = "";
-                biggestValue = 0;
-
-                List<int> checkList1 = new List<int>(); // list so sánh theo ngày không bán được
-                currentValue1 = value[i]; // giá trị cột làm mốc
-
-                for (int j = 0; j < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; j++) // duyệt từng ngày của màu
+                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                 {
-                    if (zeroOne[i][j] == 0) // tìm ngày không bán được để so
+                    print = "";
+                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
                     {
-                        checkList1.Add(j);
-                    }
-                }
-
-
-
-                // cột đầu tiên có full 1
-                if (!checkList1.Any())
-                {
-                    biggestValue = currentValue1;
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
-                    {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int k = q + 1; k < model.getColCount() - n + 3; k++)
                         {
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            biggestValue = 0;
+                            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
                             {
-                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
+                                if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
+                                {
+                                    biggestValue++;
+                                }
                             }
+
+                            if (biggestValue < limitedInputValue)
+                            {
+                                continue;
+                            }
+                            print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                         }
                     }
-                }
-                else // cột 1 không làm full 1
-                {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++) // chọn từng cột ở vòng 2
+                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
                     {
-                        List<int> checkList2 = new List<int>(checkList1);
-
-                        int currentCosts = 0; // trọng số cột hiện tại ở vòng 2
-
-                        foreach (int temp in checkList1) // tính trọng số màu ở vòng 2
-                        {
-                            if (zeroOne[j][temp] == 1)
-                            {
-                                currentCosts++;
-                                checkList2.Remove(temp);
-                            }
-                        }
-
-                        currentValue2 = currentValue1 + currentCosts;
-
-                        if (!checkList2.Any()) // 2 cột full 1
-                        {
-                            biggestValue = currentValue2;
-                            for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                            {
-                                for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                {
-                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-                                }
-
-                            }
-                        }
-                        else // 2 cot khong lam full 1
-                        {
-                            for (int q = j + 1; q < model.getColCount() - n + 2; q++) // chọn từng cột ở vòng 3, để lại 2 cột để ghép màu
-                            {
-                                List<int> checkList3 = new List<int>(checkList2);
-
-                                currentCosts = 0;
-
-                                foreach (int temp in checkList2)
-                                {
-                                    if (zeroOne[q][temp] == 1)
-                                    {
-                                        currentCosts++;
-                                        checkList3.Remove(temp);
-                                    }
-                                }
-
-                                currentValue3 = currentValue2 + currentCosts;
-
-
-                                if (!checkList3.Any()) // 3 cột làm full 1
-                                {
-                                    biggestValue = currentValue3;
-
-                                    for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                                    {
-                                        print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-                                    }
-                                }
-                                else // 3 cot khong lam full 1
-                                {
-                                    for (int k = q + 1; k < model.getColCount() - n + 3; k++) // chọn màu ở vòng 4, để lại 1 màu để ghép
-                                    {
-                                        List<int> checkList4 = new List<int>(checkList3);
-
-                                        currentCosts = 0;
-
-                                        foreach (int temp in checkList3)
-                                        {
-                                            if (zeroOne[k][temp] == 1)
-                                            {
-                                                currentCosts++;
-                                                checkList4.Remove(temp);
-                                            }
-                                        }
-
-                                        currentValue4 = currentValue3 + currentCosts;
-
-                                        biggestValue = currentValue4;
-                                        
-                                        print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-
-                                    }
-                                }
-                            }
-                        }
+                        writetext.Write(print);
                     }
                 }
-
-                printOut += print;
             }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write4.txt"))
+        }
+
+        public void processGroupAll5() // print All n = 5
+        {
+            thietlaphesoModel model = new thietlaphesoModel();
+
+            int n = model.getN();
+            string print = "";
+            int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
+            int[] value = model.getValue();
+            int[][] zeroOne = model.getZeroOne();
+            int[] index = model.getIndex();
+            string[] color = model.getColor();
+
+            n = 5;
+
+            for (int i = 0; i < model.getColCount() - n; i++)
             {
-                writetext.WriteLine(printOut);
+                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                {
+                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                    {
+                        print = "";
+                        for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                        {
+                            for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                            {
+                                biggestValue = 0;
+                                for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                                {
+                                    if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1 || zeroOne[l][temp] == 1)
+                                    {
+                                        biggestValue++;
+                                    }
+                                }
+
+                                if (biggestValue < limitedInputValue)
+                                {
+                                    continue;
+                                }
+                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
+                            }
+                        }
+                        using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                        {
+                            writetext.Write(print);
+                        }
+
+                    }
+
+                }
             }
         }
 

@@ -80,7 +80,7 @@ namespace DataProcessing
                 if (group2)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup1));
+                    await Task.Run(new Action(tlhscontroller.processGroup));
                     MessageBox.Show("Mau 2 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     outcontroller.sortOutPut(2);
                 }
@@ -96,14 +96,14 @@ namespace DataProcessing
                 else if (group4)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup1));
+                    await Task.Run(new Action(tlhscontroller.processGroup));
                     MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     outcontroller.sortOutPut(4);
                 }
                 else if (group5)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup1));
+                    await Task.Run(new Action(tlhscontroller.processGroup));
                     MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     outcontroller.sortOutPut(5);
                 }
