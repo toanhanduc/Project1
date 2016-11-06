@@ -15,11 +15,12 @@ namespace DataProcessing
         public int n = 0;
         Controller.ExcelController excelcontroller = new Controller.ExcelController();
         Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
+        Controller.OutputController outcontroller = new Controller.OutputController();
         //public bool check = false;
 
         public thietlapHeSo()
         {
-            InitializeComponent();
+           InitializeComponent();        
         }
         Boolean group2 = false, group3 = false, group4 = false, group5 = false;
         /// <summary>
@@ -79,26 +80,32 @@ namespace DataProcessing
                 if (group2)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup));
+                    await Task.Run(new Action(tlhscontroller.processGroup1));
                     MessageBox.Show("Mau 2 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                    outcontroller.sortOutPut(2);
                 }
                 else if (group3)
                 {
                     int timestart = Environment.TickCount;
                     await Task.Run(new Action(tlhscontroller.processGroup));                  
                     MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                    int timestart1 = Environment.TickCount;
+                    outcontroller.sortOutPut(3);
+                    MessageBox.Show("Mau 3 sx: " + ((double)(Environment.TickCount - timestart1) / 1000).ToString() + "s");
                 }
                 else if (group4)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup));
+                    await Task.Run(new Action(tlhscontroller.processGroup1));
                     MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                    outcontroller.sortOutPut(4);
                 }
                 else if (group5)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup));
+                    await Task.Run(new Action(tlhscontroller.processGroup1));
                     MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                    outcontroller.sortOutPut(5);
                 }
                 else
                 {

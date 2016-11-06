@@ -125,6 +125,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             FontSize="20"
+                            SelectedDate="2015/02/23"
                             Margin="290 0 0 0 "                            
                         ></DatePicker>
                         <TextBlock
@@ -132,7 +133,7 @@
                             VerticalAlignment="Center"
                             FontSize="23"
                             FontWeight="Regular"
-                            Margin="450 0 0 0">
+                            Margin="496,0,0,4">
                         tới
                         </TextBlock>
                         <DatePicker
@@ -140,7 +141,8 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             FontSize="20"
-                            Margin="490 0 0 0"
+                            SelectedDate="2015/09/28"
+                            Margin="543,0,-53,0"
                         ></DatePicker>
                     </Grid>
                     <!--End Thoi gian tim kiem -->

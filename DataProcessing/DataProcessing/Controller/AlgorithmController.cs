@@ -1717,6 +1717,7 @@ namespace DataProcessing.Controller
                                         {
                                             if (n == 4)
                                             {
+                                                
                                                 String[] colorOut = new String[4];
                                                 int[] colorOutIndex = new int[4];
 

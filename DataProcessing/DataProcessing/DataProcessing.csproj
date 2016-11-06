@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Controller\AlgorithmController.cs" />
     <Compile Include="Controller\ExcelController.cs" />
+    <Compile Include="Controller\OutputController.cs" />
     <Compile Include="Model\thietlaphesoModel.cs" />
     <Compile Include="View\FindingStatus.xaml.cs">
       <DependentUpon>FindingStatus.xaml</DependentUpon>
