@@ -1052,7 +1052,7 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroup()//printAll()
+        public void processGroup2()//printAll()
         {
             thietlaphesoModel model = new thietlaphesoModel();
 
@@ -1062,7 +1062,6 @@ namespace DataProcessing.Controller
             int currentValue2; // giá trị ở vòng 2
             int currentValue3; // giá trị ở vòng 3
             int currentValue4; // giá trị ở vòng 4
-            int currentColumnValue; // giá trị cột làm mốc
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
             int[][] zeroOne = model.getZeroOne();
@@ -1084,9 +1083,6 @@ namespace DataProcessing.Controller
                         checkList1.Add(j);
                     }
                 }
-
-                
-
                 // kiểm tra xem còn ô trống nào không
                 if (!checkList1.Any())
                 {
@@ -1096,14 +1092,7 @@ namespace DataProcessing.Controller
                     {
                         for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                         {
-                            if (index[i] < index[j])
-                            {
-                                print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
-                            }
-                            else
-                            {
-                                print += color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
-                            }
+                            print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
                         }
                     }
                     else
@@ -1114,36 +1103,7 @@ namespace DataProcessing.Controller
                             {
                                 for (int q = j + 1; q < model.getColCount() - n + 2; q++)
                                 {
-                                    String[] colorOut = new String[3];
-                                    int[] colorOutIndex = new int[3];
-
-                                    colorOut[0] = color[i];
-                                    colorOut[1] = color[j];
-                                    colorOut[2] = color[q];
-
-                                    colorOutIndex[0] = index[i];
-                                    colorOutIndex[1] = index[j];
-                                    colorOutIndex[2] = index[q];
-
-                                    for (int x = 0; x < 3; x++)
-                                    {
-                                        for (int y = x + 1; y < 3; y++)
-                                        {
-                                            if (colorOutIndex[x] > colorOutIndex[y])
-                                            {
-                                                String temp;
-                                                temp = colorOut[x];
-                                                colorOut[x] = colorOut[y];
-                                                colorOut[y] = temp;
-
-                                                int tempInt;
-                                                tempInt = colorOutIndex[x];
-                                                colorOutIndex[x] = colorOutIndex[y];
-                                                colorOutIndex[y] = tempInt;
-                                            }
-                                        }
-                                    }
-                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                    print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
                                 }
                             }
                         }
@@ -1157,38 +1117,7 @@ namespace DataProcessing.Controller
                                     {
                                         for (int k = q + 1; k < model.getColCount() - n + 3; k++)
                                         {
-                                            String[] colorOut = new String[4];
-                                            int[] colorOutIndex = new int[4];
-
-                                            colorOut[0] = color[i];
-                                            colorOut[1] = color[j];
-                                            colorOut[2] = color[q];
-                                            colorOut[3] = color[k];
-
-                                            colorOutIndex[0] = index[i];
-                                            colorOutIndex[1] = index[j];
-                                            colorOutIndex[2] = index[q];
-                                            colorOutIndex[3] = index[k];
-
-                                            for (int x = 0; x < 4; x++)
-                                            {
-                                                for (int y = x + 1; y < 4; y++)
-                                                {
-                                                    if (colorOutIndex[x] > colorOutIndex[y])
-                                                    {
-                                                        String temp;
-                                                        temp = colorOut[x];
-                                                        colorOut[x] = colorOut[y];
-                                                        colorOut[y] = temp;
-
-                                                        int tempInt;
-                                                        tempInt = colorOutIndex[x];
-                                                        colorOutIndex[x] = colorOutIndex[y];
-                                                        colorOutIndex[y] = tempInt;
-                                                    }
-                                                }
-                                            }
-                                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                            print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                                         }
                                     }
                                 }
@@ -1203,42 +1132,7 @@ namespace DataProcessing.Controller
                                         {
                                             for (int l = k + 1; l < model.getColCount() - n + 4; l++)
                                             {
-                                                String[] colorOut = new String[5];
-                                                int[] colorOutIndex = new int[5];
-
-                                                colorOut[0] = color[i];
-                                                colorOut[1] = color[j];
-                                                colorOut[2] = color[q];
-                                                colorOut[3] = color[k];
-                                                colorOut[4] = color[l];
-
-                                                colorOutIndex[0] = index[i];
-                                                colorOutIndex[1] = index[j];
-                                                colorOutIndex[2] = index[q];
-                                                colorOutIndex[3] = index[k];
-                                                colorOutIndex[4] = index[l];
-
-                                                for (int x = 0; x < 5; x++)
-                                                {
-                                                    for (int y = x + 1; y < 5; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
-
+                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
                                             }
                                         }
                                     }
@@ -1273,14 +1167,7 @@ namespace DataProcessing.Controller
                             biggestValue = currentValue2;
                             if (n == 2)
                             {
-                                if (index[i] < index[j])
-                                {
-                                    print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
-                                }
-                                else
-                                {
-                                    print += color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
-                                }
+                                print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
                             }
                             else
                             {
@@ -1288,36 +1175,7 @@ namespace DataProcessing.Controller
                                 {
                                     for (int q = j + 1; q < model.getColCount() - n + 2; q++)
                                     {
-                                        String[] colorOut = new String[3];
-                                        int[] colorOutIndex = new int[3];
-
-                                        colorOut[0] = color[i];
-                                        colorOut[1] = color[j];
-                                        colorOut[2] = color[q];
-
-                                        colorOutIndex[0] = index[i];
-                                        colorOutIndex[1] = index[j];
-                                        colorOutIndex[2] = index[q];
-
-                                        for (int x = 0; x < 3; x++)
-                                        {
-                                            for (int y = x + 1; y < 3; y++)
-                                            {
-                                                if (colorOutIndex[x] > colorOutIndex[y])
-                                                {
-                                                    String temp;
-                                                    temp = colorOut[x];
-                                                    colorOut[x] = colorOut[y];
-                                                    colorOut[y] = temp;
-
-                                                    int tempInt;
-                                                    tempInt = colorOutIndex[x];
-                                                    colorOutIndex[x] = colorOutIndex[y];
-                                                    colorOutIndex[y] = tempInt;
-                                                }
-                                            }
-                                        }
-                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
                                     }
                                 }
                                 else
@@ -1328,38 +1186,7 @@ namespace DataProcessing.Controller
                                         {
                                             for (int k = q + 1; k < model.getColCount() - n + 3; k++)
                                             {
-                                                String[] colorOut = new String[4];
-                                                int[] colorOutIndex = new int[4];
-
-                                                colorOut[0] = color[i];
-                                                colorOut[1] = color[j];
-                                                colorOut[2] = color[q];
-                                                colorOut[3] = color[k];
-
-                                                colorOutIndex[0] = index[i];
-                                                colorOutIndex[1] = index[j];
-                                                colorOutIndex[2] = index[q];
-                                                colorOutIndex[3] = index[k];
-
-                                                for (int x = 0; x < 4; x++)
-                                                {
-                                                    for (int y = x + 1; y < 4; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                                             }
 
                                         }
@@ -1372,42 +1199,7 @@ namespace DataProcessing.Controller
                                             {
                                                 for (int l = k + 1; l < model.getColCount() - n + 4; l++)
                                                 {
-                                                    String[] colorOut = new String[5];
-                                                    int[] colorOutIndex = new int[5];
-
-                                                    colorOut[0] = color[i];
-                                                    colorOut[1] = color[j];
-                                                    colorOut[2] = color[q];
-                                                    colorOut[3] = color[k];
-                                                    colorOut[4] = color[l];
-
-                                                    colorOutIndex[0] = index[i];
-                                                    colorOutIndex[1] = index[j];
-                                                    colorOutIndex[2] = index[q];
-                                                    colorOutIndex[3] = index[k];
-                                                    colorOutIndex[4] = index[l];
-
-                                                    for (int x = 0; x < 5; x++)
-                                                    {
-                                                        for (int y = x + 1; y < 5; y++)
-                                                        {
-                                                            if (colorOutIndex[x] > colorOutIndex[y])
-                                                            {
-                                                                String temp;
-                                                                temp = colorOut[x];
-                                                                colorOut[x] = colorOut[y];
-                                                                colorOut[y] = temp;
-
-                                                                int tempInt;
-                                                                tempInt = colorOutIndex[x];
-                                                                colorOutIndex[x] = colorOutIndex[y];
-                                                                colorOutIndex[y] = tempInt;
-                                                            }
-                                                        }
-                                                    }
-
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
-
+                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                         }
@@ -1420,16 +1212,7 @@ namespace DataProcessing.Controller
                         {
                             if (n == 2)
                             {
-
-                                if (index[i] < index[j])
-                                {
-                                    print += color[i] + "-" + color[j] + ": " + currentValue2 + Environment.NewLine;
-                                }
-                                else
-                                {
-                                    print += color[j] + "-" + color[i] + ": " + currentValue2 + Environment.NewLine;
-                                }
-                                continue;
+                                print += color[i] + "-" + color[j] + ": " + currentValue2 + Environment.NewLine;
                             }
 
                             for (int q = j + 1; q < model.getColCount() - n + 2; q++) // chọn từng cột ở vòng 3, để lại 2 cột để ghép màu
@@ -1455,37 +1238,7 @@ namespace DataProcessing.Controller
                                     biggestValue = currentValue3;
                                     if (n == 3)
                                     {
-                                        String[] colorOut = new String[3];
-                                        int[] colorOutIndex = new int[3];
-
-                                        colorOut[0] = color[i];
-                                        colorOut[1] = color[j];
-                                        colorOut[2] = color[q];
-
-                                        colorOutIndex[0] = index[i];
-                                        colorOutIndex[1] = index[j];
-                                        colorOutIndex[2] = index[q];
-
-                                        for (int x = 0; x < 3; x++)
-                                        {
-                                            for (int y = x + 1; y < 3; y++)
-                                            {
-                                                if (colorOutIndex[x] > colorOutIndex[y])
-                                                {
-                                                    String temp;
-                                                    temp = colorOut[x];
-                                                    colorOut[x] = colorOut[y];
-                                                    colorOut[y] = temp;
-
-                                                    int tempInt;
-                                                    tempInt = colorOutIndex[x];
-                                                    colorOutIndex[x] = colorOutIndex[y];
-                                                    colorOutIndex[y] = tempInt;
-                                                }
-                                            }
-                                        }
-                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
-
+                                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
                                     }
                                     else
                                     {
@@ -1493,38 +1246,7 @@ namespace DataProcessing.Controller
                                         {
                                             for (int k = q + 1; k < model.getColCount() - n + 3; k++)
                                             {
-                                                String[] colorOut = new String[4];
-                                                int[] colorOutIndex = new int[4];
-
-                                                colorOut[0] = color[i];
-                                                colorOut[1] = color[j];
-                                                colorOut[2] = color[q];
-                                                colorOut[3] = color[k];
-
-                                                colorOutIndex[0] = index[i];
-                                                colorOutIndex[1] = index[j];
-                                                colorOutIndex[2] = index[q];
-                                                colorOutIndex[3] = index[k];
-
-                                                for (int x = 0; x < 4; x++)
-                                                {
-                                                    for (int y = x + 1; y < 4; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                                             }
                                         }
                                         else
@@ -1533,42 +1255,8 @@ namespace DataProcessing.Controller
                                             {
                                                 for (int l = k + 1; l < model.getColCount() - n + 4; l++)
                                                 {
-                                                    String[] colorOut = new String[5];
-                                                    int[] colorOutIndex = new int[5];
 
-                                                    colorOut[0] = color[i];
-                                                    colorOut[1] = color[j];
-                                                    colorOut[2] = color[q];
-                                                    colorOut[3] = color[k];
-                                                    colorOut[4] = color[l];
-
-                                                    colorOutIndex[0] = index[i];
-                                                    colorOutIndex[1] = index[j];
-                                                    colorOutIndex[2] = index[q];
-                                                    colorOutIndex[3] = index[k];
-                                                    colorOutIndex[4] = index[l];
-
-                                                    for (int x = 0; x < 5; x++)
-                                                    {
-                                                        for (int y = x + 1; y < 5; y++)
-                                                        {
-                                                            if (colorOutIndex[x] > colorOutIndex[y])
-                                                            {
-                                                                String temp;
-                                                                temp = colorOut[x];
-                                                                colorOut[x] = colorOut[y];
-                                                                colorOut[y] = temp;
-
-                                                                int tempInt;
-                                                                tempInt = colorOutIndex[x];
-                                                                colorOutIndex[x] = colorOutIndex[y];
-                                                                colorOutIndex[y] = tempInt;
-                                                            }
-                                                        }
-                                                    }
-
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
-
+                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                         }
@@ -1578,36 +1266,7 @@ namespace DataProcessing.Controller
                                 {
                                     if (n == 3)
                                     {
-                                        String[] colorOut = new String[3];
-                                        int[] colorOutIndex = new int[3];
-
-                                        colorOut[0] = color[i];
-                                        colorOut[1] = color[j];
-                                        colorOut[2] = color[q];
-
-                                        colorOutIndex[0] = index[i];
-                                        colorOutIndex[1] = index[j];
-                                        colorOutIndex[2] = index[q];
-
-                                        for (int x = 0; x < 3; x++)
-                                        {
-                                            for (int y = x + 1; y < 3; y++)
-                                            {
-                                                if (colorOutIndex[x] > colorOutIndex[y])
-                                                {
-                                                    String temp;
-                                                    temp = colorOut[x];
-                                                    colorOut[x] = colorOut[y];
-                                                    colorOut[y] = temp;
-
-                                                    int tempInt;
-                                                    tempInt = colorOutIndex[x];
-                                                    colorOutIndex[x] = colorOutIndex[y];
-                                                    colorOutIndex[y] = tempInt;
-                                                }
-                                            }
-                                        }
-                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + currentValue3 + Environment.NewLine;
+                                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
                                         continue;
                                     }
 
@@ -1628,86 +1287,19 @@ namespace DataProcessing.Controller
 
                                         currentValue4 = currentValue3 + currentCosts;
 
-                                        
-
                                         if (!checkList4.Any()) // 4 cột làm full 1
                                         {
                                             biggestValue = currentValue4;
                                             if (n == 4)
                                             {
-                                                    String[] colorOut = new String[4];
-                                                    int[] colorOutIndex = new int[4];
+                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
 
-                                                    colorOut[0] = color[i];
-                                                    colorOut[1] = color[j];
-                                                    colorOut[2] = color[q];
-                                                    colorOut[3] = color[k];
-
-                                                    colorOutIndex[0] = index[i];
-                                                    colorOutIndex[1] = index[j];
-                                                    colorOutIndex[2] = index[q];
-                                                    colorOutIndex[3] = index[k];
-
-                                                for (int x = 0; x < 4; x++)
-                                                {
-                                                    for (int y = x + 1; y < 4; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
-                                                
                                             }
                                             else // n = 5
                                             {
                                                 for (int l = k + 1; l < model.getColCount() - n + 4; l++)
                                                 {
-                                                    String[] colorOut = new String[5];
-                                                    int[] colorOutIndex = new int[5];
-
-                                                    colorOut[0] = color[i];
-                                                    colorOut[1] = color[j];
-                                                    colorOut[2] = color[q];
-                                                    colorOut[3] = color[k];
-                                                    colorOut[4] = color[l];
-
-                                                    colorOutIndex[0] = index[i];
-                                                    colorOutIndex[1] = index[j];
-                                                    colorOutIndex[2] = index[q];
-                                                    colorOutIndex[3] = index[k];
-                                                    colorOutIndex[4] = index[l];
-
-                                                    for (int x = 0; x < 5; x++)
-                                                    {
-                                                        for (int y = x + 1; y < 5; y++)
-                                                        {
-                                                            if (colorOutIndex[x] > colorOutIndex[y])
-                                                            {
-                                                                String temp;
-                                                                temp = colorOut[x];
-                                                                colorOut[x] = colorOut[y];
-                                                                colorOut[y] = temp;
-
-                                                                int tempInt;
-                                                                tempInt = colorOutIndex[x];
-                                                                colorOutIndex[x] = colorOutIndex[y];
-                                                                colorOutIndex[y] = tempInt;
-                                                            }
-                                                        }
-                                                    }
-
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
 
                                                 }
                                                 
@@ -1717,38 +1309,7 @@ namespace DataProcessing.Controller
                                         {
                                             if (n == 4)
                                             {
-                                                String[] colorOut = new String[4];
-                                                int[] colorOutIndex = new int[4];
-
-                                                colorOut[0] = color[i];
-                                                colorOut[1] = color[j];
-                                                colorOut[2] = color[q];
-                                                colorOut[3] = color[k];
-
-                                                colorOutIndex[0] = index[i];
-                                                colorOutIndex[1] = index[j];
-                                                colorOutIndex[2] = index[q];
-                                                colorOutIndex[3] = index[k];
-
-                                                for (int x = 0; x < 4; x++)
-                                                {
-                                                    for (int y = x + 1; y < 4; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + currentValue4 + Environment.NewLine;
+                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + currentValue4 + Environment.NewLine;
                                                 continue;
                                             }
                                             for (int l = k + 1; l < model.getColCount() - n + 4; l++) // chon mau o vong 5
@@ -1765,41 +1326,8 @@ namespace DataProcessing.Controller
 
 
                                                 biggestValue = currentValue4 + currentCosts;
-
-                                                String[] colorOut = new String[5];
-                                                int[] colorOutIndex = new int[5];
-
-                                                colorOut[0] = color[i];
-                                                colorOut[1] = color[j];
-                                                colorOut[2] = color[q];
-                                                colorOut[3] = color[k];
-                                                colorOut[4] = color[l];
-
-                                                colorOutIndex[0] = index[i];
-                                                colorOutIndex[1] = index[j];
-                                                colorOutIndex[2] = index[q];
-                                                colorOutIndex[3] = index[k];
-                                                colorOutIndex[4] = index[l];
-
-                                                for (int x = 0; x < 5; x++)
-                                                {
-                                                    for (int y = x + 1; y < 5; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                
+                                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
                                             }
                                             
                                         }
@@ -1819,6 +1347,157 @@ namespace DataProcessing.Controller
 
 
 
+
+
+
+        public void processGroup() // test n = 4
+        {
+            thietlaphesoModel model = new thietlaphesoModel();
+
+            int n = model.getN();
+            string print = "";
+            int currentValue1; // giá trị ở vòng 1
+            int currentValue2; // giá trị ở vòng 2
+            int currentValue3; // giá trị ở vòng 3
+            int currentValue4; // giá trị ở vòng 4
+            int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
+            int[] value = model.getValue();
+            int[][] zeroOne = model.getZeroOne();
+            int[] index = model.getIndex();
+            string[] color = model.getColor();
+
+            n = 4;
+
+            for (int i = 0; i < model.getColCount() - n + 1; i++)
+            {
+                print = "";
+                biggestValue = 0;
+
+                List<int> checkList1 = new List<int>(); // list so sánh theo ngày không bán được
+                currentValue1 = value[i]; // giá trị cột làm mốc
+
+                for (int j = 0; j < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; j++) // duyệt từng ngày của màu
+                {
+                    if (zeroOne[i][j] == 0) // tìm ngày không bán được để so
+                    {
+                        checkList1.Add(j);
+                    }
+                }
+
+
+
+                // cột đầu tiên có full 1
+                if (!checkList1.Any())
+                {
+                    biggestValue = currentValue1;
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    {
+                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        {
+                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            {
+                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
+                            }
+                        }
+                    }
+                }
+                else // cột 1 không làm full 1
+                {
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++) // chọn từng cột ở vòng 2
+                    {
+                        List<int> checkList2 = new List<int>(checkList1);
+
+                        int currentCosts = 0; // trọng số cột hiện tại ở vòng 2
+
+                        foreach (int temp in checkList1) // tính trọng số màu ở vòng 2
+                        {
+                            if (zeroOne[j][temp] == 1)
+                            {
+                                currentCosts++;
+                                checkList2.Remove(temp);
+                            }
+                        }
+
+                        currentValue2 = currentValue1 + currentCosts;
+
+                        if (!checkList2.Any()) // 2 cột full 1
+                        {
+                            biggestValue = currentValue2;
+                            for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                            {
+                                for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                                {
+                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
+                                }
+
+                            }
+                        }
+                        else // 2 cot khong lam full 1
+                        {
+                            for (int q = j + 1; q < model.getColCount() - n + 2; q++) // chọn từng cột ở vòng 3, để lại 2 cột để ghép màu
+                            {
+                                List<int> checkList3 = new List<int>(checkList2);
+
+                                currentCosts = 0;
+
+                                foreach (int temp in checkList2)
+                                {
+                                    if (zeroOne[q][temp] == 1)
+                                    {
+                                        currentCosts++;
+                                        checkList3.Remove(temp);
+                                    }
+                                }
+
+                                currentValue3 = currentValue2 + currentCosts;
+
+
+                                if (!checkList3.Any()) // 3 cột làm full 1
+                                {
+                                    biggestValue = currentValue3;
+
+                                    for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                                    {
+                                        print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
+                                    }
+                                }
+                                else // 3 cot khong lam full 1
+                                {
+                                    for (int k = q + 1; k < model.getColCount() - n + 3; k++) // chọn màu ở vòng 4, để lại 1 màu để ghép
+                                    {
+                                        List<int> checkList4 = new List<int>(checkList3);
+
+                                        currentCosts = 0;
+
+                                        foreach (int temp in checkList3)
+                                        {
+                                            if (zeroOne[k][temp] == 1)
+                                            {
+                                                currentCosts++;
+                                                checkList4.Remove(temp);
+                                            }
+                                        }
+
+                                        currentValue4 = currentValue3 + currentCosts;
+
+                                        biggestValue = currentValue4;
+                                        
+                                        print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                printOut += print;
+            }
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write4.txt"))
+            {
+                writetext.WriteLine(printOut);
+            }
+        }
 
 
         // biggestValue: Giá trị lớn nhất
