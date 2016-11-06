@@ -1372,7 +1372,7 @@ namespace DataProcessing.Controller
             {
                 print = "";
                 biggestValue = 0;
-
+                Console.WriteLine(zeroOne[0][0] == 1 || zeroOne[1][1] == 1);
                 List<int> checkList1 = new List<int>(); // list so sánh theo ngày không bán được
                 currentValue1 = value[i]; // giá trị cột làm mốc
 
