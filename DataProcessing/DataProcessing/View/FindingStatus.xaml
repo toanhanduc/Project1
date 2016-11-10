@@ -202,7 +202,7 @@
                         HorizontalAlignment="Right">Số lượng màu trong mỗi nhóm :</TextBlock>
                         <TextBlock Foreground="#009e49"
                                HorizontalAlignment="Right">
-                        <TextBlock FontWeight="Bold">ssss</TextBlock>
+                        <TextBlock x:Name="colorgroup" FontWeight="Bold">ssss</TextBlock>
                     </TextBlock>
                         <TextBlock
                         HorizontalAlignment="Right">Ngưỡng số lượng bán ra:</TextBlock>

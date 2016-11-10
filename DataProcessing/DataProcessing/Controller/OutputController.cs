@@ -17,7 +17,7 @@ namespace DataProcessing.Controller
             List<int> value = new List<int>();
             
             //Đọc file txt output và xử lý sắp xếp
-            using (StreamReader sr = new StreamReader("write.txt"))
+            using (StreamReader sr = new StreamReader(n + "-output.txt"))
             {
 
                 string line;
@@ -60,17 +60,13 @@ namespace DataProcessing.Controller
                 }
             }
 
-            foreach (KeyValuePair<string, int> pair in hashmap)
-            {
-                Console.WriteLine("{0}, {1}", pair.Key, pair.Value);
-            }
 
             //In output mới
-            using (StreamWriter writetext = new StreamWriter("writesapxep.txt"))
+            using (StreamWriter writetext = new StreamWriter(n +  "-output.txt"))
             {
                 foreach (KeyValuePair<string, int> pair in hashmap)
                 {
-                    writetext.WriteLine("{0}, {1}", pair.Key, pair.Value);
+                    writetext.WriteLine("{0}: {1}", pair.Key, pair.Value);
                 }
             }
         }

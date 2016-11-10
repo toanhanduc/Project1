@@ -15,7 +15,7 @@ namespace DataProcessing
             InitializeComponent();
             start.Text = thietlapHeSo.startdatetime;
             end.Text = thietlapHeSo.enddatetime;
-
+            colorgroup.Text = thietlapHeSo.n.ToString();
         }
     }
 }

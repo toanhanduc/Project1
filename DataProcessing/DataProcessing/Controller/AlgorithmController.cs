@@ -24,7 +24,7 @@ namespace DataProcessing.Controller
             
         }
         // new
-        public void processGroup1()
+        public void processGroup()
         {               
             int n = model.getN();
             string print = "";
@@ -1047,7 +1047,7 @@ namespace DataProcessing.Controller
                     break;
                 }
             }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write.txt"))
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter( n + "-output.txt"))
             {
                 writetext.WriteLine(printOut);
             }
@@ -1086,14 +1086,14 @@ namespace DataProcessing.Controller
                     }
                     print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
                 }
-                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("2-outputall.txt", true))
                 {
                     writetext.Write(print);
                 }
             }
         }
 
-        public void processGroup() // print All n = 3
+        public void processGroupAll3() // print All n = 3
         {
             thietlaphesoModel model = new thietlaphesoModel();
 
@@ -1130,7 +1130,7 @@ namespace DataProcessing.Controller
                         print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
                     }
                 }
-                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("3-outputall.txt", true))
                 {
                     writetext.Write(print);
                 }
@@ -1176,7 +1176,7 @@ namespace DataProcessing.Controller
                             print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                         }
                     }
-                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("4-outputall.txt", true))
                     {
                         writetext.Write(print);
                     }
@@ -1225,7 +1225,7 @@ namespace DataProcessing.Controller
                                 print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
                             }
                         }
-                        using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                        using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("5-outputall.txt", true))
                         {
                             writetext.Write(print);
                         }
