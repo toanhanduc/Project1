@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DataProcessing
 {
@@ -17,10 +18,10 @@ namespace DataProcessing
         Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
         Controller.OutputController outcontroller = new Controller.OutputController();
         //public bool check = false;
-        
+
         public thietlapHeSo()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
         Boolean group2 = false, group3 = false, group4 = false, group5 = false, findmax = true;
         /// <summary>
@@ -41,7 +42,7 @@ namespace DataProcessing
             if (browsefile == true)
                 txtFilePath.Text = openfile.FileName;
         }
-        
+
 
         /// <summary>
         /// Bắt đầu tìm kiếm
@@ -50,12 +51,12 @@ namespace DataProcessing
         /// <param name="e"></param>
         public async void startSearch(object sender, RoutedEventArgs e)
         {
-           
+
 
             // string mamaunguoidungnhap = "E";
             startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("M/dd/yyyy");
             enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("M/dd/yyyy");
-            
+
             if (txtFilePath.Text.Length == 0)
             {
                 MessageBox.Show("Bạn chưa chọn đường dẫn!");
@@ -77,9 +78,23 @@ namespace DataProcessing
                 excelcontroller.readExcel(txtFilePath.Text);
                 FindingStatus find = new FindingStatus();
                 this.NavigationService.Navigate(find);
-                
+
+
                 if (findmax)
                 {
+
+                    string limit = inputvalue.Text;
+                    if (limit == "")
+                    {
+                        MessageBox.Show("abc");
+                    }
+                    else
+                    {
+                        int limitvalue = Int32.Parse(limit);
+                        tlhscontroller.readLimit(limitvalue);
+                        MessageBox.Show(limitvalue + "");
+                    }
+
                     if (group2)
                     {
                         int timestart = Environment.TickCount;
@@ -92,14 +107,14 @@ namespace DataProcessing
                         int timestart = Environment.TickCount;
                         await Task.Run(new Action(tlhscontroller.processGroup));
                         MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
-                        int timestart1 = Environment.TickCount;
-                        outcontroller.sortOutPut(3);
-                        MessageBox.Show("Mau 3 sx: " + ((double)(Environment.TickCount - timestart1) / 1000).ToString() + "s");
+                        //int timestart1 = Environment.TickCount;
+                        //outcontroller.sortOutPut(3);
+                        //MessageBox.Show("Mau 3 sx: " + ((double)(Environment.TickCount - timestart1) / 1000).ToString() + "s");
                     }
                     else if (group4)
                     {
                         int timestart = Environment.TickCount;
-                        await Task.Run(new Action(tlhscontroller.processGroupAll4));
+                        await Task.Run(new Action(tlhscontroller.processGroup));
                         MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                         outcontroller.sortOutPut(4);
                     }
@@ -109,10 +124,6 @@ namespace DataProcessing
                         await Task.Run(new Action(tlhscontroller.processGroup));
                         MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                         outcontroller.sortOutPut(5);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Lỗi");
                     }
                 }
                 else
@@ -146,8 +157,6 @@ namespace DataProcessing
                         MessageBox.Show("Lỗi");
                     }
                 }
-               
-
             }
         }
 
@@ -181,6 +190,15 @@ namespace DataProcessing
             n = 4;
             tlhscontroller.readN(4);
             group4 = true;
+        }
+
+        private void inputvalue_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!Char.IsDigit((char)KeyInterop.VirtualKeyFromKey(e.Key)) & e.Key != Key.Back | e.Key == Key.Space)
+            {
+                e.Handled = true;
+                MessageBox.Show("I only accept numbers, sorry. :(", "This textbox says...");
+            }
         }
 
         private void RadioButton4_Unchecked(object sender, RoutedEventArgs e)

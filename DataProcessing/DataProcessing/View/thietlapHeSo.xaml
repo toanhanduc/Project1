@@ -61,7 +61,7 @@
             Margin="0 20 0 0">
                 <StackPanel            
                 HorizontalAlignment="Center"
-                VerticalAlignment="Top">
+                VerticalAlignment="Top" Margin="0,0,0,-0.2">
                     <!--Start Browse Button-->
                     <Grid
                     VerticalAlignment="Top"
@@ -202,7 +202,6 @@
                         ></RadioButton>
                         </Grid>
                     </Grid>
-
                     <Grid
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
@@ -210,7 +209,7 @@
                         <TextBlock                        
                         FontSize="23"
                         FontWeight="Regular" Margin="0,0,-65,0"
-                        >Kiểu tìm kiếm :</TextBlock>
+                        ><Run Text="Kiểu tìm kiếm :"/></TextBlock>
                         <Grid
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
@@ -225,7 +224,7 @@
                             VerticalAlignment="Center"
                             Checked="RadioButtonTop_Checked"
                             Unchecked="RadioButtonTop_Unchecked"
-                        ></RadioButton>
+                        />
                             <RadioButton
                             Margin="124,0,0,17"
                             Content="Tất cả"
@@ -235,8 +234,14 @@
                             VerticalAlignment="Center"
                             Checked="RadioButtonAll_Checked"
                             Unchecked="RadioButtonAll_Unchecked"
-                        ></RadioButton>
+                        />
                         </Grid>
+                        <TextBlock                        
+                        FontSize="23"
+                        FontWeight="Regular" Margin="0,50,0,-51" HorizontalAlignment="Left" Width="184"
+                        ><Run Text="Ngưỡng giới hạn:"/></TextBlock>
+                        <TextBox x:Name="inputvalue" FontSize="23"
+                        FontWeight="Regular" Margin="280,45,0,-46" HorizontalAlignment="Left" Width="52" RenderTransformOrigin="0.532,0.767" PreviewKeyDown="inputvalue_PreviewKeyDown" />
                     </Grid>
                     <!--End So luong mau moi nhom-->
                     <!--Start Thoi gian tim kiem gioi han-->
