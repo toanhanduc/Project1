@@ -192,14 +192,7 @@ namespace DataProcessing
             group4 = true;
         }
 
-        private void inputvalue_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (!Char.IsDigit((char)KeyInterop.VirtualKeyFromKey(e.Key)) & e.Key != Key.Back | e.Key == Key.Space)
-            {
-                e.Handled = true;
-                MessageBox.Show("I only accept numbers, sorry. :(", "This textbox says...");
-            }
-        }
+    
 
         private void RadioButton4_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -216,6 +209,17 @@ namespace DataProcessing
         private void RadioButton5_Unchecked(object sender, RoutedEventArgs e)
         {
             group5 = false;
+        }
+
+        private void inputvalue_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            {
+                if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                {
+                    e.Handled = true;
+                    MessageBox.Show("I only accept numbers, sorry. :(", "This textbox says...");
+                }    
+            }
         }
 
         private void txtFilePath_TextChanged(object sender, TextChangedEventArgs e)

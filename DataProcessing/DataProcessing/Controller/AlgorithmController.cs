@@ -17,7 +17,7 @@ namespace DataProcessing.Controller
         string printOut = "";
         static int[] max;
         int limitedInputValue = 0; // nguong gioi han dau vao
-        int nColorChose = 1; // the number of chosen color
+        int nColorChose = 5; // the number of chosen color
         thietlaphesoModel model = new thietlaphesoModel();
         public void readN(int n)
         {
@@ -1121,7 +1121,7 @@ namespace DataProcessing.Controller
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-                MessageBox.Show("a");
+               
                 for (int i = 0; i < model.getColCount() - n; i++)
                 {
                     print = "";
@@ -1154,7 +1154,7 @@ namespace DataProcessing.Controller
             }
             else// in theo các màu người dùng nhập
             {
-                MessageBox.Show("ab");
+                
                 for (int i = 0; i < model.getColCount() - n; i++)
                 {
                     print = "";
@@ -1245,7 +1245,7 @@ namespace DataProcessing.Controller
 
             n = 4;
 
-            if (nColorChose == 0)
+            if (nColorChose == 0) // in bt
             {
                 for (int i = 0; i < model.getColCount() - n; i++)
                 {
@@ -1279,7 +1279,7 @@ namespace DataProcessing.Controller
                     }
                 }
             }
-            else
+            else // nhin theo nhập vào của người dùng
             {
                 for (int i = 0; i < model.getColCount() - n; i++)
                 {
@@ -1336,11 +1336,9 @@ namespace DataProcessing.Controller
                                     }
                                 }
 
-                                print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
-
-
-
-                                if (nColorChose >= 4)
+                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                
+                                if (nColorChose == 4)
                                 {
                                     break;
                                 }
@@ -1480,7 +1478,7 @@ namespace DataProcessing.Controller
                                             }
                                         }
                                     }
-                                    print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                     
                                     if (nColorChose == 5)
                                     {

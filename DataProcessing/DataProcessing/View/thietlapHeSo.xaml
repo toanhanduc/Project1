@@ -241,7 +241,7 @@
                         FontWeight="Regular" Margin="0,50,0,-51" HorizontalAlignment="Left" Width="184"
                         ><Run Text="Ngưỡng giới hạn:"/></TextBlock>
                         <TextBox x:Name="inputvalue" FontSize="23"
-                        FontWeight="Regular" Margin="280,45,0,-46" HorizontalAlignment="Left" Width="52" RenderTransformOrigin="0.532,0.767" PreviewKeyDown="inputvalue_PreviewKeyDown" />
+                        FontWeight="Regular" Margin="280,45,0,-28" HorizontalAlignment="Left" Width="66" RenderTransformOrigin="0.532,0.767" PreviewTextInput="inputvalue_PreviewTextInput" />
                     </Grid>
                     <!--End So luong mau moi nhom-->
                     <!--Start Thoi gian tim kiem gioi han-->
