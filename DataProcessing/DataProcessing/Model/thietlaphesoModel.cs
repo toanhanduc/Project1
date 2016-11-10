@@ -12,7 +12,25 @@ namespace DataProcessing.Model
         private static int[][] zeroOne = new int[colcount - 1][];
         private static int[] index = new int[colcount - 1];
         private static int n = 0;
+        private static int limitvalue = 0;
 
+
+        /// <summary>
+        /// Set giá trị n
+        /// </summary>
+        /// <param name="limit"></param>
+        public void setLimit(int limit)
+        {
+            limitvalue = limit; 
+        }
+        /// <summary>
+        /// Get giá trị limit value
+        /// </summary>
+        /// <returns></returns>
+        public int getLimit()
+        {
+            return limitvalue ;
+        }
 
         /// <summary>
         /// Set giá trị n

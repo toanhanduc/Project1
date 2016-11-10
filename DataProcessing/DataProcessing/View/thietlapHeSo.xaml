@@ -61,7 +61,7 @@
             Margin="0 20 0 0">
                 <StackPanel            
                 HorizontalAlignment="Center"
-                VerticalAlignment="Top">
+                VerticalAlignment="Top" Margin="0,0,0,-0.2">
                     <!--Start Browse Button-->
                     <Grid
                     VerticalAlignment="Top"
@@ -153,7 +153,7 @@
                         Margin="0 7 0 0">
                         <TextBlock                        
                         FontSize="23"
-                        FontWeight="Regular"
+                        FontWeight="Regular" Margin="0,7,0,-7.2"
                         >Số lượng màu mỗi nhóm :</TextBlock>
                         <Grid
                         HorizontalAlignment="Left"
@@ -201,6 +201,18 @@
                             Unchecked="RadioButton5_Unchecked"
                         ></RadioButton>
                         </Grid>
+                    </Grid>
+
+                    <Grid
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="0 7 0 0" >
+                        <TextBlock                        
+                        FontSize="23"
+                        FontWeight="Regular" Margin="0,7,0,-7.6" HorizontalAlignment="Left" Width="184"
+                        >Ngưỡng giới hạn:</TextBlock>
+                        <TextBox x:Name="inputvalue" FontSize="23"
+                        FontWeight="Regular" Margin="197,0,-65,-0.8" HorizontalAlignment="Left" Width="52" RenderTransformOrigin="0.532,0.767" PreviewKeyDown="inputvalue_PreviewKeyDown" />
                     </Grid>
                     <!--End So luong mau moi nhom-->
                     <!--Start Thoi gian tim kiem gioi han-->

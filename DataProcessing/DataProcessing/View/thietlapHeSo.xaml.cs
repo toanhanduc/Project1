@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace DataProcessing
 {
@@ -76,22 +77,33 @@ namespace DataProcessing
             {
                 FindingStatus find = new FindingStatus();
                 this.NavigationService.Navigate(find);
+                string limit = inputvalue.Text;
+                if ( limit == "")
+                {
+                    MessageBox.Show("abc");
+                }
+                else
+                {
+                    int limitvalue = Int32.Parse(limit);
+                    tlhscontroller.readLimit(limitvalue);
+                    MessageBox.Show(limitvalue + "");
+                }
                
                 if (group2)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup));
+                    await Task.Run(new Action(tlhscontroller.processGroup1));
                     MessageBox.Show("Mau 2 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     outcontroller.sortOutPut(2);
                 }
                 else if (group3)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup));                  
+                    await Task.Run(new Action(tlhscontroller.processGroupAll3));                  
                     MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
-                    int timestart1 = Environment.TickCount;
-                    outcontroller.sortOutPut(3);
-                    MessageBox.Show("Mau 3 sx: " + ((double)(Environment.TickCount - timestart1) / 1000).ToString() + "s");
+                    //int timestart1 = Environment.TickCount;
+                    //outcontroller.sortOutPut(3);
+                    //MessageBox.Show("Mau 3 sx: " + ((double)(Environment.TickCount - timestart1) / 1000).ToString() + "s");
                 }
                 else if (group4)
                 {
@@ -103,7 +115,7 @@ namespace DataProcessing
                 else if (group5)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup));
+                    await Task.Run(new Action(tlhscontroller.processGroup1));
                     MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     outcontroller.sortOutPut(5);
                 }
@@ -144,6 +156,15 @@ namespace DataProcessing
         {
             tlhscontroller.readN(4);
             group4 = true;
+        }
+
+        private void inputvalue_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!Char.IsDigit((char)KeyInterop.VirtualKeyFromKey(e.Key)) & e.Key != Key.Back | e.Key == Key.Space)
+            {
+                e.Handled = true;
+                MessageBox.Show("I only accept numbers, sorry. :(", "This textbox says...");
+            }
         }
 
         private void RadioButton4_Unchecked(object sender, RoutedEventArgs e)

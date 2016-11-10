@@ -16,12 +16,16 @@ namespace DataProcessing.Controller
         bool canStop = true;
         string printOut = "";
         static int[] max;
-        int limitedInputValue = 0; // nguong gioi han dau vao
         thietlaphesoModel model = new thietlaphesoModel();
         public void readN(int n)
         {
             model.setN(n);
             
+        }
+
+        public void readLimit(int limit)
+        {
+            model.setLimit(limit);
         }
         // new
         public void processGroup1()
@@ -1058,6 +1062,7 @@ namespace DataProcessing.Controller
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
+            int limitedInputValue = model.getLimit();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
@@ -1093,11 +1098,12 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroup() // print All n = 3
+        public void processGroupAll3() // print All n = 3
         {
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
+            int limitedInputValue = model.getLimit();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
@@ -1142,6 +1148,7 @@ namespace DataProcessing.Controller
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
+            int limitedInputValue = model.getLimit();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
@@ -1189,6 +1196,7 @@ namespace DataProcessing.Controller
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
+            int limitedInputValue = model.getLimit();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
