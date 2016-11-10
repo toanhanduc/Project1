@@ -24,6 +24,11 @@ namespace DataProcessing.Controller
             model.setN(n);
             
         }
+
+        public void readLimit(int limit)
+        {
+            model.setLimit(limit);
+        }
         // new
         public void processGroup1()
         {               
@@ -1059,6 +1064,7 @@ namespace DataProcessing.Controller
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
+            int limitedInputValue = model.getLimit();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
@@ -1095,42 +1101,6 @@ namespace DataProcessing.Controller
                     }
                 }
             }
-            else // in theo các màu người dùng nhập
-            {
-                for (int i = 0; i < model.getColCount() - n; i++)
-                {
-                    print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
-                    {
-                        biggestValue = 0;
-                        for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-                        {
-                            if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1)
-                            {
-                                biggestValue++;
-                            }
-                        }
-                        if (biggestValue < limitedInputValue)
-                        {
-                            continue;
-                        }
-                        print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
-
-                        if(nColorChose >= 2)
-                        {
-                            break;
-                        }
-                    }
-                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
-                    {
-                        writetext.Write(print);
-                    }
-                    if(nColorChose >= 1)
-                    {
-                        break;
-                    }
-                }
-            }
         }
 
         public void processGroupAll3() // print All n = 3
@@ -1138,6 +1108,7 @@ namespace DataProcessing.Controller
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
+            int limitedInputValue = model.getLimit();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
@@ -1263,6 +1234,7 @@ namespace DataProcessing.Controller
             thietlaphesoModel model = new thietlaphesoModel();
 
             int n = model.getN();
+            int limitedInputValue = model.getLimit();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
