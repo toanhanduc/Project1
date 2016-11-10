@@ -16,6 +16,8 @@ namespace DataProcessing.Controller
         bool canStop = true;
         string printOut = "";
         static int[] max;
+        int limitedInputValue = 0; // nguong gioi han dau vao
+        int nColorChose = 1; // the number of chosen color
         thietlaphesoModel model = new thietlaphesoModel();
         public void readN(int n)
         {
@@ -1072,28 +1074,31 @@ namespace DataProcessing.Controller
 
             n = 2;
 
-            for (int i = 0; i < model.getColCount() - n; i++)
+            if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-                print = "";
-                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                for (int i = 0; i < model.getColCount() - n; i++)
                 {
-                    biggestValue = 0;
-                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                    print = "";
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                     {
-                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1)
+                        biggestValue = 0;
+                        for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
                         {
-                            biggestValue++;
+                            if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1)
+                            {
+                                biggestValue++;
+                            }
                         }
+                        if (biggestValue < limitedInputValue)
+                        {
+                            continue;
+                        }
+                        print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
                     }
-                    if(biggestValue < limitedInputValue)
+                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
                     {
-                        continue;
+                        writetext.Write(print);
                     }
-                    print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
-                }
-                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
-                {
-                    writetext.Write(print);
                 }
             }
         }
@@ -1112,35 +1117,116 @@ namespace DataProcessing.Controller
             string[] color = model.getColor();
 
             n = 3;
+            
 
-            for (int i = 0; i < model.getColCount() - n; i++)
+            if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-                print = "";
-                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                for (int i = 0; i < model.getColCount() - n; i++)
                 {
-                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                    print = "";
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                     {
-                        biggestValue = 0;
-                        for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
                         {
-                            if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1)
+                            biggestValue = 0;
+                            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
                             {
-                                biggestValue++;
+                                if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1)
+                                {
+                                    biggestValue++;
+                                }
                             }
-                        }
 
-                        if (biggestValue < limitedInputValue)
-                        {
-                            continue;
+                            if (biggestValue < limitedInputValue)
+                            {
+                                continue;
+                            }
+
+                            print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
                         }
-                        print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
+                    }
+                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write4.txt", true))
+                    {
+                        writetext.Write(print);
                     }
                 }
-                using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+            }
+            else// in theo các màu người dùng nhập
+            {
+                for (int i = 0; i < model.getColCount() - n; i++)
                 {
-                    writetext.Write(print);
+                    print = "";
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    {
+                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        {
+                            biggestValue = 0;
+                            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                            {
+                                if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1)
+                                {
+                                    biggestValue++;
+                                }
+                            }
+
+                            if (biggestValue < limitedInputValue)
+                            {
+                                continue;
+                            }
+                            //print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
+
+                            String[] colorOut = new String[3];
+                            int[] colorOutIndex = new int[3];
+
+                            colorOut[0] = color[i];
+                            colorOut[1] = color[j];
+                            colorOut[2] = color[q];
+
+                            colorOutIndex[0] = index[i];
+                            colorOutIndex[1] = index[j];
+                            colorOutIndex[2] = index[q];
+
+                            for (int x = 0; x < 3; x++)
+                            {
+                                for (int y = x + 1; y < 3; y++)
+                                {
+                                    if (colorOutIndex[x] > colorOutIndex[y])
+                                    {
+                                        String temp;
+                                        temp = colorOut[x];
+                                        colorOut[x] = colorOut[y];
+                                        colorOut[y] = temp;
+
+                                        int tempInt;
+                                        tempInt = colorOutIndex[x];
+                                        colorOutIndex[x] = colorOutIndex[y];
+                                        colorOutIndex[y] = tempInt;
+                                    }
+                                }
+                            }
+                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+
+                            if (nColorChose >= 3)
+                            {
+                                break;
+                            }
+                        }
+                        if (nColorChose >= 2)
+                        {
+                            break;
+                        }
+                    }
+                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                    {
+                        writetext.Write(print);
+                    }
+                    if(nColorChose >= 1)
+                    {
+                        break;
+                    }
                 }
             }
+             
         }
 
         public void processGroupAll4() // print All n = 4
@@ -1158,69 +1244,21 @@ namespace DataProcessing.Controller
 
             n = 4;
 
-            for (int i = 0; i < model.getColCount() - n; i++)
+            if (nColorChose == 0)
             {
-                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                for (int i = 0; i < model.getColCount() - n; i++)
                 {
-                    print = "";
-                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                    {
-                        for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                        {
-                            biggestValue = 0;
-                            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-                            {
-                                if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
-                                {
-                                    biggestValue++;
-                                }
-                            }
-
-                            if (biggestValue < limitedInputValue)
-                            {
-                                continue;
-                            }
-                            print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
-                        }
-                    }
-                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write4.txt", true))
-                    {
-                        writetext.Write(print);
-                    }
-                }
-            }
-        }
-
-        public void processGroupAll5() // print All n = 5
-        {
-            thietlaphesoModel model = new thietlaphesoModel();
-
-            int n = model.getN();
-            int limitedInputValue = model.getLimit();
-            string print = "";
-            int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
-            int[] value = model.getValue();
-            int[][] zeroOne = model.getZeroOne();
-            int[] index = model.getIndex();
-            string[] color = model.getColor();
-
-            n = 5;
-
-            for (int i = 0; i < model.getColCount() - n; i++)
-            {
-                for (int j = i + 1; j < model.getColCount() - n + 1; j++)
-                {
-                    for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                     {
                         print = "";
-                        for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
                         {
-                            for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
                             {
                                 biggestValue = 0;
                                 for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
                                 {
-                                    if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1 || zeroOne[l][temp] == 1)
+                                    if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
                                     {
                                         biggestValue++;
                                     }
@@ -1230,16 +1268,251 @@ namespace DataProcessing.Controller
                                 {
                                     continue;
                                 }
-                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
+                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                             }
                         }
                         using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
                         {
                             writetext.Write(print);
                         }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < model.getColCount() - n; i++)
+                {
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    {
+                        print = "";
+                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        {
+                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            {
+                                biggestValue = 0;
+                                for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                                {
+                                    if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
+                                    {
+                                        biggestValue++;
+                                    }
+                                }
+
+                                if (biggestValue < limitedInputValue)
+                                {
+                                    continue;
+                                }
+
+                                String[] colorOut = new String[4];
+                                int[] colorOutIndex = new int[4];
+
+                                colorOut[0] = color[i];
+                                colorOut[1] = color[j];
+                                colorOut[2] = color[q];
+                                colorOut[3] = color[k];
+
+                                colorOutIndex[0] = index[i];
+                                colorOutIndex[1] = index[j];
+                                colorOutIndex[2] = index[q];
+                                colorOutIndex[3] = index[k];
+
+                                for (int x = 0; x < 4; x++)
+                                {
+                                    for (int y = x + 1; y < 4; y++)
+                                    {
+                                        if (colorOutIndex[x] > colorOutIndex[y])
+                                        {
+                                            String temp;
+                                            temp = colorOut[x];
+                                            colorOut[x] = colorOut[y];
+                                            colorOut[y] = temp;
+
+                                            int tempInt;
+                                            tempInt = colorOutIndex[x];
+                                            colorOutIndex[x] = colorOutIndex[y];
+                                            colorOutIndex[y] = tempInt;
+                                        }
+                                    }
+                                }
+
+                                print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+
+
+
+                                if (nColorChose >= 4)
+                                {
+                                    break;
+                                }
+                            }
+                            if (nColorChose >= 3)
+                            {
+                                break;
+                            }
+                        }
+                        using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                        {
+                            writetext.Write(print);
+                        }
+                        if (nColorChose >= 2)
+                        {
+                            break;
+                        }
+                    }
+                    if (nColorChose >= 1)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void processGroup() // print All n = 5
+        {
+            thietlaphesoModel model = new thietlaphesoModel();
+
+            int n = model.getN();
+            string print = "";
+            int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
+            int[] value = model.getValue();
+            int[][] zeroOne = model.getZeroOne();
+            int[] index = model.getIndex();
+            string[] color = model.getColor();
+
+            n = 5;
+
+            if (nColorChose == 0)
+            {
+                for (int i = 0; i < model.getColCount() - n; i++)
+                {
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    {
+                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        {
+                            print = "";
+                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            {
+                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                                {
+                                    biggestValue = 0;
+                                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                                    {
+                                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1 || zeroOne[l][temp] == 1)
+                                        {
+                                            biggestValue++;
+                                        }
+                                    }
+
+                                    if (biggestValue < limitedInputValue)
+                                    {
+                                        continue;
+                                    }
+                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
+                                }
+                            }
+                            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                            {
+                                writetext.Write(print);
+                            }
+
+                        }
 
                     }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < model.getColCount() - n; i++)
+                {
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    {
+                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        {
+                            print = "";
+                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            {
+                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                                {
+                                    biggestValue = 0;
+                                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                                    {
+                                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1 || zeroOne[l][temp] == 1)
+                                        {
+                                            biggestValue++;
+                                        }
+                                    }
 
+                                    if (biggestValue < limitedInputValue)
+                                    {
+                                        continue;
+                                    }
+
+                                    String[] colorOut = new String[5];
+                                    int[] colorOutIndex = new int[5];
+
+                                    colorOut[0] = color[i];
+                                    colorOut[1] = color[j];
+                                    colorOut[2] = color[q];
+                                    colorOut[3] = color[k];
+                                    colorOut[4] = color[l];
+
+                                    colorOutIndex[0] = index[i];
+                                    colorOutIndex[1] = index[j];
+                                    colorOutIndex[2] = index[q];
+                                    colorOutIndex[3] = index[k];
+                                    colorOutIndex[4] = index[l];
+
+                                    for (int x = 0; x < 5; x++)
+                                    {
+                                        for (int y = x + 1; y < 5; y++)
+                                        {
+                                            if (colorOutIndex[x] > colorOutIndex[y])
+                                            {
+                                                String temp;
+                                                temp = colorOut[x];
+                                                colorOut[x] = colorOut[y];
+                                                colorOut[y] = temp;
+
+                                                int tempInt;
+                                                tempInt = colorOutIndex[x];
+                                                colorOutIndex[x] = colorOutIndex[y];
+                                                colorOutIndex[y] = tempInt;
+                                            }
+                                        }
+                                    }
+                                    print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                    
+                                    if (nColorChose == 5)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                if (nColorChose >= 4)
+                                {
+                                    break;
+                                }
+                            }
+                            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                            {
+                                writetext.Write(print);
+                            }
+
+                            if (nColorChose >= 3)
+                            {
+                                break;
+                            }
+
+                        }
+                        if (nColorChose >= 2)
+                        {
+                            break;
+                        }
+
+                    }
+                    if(nColorChose >= 1)
+                    {
+                        break;
+                    }
                 }
             }
         }
