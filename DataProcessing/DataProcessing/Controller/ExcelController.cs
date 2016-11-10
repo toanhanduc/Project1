@@ -10,6 +10,14 @@ namespace DataProcessing.Controller
     {
         thietlaphesoModel model = new thietlaphesoModel();
         public static int ngaybatdau = 0, ngayketthuc = 0;
+        public static bool check = false;
+        public static int ncolor = 1;
+        
+        public void setNColor(int numberinputcolor)
+        {
+            ncolor = numberinputcolor;
+        }
+        
         public void readExcel(String path)
         {
 
@@ -103,34 +111,39 @@ namespace DataProcessing.Controller
 
 
             string tmp4 = "";
-            int tmp5, tmp6;
-            //if (check == true)
-            //{
-            //    for (int i = 0; i < model.getColCount() - 1; i++)
-            //    {
-            //        if (color[i] == mamaunguoidungnhap)
-            //        {
-            //            tmp4 = color[i];
-            //            tmp5 = value[i];
-            //            color[i] = color[0];
-            //            value[i] = value[0];
-            //            color[0] = tmp4;
-            //            value[0] = tmp5;
-            //            for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
-            //            {
-            //                tmp6 = zeroOne[i][n];
-            //                zeroOne[i][n] = zeroOne[0][n];
-            //                zeroOne[0][n] = tmp6;
-            //            }
+            int tmp5, tmp6, tmpindex0;
+            if (ncolor == 1)
+            {
+                for (int i = 0; i < model.getColCount() - 1; i++)
+                {
+                    if (color[i] == "BO")
+                    {
+                        tmp4 = color[i];
+                        tmp5 = value[i];
+                        tmpindex0 = index[i];
+                        color[i] = color[0];
+                        value[i] = value[0];
+                        index[i] = index[0];
+                        color[0] = tmp4;
+                        value[0] = tmp5;
+                        index[0] = tmpindex0;
+                        for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
+                        {
+                            tmp6 = zeroOne[i][n];
+                            zeroOne[i][n] = zeroOne[0][n];
+                            zeroOne[0][n] = tmp6;
+                        }
+                        break;
+                    }     
+                }
 
-            //        }
-            //    }
-            //}
+            }
+
 
             //sắp xếp mảng
             int tmp1, tmp2, tmpindex;
             string tmp3 = "";
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 1; i < value.Length; i++)
             {
                 //if (check == true && i == 0)
                 //{
@@ -162,7 +175,7 @@ namespace DataProcessing.Controller
             model.setColor(color);
             model.setValue(value);
             model.setZeroOne(zeroOne);
-
+            MessageBox.Show(color[0] + " " + color[1]);
             excel.Quit();
         }
     }
