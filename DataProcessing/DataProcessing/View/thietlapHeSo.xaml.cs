@@ -96,7 +96,7 @@ namespace DataProcessing
                 else if (group4)
                 {
                     int timestart = Environment.TickCount;
-                    await Task.Run(new Action(tlhscontroller.processGroup));
+                    await Task.Run(new Action(tlhscontroller.processGroupAll4));
                     MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     outcontroller.sortOutPut(4);
                 }

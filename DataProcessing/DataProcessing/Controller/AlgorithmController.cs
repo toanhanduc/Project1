@@ -1176,7 +1176,7 @@ namespace DataProcessing.Controller
                             print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
                         }
                     }
-                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write5.txt", true))
+                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("write4.txt", true))
                     {
                         writetext.Write(print);
                     }
