@@ -1295,7 +1295,8 @@ namespace DataProcessing.Controller
                                 }
 
                                 print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
-                                if (nColorChose == 4)
+
+                                if (nColorChose >= 4)
                                 {
                                     break;
                                 }

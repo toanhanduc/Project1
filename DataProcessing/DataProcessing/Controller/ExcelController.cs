@@ -165,6 +165,25 @@ namespace DataProcessing.Controller
                             }
                         }
                     }
+                    //if (color[i] == "BO")
+                    //{
+                    //    tmp4 = color[i];
+                    //    tmp5 = value[i];
+                    //    tmpindex0 = index[i];
+                    //    color[i] = color[0];
+                    //    value[i] = value[0];
+                    //    index[i] = index[0];
+                    //    color[0] = tmp4;
+                    //    value[0] = tmp5;
+                    //    index[0] = tmpindex0;
+                    //    for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
+                    //    {
+                    //        tmp6 = zeroOne[i][n];
+                    //        zeroOne[i][n] = zeroOne[0][n];
+                    //        zeroOne[0][n] = tmp6;
+                    //    }
+                    //    break;
+                    //}     
                 }
             }
             else if (ncolor == 2) //Người dùng nhập sẵn 2 mã màu
@@ -723,6 +742,12 @@ namespace DataProcessing.Controller
             model.setZeroOne(zeroOne);
             MessageBox.Show(color[0] + " " + color[1] + " " + color[2] + " " + color[3] + " " + color[4]);
             excel.Quit();
+        }
+
+        public string[] fillColorCombobox()
+        {
+            string[] array = model.getColor();
+            return array;
         }
     }
 }
