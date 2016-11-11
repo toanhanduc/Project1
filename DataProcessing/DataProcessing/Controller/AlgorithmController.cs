@@ -17,7 +17,7 @@ namespace DataProcessing.Controller
         string printOut = "";
         static int[] max;
         int limitedInputValue = 0; // nguong gioi han dau vao
-        int nColorChose = 5; // the number of chosen color
+        int nColorChose = 0; // the number of chosen color
         thietlaphesoModel model = new thietlaphesoModel();
         public void readN(int n)
         {

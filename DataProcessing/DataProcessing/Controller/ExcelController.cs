@@ -11,7 +11,7 @@ namespace DataProcessing.Controller
         thietlaphesoModel model = new thietlaphesoModel();
         public static int ngaybatdau = 0, ngayketthuc = 0;
         public static bool check = false;
-        public static int ncolor = 5;
+        public static int ncolor = 0;
 
         public void setNColor(int numberinputcolor)
         {
