@@ -116,25 +116,25 @@ namespace DataProcessing.Controller
             {
                 for (int i = 0; i < model.getColCount() - 1; i++)
                 {
-                    if (color[i] == "BO")
-                    {
-                        tmp4 = color[i];
-                        tmp5 = value[i];
-                        tmpindex0 = index[i];
-                        color[i] = color[0];
-                        value[i] = value[0];
-                        index[i] = index[0];
-                        color[0] = tmp4;
-                        value[0] = tmp5;
-                        index[0] = tmpindex0;
-                        for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
-                        {
-                            tmp6 = zeroOne[i][n];
-                            zeroOne[i][n] = zeroOne[0][n];
-                            zeroOne[0][n] = tmp6;
-                        }
-                        break;
-                    }     
+                    //if (color[i] == "BO")
+                    //{
+                    //    tmp4 = color[i];
+                    //    tmp5 = value[i];
+                    //    tmpindex0 = index[i];
+                    //    color[i] = color[0];
+                    //    value[i] = value[0];
+                    //    index[i] = index[0];
+                    //    color[0] = tmp4;
+                    //    value[0] = tmp5;
+                    //    index[0] = tmpindex0;
+                    //    for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
+                    //    {
+                    //        tmp6 = zeroOne[i][n];
+                    //        zeroOne[i][n] = zeroOne[0][n];
+                    //        zeroOne[0][n] = tmp6;
+                    //    }
+                    //    break;
+                    //}     
                 }
 
             }
@@ -143,7 +143,7 @@ namespace DataProcessing.Controller
             //sắp xếp mảng
             int tmp1, tmp2, tmpindex;
             string tmp3 = "";
-            for (int i = 1; i < value.Length; i++)
+            for (int i = 0; i < value.Length; i++)
             {
                 //if (check == true && i == 0)
                 //{
