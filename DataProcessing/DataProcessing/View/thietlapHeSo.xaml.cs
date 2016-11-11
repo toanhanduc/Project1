@@ -22,6 +22,7 @@ namespace DataProcessing
         public thietlapHeSo()
         {
             InitializeComponent();
+            
         }
         Boolean group2 = false, group3 = false, group4 = false, group5 = false, findmax = true;
         /// <summary>
@@ -41,6 +42,7 @@ namespace DataProcessing
 
             if (browsefile == true)
                 txtFilePath.Text = openfile.FileName;
+                
         }
 
 
@@ -76,8 +78,10 @@ namespace DataProcessing
             else
             {
                 excelcontroller.readExcel(txtFilePath.Text);
-                FindingStatus find = new FindingStatus();
-                this.NavigationService.Navigate(find);
+                string[] array = new string[] { "a", "b", "d" };
+                combo.ItemsSource = excelcontroller.fillColorCombobox();
+                //FindingStatus find = new FindingStatus();
+                //this.NavigationService.Navigate(find);
 
 
                 if (findmax)

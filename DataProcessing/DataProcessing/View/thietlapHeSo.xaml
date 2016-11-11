@@ -236,13 +236,18 @@
                             Unchecked="RadioButtonAll_Unchecked"
                         />
                         </Grid>
-                        <TextBlock                        
+                        <Grid Margin="0,48,0,-48">
+                            <TextBlock                        
                         FontSize="23"
-                        FontWeight="Regular" Margin="0,50,0,-51" HorizontalAlignment="Left" Width="184"
+                        FontWeight="Regular" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="184"
                         ><Run Text="Ngưỡng giới hạn:"/></TextBlock>
-                        <TextBox x:Name="inputvalue" FontSize="23"
-                        FontWeight="Regular" Margin="280,45,0,-28" HorizontalAlignment="Left" Width="66" RenderTransformOrigin="0.532,0.767" PreviewTextInput="inputvalue_PreviewTextInput" />
+                            <TextBox x:Name="inputvalue" FontSize="23"
+                        FontWeight="Regular" Margin="296,-1,0,18" HorizontalAlignment="Left" Width="66" RenderTransformOrigin="0.532,0.767" PreviewTextInput="inputvalue_PreviewTextInput" />
+                        </Grid>
+
                     </Grid>
+                    <ComboBox Margin="0,48,0,-48" IsEditable="True" Height="23" x:Name="combo" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+
                     <!--End So luong mau moi nhom-->
                     <!--Start Thoi gian tim kiem gioi han-->
                     <!--<Grid VerticalAlignment="Center"
