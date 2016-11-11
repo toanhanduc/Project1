@@ -29,7 +29,7 @@ namespace DataProcessing.Controller
         {
             model.setLimit(limit);
         }
-        // new
+        // tìm nhóm lớn nhất theo yêu cầu gviên
         public void processGroup()
         {               
             int n = model.getN();
@@ -47,12 +47,10 @@ namespace DataProcessing.Controller
             int[] index = model.getIndex();
             int[] max = new int[model.getColCount() - 1];
             string[] color = model.getColor();
-            List<int> savedRound2 = new List<int>();
+            List<int> savedRound2 = new List<int>(); // lưu các màu mang giá trị lớn nhất ở mốc màu thứ 2
             List<int> savedRound3 = new List<int>();
             List<int> savedRound4 = new List<int>();
-
             
-
             if (value[n - 1] == 0)
             {
                 canStop = false;
@@ -60,6 +58,11 @@ namespace DataProcessing.Controller
 
             for (int i = 0; i < model.getColCount() - n; i++)
             {
+                // điều kiện dừng
+                if (checkToBreak(n, biggestValue, value[i]) || (value[i + n - 1] == 0 && canStop))
+                {
+                    break;
+                }
                 print = "";
                 biggestValue = 0;
                 biggestValue2 = 0;
@@ -78,6 +81,11 @@ namespace DataProcessing.Controller
                     biggestValue = currentValue1;
                     for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                     {
+                        if (value[j] == 0 && (canStop || (value[n - 1] == 0 && value[1] != 0)))
+                        {
+                            break;
+                        }
+
                         if (n == 2)
                         {
                             print += color[i] + " - " + color[j] + ": " + biggestValue + Environment.NewLine;
@@ -87,7 +95,11 @@ namespace DataProcessing.Controller
                         {
                             for (int q = j + 1; q < model.getColCount() - n + 2; q++)
                             {
-                                
+                                if (value[q] == 0 && (canStop || (value[n - 1] == 0 && value[2] != 0)))
+                                {
+                                    break;
+                                }
+
                                 if (n == 3)
                                 {
                                     print += color[i] + " - " + color[j] + " - " + color[q] + ": " + biggestValue + Environment.NewLine;
@@ -97,6 +109,10 @@ namespace DataProcessing.Controller
                                 {
                                     for (int k = q + 1; k < model.getColCount() - n + 3; k++)
                                     {
+                                        if (value[k] == 0 && (canStop || (value[n - 1] == 0 && value[3] != 0)))
+                                        {
+                                            break;
+                                        }
                                         if (n == 4)
                                         {
                                             print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
@@ -106,6 +122,10 @@ namespace DataProcessing.Controller
                                         {
                                             for (int l = k + 1; l < model.getColCount() - n + 4; l++)
                                             {
+                                                if (value[l] == 0 && canStop)
+                                                {
+                                                    break;
+                                                }
                                                 print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
                                             }
                                         }
@@ -114,6 +134,7 @@ namespace DataProcessing.Controller
                             }
                         }
                     }
+                    printOut += print;
                 }
                 else // màu đầu tiên không full 1
                 {
@@ -122,6 +143,11 @@ namespace DataProcessing.Controller
                         if (j == i)
                         {
                             continue;
+                        }
+
+                        if (checkToBreak(n, biggestValue, value[i] + value[j]) || (value[j] == 0 && (canStop || (value[n - 1] == 0 && value[1] != 0))))
+                        {
+                            break;
                         }
 
                         List<int> checkList2 = new List<int>(checkList1);
@@ -138,7 +164,7 @@ namespace DataProcessing.Controller
                         }
                         currentValue2 = currentValue1 + currentCosts;
 
-                        if (currentValue2 < biggestValue2)
+                        if (currentValue2 < biggestValue)
                         {
                             continue;
                         }
@@ -173,7 +199,7 @@ namespace DataProcessing.Controller
                                 }
                             }
                         }
-                        else
+                        else // n > 2, tìm nhóm 2 màu có OR lớn nhất để ghép
                         {
                             if (j > i || j < i && currentValue2 < max[j])
                             {
@@ -189,92 +215,48 @@ namespace DataProcessing.Controller
                                 }
                             }
                         }
-                        //printOut += print;
                     }
 
-                    if (n > 2)
+                    if(n == 2)
+                    {
+                        printOut += print;
+                    }
+                    else //(n > 2)
                     {
                         foreach (int j in savedRound2)
                         {
                             biggestValue = 0;
                             biggestValue3 = 0;
-                            for (int q = 0; q < model.getColCount() - n + 1; q++)
+
+                            int currentCosts = 0; // trọng số cột hiện tại
+                            List<int> checkList2 = new List<int>(checkList1);
+                            foreach (int temp in checkList1) // đánh trọng số cho màu thứ 2
                             {
-                                if (q == i || q == j)
+                                if (zeroOne[j][temp] == 1)
                                 {
-                                    continue;
+                                    currentCosts++;
+                                    checkList2.Remove(temp);
                                 }
+                            }
+                            currentValue2 = currentValue1 + currentCosts;
 
-                                List<int> checkList2 = new List<int>(checkList1);
+                            if (!checkList2.Any()) // 2 màu làm full 1 luôn
+                            {
+                                biggestValue = currentValue2;
 
-                                int currentCosts = 0; // trọng số cột hiện tại
-
-                                foreach (int temp in checkList1) // đánh trọng số cho màu thứ 2
+                                for (int q = 0; q < model.getColCount() - n + 2; q++)
                                 {
-                                    if (zeroOne[j][temp] == 1)
+                                    if (q == i || q == j)
                                     {
-                                        currentCosts++;
-                                        checkList2.Remove(temp);
+                                        continue;
                                     }
-                                }
-                                currentValue2 = currentValue1 + currentCosts;
-                                //////////////////
-                                List<int> checkList3 = new List<int>(checkList2);
-                                currentCosts = 0;
 
-                                foreach (int temp in checkList2) // đánh trọng số cho màu thứ 2
-                                {
-                                    if (zeroOne[q][temp] == 1)
+                                    if (value[q] == 0 && (canStop || (value[n - 1] == 0 && value[2] != 0)))
                                     {
-                                        currentCosts++;
-                                        checkList3.Remove(temp);
+                                        break;
                                     }
-                                }
-                                currentValue3 = currentValue2 + currentCosts;
 
-                                if(currentValue3 < biggestValue3)
-                                {
-                                    continue;
-                                }
-
-                                if (n == 3)
-                                {
-                                    if (currentValue3 > biggestValue)
-                                    {
-                                        biggestValue = currentValue3;
-
-                                        String[] colorOut = new String[3];
-                                        int[] colorOutIndex = new int[3];
-
-                                        colorOut[0] = color[i];
-                                        colorOut[1] = color[j];
-                                        colorOut[2] = color[q];
-
-                                        colorOutIndex[0] = index[i];
-                                        colorOutIndex[1] = index[j];
-                                        colorOutIndex[2] = index[q];
-
-                                        for (int x = 0; x < 3; x++)
-                                        {
-                                            for (int y = x + 1; y < 3; y++)
-                                            {
-                                                if (colorOutIndex[x] > colorOutIndex[y])
-                                                {
-                                                    String temp;
-                                                    temp = colorOut[x];
-                                                    colorOut[x] = colorOut[y];
-                                                    colorOut[y] = temp;
-
-                                                    int tempInt;
-                                                    tempInt = colorOutIndex[x];
-                                                    colorOutIndex[x] = colorOutIndex[y];
-                                                    colorOutIndex[y] = tempInt;
-                                                }
-                                            }
-                                        }
-                                        print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
-                                    }
-                                    else if (currentValue3 == biggestValue)
+                                    if (n == 3)
                                     {
                                         String[] colorOut = new String[3];
                                         int[] colorOutIndex = new int[3];
@@ -306,116 +288,23 @@ namespace DataProcessing.Controller
                                             }
                                         }
                                         print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                        continue;
                                     }
-                                }
-                                else
-                                {
-                                    if (currentValue3 > biggestValue)
+                                    else // n > 3
                                     {
-                                        biggestValue = currentValue3;
-                                        savedRound3.Clear();
-                                        savedRound3.Add(q);
-                                    }
-                                    else if (currentValue3 == biggestValue)
-                                    {
-                                        savedRound3.Add(q);
-                                    }
-                                }
-                            }
-
-                            if (n > 3)
-                            {
-                                foreach (int q in savedRound3)
-                                {
-                                    biggestValue = 0;
-                                    for (int k = 0; k < model.getColCount() - n + 1; k++)
-                                    {
-                                        if (k == i || k == j || k == q)
+                                        for (int k = 0; k < model.getColCount() - n + 3; k++)
                                         {
-                                            continue;
-                                        }
-                                        List<int> checkList2 = new List<int>(checkList1);
-
-                                        int currentCosts = 0; // trọng số cột hiện tại
-
-                                        foreach (int temp in checkList1) // đánh trọng số cho màu thứ 2
-                                        {
-                                            if (zeroOne[j][temp] == 1)
+                                            if(k == i || k == j || k == q)
                                             {
-                                                currentCosts++;
-                                                checkList2.Remove(temp);
+                                                continue;
                                             }
-                                        }
-                                        currentValue2 = currentValue1 + currentCosts;
 
-                                        List<int> checkList3 = new List<int>(checkList2);
-                                        currentCosts = 0;
-
-                                        foreach (int temp in checkList2) // đánh trọng số cho màu thứ 2
-                                        {
-                                            if (zeroOne[q][temp] == 1)
+                                            if (value[k] == 0 && (canStop || (value[n - 1] == 0 && value[3] != 0)))
                                             {
-                                                currentCosts++;
-                                                checkList3.Remove(temp);
+                                                break;
                                             }
-                                        }
-                                        currentValue3 = currentValue2 + currentCosts;
-                                        //////////////////////////
-                                        List<int> checkList4 = new List<int>(checkList3);
-                                        currentCosts = 0;
 
-                                        foreach (int temp in checkList3) // đánh trọng số cho màu thứ 2
-                                        {
-                                            if (zeroOne[k][temp] == 1)
-                                            {
-                                                currentCosts++;
-                                                checkList4.Remove(temp);
-                                            }
-                                        }
-                                        currentValue4 = currentValue3 + currentCosts;
-
-                                        if (n == 4)
-                                        {
-                                            if (currentValue4 > biggestValue)
-                                            {
-                                                biggestValue = currentValue4;
-
-                                                String[] colorOut = new String[4];
-                                                int[] colorOutIndex = new int[4];
-
-                                                colorOut[0] = color[i];
-                                                colorOut[1] = color[j];
-                                                colorOut[2] = color[q];
-                                                colorOut[3] = color[k];
-
-                                                colorOutIndex[0] = index[i];
-                                                colorOutIndex[1] = index[j];
-                                                colorOutIndex[2] = index[q];
-                                                colorOutIndex[3] = index[k];
-
-                                                for (int x = 0; x < 4; x++)
-                                                {
-                                                    for (int y = x + 1; y < 4; y++)
-                                                    {
-                                                        if (colorOutIndex[x] > colorOutIndex[y])
-                                                        {
-                                                            String temp;
-                                                            temp = colorOut[x];
-                                                            colorOut[x] = colorOut[y];
-                                                            colorOut[y] = temp;
-
-                                                            int tempInt;
-                                                            tempInt = colorOutIndex[x];
-                                                            colorOutIndex[x] = colorOutIndex[y];
-                                                            colorOutIndex[y] = tempInt;
-                                                        }
-                                                    }
-                                                }
-
-                                                print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
-
-                                            }
-                                            else if (currentValue4 == biggestValue)
+                                            if (n == 4)
                                             {
                                                 String[] colorOut = new String[4];
                                                 int[] colorOutIndex = new int[4];
@@ -449,130 +338,21 @@ namespace DataProcessing.Controller
                                                     }
                                                 }
                                                 print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                continue;
                                             }
-                                        }
-                                        else
-                                        {
-                                            if (currentValue4 > biggestValue)
+                                            else // n > 4
                                             {
-                                                biggestValue = currentValue4;
-                                                savedRound4.Clear();
-                                                savedRound4.Add(k);
-                                            }
-                                            else if (currentValue4 == biggestValue)
-                                            {
-                                                savedRound4.Add(k);
-                                            }
-                                        }
-
-                                    }
-
-                                    if(n > 4)
-                                    {
-                                        foreach(int k in savedRound4)
-                                        {
-                                            biggestValue = 0;
-                                            for (int l = 0; l < model.getColCount() - n + 1; l++)
-                                            {
-                                                if(l == i || l == j || l == q || l == k)
+                                                for (int l = 0; l < model.getColCount() - n + 4; l++)
                                                 {
-                                                    continue;
-                                                }
-
-                                                List<int> checkList2 = new List<int>(checkList1);
-
-                                                int currentCosts = 0; // trọng số cột hiện tại
-
-                                                foreach (int temp in checkList1) // đánh trọng số cho màu thứ 2
-                                                {
-                                                    if (zeroOne[j][temp] == 1)
+                                                    if(l == i || l == j || l == q || l == k)
                                                     {
-                                                        currentCosts++;
-                                                        checkList2.Remove(temp);
+                                                        continue;
                                                     }
-                                                }
-                                                currentValue2 = currentValue1 + currentCosts;
 
-                                                List<int> checkList3 = new List<int>(checkList2);
-                                                currentCosts = 0;
-
-                                                foreach (int temp in checkList2) // đánh trọng số cho màu thứ 2
-                                                {
-                                                    if (zeroOne[q][temp] == 1)
+                                                    if (value[l] == 0 && canStop)
                                                     {
-                                                        currentCosts++;
-                                                        checkList3.Remove(temp);
+                                                        break;
                                                     }
-                                                }
-                                                currentValue3 = currentValue2 + currentCosts;
-
-                                                List<int> checkList4 = new List<int>(checkList3);
-                                                currentCosts = 0;
-
-                                                foreach (int temp in checkList3) // đánh trọng số cho màu thứ 2
-                                                {
-                                                    if (zeroOne[k][temp] == 1)
-                                                    {
-                                                        currentCosts++;
-                                                        checkList4.Remove(temp);
-                                                    }
-                                                }
-                                                currentValue4 = currentValue3 + currentCosts;
-                                                /////////////////////////
-                                                List<int> checkList5 = new List<int>(checkList4);
-                                                currentCosts = 0;
-
-                                                foreach (int temp in checkList4) // đánh trọng số cho màu thứ 2
-                                                {
-                                                    if (zeroOne[l][temp] == 1)
-                                                    {
-                                                        currentCosts++;
-                                                        checkList5.Remove(temp);
-                                                    }
-                                                }
-                                                currentValue5 = currentValue4 + currentCosts;
-
-                                                if (currentValue4 + currentCosts > biggestValue)
-                                                {
-                                                    biggestValue = currentValue4 + currentCosts;
-
-                                                    String[] colorOut = new String[5];
-                                                    int[] colorOutIndex = new int[5];
-
-                                                    colorOut[0] = color[i];
-                                                    colorOut[1] = color[j];
-                                                    colorOut[2] = color[q];
-                                                    colorOut[3] = color[k];
-                                                    colorOut[4] = color[l];
-
-                                                    colorOutIndex[0] = index[i];
-                                                    colorOutIndex[1] = index[j];
-                                                    colorOutIndex[2] = index[q];
-                                                    colorOutIndex[3] = index[k];
-                                                    colorOutIndex[4] = index[l];
-
-                                                    for (int x = 0; x < 5; x++)
-                                                    {
-                                                        for (int y = x + 1; y < 5; y++)
-                                                        {
-                                                            if (colorOutIndex[x] > colorOutIndex[y])
-                                                            {
-                                                                String temp;
-                                                                temp = colorOut[x];
-                                                                colorOut[x] = colorOut[y];
-                                                                colorOut[y] = temp;
-
-                                                                int tempInt;
-                                                                tempInt = colorOutIndex[x];
-                                                                colorOutIndex[x] = colorOutIndex[y];
-                                                                colorOutIndex[y] = tempInt;
-                                                            }
-                                                        }
-                                                    }
-                                                    print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
-                                                }
-                                                else if (currentValue4 + currentCosts == biggestValue)
-                                                {
                                                     String[] colorOut = new String[5];
                                                     int[] colorOutIndex = new int[5];
 
@@ -609,445 +389,576 @@ namespace DataProcessing.Controller
                                                     print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
-                                            printOut += print;
+                                        }
+                                    }
+                                }
+                                printOut += print;
+                                break;
+                            }
+                            else // 2 màu không full 1
+                            {
+                                for (int q = 0; q < model.getColCount() - n + 2; q++)
+                                {
+                                    if (q == i || q == j)
+                                    {
+                                        continue;
+                                    }
+
+                                    if (checkToBreak(n, biggestValue, value[i] + value[j] + value[q]) || (value[q] == 0 && (canStop || (value[n - 1] == 0 && value[2] != 0))))
+                                    {
+                                        break;
+                                    }
+
+                                    List<int> checkList3 = new List<int>(checkList2);
+                                    currentCosts = 0;
+
+                                    foreach (int temp in checkList2)
+                                    {
+                                        if (zeroOne[q][temp] == 1)
+                                        {
+                                            currentCosts++;
+                                            checkList3.Remove(temp);
+                                        }
+                                    }
+                                    currentValue3 = currentValue2 + currentCosts;
+
+                                    if (currentValue3 < biggestValue3)
+                                    {
+                                        continue;
+                                    }
+
+                                    if (n == 3)
+                                    {
+                                        if (currentValue3 > biggestValue)
+                                        {
+                                            biggestValue = currentValue3;
+
+                                            String[] colorOut = new String[3];
+                                            int[] colorOutIndex = new int[3];
+
+                                            colorOut[0] = color[i];
+                                            colorOut[1] = color[j];
+                                            colorOut[2] = color[q];
+
+                                            colorOutIndex[0] = index[i];
+                                            colorOutIndex[1] = index[j];
+                                            colorOutIndex[2] = index[q];
+
+                                            for (int x = 0; x < 3; x++)
+                                            {
+                                                for (int y = x + 1; y < 3; y++)
+                                                {
+                                                    if (colorOutIndex[x] > colorOutIndex[y])
+                                                    {
+                                                        String temp;
+                                                        temp = colorOut[x];
+                                                        colorOut[x] = colorOut[y];
+                                                        colorOut[y] = temp;
+
+                                                        int tempInt;
+                                                        tempInt = colorOutIndex[x];
+                                                        colorOutIndex[x] = colorOutIndex[y];
+                                                        colorOutIndex[y] = tempInt;
+                                                    }
+                                                }
+                                            }
+                                            print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                        }
+                                        else if (currentValue3 == biggestValue)
+                                        {
+                                            biggestValue = currentValue3;
+                                            String[] colorOut = new String[3];
+                                            int[] colorOutIndex = new int[3];
+
+                                            colorOut[0] = color[i];
+                                            colorOut[1] = color[j];
+                                            colorOut[2] = color[q];
+
+                                            colorOutIndex[0] = index[i];
+                                            colorOutIndex[1] = index[j];
+                                            colorOutIndex[2] = index[q];
+
+                                            for (int x = 0; x < 3; x++)
+                                            {
+                                                for (int y = x + 1; y < 3; y++)
+                                                {
+                                                    if (colorOutIndex[x] > colorOutIndex[y])
+                                                    {
+                                                        String temp;
+                                                        temp = colorOut[x];
+                                                        colorOut[x] = colorOut[y];
+                                                        colorOut[y] = temp;
+
+                                                        int tempInt;
+                                                        tempInt = colorOutIndex[x];
+                                                        colorOutIndex[x] = colorOutIndex[y];
+                                                        colorOutIndex[y] = tempInt;
+                                                    }
+                                                }
+                                            }
+                                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (currentValue3 > biggestValue)
+                                        {
+                                            biggestValue = currentValue3;
+                                            savedRound3.Clear();
+                                            savedRound3.Add(q);
+                                        }
+                                        else if (currentValue3 == biggestValue)
+                                        {
+                                            savedRound3.Add(q);
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (n == 3)
+                            {
+                                printOut += print;
+                            }
+                            else //(n > 3)
+                            {
+                                foreach (int q in savedRound3)
+                                {
+                                    biggestValue = 0;
+
+                                    List<int> checkList3 = new List<int>(checkList2);
+                                    currentCosts = 0;
+
+                                    foreach (int temp in checkList2) // đánh trọng số cho màu thứ 2
+                                    {
+                                        if (zeroOne[q][temp] == 1)
+                                        {
+                                            currentCosts++;
+                                            checkList3.Remove(temp);
+                                        }
+                                    }
+                                    currentValue3 = currentValue2 + currentCosts;
+
+                                    if (!checkList3.Any()) // 3 mau lam full 1
+                                    {
+                                        biggestValue = currentValue3;
+                                        
+                                        for (int k = 0; k < model.getColCount() - n + 3; k++)
+                                        {
+                                            if(k == i || k == j || k == q)
+                                            {
+                                                continue;
+                                            }
+                                            
+                                            if (value[k] == 0 && (canStop || (value[n - 1] == 0 && value[3] != 0)))
+                                            {
+                                                break;
+                                            }
+
+                                            if (n == 4)
+                                            {
+                                                String[] colorOut = new String[4];
+                                                int[] colorOutIndex = new int[4];
+
+                                                colorOut[0] = color[i];
+                                                colorOut[1] = color[j];
+                                                colorOut[2] = color[q];
+                                                colorOut[3] = color[k];
+
+                                                colorOutIndex[0] = index[i];
+                                                colorOutIndex[1] = index[j];
+                                                colorOutIndex[2] = index[q];
+                                                colorOutIndex[3] = index[k];
+
+                                                for (int x = 0; x < 4; x++)
+                                                {
+                                                    for (int y = x + 1; y < 4; y++)
+                                                    {
+                                                        if (colorOutIndex[x] > colorOutIndex[y])
+                                                        {
+                                                            String temp;
+                                                            temp = colorOut[x];
+                                                            colorOut[x] = colorOut[y];
+                                                            colorOut[y] = temp;
+
+                                                            int tempInt;
+                                                            tempInt = colorOutIndex[x];
+                                                            colorOutIndex[x] = colorOutIndex[y];
+                                                            colorOutIndex[y] = tempInt;
+                                                        }
+                                                    }
+                                                }
+                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                continue;
+                                            }
+                                            else // n > 4
+                                            {
+                                                for (int l = 0; l < model.getColCount() - n + 4; l++)
+                                                {
+                                                    if (l == i || l == j || l == q || l == k)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (value[l] == 0 && canStop)
+                                                    {
+                                                        break;
+                                                    }
+                                                    String[] colorOut = new String[5];
+                                                    int[] colorOutIndex = new int[5];
+
+                                                    colorOut[0] = color[i];
+                                                    colorOut[1] = color[j];
+                                                    colorOut[2] = color[q];
+                                                    colorOut[3] = color[k];
+                                                    colorOut[4] = color[l];
+
+                                                    colorOutIndex[0] = index[i];
+                                                    colorOutIndex[1] = index[j];
+                                                    colorOutIndex[2] = index[q];
+                                                    colorOutIndex[3] = index[k];
+                                                    colorOutIndex[4] = index[l];
+
+                                                    for (int x = 0; x < 5; x++)
+                                                    {
+                                                        for (int y = x + 1; y < 5; y++)
+                                                        {
+                                                            if (colorOutIndex[x] > colorOutIndex[y])
+                                                            {
+                                                                String temp;
+                                                                temp = colorOut[x];
+                                                                colorOut[x] = colorOut[y];
+                                                                colorOut[y] = temp;
+
+                                                                int tempInt;
+                                                                tempInt = colorOutIndex[x];
+                                                                colorOutIndex[x] = colorOutIndex[y];
+                                                                colorOutIndex[y] = tempInt;
+                                                            }
+                                                        }
+                                                    }
+                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                }
+                                            }
+
+                                        }
+                                        printOut += print;
+                                        break;
+                                    }
+                                    else // 3 mau khong full 1
+                                    {
+                                        for (int k = 0; k < model.getColCount() - n + 3; k++)
+                                        {
+                                            if (k == i || k == j || k == q)
+                                            {
+                                                continue;
+                                            }
+
+                                            // điều kiện dừng
+                                            if (checkToBreak(n, biggestValue, value[i] + value[j] + value[q] + value[k]) || (value[k] == 0 && (canStop || (value[n - 1] == 0 && value[3] != 0))))
+                                            {
+                                                break;
+                                            }
+
+                                            //////////////////////////
+                                            List<int> checkList4 = new List<int>(checkList3);
+                                            currentCosts = 0;
+
+                                            foreach (int temp in checkList3) // đánh trọng số cho màu thứ 2
+                                            {
+                                                if (zeroOne[k][temp] == 1)
+                                                {
+                                                    currentCosts++;
+                                                    checkList4.Remove(temp);
+                                                }
+                                            }
+                                            currentValue4 = currentValue3 + currentCosts;
+
+                                            if(currentValue4 < biggestValue)
+                                            {
+                                                continue;
+                                            }
+
+                                            if (n == 4)
+                                            {
+                                                if (currentValue4 > biggestValue)
+                                                {
+                                                    biggestValue = currentValue4;
+
+                                                    String[] colorOut = new String[4];
+                                                    int[] colorOutIndex = new int[4];
+
+                                                    colorOut[0] = color[i];
+                                                    colorOut[1] = color[j];
+                                                    colorOut[2] = color[q];
+                                                    colorOut[3] = color[k];
+
+                                                    colorOutIndex[0] = index[i];
+                                                    colorOutIndex[1] = index[j];
+                                                    colorOutIndex[2] = index[q];
+                                                    colorOutIndex[3] = index[k];
+
+                                                    for (int x = 0; x < 4; x++)
+                                                    {
+                                                        for (int y = x + 1; y < 4; y++)
+                                                        {
+                                                            if (colorOutIndex[x] > colorOutIndex[y])
+                                                            {
+                                                                String temp;
+                                                                temp = colorOut[x];
+                                                                colorOut[x] = colorOut[y];
+                                                                colorOut[y] = temp;
+
+                                                                int tempInt;
+                                                                tempInt = colorOutIndex[x];
+                                                                colorOutIndex[x] = colorOutIndex[y];
+                                                                colorOutIndex[y] = tempInt;
+                                                            }
+                                                        }
+                                                    }
+
+                                                    print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+
+                                                }
+                                                else if (currentValue4 == biggestValue)
+                                                {
+                                                    String[] colorOut = new String[4];
+                                                    int[] colorOutIndex = new int[4];
+
+                                                    colorOut[0] = color[i];
+                                                    colorOut[1] = color[j];
+                                                    colorOut[2] = color[q];
+                                                    colorOut[3] = color[k];
+
+                                                    colorOutIndex[0] = index[i];
+                                                    colorOutIndex[1] = index[j];
+                                                    colorOutIndex[2] = index[q];
+                                                    colorOutIndex[3] = index[k];
+
+                                                    for (int x = 0; x < 4; x++)
+                                                    {
+                                                        for (int y = x + 1; y < 4; y++)
+                                                        {
+                                                            if (colorOutIndex[x] > colorOutIndex[y])
+                                                            {
+                                                                String temp;
+                                                                temp = colorOut[x];
+                                                                colorOut[x] = colorOut[y];
+                                                                colorOut[y] = temp;
+
+                                                                int tempInt;
+                                                                tempInt = colorOutIndex[x];
+                                                                colorOutIndex[x] = colorOutIndex[y];
+                                                                colorOutIndex[y] = tempInt;
+                                                            }
+                                                        }
+                                                    }
+                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (currentValue4 > biggestValue)
+                                                {
+                                                    biggestValue = currentValue4;
+                                                    savedRound4.Clear();
+                                                    savedRound4.Add(k);
+                                                }
+                                                else if (currentValue4 == biggestValue)
+                                                {
+                                                    savedRound4.Add(k);
+                                                }
+                                            }
 
                                         }
                                     }
 
+                                    if(n == 4)
+                                    {
+                                        printOut += print;
+                                    }
+                                    else //(n > 4)
+                                    {
+                                        foreach(int k in savedRound4)
+                                        {
+                                            biggestValue = 0;
+                                            
+                                            List<int> checkList4 = new List<int>(checkList3);
+                                            currentCosts = 0;
+
+                                            foreach (int temp in checkList3) // đánh trọng số cho màu thứ 2
+                                            {
+                                                if (zeroOne[k][temp] == 1)
+                                                {
+                                                    currentCosts++;
+                                                    checkList4.Remove(temp);
+                                                }
+                                            }
+                                            currentValue4 = currentValue3 + currentCosts;
+
+                                            if (!checkList4.Any()) // 4 mau full 1
+                                            {
+                                                biggestValue = currentValue4;
+
+                                                for (int l = 0; l < model.getColCount() - n + 4; l++)
+                                                {
+                                                    if (l == i || l == j || l == q || l == k)
+                                                    {
+                                                        continue;
+                                                    }
+
+                                                    if (value[l] == 0 && canStop)
+                                                    {
+                                                        break;
+                                                    }
+
+                                                    String[] colorOut = new String[5];
+                                                    int[] colorOutIndex = new int[5];
+
+                                                    colorOut[0] = color[i];
+                                                    colorOut[1] = color[j];
+                                                    colorOut[2] = color[q];
+                                                    colorOut[3] = color[k];
+                                                    colorOut[4] = color[l];
+
+                                                    colorOutIndex[0] = index[i];
+                                                    colorOutIndex[1] = index[j];
+                                                    colorOutIndex[2] = index[q];
+                                                    colorOutIndex[3] = index[k];
+                                                    colorOutIndex[4] = index[l];
+
+                                                    for (int x = 0; x < 5; x++)
+                                                    {
+                                                        for (int y = x + 1; y < 5; y++)
+                                                        {
+                                                            if (colorOutIndex[x] > colorOutIndex[y])
+                                                            {
+                                                                String temp;
+                                                                temp = colorOut[x];
+                                                                colorOut[x] = colorOut[y];
+                                                                colorOut[y] = temp;
+
+                                                                int tempInt;
+                                                                tempInt = colorOutIndex[x];
+                                                                colorOutIndex[x] = colorOutIndex[y];
+                                                                colorOutIndex[y] = tempInt;
+                                                            }
+                                                        }
+                                                    }
+
+                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                }
+                                            }
+                                            else // 4 mau khong full 1
+                                            {
+                                                for (int l = 0; l < model.getColCount() - n + 4; l++)
+                                                {
+                                                    if (l == i || l == j || l == q || l == k)
+                                                    {
+                                                        continue;
+                                                    }
+                                                    
+                                                    /////////////////////////
+                                                    List<int> checkList5 = new List<int>(checkList4);
+                                                    currentCosts = 0;
+
+                                                    foreach (int temp in checkList4) // đánh trọng số cho màu thứ 2
+                                                    {
+                                                        if (zeroOne[l][temp] == 1)
+                                                        {
+                                                            currentCosts++;
+                                                            checkList5.Remove(temp);
+                                                        }
+                                                    }
+                                                    currentValue5 = currentValue4 + currentCosts;
+
+                                                    if (currentValue4 + currentCosts > biggestValue)
+                                                    {
+                                                        biggestValue = currentValue4 + currentCosts;
+
+                                                        String[] colorOut = new String[5];
+                                                        int[] colorOutIndex = new int[5];
+
+                                                        colorOut[0] = color[i];
+                                                        colorOut[1] = color[j];
+                                                        colorOut[2] = color[q];
+                                                        colorOut[3] = color[k];
+                                                        colorOut[4] = color[l];
+
+                                                        colorOutIndex[0] = index[i];
+                                                        colorOutIndex[1] = index[j];
+                                                        colorOutIndex[2] = index[q];
+                                                        colorOutIndex[3] = index[k];
+                                                        colorOutIndex[4] = index[l];
+
+                                                        for (int x = 0; x < 5; x++)
+                                                        {
+                                                            for (int y = x + 1; y < 5; y++)
+                                                            {
+                                                                if (colorOutIndex[x] > colorOutIndex[y])
+                                                                {
+                                                                    String temp;
+                                                                    temp = colorOut[x];
+                                                                    colorOut[x] = colorOut[y];
+                                                                    colorOut[y] = temp;
+
+                                                                    int tempInt;
+                                                                    tempInt = colorOutIndex[x];
+                                                                    colorOutIndex[x] = colorOutIndex[y];
+                                                                    colorOutIndex[y] = tempInt;
+                                                                }
+                                                            }
+                                                        }
+                                                        print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    }
+                                                    else if (currentValue4 + currentCosts == biggestValue)
+                                                    {
+                                                        String[] colorOut = new String[5];
+                                                        int[] colorOutIndex = new int[5];
+
+                                                        colorOut[0] = color[i];
+                                                        colorOut[1] = color[j];
+                                                        colorOut[2] = color[q];
+                                                        colorOut[3] = color[k];
+                                                        colorOut[4] = color[l];
+
+                                                        colorOutIndex[0] = index[i];
+                                                        colorOutIndex[1] = index[j];
+                                                        colorOutIndex[2] = index[q];
+                                                        colorOutIndex[3] = index[k];
+                                                        colorOutIndex[4] = index[l];
+
+                                                        for (int x = 0; x < 5; x++)
+                                                        {
+                                                            for (int y = x + 1; y < 5; y++)
+                                                            {
+                                                                if (colorOutIndex[x] > colorOutIndex[y])
+                                                                {
+                                                                    String temp;
+                                                                    temp = colorOut[x];
+                                                                    colorOut[x] = colorOut[y];
+                                                                    colorOut[y] = temp;
+
+                                                                    int tempInt;
+                                                                    tempInt = colorOutIndex[x];
+                                                                    colorOutIndex[x] = colorOutIndex[y];
+                                                                    colorOutIndex[y] = tempInt;
+                                                                }
+                                                            }
+                                                        }
+                                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    }
+                                                }
+                                            }
+                                            printOut += print;
+                                        }
+                                    }
                                 }
                             }
-
                         }
-
-                        
                     }
-
-                    // tam thoi comment
-
-
-                        //else if (!checkList2.Any()) // 2 màu làm full 1
-                        //{
-                        //    if(biggestValue < currentValue2) // mốc mới
-                        //    {
-                        //        biggestValue = currentValue2;
-                        //        print = "";
-                        //        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                        //        {
-                        //            if (n == 3)
-                        //            {
-                        //                print += color[i] + " - " + color[j] + " - " + color[q] + ": " + biggestValue + Environment.NewLine;
-                        //                continue;
-                        //            }
-                        //            else // n > 3
-                        //            {
-                        //                for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                        //                {
-                        //                    if (n == 4)
-                        //                    {
-                        //                        print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
-                        //                        continue;
-                        //                    }
-                        //                    else // n > 4
-                        //                    {
-                        //                        for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                        //                        {
-                        //                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                    }
-                        //                }
-                        //            }
-                        //        }
-
-                        //    }
-                        //    else // biggestValue == currentValue2
-                        //    {
-                        //        biggestValue = currentValue2;
-                        //        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
-                        //        {
-                        //            if (n == 3)
-                        //            {
-                        //                print += color[i] + " - " + color[j] + " - " + color[q] + ": " + biggestValue + Environment.NewLine;
-                        //                continue;
-                        //            }
-                        //            else // n > 3
-                        //            {
-                        //                for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                        //                {
-                        //                    if (n == 4)
-                        //                    {
-                        //                        print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
-                        //                        continue;
-                        //                    }
-                        //                    else // n > 4
-                        //                    {
-                        //                        for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                        //                        {
-                        //                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                    }
-                        //                }
-                        //            }
-                        //        }
-                        //    }
-                        //}
-                        //else // 2 màu không full 1
-                        //{
-                        //    for (int q = 0; q < model.getColCount() - n + 2; q++)
-                        //    {
-                        //        if(q == i || q == j)
-                        //        {
-                        //            continue;
-                        //        }
-
-                        //        List<int> checkList3 = new List<int>(checkList2);
-
-                        //        currentCosts = 0;
-
-                        //        foreach (int temp in checkList2)
-                        //        {
-                        //            if (zeroOne[q][temp] == 1)
-                        //            {
-                        //                currentCosts++;
-                        //                checkList3.Remove(temp);
-                        //            }
-                        //        }
-
-                        //        currentValue3 = currentValue2 + currentCosts;
-
-                        //        if (n == 3)
-                        //        {
-                        //            //if (q > j || (q < j && currentValue3 < max[q]))
-                        //            //{
-                        //                if (currentValue3 > biggestValue && currentValue2 == biggestValue2)
-                        //                {
-                        //                    biggestValue = currentValue3;
-
-                        //                    String[] colorOut = new String[3];
-                        //                    int[] colorOutIndex = new int[3];
-
-                        //                    colorOut[0] = color[i];
-                        //                    colorOut[1] = color[j];
-                        //                    colorOut[2] = color[q];
-
-                        //                    colorOutIndex[0] = index[i];
-                        //                    colorOutIndex[1] = index[j];
-                        //                    colorOutIndex[2] = index[q];
-
-                        //                    for (int x = 0; x < 3; x++)
-                        //                    {
-                        //                        for (int y = x + 1; y < 3; y++)
-                        //                        {
-                        //                            if (colorOutIndex[x] > colorOutIndex[y])
-                        //                            {
-                        //                                //String temp;
-                        //                                //temp = colorOut[x];
-                        //                                //colorOut[x] = colorOut[y];
-                        //                                //colorOut[y] = temp;
-
-                        //                                //int tempInt;
-                        //                                //tempInt = colorOutIndex[x];
-                        //                                //colorOutIndex[x] = colorOutIndex[y];
-                        //                                //colorOutIndex[y] = tempInt;
-                        //                            }
-                        //                        }
-                        //                    }
-                        //                    print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
-                        //                }
-                        //                else if (currentValue3 == biggestValue && currentValue2 == biggestValue2)
-                        //                {
-                        //                    String[] colorOut = new String[3];
-                        //                    int[] colorOutIndex = new int[3];
-
-                        //                    colorOut[0] = color[i];
-                        //                    colorOut[1] = color[j];
-                        //                    colorOut[2] = color[q];
-
-                        //                    colorOutIndex[0] = index[i];
-                        //                    colorOutIndex[1] = index[j];
-                        //                    colorOutIndex[2] = index[q];
-
-                        //                    for (int x = 0; x < 3; x++)
-                        //                    {
-                        //                        for (int y = x + 1; y < 3; y++)
-                        //                        {
-                        //                            if (colorOutIndex[x] > colorOutIndex[y])
-                        //                            {
-                        //                                //String temp;
-                        //                                //temp = colorOut[x];
-                        //                                //colorOut[x] = colorOut[y];
-                        //                                //colorOut[y] = temp;
-
-                        //                                //int tempInt;
-                        //                                //tempInt = colorOutIndex[x];
-                        //                                //colorOutIndex[x] = colorOutIndex[y];
-                        //                                //colorOutIndex[y] = tempInt;
-                        //                            }
-                        //                        }
-                        //                    }
-                        //                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
-                        //                }
-                                        
-                        //            }
-                        //        //}
-                        //        else if (!checkList3.Any()) // 3 màu làm full 1
-                        //        {
-                        //            if(biggestValue < currentValue3) // mốc mới
-                        //            {
-                        //                biggestValue = currentValue3;
-                        //                print = "";
-                        //                for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                        //                {
-                        //                    if (n == 4)
-                        //                    {
-                        //                        print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
-                        //                        continue;
-                        //                    }
-                        //                    else // n > 4
-                        //                    {
-                        //                        for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                        //                        {
-                        //                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                    }
-                        //                }
-                        //            }
-                        //            else // biggestValue == currentValue3
-                        //            {
-                        //                biggestValue = currentValue3;
-                        //                for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                        //                {
-                        //                    if (n == 4)
-                        //                    {
-                        //                        print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
-                        //                        continue;
-                        //                    }
-                        //                    else // n > 4
-                        //                    {
-                        //                        for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                        //                        {
-                        //                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                    }
-                        //                }
-                        //            }
-                        //        }
-                        //        else // 3 màu không làm full 1
-                        //        {
-                        //            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
-                        //            {
-                        //                List<int> checkList4 = new List<int>(checkList3);
-
-                        //                currentCosts = 0;
-
-                        //                foreach (int temp in checkList3)
-                        //                {
-                        //                    if (zeroOne[k][temp] == 1)
-                        //                    {
-                        //                        currentCosts++;
-                        //                        checkList4.Remove(temp);
-                        //                    }
-                        //                }
-
-                        //                currentValue4 = currentValue3 + currentCosts;
-
-                        //                if(n == 4)
-                        //                {
-                        //                    if (currentValue4 > biggestValue)
-                        //                    {
-                        //                        biggestValue = currentValue4;
-
-                        //                        String[] colorOut = new String[4];
-                        //                        int[] colorOutIndex = new int[4];
-
-                        //                        colorOut[0] = color[i];
-                        //                        colorOut[1] = color[j];
-                        //                        colorOut[2] = color[q];
-                        //                        colorOut[3] = color[k];
-
-                        //                        colorOutIndex[0] = index[i];
-                        //                        colorOutIndex[1] = index[j];
-                        //                        colorOutIndex[2] = index[q];
-                        //                        colorOutIndex[3] = index[k];
-
-                        //                        for (int x = 0; x < 4; x++)
-                        //                        {
-                        //                            for (int y = x + 1; y < 4; y++)
-                        //                            {
-                        //                                if (colorOutIndex[x] > colorOutIndex[y])
-                        //                                {
-                        //                                    String temp;
-                        //                                    temp = colorOut[x];
-                        //                                    colorOut[x] = colorOut[y];
-                        //                                    colorOut[y] = temp;
-
-                        //                                    int tempInt;
-                        //                                    tempInt = colorOutIndex[x];
-                        //                                    colorOutIndex[x] = colorOutIndex[y];
-                        //                                    colorOutIndex[y] = tempInt;
-                        //                                }
-                        //                            }
-                        //                        }
-
-                        //                        print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
-
-                        //                    }
-                        //                    else if (currentValue4 == biggestValue)
-                        //                    {
-                        //                        String[] colorOut = new String[4];
-                        //                        int[] colorOutIndex = new int[4];
-
-                        //                        colorOut[0] = color[i];
-                        //                        colorOut[1] = color[j];
-                        //                        colorOut[2] = color[q];
-                        //                        colorOut[3] = color[k];
-
-                        //                        colorOutIndex[0] = index[i];
-                        //                        colorOutIndex[1] = index[j];
-                        //                        colorOutIndex[2] = index[q];
-                        //                        colorOutIndex[3] = index[k];
-
-                        //                        for (int x = 0; x < 4; x++)
-                        //                        {
-                        //                            for (int y = x + 1; y < 4; y++)
-                        //                            {
-                        //                                if (colorOutIndex[x] > colorOutIndex[y])
-                        //                                {
-                        //                                    String temp;
-                        //                                    temp = colorOut[x];
-                        //                                    colorOut[x] = colorOut[y];
-                        //                                    colorOut[y] = temp;
-
-                        //                                    int tempInt;
-                        //                                    tempInt = colorOutIndex[x];
-                        //                                    colorOutIndex[x] = colorOutIndex[y];
-                        //                                    colorOutIndex[y] = tempInt;
-                        //                                }
-                        //                            }
-                        //                        }
-                        //                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
-                        //                    }
-                        //                }
-                        //                else if (!checkList4.Any()) // 4 màu làm full 1
-                        //                {
-                        //                    if(biggestValue < currentValue4) // mốc mới
-                        //                    {
-                        //                        biggestValue = currentValue4;
-                        //                        print = "";
-                        //                        for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                        //                        {
-                        //                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                    }
-                        //                    else // biggestValue == currentValue4
-                        //                    {
-                        //                        biggestValue = currentValue4;
-                        //                        for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                        //                        {
-                        //                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                    }
-                        //                }
-                        //                else // 4 màu không làm full 1
-                        //                {
-                        //                    for (int l = k + 1; l < model.getColCount() - n + 4; l++)
-                        //                    {
-                        //                        currentCosts = 0;
-
-                        //                        foreach (int temp in checkList4)
-                        //                        {
-                        //                            if (zeroOne[l][temp] == 1)
-                        //                            {
-                        //                                currentCosts++;
-                        //                            }
-                        //                        }
-
-                        //                        if (currentValue4 + currentCosts > biggestValue)
-                        //                        {
-                        //                            biggestValue = currentValue4 + currentCosts;
-                        //                            print = "";
-
-                        //                            String[] colorOut = new String[5];
-                        //                            int[] colorOutIndex = new int[5];
-
-                        //                            colorOut[0] = color[i];
-                        //                            colorOut[1] = color[j];
-                        //                            colorOut[2] = color[q];
-                        //                            colorOut[3] = color[k];
-                        //                            colorOut[4] = color[l];
-
-                        //                            colorOutIndex[0] = index[i];
-                        //                            colorOutIndex[1] = index[j];
-                        //                            colorOutIndex[2] = index[q];
-                        //                            colorOutIndex[3] = index[k];
-                        //                            colorOutIndex[4] = index[l];
-
-                        //                            for (int x = 0; x < 5; x++)
-                        //                            {
-                        //                                for (int y = x + 1; y < 5; y++)
-                        //                                {
-                        //                                    if (colorOutIndex[x] > colorOutIndex[y])
-                        //                                    {
-                        //                                        String temp;
-                        //                                        temp = colorOut[x];
-                        //                                        colorOut[x] = colorOut[y];
-                        //                                        colorOut[y] = temp;
-
-                        //                                        int tempInt;
-                        //                                        tempInt = colorOutIndex[x];
-                        //                                        colorOutIndex[x] = colorOutIndex[y];
-                        //                                        colorOutIndex[y] = tempInt;
-                        //                                    }
-                        //                                }
-                        //                            }
-                        //                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                        else if (currentValue4 + currentCosts == biggestValue)
-                        //                        {
-                        //                            String[] colorOut = new String[5];
-                        //                            int[] colorOutIndex = new int[5];
-
-                        //                            colorOut[0] = color[i];
-                        //                            colorOut[1] = color[j];
-                        //                            colorOut[2] = color[q];
-                        //                            colorOut[3] = color[k];
-                        //                            colorOut[4] = color[l];
-
-                        //                            colorOutIndex[0] = index[i];
-                        //                            colorOutIndex[1] = index[j];
-                        //                            colorOutIndex[2] = index[q];
-                        //                            colorOutIndex[3] = index[k];
-                        //                            colorOutIndex[4] = index[l];
-
-                        //                            for (int x = 0; x < 5; x++)
-                        //                            {
-                        //                                for (int y = x + 1; y < 5; y++)
-                        //                                {
-                        //                                    if (colorOutIndex[x] > colorOutIndex[y])
-                        //                                    {
-                        //                                        String temp;
-                        //                                        temp = colorOut[x];
-                        //                                        colorOut[x] = colorOut[y];
-                        //                                        colorOut[y] = temp;
-
-                        //                                        int tempInt;
-                        //                                        tempInt = colorOutIndex[x];
-                        //                                        colorOutIndex[x] = colorOutIndex[y];
-                        //                                        colorOutIndex[y] = tempInt;
-                        //                                    }
-                        //                                }
-                        //                            }
-                        //                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
-                        //                        }
-                        //                    }
-                        //                }
-                        //            }
-                        //        }
-                        //    }
-                        //}
-                    //}
                 }
                 max[i] = biggestValue;
-                printOut += print;
+                //printOut += print;
                 if (value[i + 1]  < value[i])
                 {
                     break;
@@ -1098,6 +1009,53 @@ namespace DataProcessing.Controller
                     using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("2-outputall.txt", true))
                     {
                         writetext.Write(print);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < model.getColCount() - n; i++)
+                {
+                    print = "";
+                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    {
+                        biggestValue = 0;
+                        for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                        {
+                            if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1)
+                            {
+                                biggestValue++;
+                            }
+                        }
+
+                        if (biggestValue < limitedInputValue) // không đạt ngưỡng giới hạn
+                        {
+                            continue;
+                        }
+
+                        if (index[i] < index[j]) // sắp xếp đầu ra
+                        {
+                            print = color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                        }
+                        else
+                        {
+                            print = color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
+                        }
+
+                        if (nColorChose == 2)
+                        {
+                            break;
+                        }
+
+                    }
+                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("2-outputall.txt", true))
+                    {
+                        writetext.Write(print);
+                    }
+
+                    if(nColorChose >= 1)
+                    {
+                        break;
                     }
                 }
             }
@@ -1337,7 +1295,6 @@ namespace DataProcessing.Controller
                                 }
 
                                 print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
-                                
                                 if (nColorChose == 4)
                                 {
                                     break;
@@ -1533,7 +1490,5 @@ namespace DataProcessing.Controller
             }
             return false;
         }
-
-
     }
 }

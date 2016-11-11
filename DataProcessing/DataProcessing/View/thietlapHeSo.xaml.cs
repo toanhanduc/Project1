@@ -79,7 +79,7 @@ namespace DataProcessing
                 FindingStatus find = new FindingStatus();
                 this.NavigationService.Navigate(find);
 
-
+                //tìm lớn nhất
                 if (findmax)
                 {
 
@@ -108,7 +108,7 @@ namespace DataProcessing
                         await Task.Run(new Action(tlhscontroller.processGroup));
                         MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                         //int timestart1 = Environment.TickCount;
-                        //outcontroller.sortOutPut(3);
+                        outcontroller.sortOutPut(3);
                         //MessageBox.Show("Mau 3 sx: " + ((double)(Environment.TickCount - timestart1) / 1000).ToString() + "s");
                     }
                     else if (group4)

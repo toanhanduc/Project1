@@ -247,6 +247,25 @@ namespace DataProcessing.Controller
                             }
                         }
                     }
+                    //if (color[i] == "BO")
+                    //{
+                    //    tmp4 = color[i];
+                    //    tmp5 = value[i];
+                    //    tmpindex0 = index[i];
+                    //    color[i] = color[0];
+                    //    value[i] = value[0];
+                    //    index[i] = index[0];
+                    //    color[0] = tmp4;
+                    //    value[0] = tmp5;
+                    //    index[0] = tmpindex0;
+                    //    for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
+                    //    {
+                    //        tmp6 = zeroOne[i][n];
+                    //        zeroOne[i][n] = zeroOne[0][n];
+                    //        zeroOne[0][n] = tmp6;
+                    //    }
+                    //    break;
+                    //}     
                 }
             }
             //ncolor = 3
@@ -498,6 +517,7 @@ namespace DataProcessing.Controller
             //ncolor = 5
             else if (ncolor == 5)
             {
+            //sắp xếp mảng
                 for (int i = 0; i < model.getColCount() - 1; i++)
                 {
                     int checkcolor = 0;
