@@ -1055,10 +1055,10 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroupAll3(int nColorChose) // print All n = 3
+        public void processGroupAll3(int nColorChose, string color1, string color2, string color3) // print All n = 3
         {
             thietlaphesoModel model = new thietlaphesoModel();
-
+            exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, "", "");
             int n = model.getN();
             int limitedInputValue = model.getLimit();
             string print = "";
@@ -1182,10 +1182,10 @@ namespace DataProcessing.Controller
             }       
         }
 
-        public void processGroupAll4(int nColorChose) // print All n = 4
+        public void processGroupAll4(int nColorChose, string color1, string color2, string color3, string color4) // print All n = 4
         {
             thietlaphesoModel model = new thietlaphesoModel();
-
+            exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, color4, "");
             int n = model.getN();
             int limitedInputValue = model.getLimit();
             string print = "";
@@ -1317,10 +1317,10 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroupAll5(int nColorChose) // print All n = 5
+        public void processGroupAll5(int nColorChose, string color1, string color2, string color3, string color4, string color5) // print All n = 5
         {
             thietlaphesoModel model = new thietlaphesoModel();
-
+            exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, color4, color5);
             int n = model.getN();
             string print = "";
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột

@@ -20,6 +20,9 @@ namespace DataProcessing
         Controller.ExcelController excelcontroller = new Controller.ExcelController();
         Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
         Controller.OutputController outcontroller = new Controller.OutputController();
+        string color1, color2, color3, color4, color5;
+
+
         //public bool check = false;
 
         public thietlapHeSo()
@@ -82,14 +85,13 @@ namespace DataProcessing
         /// <param name="e"></param>
         public async void startSearch(object sender, RoutedEventArgs e)
         {
-            string color1 = combo1.SelectedValue.ToString();
-            string color2 = combo2.SelectedValue.ToString();
+
             //string color3 = combo3.SelectedValue.ToString();
             //string color4 = combo4.SelectedValue.ToString();
             //string color5 = combo5.SelectedValue.ToString();
             // string mamaunguoidungnhap = "E";
 
-            MessageBox.Show(combo1.SelectedValue.ToString());
+            //MessageBox.Show(combo1.SelectedValue.ToString());
             if (txtFilePath.Text.Length == 0)
             {
                 MessageBox.Show("Bạn chưa chọn đường dẫn!");
@@ -158,29 +160,240 @@ namespace DataProcessing
                 }
                 else
                 {
-                    if (group2)
+                    if (group2) //in tất cả nhóm 2
                     {
                         int timestart = Environment.TickCount;
-             
-                        await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1 , color2));
+                        if (ncolor == 2)
+                        {
+                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                color2 = combo2.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, color2));
+                            }
+
+                        }
+                        else if (ncolor == 1)
+                        {
+                            if (combo1.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, ""));
+                            }
+                        }
+                        else if (ncolor == 0)
+                            await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, "", ""));
                         MessageBox.Show("Mau 2 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     }
-                    else if (group3)
+                    else if (group3) // in tất cả nhóm 3
                     {
                         int timestart = Environment.TickCount;
-                        await Task.Run(() => tlhscontroller.processGroupAll3(ncolor));
+                        if (ncolor == 3)
+                        {
+                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                color2 = combo2.SelectedValue.ToString();
+                                color3 = combo3.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, color3));
+                            }
+                        }
+
+                        else if (ncolor == 2)
+                        {
+                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                color2 = combo2.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, ""));
+                            }
+
+                        }
+
+                        else if (ncolor == 1)
+                        {
+                            if (combo1.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, "", ""));
+                            }
+                        }
+                        else if (ncolor == 0)
+                            await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, "", "", ""));
                         MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     }
-                    else if (group4)
+                    else if (group4) // in tất cả nhóm 4 màu
                     {
                         int timestart = Environment.TickCount;
-                        await Task.Run(() => tlhscontroller.processGroupAll4(ncolor));
+                        if (ncolor == 4)
+                        {
+                            {
+                                {
+                                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1 || combo4.SelectedIndex == -1)
+                                    {
+                                        MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                                    }
+                                    else
+                                    {
+                                        color1 = combo1.SelectedValue.ToString();
+                                        color2 = combo2.SelectedValue.ToString();
+                                        color3 = combo3.SelectedValue.ToString();
+                                        color4 = combo4.SelectedValue.ToString();
+                                        await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, color4));
+                                    }
+                                }
+                            }
+                        }
+                        else if (ncolor == 3)
+                        {
+                            {
+                                if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1)
+                                {
+                                    MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                                }
+                                else
+                                {
+                                    color1 = combo1.SelectedValue.ToString();
+                                    color2 = combo2.SelectedValue.ToString();
+                                    color3 = combo3.SelectedValue.ToString();
+                                    await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, ""));
+                                }
+                            }
+                        }
+                        else if (ncolor == 2)
+                        {
+                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                color2 = combo2.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, "", ""));
+                            }
+                        }
+                        else if (ncolor == 1)
+                        {
+                            if (combo1.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, "", "", ""));
+                            }
+                        }
+                        else if (ncolor == 0)
+                            await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, "", "", "", ""));
                         MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     }
-                    else if (group5)
+                    else if (group5) // in tất cả nhóm 5 màu
                     {
                         int timestart = Environment.TickCount;
-                        await Task.Run(() => tlhscontroller.processGroupAll5(ncolor));
+                        if (ncolor == 5)
+                        {
+                            {
+                                {
+                                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1 || combo4.SelectedIndex == -1 || combo5.SelectedIndex == -1)
+                                    {
+                                        MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                                    }
+                                    else
+                                    {
+                                        color1 = combo1.SelectedValue.ToString();
+                                        color2 = combo2.SelectedValue.ToString();
+                                        color3 = combo3.SelectedValue.ToString();
+                                        color4 = combo4.SelectedValue.ToString();
+                                        color5 = combo5.SelectedValue.ToString();
+                                        await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, color5));
+                                    }
+                                }
+                            }
+                        }
+                        else if (ncolor == 4)
+                        {
+                            {
+                                {
+                                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1 || combo4.SelectedIndex == -1)
+                                    {
+                                        MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                                    }
+                                    else
+                                    {
+                                        color1 = combo1.SelectedValue.ToString();
+                                        color2 = combo2.SelectedValue.ToString();
+                                        color3 = combo3.SelectedValue.ToString();
+                                        color4 = combo4.SelectedValue.ToString();
+                                        await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, ""));
+                                    }
+                                }
+                            }
+                        }
+                        else if (ncolor == 3)
+                        {
+                            {
+                                if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1)
+                                {
+                                    MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                                }
+                                else
+                                {
+                                    color1 = combo1.SelectedValue.ToString();
+                                    color2 = combo2.SelectedValue.ToString();
+                                    color3 = combo3.SelectedValue.ToString();
+                                    await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, "", ""));
+                                }
+                            }
+                        }
+                        else if (ncolor == 2)
+                        {
+                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                color2 = combo2.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, "", "", ""));
+                            }
+                        }
+                        else if (ncolor == 1)
+                        {
+                            if (combo1.SelectedIndex == -1)
+                            {
+                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+                            }
+                            else
+                            {
+                                color1 = combo1.SelectedValue.ToString();
+                                await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, "", "", "", ""));
+                            }
+                        }
+                        else if (ncolor == 0)
+                            await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, "", "", "", "", ""));
                         MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
                     }
                     else
@@ -195,14 +408,27 @@ namespace DataProcessing
 
         private void RadioButton2_Checked(object sender, RoutedEventArgs e)
         {
-            textcolornumber.Visibility = Visibility.Visible;
-            colornumber0.Visibility = Visibility.Visible;
-            colornumber0.IsChecked = true;
-            colornumber1.Visibility = Visibility.Visible;
-            colornumber2.Visibility = Visibility.Visible;
-            colornumber3.Visibility = Visibility.Hidden;
-            colornumber4.Visibility = Visibility.Hidden;
-            colornumber5.Visibility = Visibility.Hidden;
+            if (!findmax)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+                colornumber3.Visibility = Visibility.Hidden;
+                colornumber4.Visibility = Visibility.Hidden;
+                colornumber5.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                textcolornumber.Visibility = Visibility.Hidden;
+                colornumber0.Visibility = Visibility.Hidden;
+                colornumber1.Visibility = Visibility.Hidden;
+                colornumber2.Visibility = Visibility.Hidden;
+                colornumber3.Visibility = Visibility.Hidden;
+                colornumber4.Visibility = Visibility.Hidden;
+                colornumber5.Visibility = Visibility.Hidden;
+            }
             n = 2;
             tlhscontroller.readN(2);
             group2 = true;
@@ -215,14 +441,27 @@ namespace DataProcessing
 
         private void RadioButton3_Checked(object sender, RoutedEventArgs e)
         {
-            textcolornumber.Visibility = Visibility.Visible;
-            colornumber0.Visibility = Visibility.Visible;
-            colornumber0.IsChecked = true;
-            colornumber1.Visibility = Visibility.Visible;
-            colornumber2.Visibility = Visibility.Visible;
-            colornumber3.Visibility = Visibility.Visible;
-            colornumber4.Visibility = Visibility.Hidden;
-            colornumber5.Visibility = Visibility.Hidden;
+            if (!findmax)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+                colornumber3.Visibility = Visibility.Visible;
+                colornumber4.Visibility = Visibility.Hidden;
+                colornumber5.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                textcolornumber.Visibility = Visibility.Hidden;
+                colornumber0.Visibility = Visibility.Hidden;
+                colornumber1.Visibility = Visibility.Hidden;
+                colornumber2.Visibility = Visibility.Hidden;
+                colornumber3.Visibility = Visibility.Hidden;
+                colornumber4.Visibility = Visibility.Hidden;
+                colornumber5.Visibility = Visibility.Hidden;
+            }
             n = 3;
             tlhscontroller.readN(3);
             group3 = true;
@@ -235,14 +474,27 @@ namespace DataProcessing
 
         private void RadioButton4_Checked(object sender, RoutedEventArgs e)
         {
-            textcolornumber.Visibility = Visibility.Visible;
-            colornumber0.Visibility = Visibility.Visible;
-            colornumber0.IsChecked = true;
-            colornumber1.Visibility = Visibility.Visible;
-            colornumber2.Visibility = Visibility.Visible;
-            colornumber3.Visibility = Visibility.Visible;
-            colornumber4.Visibility = Visibility.Visible;
-            colornumber5.Visibility = Visibility.Hidden;
+            if (!findmax)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+                colornumber3.Visibility = Visibility.Visible;
+                colornumber4.Visibility = Visibility.Visible;
+                colornumber5.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                textcolornumber.Visibility = Visibility.Hidden;
+                colornumber0.Visibility = Visibility.Hidden;
+                colornumber1.Visibility = Visibility.Hidden;
+                colornumber2.Visibility = Visibility.Hidden;
+                colornumber3.Visibility = Visibility.Hidden;
+                colornumber4.Visibility = Visibility.Hidden;
+                colornumber5.Visibility = Visibility.Hidden;
+            }
             n = 4;
             tlhscontroller.readN(4);
             group4 = true;
@@ -257,14 +509,27 @@ namespace DataProcessing
 
         private void RadioButton5_Checked(object sender, RoutedEventArgs e)
         {
-            textcolornumber.Visibility = Visibility.Visible;
-            colornumber0.Visibility = Visibility.Visible;
-            colornumber0.IsChecked = true;
-            colornumber1.Visibility = Visibility.Visible;
-            colornumber2.Visibility = Visibility.Visible;
-            colornumber3.Visibility = Visibility.Visible;
-            colornumber4.Visibility = Visibility.Visible;
-            colornumber5.Visibility = Visibility.Visible;
+            if (!findmax)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+                colornumber3.Visibility = Visibility.Visible;
+                colornumber4.Visibility = Visibility.Visible;
+                colornumber5.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                textcolornumber.Visibility = Visibility.Hidden;
+                colornumber0.Visibility = Visibility.Hidden;
+                colornumber1.Visibility = Visibility.Hidden;
+                colornumber2.Visibility = Visibility.Hidden;
+                colornumber3.Visibility = Visibility.Hidden;
+                colornumber4.Visibility = Visibility.Hidden;
+                colornumber5.Visibility = Visibility.Hidden;
+            }
             n = 5;
             tlhscontroller.readN(5);
             group5 = true;
@@ -296,6 +561,16 @@ namespace DataProcessing
         private void RadioButtonTop_Checked(object sender, RoutedEventArgs e)
         {
             findmax = true;
+            if (group2 || group3 || group4 || group5)
+            {
+                textcolornumber.Visibility = Visibility.Hidden;
+                colornumber0.Visibility = Visibility.Hidden;
+                colornumber1.Visibility = Visibility.Hidden;
+                colornumber2.Visibility = Visibility.Hidden;
+                colornumber3.Visibility = Visibility.Hidden;
+                colornumber4.Visibility = Visibility.Hidden;
+                colornumber5.Visibility = Visibility.Hidden;
+            }   
         }
 
         private void RadioButtonTop_Unchecked(object sender, RoutedEventArgs e)
@@ -306,6 +581,44 @@ namespace DataProcessing
         private void RadioButtonAll_Checked(object sender, RoutedEventArgs e)
         {
             findmax = false;
+            if (group2)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+            }
+            else if (group3)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+                colornumber3.Visibility = Visibility.Visible;
+            }
+            else if (group4)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+                colornumber3.Visibility = Visibility.Visible;
+                colornumber4.Visibility = Visibility.Visible;
+            }
+            else if (group5)
+            {
+                textcolornumber.Visibility = Visibility.Visible;
+                colornumber0.Visibility = Visibility.Visible;
+                colornumber0.IsChecked = true;
+                colornumber1.Visibility = Visibility.Visible;
+                colornumber2.Visibility = Visibility.Visible;
+                colornumber3.Visibility = Visibility.Visible;
+                colornumber4.Visibility = Visibility.Visible;
+                colornumber5.Visibility = Visibility.Visible;
+            }
         }
 
         private void RadioButtonAll_Unchecked(object sender, RoutedEventArgs e)
