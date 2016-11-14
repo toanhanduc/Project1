@@ -17,8 +17,8 @@ namespace DataProcessing.Controller
         string printOut = "";
         static int[] max;
         int limitedInputValue = 0; // nguong gioi han dau vao
-        int nColorChose = 0; // the number of chosen color
         thietlaphesoModel model = new thietlaphesoModel();
+        ExcelController exc = new ExcelController();
         public void readN(int n)
         {
             model.setN(n);
@@ -970,10 +970,9 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroupAll2() // print All n = 2
+        public void processGroupAll2(int nColorChose, string color1, string color2) // print All n = 2
         {
-            thietlaphesoModel model = new thietlaphesoModel();
-
+            exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, "", "", "");
             int n = model.getN();
             int limitedInputValue = model.getLimit();
             string print = "";
@@ -1061,7 +1060,7 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroupAll3() // print All n = 3
+        public void processGroupAll3(int nColorChose) // print All n = 3
         {
             thietlaphesoModel model = new thietlaphesoModel();
 
@@ -1188,7 +1187,7 @@ namespace DataProcessing.Controller
             }       
         }
 
-        public void processGroupAll4() // print All n = 4
+        public void processGroupAll4(int nColorChose) // print All n = 4
         {
             thietlaphesoModel model = new thietlaphesoModel();
 
@@ -1323,7 +1322,7 @@ namespace DataProcessing.Controller
             }
         }
 
-        public void processGroupAll5() // print All n = 5
+        public void processGroupAll5(int nColorChose) // print All n = 5
         {
             thietlaphesoModel model = new thietlaphesoModel();
 

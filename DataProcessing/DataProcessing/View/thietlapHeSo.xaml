@@ -246,7 +246,93 @@
                         </Grid>
 
                     </Grid>
-                    <ComboBox Margin="0,48,0,-48" IsEditable="True" Height="23" x:Name="combo" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                    <Grid Margin="0 45">
+                        <TextBlock x:Name="textcolornumber"
+                        Visibility="Hidden"
+                        HorizontalAlignment="Left"
+                        FontSize="23"
+                        FontWeight="Regular" Height="45" Width="638"
+                        ><Run Text="Số lượng mã màu cho sẵn :"/></TextBlock>
+                        <Grid
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="280 -5 0 0"
+                        Height="35">
+                            <RadioButton x:Name="colornumber0"
+                            Margin="20,0,0,-0.2"
+                            Content="0"
+                            FontSize="20"
+                            Padding="5 -9 0 0 "
+                            Visibility="Hidden"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Checked="ColorButton0_Checked"
+                            Unchecked="ColorButton0_Unchecked"
+                        ></RadioButton>
+                            <RadioButton x:Name="colornumber1"
+                            Margin="70,0,0,-0.2"
+                            Content="1"
+                            FontSize="20"
+                            Padding="5 -9 0 0 "
+                            Visibility="Hidden"             
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Checked="ColorButton1_Checked"
+                            Unchecked="ColorButton1_Unchecked"
+                        ></RadioButton>
+                            <RadioButton x:Name="colornumber2"
+                            Margin="120,0,0,-0.2"
+                            Content="2"
+                            FontSize="20"
+                            Padding="5 -9 0 0 "
+                            Visibility="Hidden"             
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Checked="ColorButton2_Checked"
+                            Unchecked="ColorButton2_Unchecked"
+                        ></RadioButton>
+                            <RadioButton x:Name="colornumber3"
+                            Margin="170 0 0 0"
+                            Content="3"
+                            FontSize="20"
+                            Padding="5 -9 0 0 "
+                            Visibility="Hidden"             
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Checked="ColorButton3_Checked"
+                            Unchecked="ColorButton3_Unchecked"
+                        ></RadioButton>
+                            <RadioButton x:Name="colornumber4"
+                            Margin="220 0 0 0"
+                            Content="4"
+                            FontSize="20"
+                            Padding="5 -9 0 0 "
+                            Visibility="Hidden"             
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Checked="ColorButton4_Checked"
+                            Unchecked="ColorButton4_Unchecked"
+                        ></RadioButton>
+                            <RadioButton x:Name="colornumber5"
+                            Margin="270 0 0 0"
+                            Content="5"
+                            FontSize="20"
+                            Padding="5 -9 0 0 "
+                            Visibility="Hidden"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Checked="ColorButton5_Checked"
+                            Unchecked="ColorButton5_Unchecked"
+                        ></RadioButton>
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="0 -30">
+                        <ComboBox Margin="10,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo1" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                        <ComboBox Margin="150,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo2" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                        <ComboBox Margin="290,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo3" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                        <ComboBox Margin="430,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo4" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                        <ComboBox Margin="570,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo5" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                    </Grid>
 
                     <!--End So luong mau moi nhom-->
                     <!--Start Thoi gian tim kiem gioi han-->
@@ -285,7 +371,18 @@
                 </StackPanel>
             </Grid>
             <!--End Mid-->
+            <Grid>
+                <TextBlock x:Name="readExcelProcess"
+                    Margin="0,33,240,10"
+                    Height="40"
+                    FontSize="20"
+                    Text="{Binding Text}"
+                    HorizontalAlignment="Right" Width="194">
+                </TextBlock>
+            </Grid>
         </StackPanel>
+
+
         <!--Start Btm-->
         <Grid
             VerticalAlignment="Bottom"
@@ -315,7 +412,10 @@
                 </TextBlock>
             </Button>
             <!--End TimKiem Button-->
+
         </Grid>
+
         <!--End Btm-->
     </Grid>
+
 </Page>

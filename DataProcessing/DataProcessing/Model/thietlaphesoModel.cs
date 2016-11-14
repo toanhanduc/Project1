@@ -4,10 +4,10 @@ namespace DataProcessing.Model
 {
     public class thietlaphesoModel
     {
-
         private static int colcount = 1;
         private static int rowcount = 1;
         private static String[] color = new String[colcount - 1];
+        private static String[] colordefault = new String[colcount - 1];
         private static int[] value = new int[colcount - 1];
         private static int[][] zeroOne = new int[colcount - 1][];
         private static int[] index = new int[colcount - 1];
@@ -80,6 +80,23 @@ namespace DataProcessing.Model
         {
             return rowcount;
         }
+        /// <summary>
+        /// Set giá trị mảng tên màu ko sắp xếp
+        /// </summary>
+        /// <param name="color"></param>
+        public void setColorDefault(String[] color12)
+        {
+            colordefault = color12;
+        }
+        /// <summary>
+        /// Get giá trị mảng tên màu ko sắp xếp
+        /// </summary>
+        /// <returns></returns>
+        public String[] getColorDefault()
+        {
+            return colordefault;
+        }
+
         /// <summary>
         /// Set giá trị mảng tên màu
         /// </summary>
