@@ -40,8 +40,6 @@ namespace DataProcessing.Controller
             int currentValue4; // giá trị ở vòng 4
             int currentValue5;
             int biggestValue = 0;
-            int biggestValue2 = 0;
-            int biggestValue3 = 0;
             int[] value = model.getValue();
             int[][] zeroOne = model.getZeroOne();
             int[] index = model.getIndex();
@@ -65,7 +63,6 @@ namespace DataProcessing.Controller
                 }
                 print = "";
                 biggestValue = 0;
-                biggestValue2 = 0;
                 List<int> checkList1 = new List<int>(); // list so sánh theo ngày không bán được sau vòng 1
                 currentValue1 = value[i];
                 for (int j = 0; j < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; j++) // tạo list chứa những ngày không bán được của màu đầu tiên
@@ -226,7 +223,6 @@ namespace DataProcessing.Controller
                         foreach (int j in savedRound2)
                         {
                             biggestValue = 0;
-                            biggestValue3 = 0;
 
                             int currentCosts = 0; // trọng số cột hiện tại
                             List<int> checkList2 = new List<int>(checkList1);
@@ -393,7 +389,6 @@ namespace DataProcessing.Controller
                                     }
                                 }
                                 printOut += print;
-                                break;
                             }
                             else // 2 màu không full 1
                             {
@@ -422,7 +417,7 @@ namespace DataProcessing.Controller
                                     }
                                     currentValue3 = currentValue2 + currentCosts;
 
-                                    if (currentValue3 < biggestValue3)
+                                    if (currentValue3 < biggestValue)
                                     {
                                         continue;
                                     }
@@ -642,7 +637,7 @@ namespace DataProcessing.Controller
 
                                         }
                                         printOut += print;
-                                        break;
+                                        //break;
                                     }
                                     else // 3 mau khong full 1
                                     {
