@@ -31,7 +31,8 @@ namespace DataProcessing.Controller
         }
         // tìm nhóm lớn nhất theo yêu cầu gviên
         public void processGroup()
-        {               
+        {
+            exc.readExcelSortByValue(model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne());
             int n = model.getN();
             string print = "";
             int currentValue1; // giá trị ở vòng 1
@@ -85,7 +86,7 @@ namespace DataProcessing.Controller
 
                         if (n == 2)
                         {
-                            print += color[i] + " - " + color[j] + ": " + biggestValue + Environment.NewLine;
+                            print += color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                             continue;
                         }
                         else // n > 2
@@ -99,7 +100,7 @@ namespace DataProcessing.Controller
 
                                 if (n == 3)
                                 {
-                                    print += color[i] + " - " + color[j] + " - " + color[q] + ": " + biggestValue + Environment.NewLine;
+                                    print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
                                     continue;
                                 }
                                 else // n > 3
@@ -112,7 +113,7 @@ namespace DataProcessing.Controller
                                         }
                                         if (n == 4)
                                         {
-                                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
+                                            print += color[i] + " " + color[j] + " " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
                                             continue;
                                         }
                                         else // n > 4
@@ -123,7 +124,7 @@ namespace DataProcessing.Controller
                                                 {
                                                     break;
                                                 }
-                                                print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
+                                                print += color[i] + " " + color[j] + " " + color[q] + "- " + color[k] + " " + color[l] + ": " + biggestValue + Environment.NewLine;
                                             }
                                         }
                                     }
@@ -175,11 +176,11 @@ namespace DataProcessing.Controller
                                     biggestValue = currentValue2;
                                     if (index[i] < index[j])
                                     {
-                                        print = color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                                        print = color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                                     }
                                     else
                                     {
-                                        print = color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
+                                        print = color[j] + " " + color[i] + ": " + biggestValue + Environment.NewLine;
                                     }
 
                                 }
@@ -187,11 +188,11 @@ namespace DataProcessing.Controller
                                 {
                                     if (index[i] < index[j])
                                     {
-                                        print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                                        print += color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                                     }
                                     else
                                     {
-                                        print += color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
+                                        print += color[j] + " " + color[i] + ": " + biggestValue + Environment.NewLine;
                                     }
                                 }
                             }
@@ -283,7 +284,7 @@ namespace DataProcessing.Controller
                                                 }
                                             }
                                         }
-                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                        print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
                                         continue;
                                     }
                                     else // n > 3
@@ -333,7 +334,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
                                                 }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
                                                 continue;
                                             }
                                             else // n > 4
@@ -382,7 +383,7 @@ namespace DataProcessing.Controller
                                                             }
                                                         }
                                                     }
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                         }
@@ -457,7 +458,7 @@ namespace DataProcessing.Controller
                                                     }
                                                 }
                                             }
-                                            print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                            print = colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
                                         }
                                         else if (currentValue3 == biggestValue)
                                         {
@@ -491,7 +492,7 @@ namespace DataProcessing.Controller
                                                     }
                                                 }
                                             }
-                                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                            print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
                                         }
                                     }
                                     else
@@ -582,7 +583,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
                                                 }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
                                                 continue;
                                             }
                                             else // n > 4
@@ -631,7 +632,7 @@ namespace DataProcessing.Controller
                                                             }
                                                         }
                                                     }
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
 
@@ -711,7 +712,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
 
-                                                    print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                    print = colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
 
                                                 }
                                                 else if (currentValue4 == biggestValue)
@@ -747,7 +748,7 @@ namespace DataProcessing.Controller
                                                             }
                                                         }
                                                     }
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                             else
@@ -840,7 +841,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
 
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                             else // 4 mau khong full 1
@@ -903,7 +904,7 @@ namespace DataProcessing.Controller
                                                                 }
                                                             }
                                                         }
-                                                        print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                        print = colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                     }
                                                     else if (currentValue4 + currentCosts == biggestValue)
                                                     {
@@ -940,7 +941,7 @@ namespace DataProcessing.Controller
                                                                 }
                                                             }
                                                         }
-                                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                        print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                     }
                                                 }
                                             }
@@ -998,7 +999,7 @@ namespace DataProcessing.Controller
                         {
                             continue;
                         }
-                        print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                        print += color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                     }
                     using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("2-outputall.txt", true))
                     {
@@ -1029,11 +1030,11 @@ namespace DataProcessing.Controller
 
                         if (index[i] < index[j]) // sắp xếp đầu ra
                         {
-                            print = color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                            print = color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                         }
                         else
                         {
-                            print = color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
+                            print = color[j] + " " + color[i] + ": " + biggestValue + Environment.NewLine;
                         }
 
                         if (nColorChose == 2)
@@ -1069,7 +1070,7 @@ namespace DataProcessing.Controller
             string[] color = model.getColor();
 
             n = 3;
-            
+          
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
@@ -1095,7 +1096,7 @@ namespace DataProcessing.Controller
                                 continue;
                             }
 
-                            print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
+                            print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
                         }
                     }
                     using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("3-outputall.txt", true))
@@ -1127,7 +1128,7 @@ namespace DataProcessing.Controller
                             {
                                 continue;
                             }
-                            //print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
+                            //print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
 
                             String[] colorOut = new String[3];
                             int[] colorOutIndex = new int[3];
@@ -1158,7 +1159,7 @@ namespace DataProcessing.Controller
                                     }
                                 }
                             }
-                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                            print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
 
                             if (nColorChose >= 3)
                             {
@@ -1221,7 +1222,7 @@ namespace DataProcessing.Controller
                                 {
                                     continue;
                                 }
-                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
+                                print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + ": " + biggestValue + Environment.NewLine;
                             }
                         }
                         using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("4-outputall.txt", true))
@@ -1288,7 +1289,7 @@ namespace DataProcessing.Controller
                                     }
                                 }
 
-                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
 
                                 if (nColorChose >= 4)
                                 {
@@ -1357,7 +1358,7 @@ namespace DataProcessing.Controller
                                     {
                                         continue;
                                     }
-                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
+                                    print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + " " + color[l] + ": " + biggestValue + Environment.NewLine;
                                 }
                             }
                             using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("5-outputall.txt", true))
@@ -1430,7 +1431,7 @@ namespace DataProcessing.Controller
                                             }
                                         }
                                     }
-                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                     
                                     if (nColorChose == 5)
                                     {

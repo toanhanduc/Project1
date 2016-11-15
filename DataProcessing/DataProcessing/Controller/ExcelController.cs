@@ -260,8 +260,8 @@ namespace DataProcessing.Controller
                                     for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     break;
                                 }
@@ -343,8 +343,8 @@ namespace DataProcessing.Controller
                                     for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     checkcolor++;
                                     if (checkcolor == 2)
@@ -365,8 +365,8 @@ namespace DataProcessing.Controller
                                                 for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                 {
                                                     tmp6 = zeroOne[k][n];
-                                                    zeroOne[k][n] = zeroOne[0][n];
-                                                    zeroOne[0][n] = tmp6;
+                                                    zeroOne[k][n] = zeroOne[2][n];
+                                                    zeroOne[2][n] = tmp6;
                                                 }
                                                 break;
                                             }
@@ -453,8 +453,8 @@ namespace DataProcessing.Controller
                                     for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     checkcolor++;
                                     if (checkcolor == 2)
@@ -475,8 +475,8 @@ namespace DataProcessing.Controller
                                                 for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                 {
                                                     tmp6 = zeroOne[k][n];
-                                                    zeroOne[k][n] = zeroOne[0][n];
-                                                    zeroOne[0][n] = tmp6;
+                                                    zeroOne[k][n] = zeroOne[2][n];
+                                                    zeroOne[2][n] = tmp6;
                                                 }
                                                 checkcolor++;
                                                 if (checkcolor == 3)
@@ -497,8 +497,8 @@ namespace DataProcessing.Controller
                                                             for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                             {
                                                                 tmp6 = zeroOne[l][n];
-                                                                zeroOne[l][n] = zeroOne[0][n];
-                                                                zeroOne[0][n] = tmp6;
+                                                                zeroOne[l][n] = zeroOne[3][n];
+                                                                zeroOne[3][n] = tmp6;
                                                             }
                                                             break;
                                                         }
@@ -591,8 +591,8 @@ namespace DataProcessing.Controller
                                     for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     checkcolor++;
                                     if (checkcolor == 2)
@@ -613,8 +613,8 @@ namespace DataProcessing.Controller
                                                 for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                 {
                                                     tmp6 = zeroOne[k][n];
-                                                    zeroOne[k][n] = zeroOne[0][n];
-                                                    zeroOne[0][n] = tmp6;
+                                                    zeroOne[k][n] = zeroOne[2][n];
+                                                    zeroOne[2][n] = tmp6;
                                                 }
                                                 checkcolor++;
                                                 if (checkcolor == 3)
@@ -635,8 +635,8 @@ namespace DataProcessing.Controller
                                                             for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                             {
                                                                 tmp6 = zeroOne[l][n];
-                                                                zeroOne[l][n] = zeroOne[0][n];
-                                                                zeroOne[0][n] = tmp6;
+                                                                zeroOne[l][n] = zeroOne[3][n];
+                                                                zeroOne[3][n] = tmp6;
                                                             }
                                                             checkcolor++;
                                                             if (checkcolor == 4)
@@ -657,8 +657,8 @@ namespace DataProcessing.Controller
                                                                         for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                                         {
                                                                             tmp6 = zeroOne[q][n];
-                                                                            zeroOne[q][n] = zeroOne[0][n];
-                                                                            zeroOne[0][n] = tmp6;
+                                                                            zeroOne[q][n] = zeroOne[4][n];
+                                                                            zeroOne[4][n] = tmp6;
                                                                         }
                                                                         break;
                                                                     }
