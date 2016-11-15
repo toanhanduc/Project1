@@ -327,7 +327,7 @@
                         </Grid>
                     </Grid>
                     <Grid Margin="0 -30">
-                        <ComboBox Margin="10,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo1" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                        <ComboBox Margin="10,10,10,30" Visibility="Hidden"  HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo1" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
                         <ComboBox Margin="150,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo2" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
                         <ComboBox Margin="290,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo3" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
                         <ComboBox Margin="430,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo4" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
