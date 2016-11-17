@@ -8,6 +8,7 @@ namespace DataProcessing.Model
         private static int rowcount = 1;
         private static String[] color = new String[colcount - 1];
         private static String[] colordefault = new String[colcount - 1];
+        private static String[] datetime = new String[rowcount - 1];
         private static int[] value = new int[colcount - 1];
         private static int[][] zeroOne = new int[colcount - 1][];
         private static int[] index = new int[colcount - 1];
@@ -83,7 +84,7 @@ namespace DataProcessing.Model
         /// <summary>
         /// Set giá trị mảng tên màu ko sắp xếp
         /// </summary>
-        /// <param name="color"></param>
+        /// <param name="colordefault"></param>
         public void setColorDefault(String[] color12)
         {
             colordefault = color12;
@@ -95,6 +96,23 @@ namespace DataProcessing.Model
         public String[] getColorDefault()
         {
             return colordefault;
+        }
+
+        /// <summary>
+        /// Set giá trị mảng tên màu ko sắp xếp
+        /// </summary>
+        /// <param name="colordefault"></param>
+        public void setDateTime(String[] date)
+        {
+            datetime = date;
+        }
+        /// <summary>
+        /// Get giá trị mảng tên màu ko sắp xếp
+        /// </summary>
+        /// <returns></returns>
+        public String[] getDateTime()
+        {
+            return datetime;
         }
 
         /// <summary>

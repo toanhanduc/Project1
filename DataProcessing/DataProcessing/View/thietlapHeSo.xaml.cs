@@ -15,6 +15,7 @@ namespace DataProcessing
     public partial class thietlapHeSo : Page
     {
         public static string startdatetime = "", enddatetime = "";
+        public static string txtpath = "";
         public static int n = 0;
         public static int ncolor = 0;
         Controller.ExcelController excelcontroller = new Controller.ExcelController();
@@ -62,15 +63,16 @@ namespace DataProcessing
             if (browsefile == true)
             {
                 txtFilePath.Text = openfile.FileName;
-                startdatetime = startd.SelectedDate == null ? "" : startd.SelectedDate.Value.ToString("M/dd/yyyy");
-                enddatetime = endd.SelectedDate == null ? "" : endd.SelectedDate.Value.ToString("M/dd/yyyy");
-                await Task.Run(() => excelcontroller.readExcel(openfile.FileName));
-
+                txtpath = openfile.FileName;
+                await Task.Run(() => excelcontroller.getColorAndDate(openfile.FileName));
+                date1.ItemsSource = excelcontroller.fillDateTime();
+                date2.ItemsSource = excelcontroller.fillDateTime();
                 combo1.ItemsSource = excelcontroller.fillColorCombobox();
                 combo2.ItemsSource = excelcontroller.fillColorCombobox();
                 combo3.ItemsSource = excelcontroller.fillColorCombobox();
                 combo4.ItemsSource = excelcontroller.fillColorCombobox();
                 combo5.ItemsSource = excelcontroller.fillColorCombobox();
+                
 
             }
 
@@ -85,7 +87,9 @@ namespace DataProcessing
         /// <param name="e"></param>
         public async void startSearch(object sender, RoutedEventArgs e)
         {
-
+            startdatetime = date1.SelectedValue.ToString() == null ? "" : date1.SelectedValue.ToString();
+            enddatetime = date2.SelectedValue.ToString() == null ? "" : date2.SelectedValue.ToString();
+            
             //string color3 = combo3.SelectedValue.ToString();
             //string color4 = combo4.SelectedValue.ToString();
             //string color5 = combo5.SelectedValue.ToString();
@@ -110,6 +114,7 @@ namespace DataProcessing
             }
             else
             {
+                await Task.Run(() => excelcontroller.readExcel(txtpath));
 
                 FindingStatus find = new FindingStatus();
                 this.NavigationService.Navigate(find);

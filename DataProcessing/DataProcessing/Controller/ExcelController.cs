@@ -5,6 +5,7 @@ using app = Microsoft.Office.Interop.Excel.Application;
 using DataProcessing.Model;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DataProcessing.Controller
 {
@@ -15,7 +16,9 @@ namespace DataProcessing.Controller
         public static bool check = false;
         public static int ncolor = 0;
         public static int colprogress = 0;
-        
+        List<string> color = new List<string>();
+        List<int> index = new List<int>();
+
         public void setNColor(int numberinputcolor)
         {
             ncolor = numberinputcolor;
@@ -23,6 +26,12 @@ namespace DataProcessing.Controller
         public string[] fillColorCombobox()
         {
             string[] array = model.getColorDefault();
+            return array;
+        }
+
+        public string[] fillDateTime()
+        {
+            string[] array = model.getDateTime();
             return array;
         }
 
@@ -34,6 +43,68 @@ namespace DataProcessing.Controller
         public int getColorProgress()
         {
             return colprogress;
+        }
+        
+        public void getColorAndDate(String path)
+        {
+            Excel.Application excel;
+            excel = new Excel.Application();
+            Excel.Workbook WB = excel.Workbooks.Open(path);
+            WB = excel.ActiveWorkbook;
+            Excel.Worksheet WS;
+            WS = WB.ActiveSheet;
+
+
+            model.setColCount(WS.UsedRange.Columns.Count);
+            model.setRowCount(WS.UsedRange.Rows.Count);
+            String[] color = new string[model.getColCount() - 1];
+            String[] colordefault = new string[model.getColCount() - 1];
+            String[] datetime = new string[model.getRowCount() - 1];
+            int[] index = new int[model.getColCount() - 1];
+            for (int i = 0; i < model.getColCount() - 1; i++)
+            {
+                index[i] = i;
+            }
+
+            Dictionary<string, int> hashmap = new Dictionary<string, int>();
+
+            Excel.Range colornumber = WS.get_Range((Excel.Range)WS.Cells[2][1], (Excel.Range)WS.Cells[model.getColCount()][1]);
+            object mamau = colornumber.Value;
+            //Lấy mã màu vào mảng
+            int colorcount = 0;
+            foreach (object objcolor in (Array)mamau)
+            {
+                string colorname = (string)objcolor;
+                try
+                {
+                    color[colorcount] = colorname;
+                    colordefault[colorcount] = colorname;
+                    hashmap.Add(color[colorcount], 0);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(colorname + " đã trùng");
+                    break;
+                }
+                
+                colorcount++;
+            }
+            //Lấy mã ngày vào mảng
+            int datecount = 0;
+            int start = Environment.TickCount;
+            for (int row = 2; row <= model.getRowCount(); row++)
+            {
+                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
+                    datetime[datecount] = cell;
+                    datecount++;              
+            }
+            MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
+            model.setColor(color);
+            model.setColorDefault(colordefault);
+            model.setDateTime(datetime);
+            model.setIndex(index);
+            excel.Quit();
+
         }
 
         public void readExcel(String path)
@@ -50,54 +121,30 @@ namespace DataProcessing.Controller
 
             model.setColCount(WS.UsedRange.Columns.Count);
             model.setRowCount(WS.UsedRange.Rows.Count);
-            String[] color = new string[model.getColCount() - 1];
+            String[] color = model.getColor();
             String[] colordefault = new string[model.getColCount() - 1];
+            string[] datetime = model.getDateTime();
             int[] value = new int[model.getColCount() - 1];
             int[][] zeroOne = new int[model.getColCount() - 1][];
-            int[] index = new int[model.getColCount() - 1];
-            for (int i = 0; i < model.getColCount() - 1; i++)
-            {
-                index[i] = i;
-            }
-            
-            Excel.Range colornumber = WS.get_Range((Excel.Range)WS.Cells[2][1], (Excel.Range)WS.Cells[model.getColCount()][1]);
-            object mamau = colornumber.Value;
-            //Lấy mã màu vào mảng
-            int colorcount = 0;
-            foreach (object objcolor in (Array)mamau)
-            {
-                string colorname = (string)objcolor;
-                color[colorcount] = colorname;
-                colordefault[colorcount] = colorname;
-                colorcount++;
-                
-            }
-            model.setColorDefault(colordefault);
-
-            MessageBox.Show("Lưu hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
+            for (int i = 0; i < model.getDateTime().Length; i++)
             //Khoanh vùng ngày bắt đầu và kết thúc
-            for (int row = 2; row <= model.getRowCount(); row++)
             {
-                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
-                if (cell == thietlapHeSo.startdatetime)
-                    ngaybatdau = row;
-
-                else if (cell == thietlapHeSo.enddatetime)
+                if (datetime[i] == thietlapHeSo.startdatetime)
                 {
-                    ngayketthuc = row;
-                    break;
+                    ngaybatdau = i + 2;
+                }
+                else if (datetime[i] == thietlapHeSo.enddatetime)
+                {
+                    ngayketthuc = i + 2;
                 }
             }
-
-
-            MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
 
             //Tạo mảng 2 chiều zeroOne
             for (int i = 0; i < model.getColCount() - 1; i++)
             {
                 zeroOne[i] = new int[ngayketthuc - ngaybatdau + 1];
             }
-
+               
             //Tính tổng tất cả các cột theo thời gian đã định
             for (int i = 2; i <= model.getColCount(); i++)
             {
@@ -131,7 +178,7 @@ namespace DataProcessing.Controller
             }
             MessageBox.Show("Đọc hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
 
-            model.setIndex(index);
+            
             model.setColor(color);
             model.setValue(value);
             model.setZeroOne(zeroOne);
