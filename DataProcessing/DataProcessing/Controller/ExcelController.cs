@@ -16,8 +16,11 @@ namespace DataProcessing.Controller
         public static bool check = false;
         public static int ncolor = 0;
         public static int colprogress = 0;
+        public static int duplicatecolor = 0;
         List<string> color = new List<string>();
         List<int> index = new List<int>();
+
+        public object Interaction { get; private set; }
 
         public void setNColor(int numberinputcolor)
         {
@@ -83,8 +86,19 @@ namespace DataProcessing.Controller
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(colorname + " đã trùng");
-                    break;
+                    View.Warning.Show("Màu " + colorname + " đã trùng");
+                    if (View.Warning.yourchoise == 1)
+                    {
+
+                    }
+                    else if (View.Warning.yourchoise == 2)
+                    {
+
+                    }
+                    else if (View.Warning.yourchoise == 3)
+                    {
+
+                    }
                 }
                 
                 colorcount++;
