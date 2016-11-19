@@ -980,12 +980,14 @@ namespace DataProcessing.Controller
 
             n = 2;
 
+            MessageBox.Show("" + ExcelController.duplicateindex.Count);
+
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         biggestValue = 0;
                         for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1009,10 +1011,10 @@ namespace DataProcessing.Controller
             }
             else
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         biggestValue = 0;
                         for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)

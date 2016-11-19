@@ -85,11 +85,11 @@ namespace DataProcessing.View
         {
             if (yourchoise == 1)
             {
-                Application.Exit();
+                this.Visible = false;
             }
             else if (yourchoise == 2)
             {
-                Application.Exit();
+                this.Visible = false;
             }
             else if(yourchoise == 3)
             {
@@ -100,7 +100,9 @@ namespace DataProcessing.View
                 }
                 else
                 {
-                    Application.Exit();
+                    // MessageBox.Show("Đã đổi mã màu " + " + View.Warning.newnamecolor");
+                    // Application.Exit();
+                    this.Visible = false;
                 }
             }
             

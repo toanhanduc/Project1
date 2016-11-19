@@ -16,9 +16,7 @@ namespace DataProcessing.Controller
         public static bool check = false;
         public static int ncolor = 0;
         public static int colprogress = 0;
-        public static int duplicatecolor = 0;
-        List<string> color = new List<string>();
-        List<int> index = new List<int>();
+        public static List<int> duplicateindex = new List<int>();
 
         public object Interaction { get; private set; }
 
@@ -89,7 +87,8 @@ namespace DataProcessing.Controller
                     View.Warning.Show("Màu " + colorname + " đã trùng");
                     if (View.Warning.yourchoise == 1)
                     {
-
+                        duplicateindex.Add(colorcount + duplicateindex.Count);
+                        colorcount--;    
                     }
                     else if (View.Warning.yourchoise == 2)
                     {
@@ -97,13 +96,18 @@ namespace DataProcessing.Controller
                     }
                     else if (View.Warning.yourchoise == 3)
                     {
-                        hashmap.Add(View.Warning.newnamecolor, 0);
-                        color[colorcount] = View.Warning.newnamecolor;
-                        colordefault[colorcount] = View.Warning.newnamecolor;
-                        Console.WriteLine("Đã đổi mã màu " + colorname + " sang " + View.Warning.newnamecolor);
+                        try
+                        {
+                            hashmap.Add(View.Warning.newnamecolor, 0);
+                            color[colorcount] = View.Warning.newnamecolor;
+                            colordefault[colorcount] = View.Warning.newnamecolor;
+                        }
+                        catch(Exception a)
+                        {
+                            View.Warning.Show("Màu " + colorname + " đã trùng");
+                        }
                     }
                 }
-                MessageBox.Show("Màu " + color[colorcount]);
                 colorcount++;
             }
             //Lấy mã ngày vào mảng
@@ -142,6 +146,7 @@ namespace DataProcessing.Controller
             String[] colordefault = new string[model.getColCount() - 1];
             string[] datetime = model.getDateTime();
             int[] value = new int[model.getColCount() - 1];
+            int[] index = model.getIndex();
             int[][] zeroOne = new int[model.getColCount() - 1][];
             for (int i = 0; i < model.getDateTime().Length; i++)
             //Khoanh vùng ngày bắt đầu và kết thúc
@@ -161,42 +166,117 @@ namespace DataProcessing.Controller
             {
                 zeroOne[i] = new int[ngayketthuc - ngaybatdau + 1];
             }
-               
+            int checkindex = 0; //Biến chỉ số màu trùng
+            int check_change_first_time = 0;
+            int check_count_duplicate = 0; //Biến đếm số lượng màu trùng đã tìm để dịch mảng phía sau màu trùng đó
             //Tính tổng tất cả các cột theo thời gian đã định
             for (int i = 2; i <= model.getColCount(); i++)
             {
-
+                
                 int temp = 0;
                 Excel.Range b = WS.get_Range((Excel.Range)WS.Cells[i][ngaybatdau], (Excel.Range)WS.Cells[i][ngayketthuc]);
                 object arr = b.Value;
                 int j = 0;
-                foreach (object s in (Array)arr)
+
+                //Kiểm tra mã màu đã bị xóa hoặc gộp chưa
+                foreach (int check_duplicate_index in duplicateindex)
                 {
-
-                    string tmp = s == null ? "" : "1";
-                    if (tmp != "1")
+                    if (index[i - 2] == check_duplicate_index)
                     {
-                        zeroOne[i - 2][j] = 0;
-                        j++;
-                        continue;
-                    }
+                        check_change_first_time += 1;
+                        check_count_duplicate++;
+                        break;
+                    }     
+                }
+               
 
+                if (check_count_duplicate == 0)
+                {
+                    foreach (object s in (Array)arr)
+                    {
+
+                        string tmp = s == null ? "" : "1";
+                        if (tmp != "1")
+                        {
+                            zeroOne[i - 2][j] = 0;
+                            j++;
+                            continue;
+                        }
+
+                        else
+                        {
+                            zeroOne[i - 2][j] = 1;
+                            j++;
+                            temp += int.Parse(tmp);
+
+                        }
+
+                    }
+                    value[i - 2] = temp;
+                    setColorProgress(i - 1);
+                }
+                else if (check_count_duplicate != 0)
+                {
+                    if (check_change_first_time != checkindex)
+                    {
+                        checkindex = check_change_first_time;
+                        foreach (object s in (Array)arr)
+                        {
+
+                            string tmp = s == null ? "" : "1";
+                            if (tmp != "1")
+                            {
+                                zeroOne[i - 2][j] = 0;
+                                j++;
+                                continue;
+                            }
+
+                            else
+                            {
+                                zeroOne[i - 2][j] = 1;
+                                j++;
+                                temp += int.Parse(tmp);
+
+                            }
+
+                        }
+                        value[i - 2] = temp;
+                        setColorProgress(i - 1);
+                    }
                     else
                     {
-                        zeroOne[i - 2][j] = 1;
-                        j++;
-                        temp += int.Parse(tmp);
+                        foreach (object s in (Array)arr)
+                        {
 
+                            string tmp = s == null ? "" : "1";
+                            if (tmp != "1")
+                            {
+                                zeroOne[i - 2 - check_count_duplicate][j] = 0;
+                                j++;
+                                continue;
+                            }
+
+                            else
+                            {
+                                zeroOne[i - 2 - check_count_duplicate][j] = 1;
+                                j++;
+                                temp += int.Parse(tmp);
+
+                            }
+
+                        }
+                        value[i - 2 - check_count_duplicate] = temp;
+                        setColorProgress(i - 1);
                     }
-
+                    
                 }
-                value[i - 2] = temp;
-                setColorProgress(i - 1);
+
+                
             }
             MessageBox.Show("Đọc hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
 
             
-            model.setColor(color);
+          //  model.setColor(color);
             model.setValue(value);
             model.setZeroOne(zeroOne);
             excel.Quit();
@@ -789,13 +869,13 @@ namespace DataProcessing.Controller
             //sắp xếp mảng
             int tmp1, tmp2, tmpindex;
             string tmp3 = "";
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < value.Length - duplicateindex.Count; i++)
             {
                 //if (check == true && i == 0)
                 //{
                 //    continue;
                 //}
-                for (int j = i + 1; j < value.Length; j++)
+                for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                 {
                     if (value[i] < value[j])
                     {
