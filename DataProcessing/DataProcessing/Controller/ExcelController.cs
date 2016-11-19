@@ -80,9 +80,9 @@ namespace DataProcessing.Controller
                 string colorname = (string)objcolor;
                 try
                 {
+                    hashmap.Add(colorname, 0);
                     color[colorcount] = colorname;
-                    colordefault[colorcount] = colorname;
-                    hashmap.Add(color[colorcount], 0);
+                    colordefault[colorcount] = colorname;     
                 }
                 catch (Exception e)
                 {
@@ -97,10 +97,13 @@ namespace DataProcessing.Controller
                     }
                     else if (View.Warning.yourchoise == 3)
                     {
-
+                        hashmap.Add(View.Warning.newnamecolor, 0);
+                        color[colorcount] = View.Warning.newnamecolor;
+                        colordefault[colorcount] = View.Warning.newnamecolor;
+                        Console.WriteLine("Đã đổi mã màu " + colorname + " sang " + View.Warning.newnamecolor);
                     }
                 }
-                
+                MessageBox.Show("Màu " + color[colorcount]);
                 colorcount++;
             }
             //Lấy mã ngày vào mảng

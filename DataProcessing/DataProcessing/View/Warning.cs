@@ -113,7 +113,8 @@ namespace DataProcessing.View
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cancel");
+            yourchoise = 4;
+            Application.Exit();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
