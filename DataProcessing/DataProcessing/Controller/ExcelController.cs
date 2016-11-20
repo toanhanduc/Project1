@@ -96,16 +96,22 @@ namespace DataProcessing.Controller
                     }
                     else if (View.Warning.yourchoise == 3)
                     {
-                        try
+                        int checkwhile = 0;
+                        do
                         {
-                            hashmap.Add(View.Warning.newnamecolor, 0);
-                            color[colorcount] = View.Warning.newnamecolor;
-                            colordefault[colorcount] = View.Warning.newnamecolor;
-                        }
-                        catch(Exception a)
-                        {
-                            View.Warning.Show("Màu " + colorname + " đã trùng");
-                        }
+                            try
+                            {
+                                hashmap.Add(View.Warning.newnamecolor, 0);
+                                checkwhile = 1;
+                                color[colorcount] = View.Warning.newnamecolor;
+                                colordefault[colorcount] = View.Warning.newnamecolor;
+                            }
+                            catch (Exception a)
+                            {
+                                View.Warning.Show("Màu " + View.Warning.newnamecolor + " đã tồn tại");
+                            }
+                        } while (checkwhile != 1);
+                        
                     }
                 }
                 colorcount++;
