@@ -1073,7 +1073,6 @@ namespace DataProcessing.Controller
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-               
                 for (int i = 0; i < model.getColCount() - n; i++)
                 {
                     print = "";
