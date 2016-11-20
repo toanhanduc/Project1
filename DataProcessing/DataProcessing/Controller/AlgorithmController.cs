@@ -1072,7 +1072,49 @@ namespace DataProcessing.Controller
             string[] color = model.getColor();
 
             n = 3;
-          
+            Console.WriteLine(color[0]);
+            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+            {
+                Console.WriteLine(zeroOne[0][temp]);
+            }
+            Console.WriteLine("-----");
+            Console.WriteLine(color[1]);
+            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+            {
+                Console.WriteLine(zeroOne[1][temp]);
+            }
+            Console.WriteLine("-----");
+            Console.WriteLine(color[2]);
+            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+            {
+                Console.WriteLine(zeroOne[2][temp]);
+            }
+            Console.WriteLine("-----");
+            Console.WriteLine(color[3]);
+            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+            {
+                Console.WriteLine(zeroOne[3][temp]);
+            }
+            Console.WriteLine("-----");
+            Console.WriteLine(color[4]);
+            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+            {
+                Console.WriteLine(zeroOne[4][temp]);
+            }
+            Console.WriteLine("-----");
+            Console.WriteLine(color[5]);
+            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+            {
+                Console.WriteLine(zeroOne[5][temp]);
+            }
+            Console.WriteLine("-----");
+            Console.WriteLine(color[6]);
+            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+            {
+                Console.WriteLine(zeroOne[6][temp]);
+            }
+            Console.WriteLine("-----");
+
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
