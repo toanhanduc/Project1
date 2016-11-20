@@ -1077,12 +1077,12 @@ namespace DataProcessing.Controller
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
                
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             biggestValue = 0;
                             for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1110,12 +1110,12 @@ namespace DataProcessing.Controller
             else// in theo các màu người dùng nhập
             {
                 
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             biggestValue = 0;
                             for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1202,14 +1202,14 @@ namespace DataProcessing.Controller
 
             if (nColorChose == 0) // in bt
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         print = "";
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
                                 biggestValue = 0;
                                 for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1236,14 +1236,14 @@ namespace DataProcessing.Controller
             }
             else // nhin theo nhập vào của người dùng
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         print = "";
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
                                 biggestValue = 0;
                                 for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1336,16 +1336,16 @@ namespace DataProcessing.Controller
 
             if (nColorChose == 0)
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             print = "";
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
-                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                                for (int l = k + 1; l < model.getColCount() - n + 4 - ExcelController.duplicateindex.Count; l++)
                                 {
                                     biggestValue = 0;
                                     for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1375,16 +1375,16 @@ namespace DataProcessing.Controller
             }
             else
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             print = "";
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
-                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                                for (int l = k + 1; l < model.getColCount() - n + 4 - ExcelController.duplicateindex.Count; l++)
                                 {
                                     biggestValue = 0;
                                     for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
