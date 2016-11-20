@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +63,12 @@
     <Compile Include="Model\thietlaphesoModel.cs" />
     <Compile Include="View\FindingStatus.xaml.cs">
       <DependentUpon>FindingStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Warning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Warning.Designer.cs">
+      <DependentUpon>Warning.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
@@ -110,6 +118,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Warning.resx">
+      <DependentUpon>Warning.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

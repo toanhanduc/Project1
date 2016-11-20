@@ -120,30 +120,16 @@
                             FontSize="23"
                             Margin="0 0 0 0"
                         >Khoảng thời gian tìm kiếm :</TextBlock>
-                        <DatePicker
-                            x:Name="startd"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            FontSize="20"
-                            SelectedDate="2015/02/23"
-                            Margin="290 0 0 0 "                            
-                        ></DatePicker>
+                        <ComboBox Margin="320,5,10,30" Visibility="Visible"  HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="date1" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}" RenderTransformOrigin="2.959,0.545"/>
                         <TextBlock
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="23"
                             FontWeight="Regular"
-                            Margin="496,0,0,4">
+                            Margin="453,0,0,26.6">
                         tới
                         </TextBlock>
-                        <DatePicker
-                            x:Name="endd"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            FontSize="20"
-                            SelectedDate="2015/09/28"
-                            Margin="543,0,-53,0"
-                        ></DatePicker>
+                        <ComboBox Margin="500,5,10,30" Visibility="Visible"  HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="date2" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}" RenderTransformOrigin="2.959,0.545"/>
                     </Grid>
                     <!--End Thoi gian tim kiem -->
                     <!--Start So luong mau moi nhom-->
@@ -327,7 +313,7 @@
                         </Grid>
                     </Grid>
                     <Grid Margin="0 -30">
-                        <ComboBox Margin="10,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo1" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
+                        <ComboBox Margin="10,10,10,30" Visibility="Hidden"  HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo1" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
                         <ComboBox Margin="150,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo2" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
                         <ComboBox Margin="290,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo3" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>
                         <ComboBox Margin="430,10,10,30" Visibility="Hidden" HorizontalAlignment="Left" IsEditable="True" Height="23" x:Name="combo4" Width="120"  IsTextSearchEnabled="True" ItemsSource="{Binding fillcolor}"/>

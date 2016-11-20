@@ -5,6 +5,7 @@ using app = Microsoft.Office.Interop.Excel.Application;
 using DataProcessing.Model;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DataProcessing.Controller
 {
@@ -15,7 +16,10 @@ namespace DataProcessing.Controller
         public static bool check = false;
         public static int ncolor = 0;
         public static int colprogress = 0;
-        
+        public static List<int> duplicateindex = new List<int>();
+
+        public object Interaction { get; private set; }
+
         public void setNColor(int numberinputcolor)
         {
             ncolor = numberinputcolor;
@@ -23,6 +27,12 @@ namespace DataProcessing.Controller
         public string[] fillColorCombobox()
         {
             string[] array = model.getColorDefault();
+            return array;
+        }
+
+        public string[] fillDateTime()
+        {
+            string[] array = model.getDateTime();
             return array;
         }
 
@@ -34,6 +44,88 @@ namespace DataProcessing.Controller
         public int getColorProgress()
         {
             return colprogress;
+        }
+        
+        public void getColorAndDate(String path)
+        {
+            Excel.Application excel;
+            excel = new Excel.Application();
+            Excel.Workbook WB = excel.Workbooks.Open(path);
+            WB = excel.ActiveWorkbook;
+            Excel.Worksheet WS;
+            WS = WB.ActiveSheet;
+
+
+            model.setColCount(WS.UsedRange.Columns.Count);
+            model.setRowCount(WS.UsedRange.Rows.Count);
+            String[] color = new string[model.getColCount() - 1];
+            String[] colordefault = new string[model.getColCount() - 1];
+            String[] datetime = new string[model.getRowCount() - 1];
+            int[] index = new int[model.getColCount() - 1];
+            for (int i = 0; i < model.getColCount() - 1; i++)
+            {
+                index[i] = i;
+            }
+
+            Dictionary<string, int> hashmap = new Dictionary<string, int>();
+
+            Excel.Range colornumber = WS.get_Range((Excel.Range)WS.Cells[2][1], (Excel.Range)WS.Cells[model.getColCount()][1]);
+            object mamau = colornumber.Value;
+            //Lấy mã màu vào mảng
+            int colorcount = 0;
+            foreach (object objcolor in (Array)mamau)
+            {
+                string colorname = (string)objcolor;
+                try
+                {
+                    hashmap.Add(colorname, 0);
+                    color[colorcount] = colorname;
+                    colordefault[colorcount] = colorname;     
+                }
+                catch (Exception e)
+                {
+                    View.Warning.Show("Màu " + colorname + " đã trùng");
+                    if (View.Warning.yourchoise == 1)
+                    {
+                        duplicateindex.Add(colorcount + duplicateindex.Count);
+                        colorcount--;    
+                    }
+                    else if (View.Warning.yourchoise == 2)
+                    {
+
+                    }
+                    else if (View.Warning.yourchoise == 3)
+                    {
+                        try
+                        {
+                            hashmap.Add(View.Warning.newnamecolor, 0);
+                            color[colorcount] = View.Warning.newnamecolor;
+                            colordefault[colorcount] = View.Warning.newnamecolor;
+                        }
+                        catch(Exception a)
+                        {
+                            View.Warning.Show("Màu " + colorname + " đã trùng");
+                        }
+                    }
+                }
+                colorcount++;
+            }
+            //Lấy mã ngày vào mảng
+            int datecount = 0;
+            int start = Environment.TickCount;
+            for (int row = 2; row <= model.getRowCount(); row++)
+            {
+                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
+                    datetime[datecount] = cell;
+                    datecount++;              
+            }
+            MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
+            model.setColor(color);
+            model.setColorDefault(colordefault);
+            model.setDateTime(datetime);
+            model.setIndex(index);
+            excel.Quit();
+
         }
 
         public void readExcel(String path)
@@ -50,89 +142,141 @@ namespace DataProcessing.Controller
 
             model.setColCount(WS.UsedRange.Columns.Count);
             model.setRowCount(WS.UsedRange.Rows.Count);
-            String[] color = new string[model.getColCount() - 1];
+            String[] color = model.getColor();
             String[] colordefault = new string[model.getColCount() - 1];
+            string[] datetime = model.getDateTime();
             int[] value = new int[model.getColCount() - 1];
+            int[] index = model.getIndex();
             int[][] zeroOne = new int[model.getColCount() - 1][];
-            int[] index = new int[model.getColCount() - 1];
-            for (int i = 0; i < model.getColCount() - 1; i++)
-            {
-                index[i] = i;
-            }
-            
-            Excel.Range colornumber = WS.get_Range((Excel.Range)WS.Cells[2][1], (Excel.Range)WS.Cells[model.getColCount()][1]);
-            object mamau = colornumber.Value;
-            //Lấy mã màu vào mảng
-            int colorcount = 0;
-            foreach (object objcolor in (Array)mamau)
-            {
-                string colorname = (string)objcolor;
-                color[colorcount] = colorname;
-                colordefault[colorcount] = colorname;
-                colorcount++;
-                
-            }
-            model.setColorDefault(colordefault);
-
-            MessageBox.Show("Lưu hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
+            for (int i = 0; i < model.getDateTime().Length; i++)
             //Khoanh vùng ngày bắt đầu và kết thúc
-            for (int row = 2; row <= model.getRowCount(); row++)
             {
-                string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
-                if (cell == thietlapHeSo.startdatetime)
-                    ngaybatdau = row;
-
-                else if (cell == thietlapHeSo.enddatetime)
+                if (datetime[i] == thietlapHeSo.startdatetime)
                 {
-                    ngayketthuc = row;
-                    break;
+                    ngaybatdau = i + 2;
+                }
+                else if (datetime[i] == thietlapHeSo.enddatetime)
+                {
+                    ngayketthuc = i + 2;
                 }
             }
-
-
-            MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
 
             //Tạo mảng 2 chiều zeroOne
             for (int i = 0; i < model.getColCount() - 1; i++)
             {
                 zeroOne[i] = new int[ngayketthuc - ngaybatdau + 1];
             }
-
+            int checkindex = 0; //Biến chỉ số màu trùng
+            int check_change_first_time = 0;
+            int check_count_duplicate = 0; //Biến đếm số lượng màu trùng đã tìm để dịch mảng phía sau màu trùng đó
             //Tính tổng tất cả các cột theo thời gian đã định
             for (int i = 2; i <= model.getColCount(); i++)
             {
-
+                
                 int temp = 0;
                 Excel.Range b = WS.get_Range((Excel.Range)WS.Cells[i][ngaybatdau], (Excel.Range)WS.Cells[i][ngayketthuc]);
                 object arr = b.Value;
                 int j = 0;
-                foreach (object s in (Array)arr)
+
+                //Kiểm tra mã màu đã bị xóa hoặc gộp chưa
+                foreach (int check_duplicate_index in duplicateindex)
                 {
-
-                    string tmp = s == null ? "" : "1";
-                    if (tmp != "1")
+                    if (index[i - 2] == check_duplicate_index)
                     {
-                        zeroOne[i - 2][j] = 0;
-                        j++;
-                        continue;
-                    }
+                        check_change_first_time += 1;
+                        check_count_duplicate++;
+                        break;
+                    }     
+                }
+               
 
+                if (check_count_duplicate == 0)
+                {
+                    foreach (object s in (Array)arr)
+                    {
+
+                        string tmp = s == null ? "" : "1";
+                        if (tmp != "1")
+                        {
+                            zeroOne[i - 2][j] = 0;
+                            j++;
+                            continue;
+                        }
+
+                        else
+                        {
+                            zeroOne[i - 2][j] = 1;
+                            j++;
+                            temp += int.Parse(tmp);
+
+                        }
+
+                    }
+                    value[i - 2] = temp;
+                    setColorProgress(i - 1);
+                }
+                else if (check_count_duplicate != 0)
+                {
+                    if (check_change_first_time != checkindex)
+                    {
+                        checkindex = check_change_first_time;
+                        foreach (object s in (Array)arr)
+                        {
+
+                            string tmp = s == null ? "" : "1";
+                            if (tmp != "1")
+                            {
+                                zeroOne[i - 2][j] = 0;
+                                j++;
+                                continue;
+                            }
+
+                            else
+                            {
+                                zeroOne[i - 2][j] = 1;
+                                j++;
+                                temp += int.Parse(tmp);
+
+                            }
+
+                        }
+                        value[i - 2] = temp;
+                        setColorProgress(i - 1);
+                    }
                     else
                     {
-                        zeroOne[i - 2][j] = 1;
-                        j++;
-                        temp += int.Parse(tmp);
+                        foreach (object s in (Array)arr)
+                        {
 
+                            string tmp = s == null ? "" : "1";
+                            if (tmp != "1")
+                            {
+                                zeroOne[i - 2 - check_count_duplicate][j] = 0;
+                                j++;
+                                continue;
+                            }
+
+                            else
+                            {
+                                zeroOne[i - 2 - check_count_duplicate][j] = 1;
+                                j++;
+                                temp += int.Parse(tmp);
+
+                            }
+
+                        }
+                        value[i - 2 - check_count_duplicate] = temp;
+                        setColorProgress(i - 1);
                     }
-
+                    
                 }
-                value[i - 2] = temp;
-                setColorProgress(i - 1);
+
+                
             }
             MessageBox.Show("Đọc hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
 
-            model.setIndex(index);
-            model.setColor(color);
+            
+          //  model.setColor(color);
             model.setValue(value);
             model.setZeroOne(zeroOne);
             excel.Quit();
@@ -147,7 +291,7 @@ namespace DataProcessing.Controller
             int tmp5, tmp6, tmpindex0;
             if (ncolor == 1) //Người dùng nhập sẵn 1 mã màu
             {
-                for (int i = 0; i < model.getColCount() - 1; i++)
+                for (int i = 0; i < model.getColCount() - 1 - duplicateindex.Count; i++)
                 {
                     if (color[i] == color1)
                     {
@@ -171,13 +315,13 @@ namespace DataProcessing.Controller
                 }
                 int tmp1, tmp2, tmpindex;
                 string tmp3 = "";
-                for (int i = 1; i < value.Length; i++)
+                for (int i = 1; i < value.Length - duplicateindex.Count; i++)
                 {
                     //if (check == true && i == 0)
                     //{
                     //    continue;
                     //}
-                    for (int j = i + 1; j < value.Length; j++)
+                    for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
                         {
@@ -221,7 +365,7 @@ namespace DataProcessing.Controller
             }
             else if (ncolor == 2) //Người dùng nhập sẵn 2 mã màu
             {
-                for (int i = 0; i < model.getColCount() - 1; i++)
+                for (int i = 0; i < model.getColCount() - 1 - duplicateindex.Count; i++)
                 {
                     int checkcolor = 0;
                     if ((color[i] == color1 || color[i] == color2))
@@ -244,7 +388,7 @@ namespace DataProcessing.Controller
                         checkcolor++;
                         if (checkcolor == 1)
                         {
-                            for (int j = i + 1; j < model.getColCount() - 1; j++)
+                            for (int j = i + 1; j < model.getColCount() - 1 - duplicateindex.Count; j++)
                             {
                                 if ((color[j] == color1 || color[j] == color2))
                                 {
@@ -260,8 +404,8 @@ namespace DataProcessing.Controller
                                     for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     break;
                                 }
@@ -278,7 +422,7 @@ namespace DataProcessing.Controller
                     //{
                     //    continue;
                     //}
-                    for (int j = i + 1; j < value.Length; j++)
+                    for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
                         {
@@ -304,7 +448,7 @@ namespace DataProcessing.Controller
             //ncolor = 3
             else if (ncolor == 3)
             {
-                for (int i = 0; i < model.getColCount() - 1; i++)
+                for (int i = 0; i < model.getColCount() - 1 - duplicateindex.Count; i++)
                 {
                     int checkcolor = 0;
                     if ((color[i] == color1 || color[i] == color2 || color[i] == color3))
@@ -327,7 +471,7 @@ namespace DataProcessing.Controller
                         checkcolor++;
                         if (checkcolor == 1)
                         {
-                            for (int j = i + 1; j < model.getColCount() - 1; j++)
+                            for (int j = i + 1; j < model.getColCount() - 1 - duplicateindex.Count; j++)
                             {
                                 if ((color[j] == color1 || color[j] == color2 || color[j] == color3))
                                 {
@@ -343,13 +487,13 @@ namespace DataProcessing.Controller
                                     for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     checkcolor++;
                                     if (checkcolor == 2)
                                     {
-                                        for (int k = j + 1; k < model.getColCount() - 1; k++)
+                                        for (int k = j + 1; k < model.getColCount() - 1 - duplicateindex.Count; k++)
                                         {
                                             if ((color[k] == color1 || color[k] == color2 || color[k] == color3))
                                             {
@@ -365,8 +509,8 @@ namespace DataProcessing.Controller
                                                 for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                 {
                                                     tmp6 = zeroOne[k][n];
-                                                    zeroOne[k][n] = zeroOne[0][n];
-                                                    zeroOne[0][n] = tmp6;
+                                                    zeroOne[k][n] = zeroOne[2][n];
+                                                    zeroOne[2][n] = tmp6;
                                                 }
                                                 break;
                                             }
@@ -382,13 +526,13 @@ namespace DataProcessing.Controller
 
                 int tmp1, tmp2, tmpindex;
                 string tmp3 = "";
-                for (int i = 3; i < value.Length; i++)
+                for (int i = 3; i < value.Length - duplicateindex.Count; i++)
                 {
                     //if (check == true && i == 0)
                     //{
                     //    continue;
                     //}
-                    for (int j = i + 1; j < value.Length; j++)
+                    for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
                         {
@@ -414,7 +558,7 @@ namespace DataProcessing.Controller
             //ncolor = 4
             else if (ncolor == 4)
             {
-                for (int i = 0; i < model.getColCount() - 1; i++)
+                for (int i = 0; i < model.getColCount() - 1 - duplicateindex.Count; i++)
                 {
                     int checkcolor = 0;
                     if (color[i] == color1 || color[i] == color2 || color[i] == color3 || color[i] == color4)
@@ -437,7 +581,7 @@ namespace DataProcessing.Controller
                         checkcolor++;
                         if (checkcolor == 1)
                         {
-                            for (int j = i + 1; j < model.getColCount() - 1; j++)
+                            for (int j = i + 1; j < model.getColCount() - 1 - duplicateindex.Count; j++)
                             {
                                 if (color[j] == color1 || color[j] == color2 || color[j] == color3 || color[j] == color4)
                                 {
@@ -453,13 +597,13 @@ namespace DataProcessing.Controller
                                     for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     checkcolor++;
                                     if (checkcolor == 2)
                                     {
-                                        for (int k = j + 1; k < model.getColCount() - 1; k++)
+                                        for (int k = j + 1; k < model.getColCount() - 1 - duplicateindex.Count; k++)
                                         {
                                             if (color[k] == color1 || color[k] == color2 || color[k] == color3 || color[k] == color4)
                                             {
@@ -475,13 +619,13 @@ namespace DataProcessing.Controller
                                                 for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                 {
                                                     tmp6 = zeroOne[k][n];
-                                                    zeroOne[k][n] = zeroOne[0][n];
-                                                    zeroOne[0][n] = tmp6;
+                                                    zeroOne[k][n] = zeroOne[2][n];
+                                                    zeroOne[2][n] = tmp6;
                                                 }
                                                 checkcolor++;
                                                 if (checkcolor == 3)
                                                 {
-                                                    for (int l = k + 1; l < model.getColCount() - 1; l++)
+                                                    for (int l = k + 1; l < model.getColCount() - 1 - duplicateindex.Count; l++)
                                                     {
                                                         if (color[l] == color1 || color[l] == color2 || color[l] == color3 || color[l] == color4)
                                                         {
@@ -497,8 +641,8 @@ namespace DataProcessing.Controller
                                                             for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                             {
                                                                 tmp6 = zeroOne[l][n];
-                                                                zeroOne[l][n] = zeroOne[0][n];
-                                                                zeroOne[0][n] = tmp6;
+                                                                zeroOne[l][n] = zeroOne[3][n];
+                                                                zeroOne[3][n] = tmp6;
                                                             }
                                                             break;
                                                         }
@@ -518,13 +662,13 @@ namespace DataProcessing.Controller
 
                 int tmp1, tmp2, tmpindex;
                 string tmp3 = "";
-                for (int i = 4; i < value.Length; i++)
+                for (int i = 4; i < value.Length - duplicateindex.Count; i++)
                 {
                     //if (check == true && i == 0)
                     //{
                     //    continue;
                     //}
-                    for (int j = i + 1; j < value.Length; j++)
+                    for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
                         {
@@ -551,7 +695,7 @@ namespace DataProcessing.Controller
             else if (ncolor == 5)
             {
                 //sắp xếp mảng
-                for (int i = 0; i < model.getColCount() - 1; i++)
+                for (int i = 0; i < model.getColCount() - 1 - duplicateindex.Count; i++)
                 {
                     int checkcolor = 0;
                     if (color[i] == color1 || color[i] == color2 || color[i] == color3 || color[i] == color4 || color[i] == color5)
@@ -575,7 +719,7 @@ namespace DataProcessing.Controller
                         checkcolor++;
                         if (checkcolor == 1)
                         {
-                            for (int j = i + 1; j < model.getColCount() - 1; j++)
+                            for (int j = i + 1; j < model.getColCount() - 1 - duplicateindex.Count; j++)
                             {
                                 if (color[j] == color1 || color[j] == color2 || color[j] == color3 || color[j] == color4 || color[j] == color5)
                                 {
@@ -588,16 +732,16 @@ namespace DataProcessing.Controller
                                     color[1] = tmp4;
                                     value[1] = tmp5;
                                     index[1] = tmpindex0;
-                                    for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
+                                    for (int n = 0; n < ngayketthuc - ngaybatdau + 1 - duplicateindex.Count; n++)
                                     {
                                         tmp6 = zeroOne[j][n];
-                                        zeroOne[j][n] = zeroOne[0][n];
-                                        zeroOne[0][n] = tmp6;
+                                        zeroOne[j][n] = zeroOne[1][n];
+                                        zeroOne[1][n] = tmp6;
                                     }
                                     checkcolor++;
                                     if (checkcolor == 2)
                                     {
-                                        for (int k = j + 1; k < model.getColCount() - 1; k++)
+                                        for (int k = j + 1; k < model.getColCount() - 1 - duplicateindex.Count; k++)
                                         {
                                             if (color[k] == color1 || color[k] == color2 || color[k] == color3 || color[k] == color4 || color[k] == color5)
                                             {
@@ -613,13 +757,13 @@ namespace DataProcessing.Controller
                                                 for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                 {
                                                     tmp6 = zeroOne[k][n];
-                                                    zeroOne[k][n] = zeroOne[0][n];
-                                                    zeroOne[0][n] = tmp6;
+                                                    zeroOne[k][n] = zeroOne[2][n];
+                                                    zeroOne[2][n] = tmp6;
                                                 }
                                                 checkcolor++;
                                                 if (checkcolor == 3)
                                                 {
-                                                    for (int l = k + 1; l < model.getColCount() - 1; l++)
+                                                    for (int l = k + 1; l < model.getColCount() - 1 - duplicateindex.Count; l++)
                                                     {
                                                         if (color[l] == color1 || color[l] == color2 || color[l] == color3 || color[l] == color4 || color[l] == color5)
                                                         {
@@ -635,13 +779,13 @@ namespace DataProcessing.Controller
                                                             for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                             {
                                                                 tmp6 = zeroOne[l][n];
-                                                                zeroOne[l][n] = zeroOne[0][n];
-                                                                zeroOne[0][n] = tmp6;
+                                                                zeroOne[l][n] = zeroOne[3][n];
+                                                                zeroOne[3][n] = tmp6;
                                                             }
                                                             checkcolor++;
                                                             if (checkcolor == 4)
                                                             {
-                                                                for (int q = l + 1; q < model.getColCount() - 1; q++)
+                                                                for (int q = l + 1; q < model.getColCount() - 1 - duplicateindex.Count; q++)
                                                                 {
                                                                     if (color[q] == color1 || color[q] == color2 || color[q] == color3 || color[q] == color4 || color[q] == color5)
                                                                     {
@@ -657,8 +801,8 @@ namespace DataProcessing.Controller
                                                                         for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
                                                                         {
                                                                             tmp6 = zeroOne[q][n];
-                                                                            zeroOne[q][n] = zeroOne[0][n];
-                                                                            zeroOne[0][n] = tmp6;
+                                                                            zeroOne[q][n] = zeroOne[4][n];
+                                                                            zeroOne[4][n] = tmp6;
                                                                         }
                                                                         break;
                                                                     }
@@ -682,13 +826,13 @@ namespace DataProcessing.Controller
 
                 int tmp1, tmp2, tmpindex;
                 string tmp3 = "";
-                for (int i = 5; i < value.Length; i++)
+                for (int i = 5; i < value.Length - duplicateindex.Count; i++)
                 {
                     //if (check == true && i == 0)
                     //{
                     //    continue;
                     //}
-                    for (int j = i + 1; j < value.Length; j++)
+                    for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
                         {
@@ -725,13 +869,13 @@ namespace DataProcessing.Controller
             //sắp xếp mảng
             int tmp1, tmp2, tmpindex;
             string tmp3 = "";
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < value.Length - duplicateindex.Count; i++)
             {
                 //if (check == true && i == 0)
                 //{
                 //    continue;
                 //}
-                for (int j = i + 1; j < value.Length; j++)
+                for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                 {
                     if (value[i] < value[j])
                     {

@@ -31,7 +31,8 @@ namespace DataProcessing.Controller
         }
         // tìm nhóm lớn nhất theo yêu cầu gviên
         public void processGroup()
-        {               
+        {
+            exc.readExcelSortByValue(model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne());
             int n = model.getN();
             string print = "";
             int currentValue1; // giá trị ở vòng 1
@@ -85,7 +86,7 @@ namespace DataProcessing.Controller
 
                         if (n == 2)
                         {
-                            print += color[i] + " - " + color[j] + ": " + biggestValue + Environment.NewLine;
+                            print += color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                             continue;
                         }
                         else // n > 2
@@ -99,7 +100,7 @@ namespace DataProcessing.Controller
 
                                 if (n == 3)
                                 {
-                                    print += color[i] + " - " + color[j] + " - " + color[q] + ": " + biggestValue + Environment.NewLine;
+                                    print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
                                     continue;
                                 }
                                 else // n > 3
@@ -112,7 +113,7 @@ namespace DataProcessing.Controller
                                         }
                                         if (n == 4)
                                         {
-                                            print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
+                                            print += color[i] + " " + color[j] + " " + color[q] + "- " + color[k] + ": " + biggestValue + Environment.NewLine;
                                             continue;
                                         }
                                         else // n > 4
@@ -123,7 +124,7 @@ namespace DataProcessing.Controller
                                                 {
                                                     break;
                                                 }
-                                                print += color[i] + " - " + color[j] + " - " + color[q] + "- " + color[k] + " - " + color[l] + ": " + biggestValue + Environment.NewLine;
+                                                print += color[i] + " " + color[j] + " " + color[q] + "- " + color[k] + " " + color[l] + ": " + biggestValue + Environment.NewLine;
                                             }
                                         }
                                     }
@@ -175,11 +176,11 @@ namespace DataProcessing.Controller
                                     biggestValue = currentValue2;
                                     if (index[i] < index[j])
                                     {
-                                        print = color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                                        print = color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                                     }
                                     else
                                     {
-                                        print = color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
+                                        print = color[j] + " " + color[i] + ": " + biggestValue + Environment.NewLine;
                                     }
 
                                 }
@@ -187,11 +188,11 @@ namespace DataProcessing.Controller
                                 {
                                     if (index[i] < index[j])
                                     {
-                                        print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                                        print += color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                                     }
                                     else
                                     {
-                                        print += color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
+                                        print += color[j] + " " + color[i] + ": " + biggestValue + Environment.NewLine;
                                     }
                                 }
                             }
@@ -283,7 +284,7 @@ namespace DataProcessing.Controller
                                                 }
                                             }
                                         }
-                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                        print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
                                         continue;
                                     }
                                     else // n > 3
@@ -333,7 +334,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
                                                 }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
                                                 continue;
                                             }
                                             else // n > 4
@@ -382,7 +383,7 @@ namespace DataProcessing.Controller
                                                             }
                                                         }
                                                     }
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                         }
@@ -457,7 +458,7 @@ namespace DataProcessing.Controller
                                                     }
                                                 }
                                             }
-                                            print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                            print = colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
                                         }
                                         else if (currentValue3 == biggestValue)
                                         {
@@ -491,7 +492,7 @@ namespace DataProcessing.Controller
                                                     }
                                                 }
                                             }
-                                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                                            print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
                                         }
                                     }
                                     else
@@ -582,7 +583,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
                                                 }
-                                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
                                                 continue;
                                             }
                                             else // n > 4
@@ -631,7 +632,7 @@ namespace DataProcessing.Controller
                                                             }
                                                         }
                                                     }
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
 
@@ -711,7 +712,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
 
-                                                    print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                    print = colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
 
                                                 }
                                                 else if (currentValue4 == biggestValue)
@@ -747,7 +748,7 @@ namespace DataProcessing.Controller
                                                             }
                                                         }
                                                     }
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                             else
@@ -840,7 +841,7 @@ namespace DataProcessing.Controller
                                                         }
                                                     }
 
-                                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                 }
                                             }
                                             else // 4 mau khong full 1
@@ -903,7 +904,7 @@ namespace DataProcessing.Controller
                                                                 }
                                                             }
                                                         }
-                                                        print = colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                        print = colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                     }
                                                     else if (currentValue4 + currentCosts == biggestValue)
                                                     {
@@ -940,7 +941,7 @@ namespace DataProcessing.Controller
                                                                 }
                                                             }
                                                         }
-                                                        print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                                        print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                                     }
                                                 }
                                             }
@@ -979,12 +980,14 @@ namespace DataProcessing.Controller
 
             n = 2;
 
+            MessageBox.Show("" + ExcelController.duplicateindex.Count);
+
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         biggestValue = 0;
                         for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -998,7 +1001,7 @@ namespace DataProcessing.Controller
                         {
                             continue;
                         }
-                        print += color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                        print += color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                     }
                     using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("2-outputall.txt", true))
                     {
@@ -1008,10 +1011,10 @@ namespace DataProcessing.Controller
             }
             else
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         biggestValue = 0;
                         for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1029,11 +1032,11 @@ namespace DataProcessing.Controller
 
                         if (index[i] < index[j]) // sắp xếp đầu ra
                         {
-                            print = color[i] + "-" + color[j] + ": " + biggestValue + Environment.NewLine;
+                            print = color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                         }
                         else
                         {
-                            print = color[j] + "-" + color[i] + ": " + biggestValue + Environment.NewLine;
+                            print = color[j] + " " + color[i] + ": " + biggestValue + Environment.NewLine;
                         }
 
                         if (nColorChose == 2)
@@ -1069,16 +1072,16 @@ namespace DataProcessing.Controller
             string[] color = model.getColor();
 
             n = 3;
-            
+          
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             biggestValue = 0;
                             for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1094,7 +1097,7 @@ namespace DataProcessing.Controller
                                 continue;
                             }
 
-                            print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
+                            print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
                         }
                     }
                     using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("3-outputall.txt", true))
@@ -1106,12 +1109,12 @@ namespace DataProcessing.Controller
             else// in theo các màu người dùng nhập
             {
                 
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             biggestValue = 0;
                             for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1126,7 +1129,7 @@ namespace DataProcessing.Controller
                             {
                                 continue;
                             }
-                            //print += color[i] + "-" + color[j] + "-" + color[q] + ": " + biggestValue + Environment.NewLine;
+                            //print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
 
                             String[] colorOut = new String[3];
                             int[] colorOutIndex = new int[3];
@@ -1157,7 +1160,7 @@ namespace DataProcessing.Controller
                                     }
                                 }
                             }
-                            print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + ": " + biggestValue + Environment.NewLine;
+                            print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
 
                             if (nColorChose >= 3)
                             {
@@ -1198,14 +1201,14 @@ namespace DataProcessing.Controller
 
             if (nColorChose == 0) // in bt
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         print = "";
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
                                 biggestValue = 0;
                                 for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1220,7 +1223,7 @@ namespace DataProcessing.Controller
                                 {
                                     continue;
                                 }
-                                print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + ": " + biggestValue + Environment.NewLine;
+                                print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + ": " + biggestValue + Environment.NewLine;
                             }
                         }
                         using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("4-outputall.txt", true))
@@ -1232,14 +1235,14 @@ namespace DataProcessing.Controller
             }
             else // nhin theo nhập vào của người dùng
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
                         print = "";
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
                                 biggestValue = 0;
                                 for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1287,7 +1290,7 @@ namespace DataProcessing.Controller
                                     }
                                 }
 
-                                print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + ": " + biggestValue + Environment.NewLine;
+                                print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
 
                                 if (nColorChose >= 4)
                                 {
@@ -1332,16 +1335,16 @@ namespace DataProcessing.Controller
 
             if (nColorChose == 0)
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             print = "";
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
-                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                                for (int l = k + 1; l < model.getColCount() - n + 4 - ExcelController.duplicateindex.Count; l++)
                                 {
                                     biggestValue = 0;
                                     for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1356,7 +1359,7 @@ namespace DataProcessing.Controller
                                     {
                                         continue;
                                     }
-                                    print += color[i] + "-" + color[j] + "-" + color[q] + "-" + color[k] + "-" + color[l] + ": " + biggestValue + Environment.NewLine;
+                                    print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + " " + color[l] + ": " + biggestValue + Environment.NewLine;
                                 }
                             }
                             using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("5-outputall.txt", true))
@@ -1371,16 +1374,16 @@ namespace DataProcessing.Controller
             }
             else
             {
-                for (int i = 0; i < model.getColCount() - n; i++)
+                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
-                    for (int j = i + 1; j < model.getColCount() - n + 1; j++)
+                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2; q++)
+                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                         {
                             print = "";
-                            for (int k = q + 1; k < model.getColCount() - n + 3; k++)
+                            for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
                             {
-                                for (int l = k + 1; l < model.getColCount() - n + 4; l++)
+                                for (int l = k + 1; l < model.getColCount() - n + 4 - ExcelController.duplicateindex.Count; l++)
                                 {
                                     biggestValue = 0;
                                     for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
@@ -1429,7 +1432,7 @@ namespace DataProcessing.Controller
                                             }
                                         }
                                     }
-                                    print += colorOut[0] + "-" + colorOut[1] + "-" + colorOut[2] + "-" + colorOut[3] + "-" + colorOut[4] + ": " + biggestValue + Environment.NewLine;
+                                    print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                     
                                     if (nColorChose == 5)
                                     {
