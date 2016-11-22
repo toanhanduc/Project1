@@ -132,7 +132,7 @@
                         Padding="10 5"
                         >Thời gian đã xử lý:</TextBlock>
                             </Border>
-                            <TextBlock
+                            <TextBlock x:Name="processtime"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Margin="180 0 0 0">
@@ -176,7 +176,7 @@
                         Padding="10 5"
                         >Số nhóm màu đã tìm thấy:</TextBlock>
                             </Border>
-                            <TextBlock
+                            <TextBlock x:Name="foundedcolor"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Margin="230 0 0 0">
@@ -208,7 +208,7 @@
                         HorizontalAlignment="Right">Ngưỡng số lượng bán ra:</TextBlock>
                         <TextBlock Foreground="#009e49"
                                HorizontalAlignment="Right">
-                        <TextBlock FontWeight="Bold">ssss</TextBlock>
+                        <TextBlock x:Name="limitvalue" FontWeight="Bold">ssss</TextBlock>
                     </TextBlock>
                     </StackPanel>
                 </Grid>

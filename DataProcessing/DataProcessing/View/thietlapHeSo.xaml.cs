@@ -15,9 +15,11 @@ namespace DataProcessing
     public partial class thietlapHeSo : Page
     {
         public static string startdatetime = "", enddatetime = "";
+        public static string limit = "";
         public static string txtpath = "";
         public static int n = 0;
         public static int ncolor = 0;
+        public static Boolean checkstop = false;
         Controller.ExcelController excelcontroller = new Controller.ExcelController();
         Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
         Controller.OutputController outcontroller = new Controller.OutputController();
@@ -89,7 +91,7 @@ namespace DataProcessing
         {
             startdatetime = date1.SelectedValue.ToString() == null ? "" : date1.SelectedValue.ToString();
             enddatetime = date2.SelectedValue.ToString() == null ? "" : date2.SelectedValue.ToString();
-            
+            limit = inputvalue.Text;
             //string color3 = combo3.SelectedValue.ToString();
             //string color4 = combo4.SelectedValue.ToString();
             //string color5 = combo5.SelectedValue.ToString();
@@ -116,14 +118,11 @@ namespace DataProcessing
             {
                 await Task.Run(() => excelcontroller.readExcel(txtpath));
 
-                FindingStatus find = new FindingStatus();
-                this.NavigationService.Navigate(find);
-
                 //tìm lớn nhất
                 if (findmax)
                 {
-
-                    string limit = inputvalue.Text;
+                    FindingStatus find = new FindingStatus();
+                    this.NavigationService.Navigate(find);
                     if (limit == "")
                     {
                         tlhscontroller.readLimit(0);
@@ -136,30 +135,26 @@ namespace DataProcessing
 
                     if (group2)
                     {
-                        int timestart = Environment.TickCount;
                         await Task.Run(new Action(tlhscontroller.processGroup));
-                        MessageBox.Show("Mau 2 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                        checkstop = true;
                         outcontroller.sortOutPut(2);
                     }
                     else if (group3)
                     {
-                        int timestart = Environment.TickCount;
                         await Task.Run(new Action(tlhscontroller.processGroup));
-                        MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                        checkstop = true;
                         outcontroller.sortOutPut(3);
                     }
                     else if (group4)
                     {
-                        int timestart = Environment.TickCount;
                         await Task.Run(new Action(tlhscontroller.processGroup));
-                        MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                        checkstop = true;
                         outcontroller.sortOutPut(4);
                     }
                     else if (group5)
                     {
-                        int timestart = Environment.TickCount;
                         await Task.Run(new Action(tlhscontroller.processGroup));
-                        MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                        checkstop = true;
                         outcontroller.sortOutPut(5);
                     }
                 }
@@ -167,7 +162,6 @@ namespace DataProcessing
                 {
                     if (group2) //in tất cả nhóm 2
                     {
-                        int timestart = Environment.TickCount;
                         if (ncolor == 2)
                         {
                             if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
@@ -176,9 +170,12 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, color2));
+                                checkstop = true;
                             }
 
                         }
@@ -190,13 +187,20 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, ""));
+                                checkstop = true;
                             }
                         }
                         else if (ncolor == 0)
+                        {
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
                             await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, "", ""));
-                        MessageBox.Show("Mau 2 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                            checkstop = true;
+                        }
                     }
                     else if (group3) // in tất cả nhóm 3
                     {
@@ -209,10 +213,13 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 color3 = combo3.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, color3));
+                                checkstop = true;
                             }
                         }
 
@@ -224,9 +231,12 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, ""));
+                                checkstop = true;
                             }
 
                         }
@@ -239,13 +249,20 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, "", ""));
+                                checkstop = true;
                             }
                         }
                         else if (ncolor == 0)
+                        {
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
                             await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, "", "", ""));
-                        MessageBox.Show("Mau 3 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                            checkstop = true;
+                        }
                     }
                     else if (group4) // in tất cả nhóm 4 màu
                     {
@@ -260,11 +277,14 @@ namespace DataProcessing
                                     }
                                     else
                                     {
+                                        FindingStatus find = new FindingStatus();
+                                        this.NavigationService.Navigate(find);
                                         color1 = combo1.SelectedValue.ToString();
                                         color2 = combo2.SelectedValue.ToString();
                                         color3 = combo3.SelectedValue.ToString();
                                         color4 = combo4.SelectedValue.ToString();
                                         await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, color4));
+                                        checkstop = true;
                                     }
                                 }
                             }
@@ -278,10 +298,13 @@ namespace DataProcessing
                                 }
                                 else
                                 {
+                                    FindingStatus find = new FindingStatus();
+                                    this.NavigationService.Navigate(find);
                                     color1 = combo1.SelectedValue.ToString();
                                     color2 = combo2.SelectedValue.ToString();
                                     color3 = combo3.SelectedValue.ToString();
                                     await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, ""));
+                                    checkstop = true;
                                 }
                             }
                         }
@@ -293,9 +316,12 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, "", ""));
+                                checkstop = true;
                             }
                         }
                         else if (ncolor == 1)
@@ -306,13 +332,20 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, "", "", ""));
+                                checkstop = true;
                             }
                         }
                         else if (ncolor == 0)
+                        {
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
                             await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, "", "", "", ""));
-                        MessageBox.Show("Mau 4 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                            checkstop = true;
+                        }
                     }
                     else if (group5) // in tất cả nhóm 5 màu
                     {
@@ -327,12 +360,15 @@ namespace DataProcessing
                                     }
                                     else
                                     {
+                                        FindingStatus find = new FindingStatus();
+                                        this.NavigationService.Navigate(find);
                                         color1 = combo1.SelectedValue.ToString();
                                         color2 = combo2.SelectedValue.ToString();
                                         color3 = combo3.SelectedValue.ToString();
                                         color4 = combo4.SelectedValue.ToString();
                                         color5 = combo5.SelectedValue.ToString();
                                         await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, color5));
+                                        checkstop = true;
                                     }
                                 }
                             }
@@ -347,11 +383,14 @@ namespace DataProcessing
                                     }
                                     else
                                     {
+                                        FindingStatus find = new FindingStatus();
+                                        this.NavigationService.Navigate(find);
                                         color1 = combo1.SelectedValue.ToString();
                                         color2 = combo2.SelectedValue.ToString();
                                         color3 = combo3.SelectedValue.ToString();
                                         color4 = combo4.SelectedValue.ToString();
                                         await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, ""));
+                                        checkstop = true;
                                     }
                                 }
                             }
@@ -365,10 +404,13 @@ namespace DataProcessing
                                 }
                                 else
                                 {
+                                    FindingStatus find = new FindingStatus();
+                                    this.NavigationService.Navigate(find);
                                     color1 = combo1.SelectedValue.ToString();
                                     color2 = combo2.SelectedValue.ToString();
                                     color3 = combo3.SelectedValue.ToString();
                                     await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, "", ""));
+                                    checkstop = true;
                                 }
                             }
                         }
@@ -380,9 +422,12 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, "", "", ""));
+                                checkstop = true;
                             }
                         }
                         else if (ncolor == 1)
@@ -393,13 +438,20 @@ namespace DataProcessing
                             }
                             else
                             {
+                                FindingStatus find = new FindingStatus();
+                                this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, "", "", "", ""));
+                                checkstop = true;
                             }
                         }
                         else if (ncolor == 0)
+                        {
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
                             await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, "", "", "", "", ""));
-                        MessageBox.Show("Mau 5 het: " + ((double)(Environment.TickCount - timestart) / 1000).ToString() + "s");
+                            checkstop = true;
+                        }
                     }
                     else
                     {

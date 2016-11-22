@@ -228,7 +228,7 @@
                         FontWeight="Regular" Margin="0,-1,0,0" HorizontalAlignment="Left" Width="184"
                         ><Run Text="Ngưỡng giới hạn:"/></TextBlock>
                             <TextBox x:Name="inputvalue" FontSize="23"
-                        FontWeight="Regular" Margin="296,-1,0,18" HorizontalAlignment="Left" Width="66" RenderTransformOrigin="0.532,0.767" PreviewTextInput="inputvalue_PreviewTextInput" />
+                        FontWeight="Regular" Margin="296,-1,0,18" HorizontalAlignment="Left" Width="66" RenderTransformOrigin="0.532,0.767" PreviewTextInput="inputvalue_PreviewTextInput" Height="33" VerticalAlignment="Bottom" />
                         </Grid>
 
                     </Grid>
