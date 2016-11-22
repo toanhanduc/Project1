@@ -89,9 +89,10 @@ namespace DataProcessing
         /// <param name="e"></param>
         public async void startSearch(object sender, RoutedEventArgs e)
         {
-            startdatetime = date1.SelectedValue.ToString() == null ? "" : date1.SelectedValue.ToString();
-            enddatetime = date2.SelectedValue.ToString() == null ? "" : date2.SelectedValue.ToString();
+            startdatetime = date1.SelectedValue == null ? "" : date1.SelectedValue.ToString();
+            enddatetime = date2.SelectedValue == null ? "" : date2.SelectedValue.ToString();
             limit = inputvalue.Text;
+
             //string color3 = combo3.SelectedValue.ToString();
             //string color4 = combo4.SelectedValue.ToString();
             //string color5 = combo5.SelectedValue.ToString();
@@ -104,11 +105,11 @@ namespace DataProcessing
             }
             else if (startdatetime.Length == 0)
             {
-                MessageBox.Show("Bạn chưa chọn ngày bắt đầu");
+                MessageBox.Show("Ngày bắt đầu không hợp lệ");
             }
             else if (enddatetime.Length == 0)
             {
-                MessageBox.Show("Bạn chưa chọn ngày kết thúc");
+                MessageBox.Show("Ngày kết thúc không hợp lệ");
             }
             else if (!group2 && !group3 && !group4 && !group5)
             {
