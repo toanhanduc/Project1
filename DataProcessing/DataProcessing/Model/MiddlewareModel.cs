@@ -22,5 +22,6 @@ namespace DataProcessing.Model
         {
             return foundedColor;
         }
+
     }
 }

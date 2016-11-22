@@ -1002,6 +1002,7 @@ namespace DataProcessing.Controller
                         {
                             continue;
                         }
+                        middle.updateFoundedColor();
                         print += color[i] + " " + color[j] + ": " + biggestValue + Environment.NewLine;
                     }
                     using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("2-outputall.txt", true))
@@ -1039,7 +1040,7 @@ namespace DataProcessing.Controller
                         {
                             print = color[j] + " " + color[i] + ": " + biggestValue + Environment.NewLine;
                         }
-
+                        middle.updateFoundedColor();
                         if (nColorChose == 2)
                         {
                             break;
@@ -1203,6 +1204,7 @@ namespace DataProcessing.Controller
                                     }
                                 }
                             }
+                            middle.updateFoundedColor();
                             print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + ": " + biggestValue + Environment.NewLine;
 
                             if (nColorChose >= 3)
@@ -1333,7 +1335,7 @@ namespace DataProcessing.Controller
                                         }
                                     }
                                 }
-
+                                middle.updateFoundedColor();
                                 print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + ": " + biggestValue + Environment.NewLine;
 
                                 if (nColorChose >= 4)
@@ -1403,6 +1405,7 @@ namespace DataProcessing.Controller
                                     {
                                         continue;
                                     }
+                                    middle.updateFoundedColor();
                                     print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + " " + color[l] + ": " + biggestValue + Environment.NewLine;
                                 }
                             }
@@ -1476,6 +1479,7 @@ namespace DataProcessing.Controller
                                             }
                                         }
                                     }
+                                    middle.updateFoundedColor();
                                     print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
                                     
                                     if (nColorChose == 5)

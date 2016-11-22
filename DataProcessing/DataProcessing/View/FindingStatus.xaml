@@ -110,11 +110,11 @@
                         Padding="10 5"
                         >Tốc độ xử lý hiện tại :</TextBlock>
                             </Border>
-                            <TextBlock
+                            <TextBlock x:Name="processSpeed"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Margin="200 0 0 0">
-                            Sth here
+                 
                             </TextBlock>
                         </Grid>
                         <Grid>
@@ -136,7 +136,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Margin="180 0 0 0">
-                            Sth here
+                         
                             </TextBlock>
                         </Grid>
                         <Grid>
@@ -154,11 +154,11 @@
                         Padding="10 5"
                         >Ước lượng thời gian còn lại:</TextBlock>
                             </Border>
-                            <TextBlock
+                            <TextBlock x:Name="estimate"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Margin="240 0 0 0">
-                            Sth here
+                           
                             </TextBlock>
                         </Grid>
                         <Grid>
@@ -180,7 +180,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Margin="230 0 0 0">
-                            Sth here
+                         
                             </TextBlock>
                         </Grid>
                     </StackPanel>
@@ -194,21 +194,21 @@
                         HorizontalAlignment="Right">Khoảng thời gian tìm kiếm :</TextBlock>
                         <TextBlock Foreground="#009e49">
                         từ ngày 
-                        <TextBlock x:Name="start" FontWeight="Bold">dd/mm/yyyy</TextBlock>
+                        <TextBlock x:Name="start" FontWeight="Bold"></TextBlock>
                         đến ngày
-                        <TextBlock x:Name="end" FontWeight="Bold">dd/mm/yyyy</TextBlock>
+                        <TextBlock x:Name="end" FontWeight="Bold"></TextBlock>
                     </TextBlock>
                         <TextBlock
                         HorizontalAlignment="Right">Số lượng màu trong mỗi nhóm :</TextBlock>
                         <TextBlock Foreground="#009e49"
                                HorizontalAlignment="Right">
-                        <TextBlock x:Name="colorgroup" FontWeight="Bold">ssss</TextBlock>
+                        <TextBlock x:Name="colorgroup" FontWeight="Bold"></TextBlock>
                     </TextBlock>
                         <TextBlock
                         HorizontalAlignment="Right">Ngưỡng số lượng bán ra:</TextBlock>
                         <TextBlock Foreground="#009e49"
                                HorizontalAlignment="Right">
-                        <TextBlock x:Name="limitvalue" FontWeight="Bold">ssss</TextBlock>
+                        <TextBlock x:Name="limitvalue" FontWeight="Bold"></TextBlock>
                     </TextBlock>
                     </StackPanel>
                 </Grid>
