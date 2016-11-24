@@ -58,7 +58,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
             <TextBlock
-            FontFamily="Code Bold"
+            FontFamily="Segoe UI Bold"
             Foreground="#0e6633"
             FontSize="40"
             TextAlignment="Center">Welcome
