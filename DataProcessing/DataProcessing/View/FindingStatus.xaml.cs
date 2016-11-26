@@ -3,6 +3,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using DataProcessing.Controller;
+using System.Numerics;
 
 namespace DataProcessing
 {
@@ -15,8 +16,9 @@ namespace DataProcessing
         private Timer timer1 = new Timer();
         int gio = 0, phut = 0, giay = 0;
         int speed1 = 0, speed2 = 0;
-        int totalcolor = 0;
-        int es_gio = 0, es_phut = 0, es_giay = 0;
+        BigInteger sp = 1;
+        BigInteger totalcolor = 0;
+        BigInteger es_gio = 0, es_phut = 0, es_giay = 0;
         public FindingStatus()
         {
 
@@ -24,7 +26,8 @@ namespace DataProcessing
             start.Text = thietlapHeSo.startdatetime;
             end.Text = thietlapHeSo.enddatetime;
             colorgroup.Text = thietlapHeSo.n.ToString();
-            totalcolor = middle.estimateTime(middle.getExcelCol(),thietlapHeSo.n);
+            totalcolor =  MiddlewareController.estimateTime(middle.getExcelCol(), thietlapHeSo.n);
+            Console.WriteLine(totalcolor);
             if (thietlapHeSo.limit.ToString() == "")
             {
                 limitvalue.Text = "0";
@@ -48,6 +51,11 @@ namespace DataProcessing
                 timer1.Stop();
                 foundedcolor.Text = middle.getFoundedColorValue().ToString();
                 processSpeed.Text = "0";
+                if (giay < 1)
+                {
+                    processtime.Text = "0h 0m 0s";
+                }
+                estimate.Text =  "0h 0m 0s";
                 MessageBox.Show("Tìm kiếm kết thúc");
             }
             else
@@ -69,13 +77,15 @@ namespace DataProcessing
                 speed2 += speed1;
                 processSpeed.Text = speed1.ToString() + " màu/s";
 
-                totalcolor -= speed1;
-                es_giay = totalcolor / speed1;
+                sp = speed1;
+                totalcolor -= sp;
+                es_giay = totalcolor / sp;
                 es_gio = es_giay / 3600;
                 es_giay %= 3600;
                 es_phut = es_giay / 60;
                 es_giay %= 60;
                 estimate.Text = es_gio.ToString() + "h " + es_phut.ToString() + "m " + es_giay.ToString() + "s";
+               // estimate.Text = (totalcolor).ToString();
 
                 foundedcolor.Text = middle.getFoundedColorValue().ToString();
             }

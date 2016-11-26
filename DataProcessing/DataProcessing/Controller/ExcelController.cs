@@ -145,7 +145,6 @@ namespace DataProcessing.Controller
                 datetime[datecount] = cell;
                 datecount++;
             }
-            MessageBox.Show("Đường dẫn đã nhập: " + path);
             MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
             model.setColor(color);
             model.setColorDefault(colordefault);
@@ -349,6 +348,7 @@ namespace DataProcessing.Controller
                     }
                 }
             }
+            MessageBox.Show("ok");
             model.setValue(value);
             model.setZeroOne(zeroOne);
             excel.Quit();

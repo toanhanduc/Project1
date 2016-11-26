@@ -12,7 +12,7 @@ namespace DataProcessing.Controller
         /// Hàm xử lý nhóm 2 màu
         /// </summary>
         /// 
-        
+
         bool canStop = true;
         string printOut = "";
         static int[] max;
@@ -23,7 +23,7 @@ namespace DataProcessing.Controller
         public void readN(int n)
         {
             model.setN(n);
-            
+
         }
 
         public void readLimit(int limit)
@@ -50,7 +50,7 @@ namespace DataProcessing.Controller
             List<int> savedRound2 = new List<int>(); // lưu các màu mang giá trị lớn nhất ở mốc màu thứ 2
             List<int> savedRound3 = new List<int>();
             List<int> savedRound4 = new List<int>();
-            
+
             if (value[n - 1] == 0)
             {
                 canStop = false;
@@ -216,7 +216,7 @@ namespace DataProcessing.Controller
                         }
                     }
 
-                    if(n == 2)
+                    if (n == 2)
                     {
                         printOut += print;
                     }
@@ -292,7 +292,7 @@ namespace DataProcessing.Controller
                                     {
                                         for (int k = 0; k < model.getColCount() - n + 3; k++)
                                         {
-                                            if(k == i || k == j || k == q)
+                                            if (k == i || k == j || k == q)
                                             {
                                                 continue;
                                             }
@@ -342,7 +342,7 @@ namespace DataProcessing.Controller
                                             {
                                                 for (int l = 0; l < model.getColCount() - n + 4; l++)
                                                 {
-                                                    if(l == i || l == j || l == q || l == k)
+                                                    if (l == i || l == j || l == q || l == k)
                                                     {
                                                         continue;
                                                     }
@@ -538,14 +538,14 @@ namespace DataProcessing.Controller
                                     if (!checkList3.Any()) // 3 mau lam full 1
                                     {
                                         biggestValue = currentValue3;
-                                        
+
                                         for (int k = 0; k < model.getColCount() - n + 3; k++)
                                         {
-                                            if(k == i || k == j || k == q)
+                                            if (k == i || k == j || k == q)
                                             {
                                                 continue;
                                             }
-                                            
+
                                             if (value[k] == 0 && (canStop || (value[n - 1] == 0 && value[3] != 0)))
                                             {
                                                 break;
@@ -670,7 +670,7 @@ namespace DataProcessing.Controller
                                             }
                                             currentValue4 = currentValue3 + currentCosts;
 
-                                            if(currentValue4 < biggestValue)
+                                            if (currentValue4 < biggestValue)
                                             {
                                                 continue;
                                             }
@@ -769,16 +769,16 @@ namespace DataProcessing.Controller
                                         }
                                     }
 
-                                    if(n == 4)
+                                    if (n == 4)
                                     {
                                         printOut += print;
                                     }
                                     else //(n > 4)
                                     {
-                                        foreach(int k in savedRound4)
+                                        foreach (int k in savedRound4)
                                         {
                                             biggestValue = 0;
-                                            
+
                                             List<int> checkList4 = new List<int>(checkList3);
                                             currentCosts = 0;
 
@@ -853,7 +853,7 @@ namespace DataProcessing.Controller
                                                     {
                                                         continue;
                                                     }
-                                                    
+
                                                     /////////////////////////
                                                     List<int> checkList5 = new List<int>(checkList4);
                                                     currentCosts = 0;
@@ -956,12 +956,12 @@ namespace DataProcessing.Controller
                 }
                 max[i] = biggestValue;
                 //printOut += print;
-                if (value[i + 1]  < value[i])
+                if (value[i + 1] < value[i])
                 {
                     break;
                 }
             }
-            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter( n + "-output.txt"))
+            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter(n + "-output.txt"))
             {
                 writetext.WriteLine(printOut);
             }
@@ -981,7 +981,6 @@ namespace DataProcessing.Controller
 
             n = 2;
 
-            MessageBox.Show("" + ExcelController.duplicateindex.Count);
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
@@ -1052,7 +1051,7 @@ namespace DataProcessing.Controller
                         writetext.Write(print);
                     }
 
-                    if(nColorChose >= 1)
+                    if (nColorChose >= 1)
                     {
                         break;
                     }
@@ -1120,39 +1119,75 @@ namespace DataProcessing.Controller
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
-                for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
+                if (model.getColCount() < 500)
                 {
-                    print = "";
-                    for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
+                    for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                     {
-                        for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
+                        print = "";
+                        for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
                         {
-                            biggestValue = 0;
-                            for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                            for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
                             {
-                                if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1)
+                                biggestValue = 0;
+                                for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
                                 {
-                                    biggestValue++;
+                                    if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1)
+                                    {
+                                        biggestValue++;
+                                    }
                                 }
-                            }
 
-                            if (biggestValue < limitedInputValue)
-                            {
-                                continue;
+                                if (biggestValue < limitedInputValue)
+                                {
+                                    continue;
+                                }
+                                middle.updateFoundedColor();
+                                print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
                             }
-                            middle.updateFoundedColor();
-                            print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
+                        }
+                        using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("3-outputall.txt", true))
+                        {
+                            writetext.Write(print);
                         }
                     }
-                    using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("3-outputall.txt", true))
+                }
+                else
+                {
+                    for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                     {
-                        writetext.Write(print);
+                        for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
+                        {
+                            print = "";
+                            for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
+                            {
+                                biggestValue = 0;
+                                for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+                                {
+                                    if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1)
+                                    {
+                                        biggestValue++;
+                                    }
+                                }
+
+                                if (biggestValue < limitedInputValue)
+                                {
+                                    continue;
+                                }
+                                middle.updateFoundedColor();
+                                print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
+                            }
+                            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("3-outputall.txt", true))
+                            {
+                                writetext.Write(print);
+                            }
+                        }  
                     }
                 }
+
             }
             else// in theo các màu người dùng nhập
             {
-                
+
                 for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i++)
                 {
                     print = "";
@@ -1221,12 +1256,12 @@ namespace DataProcessing.Controller
                     {
                         writetext.Write(print);
                     }
-                    if(nColorChose >= 1)
+                    if (nColorChose >= 1)
                     {
                         break;
                     }
                 }
-            }       
+            }
         }
 
         public void processGroupAll4(int nColorChose, string color1, string color2, string color3, string color4) // print All n = 4
@@ -1481,7 +1516,7 @@ namespace DataProcessing.Controller
                                     }
                                     middle.updateFoundedColor();
                                     print += colorOut[0] + " " + colorOut[1] + " " + colorOut[2] + " " + colorOut[3] + " " + colorOut[4] + ": " + biggestValue + Environment.NewLine;
-                                    
+
                                     if (nColorChose == 5)
                                     {
                                         break;
@@ -1511,7 +1546,7 @@ namespace DataProcessing.Controller
                         }
 
                     }
-                    if(nColorChose >= 1)
+                    if (nColorChose >= 1)
                     {
                         break;
                     }
@@ -1523,7 +1558,7 @@ namespace DataProcessing.Controller
         // biggestValue: Giá trị lớn nhất
         // valueCol1: Giá trị của cột được chọn làm mốc 1
         // valueCol2: Giá trị của cột được chọn làm cột 2
-        public bool checkToBreak(int n,int biggestValue, int valueCol)
+        public bool checkToBreak(int n, int biggestValue, int valueCol)
         {
             if (biggestValue % n == 0 && valueCol < biggestValue / n)
             {

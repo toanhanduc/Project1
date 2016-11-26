@@ -24,7 +24,9 @@ namespace DataProcessing
         Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
         Controller.OutputController outcontroller = new Controller.OutputController();
         string color1, color2, color3, color4, color5;
-
+        Boolean group2 = false, group3 = false, group4 = false, group5 = false, findmax = true;
+        Boolean colorgroup0 = false, colorgroup1 = false, colorgroup2 = false, colorgroup3 = false, colorgroup4 = false, colorgroup5 = false;
+    
 
         //public bool check = false;
 
@@ -32,8 +34,6 @@ namespace DataProcessing
         {
             InitializeComponent();
         }
-        Boolean group2 = false, group3 = false, group4 = false, group5 = false, findmax = true;
-        Boolean colorgroup0 = false, colorgroup1 = false, colorgroup2 = false, colorgroup3 = false, colorgroup4 = false, colorgroup5 = false;
 
         public void setProcess()
         {
@@ -66,6 +66,7 @@ namespace DataProcessing
             {
                 txtFilePath.Text = openfile.FileName;
                 txtpath = openfile.FileName;
+                searchbutton.Text = "ĐANG TINH CHỈNH ...";
                 await Task.Run(() => excelcontroller.getColorAndDate(openfile.FileName));
                 date1.ItemsSource = excelcontroller.fillDateTime();
                 date2.ItemsSource = excelcontroller.fillDateTime();
@@ -74,7 +75,7 @@ namespace DataProcessing
                 combo3.ItemsSource = excelcontroller.fillColorCombobox();
                 combo4.ItemsSource = excelcontroller.fillColorCombobox();
                 combo5.ItemsSource = excelcontroller.fillColorCombobox();
-                
+                searchbutton.Text = "TIẾN HÀNH TÌM KIẾM";
 
             }
 
@@ -92,13 +93,97 @@ namespace DataProcessing
             startdatetime = date1.SelectedValue == null ? "" : date1.SelectedValue.ToString();
             enddatetime = date2.SelectedValue == null ? "" : date2.SelectedValue.ToString();
             limit = inputvalue.Text;
+            Boolean blankcolor = false;
+            Boolean checkinputcolor = false;
+            if (ncolor != 0)
+            {
+                if (ncolor == 1)
+                {
+                    if (combo1.SelectedIndex == -1)
+                    {
+                        blankcolor = true;
+                    }
+                }
+                if (ncolor == 2)
+                {
+                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
+                    {
+                        blankcolor = true;
+                    }
+                    else
+                    {
+                        if (combo1.SelectedValue.ToString() == combo2.SelectedValue.ToString())
+                        {
+                            checkinputcolor = true;
+                        }
+                    }
+                }
+                else if (ncolor == 3)
+                {
+                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1)
+                    {
+                        blankcolor = true;
+                    }
+                    else
+                    {
+                        if ((combo1.SelectedValue.ToString() == combo2.SelectedValue.ToString())
+                            || (combo1.SelectedValue.ToString() == combo3.SelectedValue.ToString())
+                            || (combo2.SelectedValue.ToString() == combo3.SelectedValue.ToString()))
+                        {
+                            checkinputcolor = true;
+                        }
+                    }
 
-            //string color3 = combo3.SelectedValue.ToString();
-            //string color4 = combo4.SelectedValue.ToString();
-            //string color5 = combo5.SelectedValue.ToString();
-            // string mamaunguoidungnhap = "E";
+                }
+                else if (ncolor == 4)
+                {
+                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1
+                        || combo4.SelectedIndex == -1)
+                    {
+                        blankcolor = true;
+                    }
+                    else
+                    {
+                        if ((combo1.SelectedValue.ToString() == combo2.SelectedValue.ToString())
+                            || (combo1.SelectedValue.ToString() == combo3.SelectedValue.ToString())
+                            || (combo1.SelectedValue.ToString() == combo4.SelectedValue.ToString())
+                            || (combo2.SelectedValue.ToString() == combo3.SelectedValue.ToString())
+                            || (combo2.SelectedValue.ToString() == combo4.SelectedValue.ToString())
+                            || (combo3.SelectedValue.ToString() == combo4.SelectedValue.ToString()))
+                        {
+                            checkinputcolor = true;
+                        }
+                    }
+                   
+                }
+                else if (ncolor == 5)
+                {
+                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1
+                       || combo4.SelectedIndex == -1 || combo5.SelectedIndex == -1)
+                    {
+                        blankcolor = true;
+                    }
+                    else
+                    {
+                        if ((combo1.SelectedValue.ToString() == combo2.SelectedValue.ToString())
+                            || (combo1.SelectedValue.ToString() == combo3.SelectedValue.ToString())
+                            || (combo1.SelectedValue.ToString() == combo4.SelectedValue.ToString())
+                            || (combo1.SelectedValue.ToString() == combo5.SelectedValue.ToString())
+                            || (combo2.SelectedValue.ToString() == combo3.SelectedValue.ToString())
+                            || (combo2.SelectedValue.ToString() == combo4.SelectedValue.ToString())
+                            || (combo2.SelectedValue.ToString() == combo5.SelectedValue.ToString())
+                            || (combo3.SelectedValue.ToString() == combo4.SelectedValue.ToString())
+                            || (combo3.SelectedValue.ToString() == combo5.SelectedValue.ToString())
+                            || (combo4.SelectedValue.ToString() == combo5.SelectedValue.ToString()))
+                        {
+                            checkinputcolor = true;
+                        }
+                    }
+                    
+                }
+            }
 
-            //MessageBox.Show(combo1.SelectedValue.ToString());
+
             if (txtFilePath.Text.Length == 0)
             {
                 MessageBox.Show("Bạn chưa chọn đường dẫn!");
@@ -115,15 +200,24 @@ namespace DataProcessing
             {
                 MessageBox.Show("Bạn chưa chọn nhóm màu");
             }
+            else if (blankcolor)
+            {
+                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
+            }
+            else if (checkinputcolor == true)
+            {
+                MessageBox.Show("Bạn vừa chọn màu đã chọn trước đó");
+            }
             else
             {
+                searchbutton.Text = "ĐANG ĐỌC DỮ LIỆU ...";
                 await Task.Run(() => excelcontroller.readExcel(txtpath));
+
 
                 //tìm lớn nhất
                 if (findmax)
                 {
-                    FindingStatus find = new FindingStatus();
-                    this.NavigationService.Navigate(find);
+
                     if (limit == "")
                     {
                         tlhscontroller.readLimit(0);
@@ -165,35 +259,20 @@ namespace DataProcessing
                     {
                         if (ncolor == 2)
                         {
-                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, color2));
                                 checkstop = true;
-                            }
-
                         }
                         else if (ncolor == 1)
                         {
-                            if (combo1.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, ""));
                                 checkstop = true;
-                            }
                         }
                         else if (ncolor == 0)
                         {
@@ -208,12 +287,6 @@ namespace DataProcessing
                         int timestart = Environment.TickCount;
                         if (ncolor == 3)
                         {
-                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
@@ -221,41 +294,25 @@ namespace DataProcessing
                                 color3 = combo3.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, color3));
                                 checkstop = true;
-                            }
                         }
 
                         else if (ncolor == 2)
                         {
-                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, ""));
                                 checkstop = true;
-                            }
-
                         }
 
                         else if (ncolor == 1)
                         {
-                            if (combo1.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, "", ""));
                                 checkstop = true;
-                            }
                         }
                         else if (ncolor == 0)
                         {
@@ -270,14 +327,6 @@ namespace DataProcessing
                         int timestart = Environment.TickCount;
                         if (ncolor == 4)
                         {
-                            {
-                                {
-                                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1 || combo4.SelectedIndex == -1)
-                                    {
-                                        MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                                    }
-                                    else
-                                    {
                                         FindingStatus find = new FindingStatus();
                                         this.NavigationService.Navigate(find);
                                         color1 = combo1.SelectedValue.ToString();
@@ -286,19 +335,9 @@ namespace DataProcessing
                                         color4 = combo4.SelectedValue.ToString();
                                         await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, color4));
                                         checkstop = true;
-                                    }
-                                }
-                            }
                         }
                         else if (ncolor == 3)
                         {
-                            {
-                                if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1)
-                                {
-                                    MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                                }
-                                else
-                                {
                                     FindingStatus find = new FindingStatus();
                                     this.NavigationService.Navigate(find);
                                     color1 = combo1.SelectedValue.ToString();
@@ -306,39 +345,23 @@ namespace DataProcessing
                                     color3 = combo3.SelectedValue.ToString();
                                     await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, ""));
                                     checkstop = true;
-                                }
-                            }
                         }
                         else if (ncolor == 2)
                         {
-                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, "", ""));
                                 checkstop = true;
-                            }
                         }
                         else if (ncolor == 1)
                         {
-                            if (combo1.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, "", "", ""));
                                 checkstop = true;
-                            }
                         }
                         else if (ncolor == 0)
                         {
@@ -353,14 +376,6 @@ namespace DataProcessing
                         int timestart = Environment.TickCount;
                         if (ncolor == 5)
                         {
-                            {
-                                {
-                                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1 || combo4.SelectedIndex == -1 || combo5.SelectedIndex == -1)
-                                    {
-                                        MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                                    }
-                                    else
-                                    {
                                         FindingStatus find = new FindingStatus();
                                         this.NavigationService.Navigate(find);
                                         color1 = combo1.SelectedValue.ToString();
@@ -370,20 +385,9 @@ namespace DataProcessing
                                         color5 = combo5.SelectedValue.ToString();
                                         await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, color5));
                                         checkstop = true;
-                                    }
-                                }
-                            }
                         }
                         else if (ncolor == 4)
                         {
-                            {
-                                {
-                                    if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1 || combo4.SelectedIndex == -1)
-                                    {
-                                        MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                                    }
-                                    else
-                                    {
                                         FindingStatus find = new FindingStatus();
                                         this.NavigationService.Navigate(find);
                                         color1 = combo1.SelectedValue.ToString();
@@ -392,19 +396,9 @@ namespace DataProcessing
                                         color4 = combo4.SelectedValue.ToString();
                                         await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, ""));
                                         checkstop = true;
-                                    }
-                                }
-                            }
                         }
                         else if (ncolor == 3)
                         {
-                            {
-                                if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1 || combo3.SelectedIndex == -1)
-                                {
-                                    MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                                }
-                                else
-                                {
                                     FindingStatus find = new FindingStatus();
                                     this.NavigationService.Navigate(find);
                                     color1 = combo1.SelectedValue.ToString();
@@ -412,39 +406,23 @@ namespace DataProcessing
                                     color3 = combo3.SelectedValue.ToString();
                                     await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, "", ""));
                                     checkstop = true;
-                                }
-                            }
                         }
                         else if (ncolor == 2)
                         {
-                            if (combo1.SelectedIndex == -1 || combo2.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 color2 = combo2.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, "", "", ""));
                                 checkstop = true;
-                            }
                         }
                         else if (ncolor == 1)
                         {
-                            if (combo1.SelectedIndex == -1)
-                            {
-                                MessageBox.Show("Bạn chưa nhập đủ tên mã màu cần tìm kiếm");
-                            }
-                            else
-                            {
                                 FindingStatus find = new FindingStatus();
                                 this.NavigationService.Navigate(find);
                                 color1 = combo1.SelectedValue.ToString();
                                 await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, "", "", "", ""));
                                 checkstop = true;
-                            }
                         }
                         else if (ncolor == 0)
                         {
@@ -628,7 +606,7 @@ namespace DataProcessing
                 colornumber3.Visibility = Visibility.Hidden;
                 colornumber4.Visibility = Visibility.Hidden;
                 colornumber5.Visibility = Visibility.Hidden;
-            }   
+            }
         }
 
         private void RadioButtonTop_Unchecked(object sender, RoutedEventArgs e)

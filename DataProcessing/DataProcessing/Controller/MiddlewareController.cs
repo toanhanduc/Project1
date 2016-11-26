@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataProcessing.Model;
+using System.Numerics;
+
 namespace DataProcessing.Controller
 {
     class MiddlewareController
     {
         MiddlewareModel model = new MiddlewareModel();
         thietlaphesoModel tlhs = new thietlaphesoModel();
+        public static int i = 0;
         public void updateFoundedColor()
         {
             model.setFoundedColor();
@@ -21,11 +24,19 @@ namespace DataProcessing.Controller
             return model.getFoundedColor();
         }
 
-        public int estimateTime(int n, int k)
+        static BigInteger tu = 1, mau = 1;
+        public static BigInteger estimateTime(int n, int k)
         {
-            if (k == 0 || k == n)
-                return 1;
-            return (estimateTime(n - 1, k - 1) + estimateTime(n - 1, k));
+            for (int i = k +1; i <= n; i++)
+            {
+                tu *= i;
+            }
+            for (int  i = 1; i <= (n-k); i++)
+            {
+                mau *= i;
+            }
+
+            return tu / mau;
         }
 
         public int getExcelCol()

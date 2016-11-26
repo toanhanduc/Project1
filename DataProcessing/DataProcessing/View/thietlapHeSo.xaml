@@ -352,7 +352,7 @@
                 Height="45"
                 Width="355"
                 BorderThickness="0">
-                <TextBlock
+                <TextBlock x:Name="searchbutton"
                     Background="Transparent"
                     Foreground="White"
                     FontSize="30"
