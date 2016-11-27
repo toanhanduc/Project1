@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using DataProcessing.Controller;
 using System.Numerics;
+using DataProcessing.Model;
 
 namespace DataProcessing
 {
@@ -13,6 +14,8 @@ namespace DataProcessing
     public partial class FindingStatus : Page
     {
         MiddlewareController middle = new MiddlewareController();
+        MiddlewareModel midmodel = new MiddlewareModel();
+        thietlaphesoModel model = new thietlaphesoModel();
         private Timer timer1 = new Timer();
         int gio = 0, phut = 0, giay = 0;
         int speed1 = 0, speed2 = 0;
@@ -20,6 +23,20 @@ namespace DataProcessing
         BigInteger totalcolor = 0;
         BigInteger totalcolor_old = (BigInteger)Decimal.MaxValue;
         Decimal foundcolor, foundcolor_old, number1, convertBigInt;
+
+        private void continueButton(object sender, System.Windows.RoutedEventArgs e)
+        {
+            model.setColCount(1);
+            model.setRowCount(1);
+            thietlapHeSo tlhs = new thietlapHeSo();
+            this.NavigationService.Navigate(tlhs);
+        }
+
+        private void exitApp(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
         BigInteger es_gio = 0, es_phut = 0, es_giay = 0, es_giay_old = 0;
         public FindingStatus()
         {
@@ -67,6 +84,7 @@ namespace DataProcessing
                 estimate.Text = "0h 0m 0s";
                
                 pbMyProgressBar.Value = 100;
+                continueGrid.Visibility = System.Windows.Visibility.Visible;
                 MessageBox.Show("Tìm kiếm kết thúc");
             }
             else

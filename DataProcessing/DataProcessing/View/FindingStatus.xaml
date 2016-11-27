@@ -227,11 +227,11 @@
                     VerticalAlignment="Top"
                 Margin="0 20 0 0">
                     <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="0.7*" />
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="0.7*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel
@@ -254,28 +254,58 @@
             HorizontalAlignment="Center"
             Margin="0 0 0 50 ">
             <!--Start TimKiem Button-->
-            <Rectangle
+            <Grid>
+                <Grid x:Name="continueGrid"
+                      Visibility="Hidden">
+                    <Rectangle
                 Fill="#009e49" 
                 Height="70"
                 Width="385"
                 Stroke="Transparent"
                 StrokeThickness="0">
-            </Rectangle>
-            <Button
+                    </Rectangle>
+                    <Button
                 Background="#55d455" 
                 Height="45"
                 Width="355"
-                BorderThickness="0">
-                <TextBlock x:Name="XXXXXXXXXXXX"
+                BorderThickness="0" Click="continueButton">
+                        <TextBlock x:Name="tieptuctimkiem"
                     Background="Transparent"
                     Foreground="White"
                     FontSize="30"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
                     TIẾP TỤC TÌM KIẾM
-                </TextBlock>
-            </Button>
-            <!--End TimKiem Button-->
+                        </TextBlock>
+                    </Button>
+                </Grid>
+                <!--End TimKiem Button-->
+                <!--Start Exit button-->
+                <Rectangle
+                Margin="600 0 0 0 "
+                Fill="#009e49" 
+                Height="70"
+                Width="130"
+                Stroke="Transparent"
+                StrokeThickness="0">
+                </Rectangle>
+                <Button
+                Background="#55d455" 
+                Height="45"
+                Width="100"
+                Margin="600 0 0 0 "
+                BorderThickness="0" Click="exitApp"
+                >
+                    <TextBlock x:Name="exit"
+                    Background="Transparent"
+                    Foreground="White"
+                    FontSize="25"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                    THOÁT
+                    </TextBlock>
+                </Button>
+            </Grid>
         </Grid>
         <!--End Btm-->
     </Grid>
