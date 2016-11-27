@@ -120,7 +120,7 @@ namespace DataProcessing.Controller
                             {
                                 View.Warning.Show("Màu " + View.Warning.newnamecolor + " đã tồn tại");
                             }
-                        } while (checkwhile != 1);
+                        } while (checkwhile == 1);
 
                     }
                 }
