@@ -13,7 +13,6 @@ namespace DataProcessing.Controller
     {
         thietlaphesoModel model = new thietlaphesoModel();
         public static int ngaybatdau = 0, ngayketthuc = 0;
-        public static bool check = false;
         public static int ncolor = 0;
         public static int colprogress = 0;
         public static List<int> duplicateindex = new List<int>();
@@ -23,7 +22,6 @@ namespace DataProcessing.Controller
         public static List<int> origin_color_index = new List<int>();
         public static int cotdautien = 0;
 
-        public object Interaction { get; private set; }
 
         public void setNColor(int numberinputcolor)
         {
@@ -41,15 +39,7 @@ namespace DataProcessing.Controller
             return array;
         }
 
-        public void setColorProgress(int colpro)
-        {
-            colprogress = colpro;
-        }
 
-        public int getColorProgress()
-        {
-            return colprogress;
-        }
 
         public void getColorAndDate(String path)
         {
@@ -138,15 +128,12 @@ namespace DataProcessing.Controller
             }
             //Lấy mã ngày vào mảng
             int datecount = 0;
-            int start = Environment.TickCount;
             for (int row = 2; row <= model.getRowCount(); row++)
             {
                 string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
                 datetime[datecount] = cell;
                 datecount++;
             }
-            MessageBox.Show("Đường dẫn đã nhập: " + path);
-            MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
             model.setColor(color);
             model.setColorDefault(colordefault);
             model.setDateTime(datetime);
@@ -154,6 +141,7 @@ namespace DataProcessing.Controller
             excel.Quit();
 
         }
+
 
         public void readExcel(String path)
         {
@@ -252,7 +240,6 @@ namespace DataProcessing.Controller
 
                     }
                     value[i - 2] = temp;
-                    setColorProgress(i - 1);
                 }
                 //Nếu đã có màu trùng
                 else if (check_count_duplicate != 0)
@@ -973,9 +960,6 @@ namespace DataProcessing.Controller
             model.setColor(color);
             model.setValue(value);
             model.setZeroOne(zeroOne);
-
         }
-
-
     }
 }

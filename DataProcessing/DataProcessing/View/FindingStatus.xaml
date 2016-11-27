@@ -42,17 +42,13 @@
                                VerticalAlignment="Top"
                                HorizontalAlignment="Center"/>
                     </StackPanel>
-                    <TextBlock
-                    FontFamily="Code Bold"
-                    Foreground="White"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    FontSize="40"
-                    Margin="35 0 0 15">
-                    Color
-                    <LineBreak/>
-                    Analysis
-                    </TextBlock>
+                    <Image
+                Source="/DataProcessing;component/Assets/name.png"
+                Width="160"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin=" 20 0 0 0">
+                    </Image>
                 </Grid>
             </Grid>
             <!--End Top bar-->
@@ -80,14 +76,6 @@
                         FontSize="35"
                         FontWeight="Bold"
                         Foreground="#009e49">Trạng thái tìm kiếm</TextBlock>
-                        <TextBlock
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Left"
-                        FontSize="20"
-
-                        >Thời điểm tiến hành tìm kiếm <TextBlock
-                            TextWrapping="NoWrap"
-                            x:Name="timestart">abc</TextBlock></TextBlock>
                     </StackPanel>
                     <StackPanel
                     VerticalAlignment="Top"
@@ -95,94 +83,118 @@
                     Margin="0 10 0 0"
                     Grid.Column="1"
                     Grid.Row="1">
-                        <Grid>
+                        <StackPanel
+                            Orientation="Horizontal">
                             <Border 
                         Margin="0 5 0 0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         BorderBrush="#009e49"
-                        BorderThickness="5">
+                        BorderThickness="5"
+                                Width="250">
                                 <TextBlock                        
                         FontSize="15"
                         FontWeight="Bold"
                         Foreground="White"
                         Background="#55d455"
                         Padding="10 5"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    TextAlignment="Center"
+                                    Width="250"
                         >Tốc độ xử lý hiện tại :</TextBlock>
                             </Border>
                             <TextBlock x:Name="processSpeed"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
-                            Margin="200 0 0 0">
-
+                                       FontSize="15"
+                                       Margin=" 10 0 0 0 ">
                             </TextBlock>
-                        </Grid>
-                        <Grid>
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Horizontal">
                             <Border 
                         Margin="0 5 0 0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         BorderBrush="#009e49"
-                        BorderThickness="5">
+                        BorderThickness="5"
+                                Width="250">
                                 <TextBlock                        
                         FontSize="15"
                         FontWeight="Bold"
                         Foreground="White"
                         Background="#55d455"
                         Padding="10 5"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    TextAlignment="Center"
+                                    Width="250"
                         >Thời gian đã xử lý:</TextBlock>
                             </Border>
                             <TextBlock x:Name="processtime"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
-                            Margin="180 0 0 0">
-
+                            Margin="10 0 0 0"
+                                       FontSize="15">
                             </TextBlock>
-                        </Grid>
-                        <Grid>
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Horizontal">
                             <Border 
                         Margin="0 5 0 0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         BorderBrush="#009e49"
-                        BorderThickness="5">
-                                <TextBlock                        
-                        FontSize="15"
-                        FontWeight="Bold"
-                        Foreground="White"
-                        Background="#55d455"
-                        Padding="10 5"
+                        BorderThickness="5"
+                                Width="250">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Background="#55d455"
+                                    Padding="10 5"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    TextAlignment="Center"
+                                    Width="250"
                         >Ước lượng thời gian còn lại:</TextBlock>
                             </Border>
                             <TextBlock x:Name="estimate"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
-                            Margin="240 0 0 0">
-
+                                       Margin="10 0 0 0"
+                                       FontSize="15">
                             </TextBlock>
-                        </Grid>
-                        <Grid>
+                        </StackPanel>
+                        <StackPanel
+                            Orientation="Horizontal">
                             <Border 
                         Margin="0 5 0 0"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         BorderBrush="#009e49"
-                        BorderThickness="5">
+                        BorderThickness="5"
+                                Width="250">
                                 <TextBlock                        
                         FontSize="15"
                         FontWeight="Bold"
                         Foreground="White"
                         Background="#55d455"
                         Padding="10 5"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    TextAlignment="Center"
+                                    Width="250"
                         >Số nhóm màu đã tìm thấy:</TextBlock>
                             </Border>
                             <TextBlock x:Name="foundedcolor"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
-                            Margin="230 0 0 0">
-
+                                       Margin="10 0 0 0"
+                                       FontSize="15">
                             </TextBlock>
-                        </Grid>
+                        </StackPanel>
                     </StackPanel>
                     <StackPanel
                     VerticalAlignment="Top"
@@ -191,36 +203,48 @@
                     Grid.Column="2"
                     Grid.Row="1">
                         <TextBlock
-                        HorizontalAlignment="Right">Khoảng thời gian tìm kiếm :</TextBlock>
-                        <TextBlock Foreground="#009e49">
+                        HorizontalAlignment="Right" FontSize="13">Khoảng thời gian tìm kiếm :</TextBlock>
+                        <TextBlock Foreground="#009e49" HorizontalAlignment="Right" FontSize="13">
                         từ ngày 
                         <TextBlock x:Name="start" FontWeight="Bold"></TextBlock>
                         đến ngày
                         <TextBlock x:Name="end" FontWeight="Bold"></TextBlock>
                     </TextBlock>
                         <TextBlock
-                        HorizontalAlignment="Right">Số lượng màu trong mỗi nhóm :</TextBlock>
-                        <TextBlock Foreground="#009e49"
-                               HorizontalAlignment="Right">
-                        <TextBlock x:Name="colorgroup" FontWeight="Bold"></TextBlock>
-                    </TextBlock>
+                        HorizontalAlignment="Right" FontSize="13">Số lượng màu trong mỗi nhóm :</TextBlock>
+                        <TextBlock x:Name="colorgroup" FontWeight="Bold" Foreground="#009e49"
+                               HorizontalAlignment="Right" FontSize="13">aaaaa</TextBlock>
                         <TextBlock
-                        HorizontalAlignment="Right">Ngưỡng số lượng bán ra:</TextBlock>
+                        HorizontalAlignment="Right" FontSize="13">Ngưỡng số lượng bán ra:</TextBlock>
                         <TextBlock Foreground="#009e49"
                                HorizontalAlignment="Right">
-                        <TextBlock x:Name="limitvalue" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="limitvalue" FontWeight="Bold">
+                        </TextBlock>
                     </TextBlock>
                     </StackPanel>
                 </Grid>
-                <!--<ProgressBar
-                        Grid.Column="1"
-                        Grid.Row="2"
-                        HorizontalAlignment="Center"
-                        Height="50"
-                        Margin="0,30,0,0"
-                        VerticalAlignment="Top"
-                        Width="600"
-                        Foreground="Salmon"/>-->
+                <Grid
+                    VerticalAlignment="Top"
+                Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="0.7*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Grid.Column="1">
+                        <ProgressBar x:Name="pbMyProgressBar" Maximum="100" Minimum="0" Height="23"/>
+                        <StackPanel
+                            Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20"> Tiến trình tìm kiếm hiện tại</TextBlock>
+                            <TextBlock Text="{Binding ElementName=pbMyProgressBar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0" FontSize="20" FontWeight="Bold"
+                        Foreground="#009e49"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
             <!--End Mid-->
         </StackPanel>
@@ -230,28 +254,58 @@
             HorizontalAlignment="Center"
             Margin="0 0 0 50 ">
             <!--Start TimKiem Button-->
-            <!--<Rectangle
+            <Grid>
+                <Grid x:Name="continueGrid"
+                      Visibility="Hidden">
+                    <Rectangle
                 Fill="#009e49" 
                 Height="70"
                 Width="385"
                 Stroke="Transparent"
                 StrokeThickness="0">
-            </Rectangle>
-            <Button
+                    </Rectangle>
+                    <Button
                 Background="#55d455" 
                 Height="45"
                 Width="355"
-                BorderThickness="0">
-                <TextBlock
+                BorderThickness="0" Click="continueButton">
+                        <TextBlock x:Name="tieptuctimkiem"
                     Background="Transparent"
                     Foreground="White"
                     FontSize="30"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
-                    NGỪNG TÌM KIẾM
-                </TextBlock>
-            </Button>-->
-            <!--End TimKiem Button-->
+                    TIẾP TỤC TÌM KIẾM
+                        </TextBlock>
+                    </Button>
+                </Grid>
+                <!--End TimKiem Button-->
+                <!--Start Exit button-->
+                <Rectangle
+                Margin="600 0 0 0 "
+                Fill="#009e49" 
+                Height="70"
+                Width="130"
+                Stroke="Transparent"
+                StrokeThickness="0">
+                </Rectangle>
+                <Button
+                Background="#55d455" 
+                Height="45"
+                Width="100"
+                Margin="600 0 0 0 "
+                BorderThickness="0" Click="exitApp"
+                >
+                    <TextBlock x:Name="exit"
+                    Background="Transparent"
+                    Foreground="White"
+                    FontSize="25"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                    THOÁT
+                    </TextBlock>
+                </Button>
+            </Grid>
         </Grid>
         <!--End Btm-->
     </Grid>

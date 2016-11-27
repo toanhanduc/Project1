@@ -41,46 +41,25 @@
                            HorizontalAlignment="Center"
                            Margin="0"/>
             </StackPanel>
-            <TextBlock
-                    FontFamily="Code Bold"
-                    Foreground="White"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    FontSize="40"
-                    Margin="35 0 0 15">
-                    Color
-                    <LineBreak/>
-                    Analysis
-            </TextBlock>
+            <Image
+                Source="/DataProcessing;component/Assets/name.png"
+                Width="160"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin=" 20 0 0 0">
+            </Image>
         </Grid>
         <!--End Top bar-->
         <StackPanel
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
-            <TextBlock
-            FontFamily="Segoe UI Bold"
-            Foreground="#0e6633"
-            FontSize="40"
-            TextAlignment="Center">Welcome
-        <LineBreak></LineBreak>
-        to the Color ananlysis</TextBlock>
-            <Viewbox
-            Width="200"
+            <Image
+                Source="/DataProcessing;component/Assets/intro.png"
+            Width="350"
             Height="Auto"
             VerticalAlignment="Center"
             HorizontalAlignment="Center">
-
-
-
-                <MediaElement 
-                    x:Name="myGif"
-                    UnloadedBehavior="Manual"
-                    Source="Assets\aaa.gif" 
-                    LoadedBehavior="Play"
-                    MediaEnded="myGif_MediaEnded"
-                    Stretch="UniformToFill"
-                    ></MediaElement>
-            </Viewbox>
+            </Image>
         </StackPanel>
         <!--Start Btm-->
         <!--Start Sudung Button-->
