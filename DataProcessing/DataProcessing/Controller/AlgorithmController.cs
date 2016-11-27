@@ -4,6 +4,8 @@ using System.Linq;
 using DataProcessing.Model;
 using System.Windows;
 
+using System.Threading;
+
 namespace DataProcessing.Controller
 {
     public class AlgorithmController
@@ -23,7 +25,6 @@ namespace DataProcessing.Controller
         public void readN(int n)
         {
             model.setN(n);
-            
         }
 
         public void readLimit(int limit)
@@ -1521,8 +1522,7 @@ namespace DataProcessing.Controller
 
 
         // biggestValue: Giá trị lớn nhất
-        // valueCol1: Giá trị của cột được chọn làm mốc 1
-        // valueCol2: Giá trị của cột được chọn làm cột 2
+        // valueCol: Giá trị của cột được chọn làm mốc
         public bool checkToBreak(int n,int biggestValue, int valueCol)
         {
             if (biggestValue % n == 0 && valueCol < biggestValue / n)
@@ -1535,5 +1535,102 @@ namespace DataProcessing.Controller
             }
             return false;
         }
+
+        //public void thread1()
+        //{
+
+        //    thietlaphesoModel model = new thietlaphesoModel();
+        //    //exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, color4, "");
+        //    int n = model.getN();
+        //    int limitedInputValue = model.getLimit();
+        //    string print = "";
+        //    int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
+        //    int[] value = model.getValue();
+        //    int[][] zeroOne = model.getZeroOne();
+        //    int[] index = model.getIndex();
+        //    string[] color = model.getColor();
+            
+        //    for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i = i+2)
+        //    {
+        //        for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
+        //        {
+        //            print = "";
+        //            for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
+        //            {
+        //                for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
+        //                {
+        //                    biggestValue = 0;
+        //                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+        //                    {
+        //                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
+        //                        {
+        //                            biggestValue++;
+        //                        }
+        //                    }
+
+        //                    if (biggestValue < limitedInputValue)
+        //                    {
+        //                        continue;
+        //                    }
+        //                    middle.updateFoundedColor();
+        //                    print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + ": " + biggestValue + Environment.NewLine;
+        //                }
+        //            }
+        //            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("4-outputall.txt", true))
+        //            {
+        //                writetext.Write(print);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //public void thread2()
+        //{
+
+        //    thietlaphesoModel model = new thietlaphesoModel();
+        //    //exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, color4, "");
+        //    int n = model.getN();
+        //    int limitedInputValue = model.getLimit();
+        //    string print = "";
+        //    int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
+        //    int[] value = model.getValue();
+        //    int[][] zeroOne = model.getZeroOne();
+        //    int[] index = model.getIndex();
+        //    string[] color = model.getColor();
+
+        //    for (int i = 1; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i = i + 2)
+        //    {
+        //        for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
+        //        {
+        //            print = "";
+        //            for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
+        //            {
+        //                for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
+        //                {
+        //                    biggestValue = 0;
+        //                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
+        //                    {
+        //                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
+        //                        {
+        //                            biggestValue++;
+        //                        }
+        //                    }
+
+        //                    if (biggestValue < limitedInputValue)
+        //                    {
+        //                        continue;
+        //                    }
+        //                    middle.updateFoundedColor();
+        //                    print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + ": " + biggestValue + Environment.NewLine;
+        //                }
+        //            }
+        //            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("4-outputall.txt", true))
+        //            {
+        //                writetext.Write(print);
+        //            }
+        //        }
+        //    }
+        //}
+
     }
 }
