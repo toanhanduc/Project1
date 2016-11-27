@@ -76,7 +76,6 @@ namespace DataProcessing
                 excelcontroller.getColorAndDate(openfile.FileName);
                 date1.ItemsSource = excelcontroller.fillDateTime();
                 date2.ItemsSource = excelcontroller.fillDateTime();
-
                 combo1.ItemsSource = excelcontroller.fillColorCombobox();
                 combo2.ItemsSource = excelcontroller.fillColorCombobox();
                 combo3.ItemsSource = excelcontroller.fillColorCombobox();

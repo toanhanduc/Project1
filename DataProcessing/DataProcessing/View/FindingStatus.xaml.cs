@@ -37,7 +37,6 @@ namespace DataProcessing
             }
             else
                 limitvalue.Text = thietlapHeSo.limit.ToString();
-
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Interval = 1000; // in miliseconds
             timer1.Start();
@@ -66,6 +65,7 @@ namespace DataProcessing
                     processtime.Text = "0h 0m 0s";
                 }
                 estimate.Text = "0h 0m 0s";
+               
                 pbMyProgressBar.Value = 100;
                 MessageBox.Show("Tìm kiếm kết thúc");
             }

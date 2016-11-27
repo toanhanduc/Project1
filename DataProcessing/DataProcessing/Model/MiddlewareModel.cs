@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DataProcessing.Model
 {
     class MiddlewareModel
     {
         private static int foundedColor = 0;
         private static int foundedColor_MaxValue = 0;
+        /// <summary>
+        /// Set giá trị số màu đã tìm được
+        /// </summary>
         public void setFoundedColor()
         {
             foundedColor += 1;
         }
         /// <summary>
-        /// Get giá trị mảng cột
+        /// Lấy giá trị số màu đã tìm được
         /// </summary>
         /// <returns></returns>
         public int getFoundedColor()
@@ -23,11 +21,17 @@ namespace DataProcessing.Model
             return foundedColor;
         }
 
-
+        /// <summary>
+        /// Set giá trị số màu đã tìm được khi chọn tìm kiếm lớn nhất
+        /// </summary>
         public void setFoundedColorMaxValue()
         {
             foundedColor_MaxValue += 1;
         }
+        /// <summary>
+        /// lấy giá trị số màu đã tìm được khi chọn tìm kiếm lớn nhất
+        /// </summary>
+        /// <returns></returns>
         public int getFoundedColorMaxValue()
         {
             return foundedColor_MaxValue;
