@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using DataProcessing.Model;
-using System.Windows;
-
-using System.Threading;
 
 namespace DataProcessing.Controller
 {
@@ -649,7 +646,6 @@ namespace DataProcessing.Controller
 
                                         }
                                         printOut += print;
-                                        //break;
                                     }
                                     else // 3 mau khong full 1
                                     {
@@ -665,8 +661,7 @@ namespace DataProcessing.Controller
                                             {
                                                 break;
                                             }
-
-                                            //////////////////////////
+                                            
                                             List<int> checkList4 = new List<int>(checkList3);
                                             currentCosts = 0;
 
@@ -863,8 +858,7 @@ namespace DataProcessing.Controller
                                                     {
                                                         continue;
                                                     }
-
-                                                    /////////////////////////
+                                                    
                                                     List<int> checkList5 = new List<int>(checkList4);
                                                     currentCosts = 0;
 
@@ -966,7 +960,6 @@ namespace DataProcessing.Controller
                     }
                 }
                 max[i] = biggestValue;
-                //printOut += print;
                 if (value[i + 1] < value[i])
                 {
                     break;
@@ -1084,49 +1077,6 @@ namespace DataProcessing.Controller
             string[] color = model.getColor();
 
             n = 3;
-            //Console.WriteLine(color[0]);
-            //for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-            //{
-            //    Console.WriteLine(zeroOne[0][temp]);
-            //}
-            //Console.WriteLine("-----");
-            //Console.WriteLine(color[1]);
-            //for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-            //{
-            //    Console.WriteLine(zeroOne[1][temp]);
-            //}
-            //Console.WriteLine("-----");
-            //Console.WriteLine(color[2]);
-            //for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-            //{
-            //    Console.WriteLine(zeroOne[2][temp]);
-            //}
-            //Console.WriteLine("-----");
-            //Console.WriteLine(color[3]);
-            //for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-            //{
-            //    Console.WriteLine(zeroOne[3][temp]);
-            //}
-            //Console.WriteLine("-----");
-            //Console.WriteLine(color[4]);
-            //for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-            //{
-            //    Console.WriteLine(zeroOne[4][temp]);
-            //}
-            //Console.WriteLine("-----");
-            //Console.WriteLine(color[5]);
-            //for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-            //{
-            //    Console.WriteLine(zeroOne[5][temp]);
-            //}
-            //Console.WriteLine("-----");
-            //Console.WriteLine(color[6]);
-            //for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-            //{
-            //    Console.WriteLine(zeroOne[6][temp]);
-            //}
-            //Console.WriteLine("-----");
-
 
             if (nColorChose == 0) // truờng hợp mặc định: in bt
             {
@@ -1219,7 +1169,6 @@ namespace DataProcessing.Controller
                             {
                                 continue;
                             }
-                            //print += color[i] + " " + color[j] + " " + color[q] + ": " + biggestValue + Environment.NewLine;
 
                             String[] colorOut = new String[3];
                             int[] colorOutIndex = new int[3];
@@ -1849,102 +1798,5 @@ namespace DataProcessing.Controller
             }
             return false;
         }
-
-        //public void thread1()
-        //{
-
-        //    thietlaphesoModel model = new thietlaphesoModel();
-        //    //exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, color4, "");
-        //    int n = model.getN();
-        //    int limitedInputValue = model.getLimit();
-        //    string print = "";
-        //    int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
-        //    int[] value = model.getValue();
-        //    int[][] zeroOne = model.getZeroOne();
-        //    int[] index = model.getIndex();
-        //    string[] color = model.getColor();
-            
-        //    for (int i = 0; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i = i+2)
-        //    {
-        //        for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
-        //        {
-        //            print = "";
-        //            for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
-        //            {
-        //                for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
-        //                {
-        //                    biggestValue = 0;
-        //                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-        //                    {
-        //                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
-        //                        {
-        //                            biggestValue++;
-        //                        }
-        //                    }
-
-        //                    if (biggestValue < limitedInputValue)
-        //                    {
-        //                        continue;
-        //                    }
-        //                    middle.updateFoundedColor();
-        //                    print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + ": " + biggestValue + Environment.NewLine;
-        //                }
-        //            }
-        //            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("4-outputall.txt", true))
-        //            {
-        //                writetext.Write(print);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //public void thread2()
-        //{
-
-        //    thietlaphesoModel model = new thietlaphesoModel();
-        //    //exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, color4, "");
-        //    int n = model.getN();
-        //    int limitedInputValue = model.getLimit();
-        //    string print = "";
-        //    int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
-        //    int[] value = model.getValue();
-        //    int[][] zeroOne = model.getZeroOne();
-        //    int[] index = model.getIndex();
-        //    string[] color = model.getColor();
-
-        //    for (int i = 1; i < model.getColCount() - n - ExcelController.duplicateindex.Count; i = i + 2)
-        //    {
-        //        for (int j = i + 1; j < model.getColCount() - n + 1 - ExcelController.duplicateindex.Count; j++)
-        //        {
-        //            print = "";
-        //            for (int q = j + 1; q < model.getColCount() - n + 2 - ExcelController.duplicateindex.Count; q++)
-        //            {
-        //                for (int k = q + 1; k < model.getColCount() - n + 3 - ExcelController.duplicateindex.Count; k++)
-        //                {
-        //                    biggestValue = 0;
-        //                    for (int temp = 0; temp < ExcelController.ngayketthuc - ExcelController.ngaybatdau + 1; temp++)
-        //                    {
-        //                        if (zeroOne[i][temp] == 1 || zeroOne[j][temp] == 1 || zeroOne[q][temp] == 1 || zeroOne[k][temp] == 1)
-        //                        {
-        //                            biggestValue++;
-        //                        }
-        //                    }
-
-        //                    if (biggestValue < limitedInputValue)
-        //                    {
-        //                        continue;
-        //                    }
-        //                    middle.updateFoundedColor();
-        //                    print += color[i] + " " + color[j] + " " + color[q] + " " + color[k] + ": " + biggestValue + Environment.NewLine;
-        //                }
-        //            }
-        //            using (System.IO.StreamWriter writetext = new System.IO.StreamWriter("4-outputall.txt", true))
-        //            {
-        //                writetext.Write(print);
-        //            }
-        //        }
-        //    }
-        //}
-
     }
 }

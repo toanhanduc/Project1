@@ -1,5 +1,4 @@
-﻿
-using DataProcessing.Model;
+﻿using DataProcessing.Model;
 using System.Numerics;
 
 namespace DataProcessing.Controller

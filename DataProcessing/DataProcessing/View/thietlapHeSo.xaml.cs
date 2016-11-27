@@ -25,10 +25,7 @@ namespace DataProcessing
         string color1, color2, color3, color4, color5;
         Boolean group2 = false, group3 = false, group4 = false, group5 = false;       
         Boolean colorgroup0 = false, colorgroup1 = false, colorgroup2 = false, colorgroup3 = false, colorgroup4 = false, colorgroup5 = false;
-    
-
-        //public bool check = false;
-
+   
         public thietlapHeSo()
         {
             InitializeComponent();
@@ -62,7 +59,6 @@ namespace DataProcessing
             openfile.DefaultExt = ".xls";
 
             openfile.Filter = "(.xls)|*.xls|(.xlsx)|*.xlsx";
-            //openfile.ShowDialog();
 
             var browsefile = openfile.ShowDialog();
 

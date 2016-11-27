@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using DataProcessing.Controller;
@@ -162,8 +161,7 @@ namespace DataProcessing
                         }
                     }
                 }
-
-                // estimate.Text = (totalcolor).ToString();
+                
                 if (thietlapHeSo.findmax == false)
                 {
                     processSpeed.Text = speed1.ToString() + " nhóm màu/s";

@@ -1,5 +1,4 @@
-﻿
-namespace DataProcessing.Model
+﻿namespace DataProcessing.Model
 {
     class MiddlewareModel
     {

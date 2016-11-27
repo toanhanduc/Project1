@@ -52,20 +52,6 @@ namespace DataProcessing.Controller
                 }
             }
 
-            //Dictionary<string, int> hashmap = new Dictionary<string, int>();
-            //for (int i = 0; i< value.Count; i++)
-            //{
-            //    try
-            //    {
-            //        hashmap.Add(color[i], value[i]);
-            //    }
-            //    catch(Exception e)
-            //    {
-            //        continue;
-            //    }
-            //}
-
-
             //In output mới
             using (StreamWriter writetext = new StreamWriter(n +  "-output.txt"))
             {

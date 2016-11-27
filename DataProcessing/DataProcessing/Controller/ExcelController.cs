@@ -373,10 +373,6 @@ namespace DataProcessing.Controller
                 string tmp3 = "";
                 for (int i = 1; i < value.Length - duplicateindex.Count; i++)
                 {
-                    //if (check == true && i == 0)
-                    //{
-                    //    continue;
-                    //}
                     for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
@@ -398,25 +394,6 @@ namespace DataProcessing.Controller
                             }
                         }
                     }
-                    //if (color[i] == "BO")
-                    //{
-                    //    tmp4 = color[i];
-                    //    tmp5 = value[i];
-                    //    tmpindex0 = index[i];
-                    //    color[i] = color[0];
-                    //    value[i] = value[0];
-                    //    index[i] = index[0];
-                    //    color[0] = tmp4;
-                    //    value[0] = tmp5;
-                    //    index[0] = tmpindex0;
-                    //    for (int n = 0; n < ngayketthuc - ngaybatdau + 1; n++)
-                    //    {
-                    //        tmp6 = zeroOne[i][n];
-                    //        zeroOne[i][n] = zeroOne[0][n];
-                    //        zeroOne[0][n] = tmp6;
-                    //    }
-                    //    break;
-                    //}     
                 }
             }
             else if (ncolor == 2) //Người dùng nhập sẵn 2 mã màu
@@ -474,10 +451,6 @@ namespace DataProcessing.Controller
                 string tmp3 = "";
                 for (int i = 2; i < value.Length; i++)
                 {
-                    //if (check == true && i == 0)
-                    //{
-                    //    continue;
-                    //}
                     for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
@@ -501,7 +474,6 @@ namespace DataProcessing.Controller
                     }
                 }
             }
-            //ncolor = 3
             else if (ncolor == 3)
             {
                 for (int i = 0; i < model.getColCount() - 1 - duplicateindex.Count; i++)
@@ -584,10 +556,6 @@ namespace DataProcessing.Controller
                 string tmp3 = "";
                 for (int i = 3; i < value.Length - duplicateindex.Count; i++)
                 {
-                    //if (check == true && i == 0)
-                    //{
-                    //    continue;
-                    //}
                     for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
@@ -611,7 +579,6 @@ namespace DataProcessing.Controller
                     }
                 }
             }
-            //ncolor = 4
             else if (ncolor == 4)
             {
                 for (int i = 0; i < model.getColCount() - 1 - duplicateindex.Count; i++)
@@ -720,10 +687,6 @@ namespace DataProcessing.Controller
                 string tmp3 = "";
                 for (int i = 4; i < value.Length - duplicateindex.Count; i++)
                 {
-                    //if (check == true && i == 0)
-                    //{
-                    //    continue;
-                    //}
                     for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
@@ -747,7 +710,6 @@ namespace DataProcessing.Controller
                     }
                 }
             }
-            //ncolor = 5
             else if (ncolor == 5)
             {
                 //sắp xếp mảng
@@ -884,10 +846,6 @@ namespace DataProcessing.Controller
                 string tmp3 = "";
                 for (int i = 5; i < value.Length - duplicateindex.Count; i++)
                 {
-                    //if (check == true && i == 0)
-                    //{
-                    //    continue;
-                    //}
                     for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                     {
                         if (value[i] < value[j])
@@ -927,10 +885,6 @@ namespace DataProcessing.Controller
             string tmp3 = "";
             for (int i = 0; i < value.Length - duplicateindex.Count; i++)
             {
-                //if (check == true && i == 0)
-                //{
-                //    continue;
-                //}
                 for (int j = i + 1; j < value.Length - duplicateindex.Count; j++)
                 {
                     if (value[i] < value[j])
