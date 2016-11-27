@@ -83,6 +83,7 @@ namespace DataProcessing.Controller
                 catch (Exception e)
                 {
                     View.Warning.Show("Màu " + colorname + " đã trùng");
+                    X:
                     if (View.Warning.yourchoise == 1)
                     {
                         duplicateindex.Add(colorcount + duplicateindex.Count);
@@ -106,22 +107,18 @@ namespace DataProcessing.Controller
                     }
                     else if (View.Warning.yourchoise == 3)
                     {
-                        int checkwhile = 0;
-                        do
-                        {
                             try
                             {
                                 hashmap.Add(View.Warning.newnamecolor, 0);
-                                checkwhile = 1;
                                 color[colorcount] = View.Warning.newnamecolor;
                                 colordefault[colorcount] = View.Warning.newnamecolor;
                             }
                             catch (Exception a)
                             {
                                 View.Warning.Show("Màu " + View.Warning.newnamecolor + " đã tồn tại");
+                                colorname = View.Warning.newnamecolor;
+                                goto X;
                             }
-                        } while (checkwhile == 1);
-
                     }
                 }
                 colorcount++;

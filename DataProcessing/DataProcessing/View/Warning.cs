@@ -100,8 +100,6 @@ namespace DataProcessing.View
                 }
                 else
                 {
-                    // MessageBox.Show("Đã đổi mã màu " + " + View.Warning.newnamecolor");
-                    // Application.Exit();
                     this.Visible = false;
                 }
             }
@@ -116,7 +114,7 @@ namespace DataProcessing.View
         private void button2_Click(object sender, EventArgs e)
         {
             yourchoise = 4;
-            Application.Exit();
+            this.Visible = false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
