@@ -138,14 +138,12 @@ namespace DataProcessing.Controller
             }
             //Lấy mã ngày vào mảng
             int datecount = 0;
-            int start = Environment.TickCount;
             for (int row = 2; row <= model.getRowCount(); row++)
             {
                 string cell = (WS.Cells[1][row] as Excel.Range).Value == null ? "" : (WS.Cells[1][row] as Excel.Range).Value.ToString("M/dd/yyyy");
                 datetime[datecount] = cell;
                 datecount++;
             }
-            MessageBox.Show("Khoanh vùng hết: " + ((double)(Environment.TickCount - start) / 1000).ToString() + "s");
             model.setColor(color);
             model.setColorDefault(colordefault);
             model.setDateTime(datetime);
@@ -153,6 +151,7 @@ namespace DataProcessing.Controller
             excel.Quit();
 
         }
+
 
         public void readExcel(String path)
         {
@@ -972,9 +971,6 @@ namespace DataProcessing.Controller
             model.setColor(color);
             model.setValue(value);
             model.setZeroOne(zeroOne);
-
         }
-
-
     }
 }

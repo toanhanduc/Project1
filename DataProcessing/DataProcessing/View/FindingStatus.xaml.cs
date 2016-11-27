@@ -29,7 +29,7 @@ namespace DataProcessing
             end.Text = thietlapHeSo.enddatetime;
             colorgroup.Text = thietlapHeSo.n.ToString();
             totalcolor = MiddlewareController.estimateTime(middle.getExcelCol(), thietlapHeSo.n);
-            number1 = (decimal) totalcolor;
+            number1 = (decimal)totalcolor;
             totalcolor_old = totalcolor;
             if (thietlapHeSo.limit.ToString() == "")
             {
@@ -52,7 +52,7 @@ namespace DataProcessing
             if (thietlapHeSo.checkstop)
             {
                 timer1.Stop();
-                if(thietlapHeSo.findmax == false)
+                if (thietlapHeSo.findmax == false)
                 {
                     foundedcolor.Text = middle.getFoundedColorValue().ToString();
                 }
@@ -86,12 +86,12 @@ namespace DataProcessing
 
                 speed1 = middle.getFoundedColorValue() - speed2;
                 speed2 += speed1;
-                processSpeed.Text = speed1.ToString() + " màu/s";
+
 
                 sp = speed1;
                 totalcolor -= sp;
 
-                if(giay == 1 && phut == 0 && gio == 0)
+                if (giay == 1 && phut == 0 && gio == 0)
                 {
                     es_giay = totalcolor / sp;
                     es_giay_old = es_giay;
@@ -115,17 +115,32 @@ namespace DataProcessing
                         es_giay %= 3600;
                         es_phut = es_giay / 60;
                         es_giay %= 60;
-                        estimate.Text = es_gio.ToString() + "h " + es_phut.ToString() + "m " + es_giay.ToString() + "s";
+                        if (thietlapHeSo.findmax == false)
+                        {
+                            estimate.Text = es_gio.ToString() + "h " + es_phut.ToString() + "m " + es_giay.ToString() + "s";
+                        }
+                        else
+                        {
+                            estimate.Text = "Đang cập nhật ...";
+                        }
                     }
                 }
 
                 // estimate.Text = (totalcolor).ToString();
-                
-                foundedcolor.Text = middle.getFoundedColorValue().ToString();
-                foundcolor = (decimal) middle.getFoundedColorValue();
-                convertBigInt += (Decimal.Divide(foundcolor - foundcolor_old, number1)*100);
-                foundcolor_old = foundcolor;
-                pbMyProgressBar.Value = (double) convertBigInt;
+                if (thietlapHeSo.findmax == false)
+                {
+                    processSpeed.Text = speed1.ToString() + " nhóm màu/s";
+                    foundedcolor.Text = middle.getFoundedColorValue().ToString();
+                    foundcolor = (decimal)middle.getFoundedColorValue();
+                    convertBigInt += (Decimal.Divide(foundcolor - foundcolor_old, number1) * 100);
+                    foundcolor_old = foundcolor;
+                    pbMyProgressBar.Value = (double)convertBigInt;
+                }
+                else
+                {
+                    processSpeed.Text = "Đang cập nhật ...";
+                    foundedcolor.Text = "Đang cập nhật ...";
+                }
             }
 
         }

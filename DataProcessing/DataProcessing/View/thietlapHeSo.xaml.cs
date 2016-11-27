@@ -46,6 +46,11 @@ namespace DataProcessing
             }
         }
 
+        public void comboBoxValue(ComboBox a, string[] array)
+        {
+            a.ItemsSource = array;
+        }
+
 
         /// <summary>
         /// Mở đường dẫn đến file xls, xlsx và điền đường dẫn vào textbox
@@ -64,12 +69,14 @@ namespace DataProcessing
 
             if (browsefile == true)
             {
-                txtFilePath.Text = openfile.FileName;
-                txtpath = openfile.FileName;
                 searchbutton.Text = "ĐANG TINH CHỈNH ...";
-                await Task.Run(() => excelcontroller.getColorAndDate(openfile.FileName));
+                MessageBox.Show("Bạn vừa nhập đường dẫn: " + openfile.FileName);
+                txtFilePath.Text = openfile.FileName;
+                txtpath = openfile.FileName;         
+                excelcontroller.getColorAndDate(openfile.FileName);
                 date1.ItemsSource = excelcontroller.fillDateTime();
                 date2.ItemsSource = excelcontroller.fillDateTime();
+
                 combo1.ItemsSource = excelcontroller.fillColorCombobox();
                 combo2.ItemsSource = excelcontroller.fillColorCombobox();
                 combo3.ItemsSource = excelcontroller.fillColorCombobox();
@@ -211,7 +218,8 @@ namespace DataProcessing
             else
             {
                 searchbutton.Text = "ĐANG ĐỌC DỮ LIỆU ...";
-                await Task.Run(() => excelcontroller.readExcel(txtpath));
+                MessageBox.Show("Đang đọc dữ liệu từ: " + txtpath);
+                excelcontroller.readExcel(txtpath);
 
 
                 //tìm lớn nhất
