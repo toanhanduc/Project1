@@ -109,15 +109,16 @@
                     </Button>
                 </Grid>
                 <!--End Browse Button-->
-                <TextBlock
-                          Grid.Row="1"                    
-                        Grid.Column="1"
-                        VerticalAlignment="Center"
+                <StackPanel Grid.Row="1"                    
+                        Grid.Column="1">
+                    <TextBlock
+                    VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         Margin="0 15 0 0"
                         FontSize="35"
                         FontWeight="Bold"
                         Foreground="#009e49">Thiết lập tham số</TextBlock>
+                </StackPanel>
                 <!--Start Thoi gian tim kiem -->
                 <StackPanel
                     Grid.Column="1"

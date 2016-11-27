@@ -60,6 +60,18 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center">
             </Image>
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="30">
+                Nhóm P1_01
+            </TextBlock>
+            <TextBlock FontSize="20" HorizontalAlignment="Center">
+                Hán Đức Toàn
+                <LineBreak></LineBreak>
+                Phạm Xuân Hồng
+                <LineBreak></LineBreak>
+                Phạm Khắc Hoài Nam
+            </TextBlock>
         </StackPanel>
         <!--Start Btm-->
         <!--Start Sudung Button-->
