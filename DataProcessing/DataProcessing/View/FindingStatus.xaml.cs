@@ -14,8 +14,6 @@ namespace DataProcessing
     public partial class FindingStatus : Page
     {
         MiddlewareController middle = new MiddlewareController();
-        MiddlewareModel midmodel = new MiddlewareModel();
-        thietlaphesoModel model = new thietlaphesoModel();
         private Timer timer1 = new Timer();
         int gio = 0, phut = 0, giay = 0;
         int speed1 = 0, speed2 = 0;
@@ -26,8 +24,29 @@ namespace DataProcessing
 
         private void continueButton(object sender, System.Windows.RoutedEventArgs e)
         {
-            model.setColCount(1);
-            model.setRowCount(1);
+            thietlaphesoModel.colcount = 1;
+            thietlaphesoModel.rowcount = 1;
+            Array.Clear(thietlaphesoModel.color, 0, thietlaphesoModel.color.Length);
+            Array.Clear(thietlaphesoModel.colordefault, 0, thietlaphesoModel.colordefault.Length);
+            Array.Clear(thietlaphesoModel.datetime, 0, thietlaphesoModel.datetime.Length);
+            Array.Clear(thietlaphesoModel.value, 0, thietlaphesoModel.value.Length);
+            Array.Clear(thietlaphesoModel.zeroOne, 0, thietlaphesoModel.zeroOne.Length);
+            Array.Clear(thietlaphesoModel.index, 0, thietlaphesoModel.index.Length);
+            thietlaphesoModel.n = 0;
+            thietlaphesoModel.limitvalue = 0;
+            MiddlewareModel.foundedColor = 0;
+            MiddlewareModel.foundedColor_MaxValue = 0;
+            thietlapHeSo.checkstop = false;
+            thietlapHeSo.findmax = true;
+            MiddlewareController.tu = 1;
+            MiddlewareController.mau = 1;
+            ExcelController.duplicateindex.Clear();
+            ExcelController.mergeduplicateindex.Clear();
+            ExcelController.tempo.Clear();
+            ExcelController.origin_color_index.Clear();
+            thietlapHeSo.n = 0;
+            thietlapHeSo.ncolor = 0;
+
             thietlapHeSo tlhs = new thietlapHeSo();
             this.NavigationService.Navigate(tlhs);
         }
@@ -82,7 +101,7 @@ namespace DataProcessing
                     processtime.Text = "0h 0m 0s";
                 }
                 estimate.Text = "0h 0m 0s";
-               
+
                 pbMyProgressBar.Value = 100;
                 continueGrid.Visibility = System.Windows.Visibility.Visible;
                 MessageBox.Show("Tìm kiếm kết thúc");

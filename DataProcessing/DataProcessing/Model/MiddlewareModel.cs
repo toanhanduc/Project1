@@ -3,8 +3,8 @@ namespace DataProcessing.Model
 {
     class MiddlewareModel
     {
-        private static int foundedColor = 0;
-        private static int foundedColor_MaxValue = 0;
+        public static int foundedColor = 0;
+        public static int foundedColor_MaxValue = 0;
         /// <summary>
         /// Set giá trị số màu đã tìm được
         /// </summary>

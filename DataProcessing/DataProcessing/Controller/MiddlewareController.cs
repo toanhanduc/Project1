@@ -8,8 +8,7 @@ namespace DataProcessing.Controller
     {
         MiddlewareModel model = new MiddlewareModel();
         thietlaphesoModel tlhs = new thietlaphesoModel();
-        static BigInteger tu = 1, mau = 1;
-        public static int i = 0;
+        public static BigInteger tu = 1, mau = 1;
         public void updateFoundedColor()
         {
             model.setFoundedColor();

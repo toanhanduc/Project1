@@ -4,8 +4,7 @@ using System.Windows.Controls;
 using Microsoft.Win32;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Threading;
-using System.Threading;
+using DataProcessing.Model;
 
 namespace DataProcessing
 {
@@ -74,6 +73,7 @@ namespace DataProcessing
                 txtFilePath.Text = openfile.FileName;
                 txtpath = openfile.FileName;         
                 excelcontroller.getColorAndDate(openfile.FileName);
+                searchbutton.Text = "TIẾN HÀNH TÌM KIẾM";
                 date1.ItemsSource = excelcontroller.fillDateTime();
                 date2.ItemsSource = excelcontroller.fillDateTime();
                 combo1.ItemsSource = excelcontroller.fillColorCombobox();
@@ -81,8 +81,6 @@ namespace DataProcessing
                 combo3.ItemsSource = excelcontroller.fillColorCombobox();
                 combo4.ItemsSource = excelcontroller.fillColorCombobox();
                 combo5.ItemsSource = excelcontroller.fillColorCombobox();
-                searchbutton.Text = "TIẾN HÀNH TÌM KIẾM";
-
             }
 
 
@@ -205,6 +203,10 @@ namespace DataProcessing
             else if (!group2 && !group3 && !group4 && !group5)
             {
                 MessageBox.Show("Bạn chưa chọn nhóm màu");
+            }
+            else if(n > thietlaphesoModel.colcount)
+            {
+                MessageBox.Show("File có ít màu hơn nhóm màu bạn chọn tìm kiếm");
             }
             else if (blankcolor)
             {

@@ -13,7 +13,6 @@ namespace DataProcessing.Controller
     {
         thietlaphesoModel model = new thietlaphesoModel();
         public static int ngaybatdau = 0, ngayketthuc = 0;
-        public static bool check = false;
         public static int ncolor = 0;
         public static int colprogress = 0;
         public static List<int> duplicateindex = new List<int>();
@@ -23,7 +22,6 @@ namespace DataProcessing.Controller
         public static List<int> origin_color_index = new List<int>();
         public static int cotdautien = 0;
 
-        public object Interaction { get; private set; }
 
         public void setNColor(int numberinputcolor)
         {
@@ -41,15 +39,7 @@ namespace DataProcessing.Controller
             return array;
         }
 
-        public void setColorProgress(int colpro)
-        {
-            colprogress = colpro;
-        }
 
-        public int getColorProgress()
-        {
-            return colprogress;
-        }
 
         public void getColorAndDate(String path)
         {
@@ -250,7 +240,6 @@ namespace DataProcessing.Controller
 
                     }
                     value[i - 2] = temp;
-                    setColorProgress(i - 1);
                 }
                 //Nếu đã có màu trùng
                 else if (check_count_duplicate != 0)

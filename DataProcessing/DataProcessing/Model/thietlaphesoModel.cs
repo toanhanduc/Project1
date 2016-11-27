@@ -4,16 +4,16 @@ namespace DataProcessing.Model
 {
     public class thietlaphesoModel
     {
-        private static int colcount = 1;
-        private static int rowcount = 1;
-        private static String[] color = new String[colcount - 1];
-        private static String[] colordefault = new String[colcount - 1];
-        private static String[] datetime = new String[rowcount - 1];
-        private static int[] value = new int[colcount - 1];
-        private static int[][] zeroOne = new int[colcount - 1][];
-        private static int[] index = new int[colcount - 1];
-        private static int n = 0;
-        private static int limitvalue = 0;
+        public static int colcount = 1;
+        public static int rowcount = 1;
+        public static String[] color = new String[colcount - 1];
+        public static String[] colordefault = new String[colcount - 1];
+        public static String[] datetime = new String[rowcount - 1];
+        public static int[] value = new int[colcount - 1];
+        public static int[][] zeroOne = new int[colcount - 1][];
+        public static int[] index = new int[colcount - 1];
+        public static int n = 0;
+        public static int limitvalue = 0;
 
 
         /// <summary>
