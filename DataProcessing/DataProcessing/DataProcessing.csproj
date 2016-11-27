@@ -155,7 +155,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\aaa.gif" />
+    <Resource Include="Assets\name.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\intro.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

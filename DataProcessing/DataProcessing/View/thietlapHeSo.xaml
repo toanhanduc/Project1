@@ -41,17 +41,13 @@
                                VerticalAlignment="Top"
                                HorizontalAlignment="Center"/>
                 </StackPanel>
-                <TextBlock
-                    FontFamily="Code Bold"
-                    Foreground="White"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
-                    FontSize="40"
-                    Margin="35 0 0 15">
-                    Color
-                    <LineBreak/>
-                    Analysis
-                </TextBlock>
+                <Image
+                Source="/DataProcessing;component/Assets/name.png"
+                Width="160"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Margin=" 20 0 0 0">
+                </Image>
             </Grid>
             <!--End Top bar-->
             <!--Start Mid-->
