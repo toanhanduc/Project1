@@ -9,7 +9,7 @@ namespace DataProcessing.Model
     class MiddlewareModel
     {
         private static int foundedColor = 0;
-
+        private static int foundedColor_MaxValue = 0;
         public void setFoundedColor()
         {
             foundedColor += 1;
@@ -21,6 +21,16 @@ namespace DataProcessing.Model
         public int getFoundedColor()
         {
             return foundedColor;
+        }
+
+
+        public void setFoundedColorMaxValue()
+        {
+            foundedColor_MaxValue += 1;
+        }
+        public int getFoundedColorMaxValue()
+        {
+            return foundedColor_MaxValue;
         }
 
     }

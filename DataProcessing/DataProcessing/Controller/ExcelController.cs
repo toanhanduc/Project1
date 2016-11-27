@@ -348,7 +348,6 @@ namespace DataProcessing.Controller
                     }
                 }
             }
-            MessageBox.Show("ok");
             model.setValue(value);
             model.setZeroOne(zeroOne);
             excel.Quit();

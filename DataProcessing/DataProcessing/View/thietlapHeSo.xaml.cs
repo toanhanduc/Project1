@@ -19,12 +19,12 @@ namespace DataProcessing
         public static string txtpath = "";
         public static int n = 0;
         public static int ncolor = 0;
-        public static Boolean checkstop = false;
+        public static Boolean checkstop = false, findmax = true;
         Controller.ExcelController excelcontroller = new Controller.ExcelController();
         Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
         Controller.OutputController outcontroller = new Controller.OutputController();
         string color1, color2, color3, color4, color5;
-        Boolean group2 = false, group3 = false, group4 = false, group5 = false, findmax = true;
+        Boolean group2 = false, group3 = false, group4 = false, group5 = false;       
         Boolean colorgroup0 = false, colorgroup1 = false, colorgroup2 = false, colorgroup3 = false, colorgroup4 = false, colorgroup5 = false;
     
 
@@ -217,7 +217,8 @@ namespace DataProcessing
                 //tìm lớn nhất
                 if (findmax)
                 {
-
+                    FindingStatus find = new FindingStatus();
+                    this.NavigationService.Navigate(find);
                     if (limit == "")
                     {
                         tlhscontroller.readLimit(0);
@@ -231,26 +232,30 @@ namespace DataProcessing
                     if (group2)
                     {
                         await Task.Run(new Action(tlhscontroller.processGroup));
+                        await Task.Run(() => outcontroller.sortOutPut(2));
+                        await Task.Run(() => outcontroller.countColorNumberMaxValue(2));
                         checkstop = true;
-                        outcontroller.sortOutPut(2);
                     }
                     else if (group3)
                     {
                         await Task.Run(new Action(tlhscontroller.processGroup));
+                        await Task.Run(() => outcontroller.sortOutPut(3));
+                        await Task.Run(() => outcontroller.countColorNumberMaxValue(3));
                         checkstop = true;
-                        outcontroller.sortOutPut(3);
                     }
                     else if (group4)
                     {
                         await Task.Run(new Action(tlhscontroller.processGroup));
+                        await Task.Run(() => outcontroller.sortOutPut(4));
+                        await Task.Run(() => outcontroller.countColorNumberMaxValue(4));
                         checkstop = true;
-                        outcontroller.sortOutPut(4);
                     }
                     else if (group5)
                     {
                         await Task.Run(new Action(tlhscontroller.processGroup));
+                        await Task.Run(() => outcontroller.sortOutPut(5));
+                        await Task.Run(() => outcontroller.countColorNumberMaxValue(5));
                         checkstop = true;
-                        outcontroller.sortOutPut(5);
                     }
                 }
                 else

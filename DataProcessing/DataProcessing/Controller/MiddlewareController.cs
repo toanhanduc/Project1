@@ -23,6 +23,10 @@ namespace DataProcessing.Controller
         {
             return model.getFoundedColor();
         }
+        public int getColorNumberMaxValue()
+        {
+            return model.getFoundedColorMaxValue();
+        }
 
         static BigInteger tu = 1, mau = 1;
         public static BigInteger estimateTime(int n, int k)
@@ -43,5 +47,7 @@ namespace DataProcessing.Controller
         {
             return tlhs.getColCount() - 1;
         }
+
+
     }
 }

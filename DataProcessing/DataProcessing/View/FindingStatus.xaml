@@ -210,6 +210,8 @@
                                HorizontalAlignment="Right">
                         <TextBlock x:Name="limitvalue" FontWeight="Bold"></TextBlock>
                     </TextBlock>
+                        <ProgressBar x:Name="pbMyProgressBar" Maximum="100" Minimum="0" Height="23"/>
+                        <TextBlock Text="{Binding ElementName=pbMyProgressBar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </StackPanel>
                 </Grid>
                 <!--<ProgressBar
@@ -229,6 +231,7 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
             Margin="0 0 0 50 ">
+            
             <!--Start TimKiem Button-->
             <!--<Rectangle
                 Fill="#009e49" 

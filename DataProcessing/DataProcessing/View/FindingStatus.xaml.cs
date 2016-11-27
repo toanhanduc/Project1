@@ -18,7 +18,9 @@ namespace DataProcessing
         int speed1 = 0, speed2 = 0;
         BigInteger sp = 1;
         BigInteger totalcolor = 0;
-        BigInteger es_gio = 0, es_phut = 0, es_giay = 0;
+        BigInteger totalcolor_old = (BigInteger)Decimal.MaxValue;
+        Decimal foundcolor, foundcolor_old, number1, convertBigInt;
+        BigInteger es_gio = 0, es_phut = 0, es_giay = 0, es_giay_old = 0;
         public FindingStatus()
         {
 
@@ -26,8 +28,9 @@ namespace DataProcessing
             start.Text = thietlapHeSo.startdatetime;
             end.Text = thietlapHeSo.enddatetime;
             colorgroup.Text = thietlapHeSo.n.ToString();
-            totalcolor =  MiddlewareController.estimateTime(middle.getExcelCol(), thietlapHeSo.n);
-            Console.WriteLine(totalcolor);
+            totalcolor = MiddlewareController.estimateTime(middle.getExcelCol(), thietlapHeSo.n);
+            number1 = (decimal) totalcolor;
+            totalcolor_old = totalcolor;
             if (thietlapHeSo.limit.ToString() == "")
             {
                 limitvalue.Text = "0";
@@ -49,13 +52,21 @@ namespace DataProcessing
             if (thietlapHeSo.checkstop)
             {
                 timer1.Stop();
-                foundedcolor.Text = middle.getFoundedColorValue().ToString();
+                if(thietlapHeSo.findmax == false)
+                {
+                    foundedcolor.Text = middle.getFoundedColorValue().ToString();
+                }
+                else
+                {
+                    foundedcolor.Text = middle.getColorNumberMaxValue().ToString();
+                }
                 processSpeed.Text = "0";
                 if (giay < 1)
                 {
                     processtime.Text = "0h 0m 0s";
                 }
-                estimate.Text =  "0h 0m 0s";
+                estimate.Text = "0h 0m 0s";
+                pbMyProgressBar.Value = 100;
                 MessageBox.Show("Tìm kiếm kết thúc");
             }
             else
@@ -79,15 +90,42 @@ namespace DataProcessing
 
                 sp = speed1;
                 totalcolor -= sp;
-                es_giay = totalcolor / sp;
-                es_gio = es_giay / 3600;
-                es_giay %= 3600;
-                es_phut = es_giay / 60;
-                es_giay %= 60;
-                estimate.Text = es_gio.ToString() + "h " + es_phut.ToString() + "m " + es_giay.ToString() + "s";
-               // estimate.Text = (totalcolor).ToString();
 
+                if(giay == 1 && phut == 0 && gio == 0)
+                {
+                    es_giay = totalcolor / sp;
+                    es_giay_old = es_giay;
+                    es_gio = es_giay / 3600;
+                    es_giay %= 3600;
+                    es_phut = es_giay / 60;
+                    es_giay %= 60;
+                    estimate.Text = es_gio.ToString() + "h " + es_phut.ToString() + "m " + es_giay.ToString() + "s";
+                }
+                else
+                {
+                    if (sp == 0)
+                    {
+                        sp = 1;
+                    }
+                    if (es_giay_old > (totalcolor / sp))
+                    {
+                        es_giay = totalcolor / sp;
+                        es_giay_old = es_giay;
+                        es_gio = es_giay / 3600;
+                        es_giay %= 3600;
+                        es_phut = es_giay / 60;
+                        es_giay %= 60;
+                        estimate.Text = es_gio.ToString() + "h " + es_phut.ToString() + "m " + es_giay.ToString() + "s";
+                    }
+                }
+
+                // estimate.Text = (totalcolor).ToString();
+                
                 foundedcolor.Text = middle.getFoundedColorValue().ToString();
+                foundcolor = (decimal) middle.getFoundedColorValue();
+                convertBigInt += (Decimal.Divide(foundcolor - foundcolor_old, number1)*100);
+                foundcolor_old = foundcolor;
+                pbMyProgressBar.Value = (double) convertBigInt;
             }
 
         }

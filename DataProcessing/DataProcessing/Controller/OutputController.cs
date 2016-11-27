@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using DataProcessing.Model;
 
 namespace DataProcessing.Controller
 {
     class OutputController
     {
+        MiddlewareModel middle = new MiddlewareModel();
         public void sortOutPut(int n)
         {
             List<string> color = new List<string>();
@@ -67,6 +69,18 @@ namespace DataProcessing.Controller
                 foreach (KeyValuePair<string, int> pair in hashmap)
                 {
                     writetext.WriteLine("{0}: {1}", pair.Key, pair.Value);
+                }
+            }
+        }
+
+        public void countColorNumberMaxValue(int n)
+        {
+            using (StreamReader sr2 = new StreamReader(n + "-output.txt"))
+            {
+                string line;
+                while ((line = sr2.ReadLine()) != null)
+                {
+                    middle.setFoundedColorMaxValue();
                 }
             }
         }
