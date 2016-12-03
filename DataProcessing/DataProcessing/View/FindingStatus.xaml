@@ -236,7 +236,12 @@
                     </Grid.RowDefinitions>
                     <StackPanel
                         Grid.Column="1">
-                        <ProgressBar x:Name="pbMyProgressBar" Maximum="100" Minimum="0" Height="23"/>
+                        <ProgressBar 
+                            x:Name="pbMyProgressBar" 
+                            Maximum="100"
+                            Minimum="0" 
+                            Height="23"
+                            />
                         <StackPanel
                             Orientation="Horizontal">
                             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20"> Tiến trình tìm kiếm hiện tại</TextBlock>

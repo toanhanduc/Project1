@@ -72,32 +72,31 @@
                     <Rectangle
                         Fill="#009e49" 
                         Height="60"
-                        Width="800"
                         Stroke="Transparent"
                         StrokeThickness="0"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"></Rectangle>
-                    <TextBox
-                        x:Name="txtFilePath"
-                        Background="White"
-                        FontSize="25"
-                        TextWrapping="NoWrap"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"></Rectangle>
+                    <StackPanel
+                        Orientation="Horizontal"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
                         Height="40"
-                        Width="600"     
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Left"
-                        Margin="15 0 0 0" TextChanged="txtFilePath_TextChanged">
-                    </TextBox>
-                    <Button
-                        Background="#55d455"
-                        Height="40"
-                        Width="140"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        BorderThickness="0"
-                        Margin="0 0 15 0"
-                        Click="browseFile">
-                        <TextBlock
+                        Margin="10 0 10 0"
+                        >
+                        <TextBox
+                            x:Name="txtFilePath"
+                            Background="White"
+                            FontSize="25"
+                            TextWrapping="NoWrap"
+                            TextChanged="txtFilePath_TextChanged"
+                            Width="600">
+                        </TextBox>
+                        <Button
+                            Width="140"
+                            Background="#55d455"
+                            BorderThickness="0"
+                            Click="browseFile">
+                            <TextBlock
                             Text="Browse"
                             Foreground="White"
                             Background="Transparent"
@@ -106,7 +105,8 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="0 6 0 0"></TextBlock>
-                    </Button>
+                        </Button>
+                    </StackPanel>
                 </Grid>
                 <!--End Browse Button-->
                 <StackPanel Grid.Row="1"                    

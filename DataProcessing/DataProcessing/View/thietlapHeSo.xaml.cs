@@ -95,6 +95,7 @@ namespace DataProcessing
             limit = inputvalue.Text;
             Boolean blankcolor = false, checkdatevalid = false;
             Boolean checkinputcolor = false;
+            MessageBox.Show(startdatetime);
             if (startdatetime != "" && enddatetime != "")
             {
                 string[] checkstartdate = startdatetime.Split('/');
