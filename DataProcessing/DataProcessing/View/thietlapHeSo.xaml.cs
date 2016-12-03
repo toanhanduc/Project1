@@ -23,9 +23,9 @@ namespace DataProcessing
         Controller.AlgorithmController tlhscontroller = new Controller.AlgorithmController();
         Controller.OutputController outcontroller = new Controller.OutputController();
         string color1, color2, color3, color4, color5;
-        Boolean group2 = false, group3 = false, group4 = false, group5 = false;       
+        Boolean group2 = false, group3 = false, group4 = false, group5 = false;
         Boolean colorgroup0 = false, colorgroup1 = false, colorgroup2 = false, colorgroup3 = false, colorgroup4 = false, colorgroup5 = false;
-   
+
         public thietlapHeSo()
         {
             InitializeComponent();
@@ -67,7 +67,7 @@ namespace DataProcessing
                 searchbutton.Text = "ĐANG TINH CHỈNH ...";
                 MessageBox.Show("Bạn vừa nhập đường dẫn: " + openfile.FileName);
                 txtFilePath.Text = openfile.FileName;
-                txtpath = openfile.FileName;         
+                txtpath = openfile.FileName;
                 excelcontroller.getColorAndDate(openfile.FileName);
                 searchbutton.Text = "TIẾN HÀNH TÌM KIẾM";
                 date1.ItemsSource = excelcontroller.fillDateTime();
@@ -93,8 +93,25 @@ namespace DataProcessing
             startdatetime = date1.SelectedValue == null ? "" : date1.SelectedValue.ToString();
             enddatetime = date2.SelectedValue == null ? "" : date2.SelectedValue.ToString();
             limit = inputvalue.Text;
-            Boolean blankcolor = false;
+            Boolean blankcolor = false, checkdatevalid = false;
             Boolean checkinputcolor = false;
+            if (startdatetime != "" && enddatetime != "")
+            {
+                string[] checkstartdate = startdatetime.Split('/');
+                string[] checkenddate = enddatetime.Split('/');
+                if (Int32.Parse(checkstartdate[2]) <= Int32.Parse(checkenddate[2]))
+                {
+                    if (Int32.Parse(checkstartdate[0]) <= Int32.Parse(checkenddate[0]))
+                    {
+                        if (Int32.Parse(checkstartdate[1]) < Int32.Parse(checkenddate[1]))
+                        {
+                            checkdatevalid = true;
+                        }
+                    }
+                }
+            }
+
+
             if (ncolor != 0)
             {
                 if (ncolor == 1)
@@ -154,7 +171,7 @@ namespace DataProcessing
                             checkinputcolor = true;
                         }
                     }
-                   
+
                 }
                 else if (ncolor == 5)
                 {
@@ -179,7 +196,7 @@ namespace DataProcessing
                             checkinputcolor = true;
                         }
                     }
-                    
+
                 }
             }
 
@@ -196,11 +213,15 @@ namespace DataProcessing
             {
                 MessageBox.Show("Ngày kết thúc không hợp lệ");
             }
+            else if (!checkdatevalid)
+            {
+                MessageBox.Show("Ngày bắt đầu và ngày kết thúc không hợp lệ");
+            }
             else if (!group2 && !group3 && !group4 && !group5)
             {
                 MessageBox.Show("Bạn chưa chọn nhóm màu");
             }
-            else if(n > thietlaphesoModel.colcount)
+            else if (n > thietlaphesoModel.colcount)
             {
                 MessageBox.Show("File có ít màu hơn nhóm màu bạn chọn tìm kiếm");
             }
@@ -269,20 +290,20 @@ namespace DataProcessing
                     {
                         if (ncolor == 2)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                color2 = combo2.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, color2));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, color2));
+                            checkstop = true;
                         }
                         else if (ncolor == 1)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, ""));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll2(ncolor, color1, ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 0)
                         {
@@ -297,32 +318,32 @@ namespace DataProcessing
                         int timestart = Environment.TickCount;
                         if (ncolor == 3)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                color2 = combo2.SelectedValue.ToString();
-                                color3 = combo3.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, color3));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            color3 = combo3.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, color3));
+                            checkstop = true;
                         }
 
                         else if (ncolor == 2)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                color2 = combo2.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, ""));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, color2, ""));
+                            checkstop = true;
                         }
 
                         else if (ncolor == 1)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, "", ""));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll3(ncolor, color1, "", ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 0)
                         {
@@ -337,41 +358,41 @@ namespace DataProcessing
                         int timestart = Environment.TickCount;
                         if (ncolor == 4)
                         {
-                                        FindingStatus find = new FindingStatus();
-                                        this.NavigationService.Navigate(find);
-                                        color1 = combo1.SelectedValue.ToString();
-                                        color2 = combo2.SelectedValue.ToString();
-                                        color3 = combo3.SelectedValue.ToString();
-                                        color4 = combo4.SelectedValue.ToString();
-                                        await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, color4));
-                                        checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            color3 = combo3.SelectedValue.ToString();
+                            color4 = combo4.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, color4));
+                            checkstop = true;
                         }
                         else if (ncolor == 3)
                         {
-                                    FindingStatus find = new FindingStatus();
-                                    this.NavigationService.Navigate(find);
-                                    color1 = combo1.SelectedValue.ToString();
-                                    color2 = combo2.SelectedValue.ToString();
-                                    color3 = combo3.SelectedValue.ToString();
-                                    await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, ""));
-                                    checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            color3 = combo3.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, color3, ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 2)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                color2 = combo2.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, "", ""));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, color2, "", ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 1)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, "", "", ""));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll4(ncolor, color1, "", "", ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 0)
                         {
@@ -386,53 +407,53 @@ namespace DataProcessing
                         int timestart = Environment.TickCount;
                         if (ncolor == 5)
                         {
-                                        FindingStatus find = new FindingStatus();
-                                        this.NavigationService.Navigate(find);
-                                        color1 = combo1.SelectedValue.ToString();
-                                        color2 = combo2.SelectedValue.ToString();
-                                        color3 = combo3.SelectedValue.ToString();
-                                        color4 = combo4.SelectedValue.ToString();
-                                        color5 = combo5.SelectedValue.ToString();
-                                        await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, color5));
-                                        checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            color3 = combo3.SelectedValue.ToString();
+                            color4 = combo4.SelectedValue.ToString();
+                            color5 = combo5.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, color5));
+                            checkstop = true;
                         }
                         else if (ncolor == 4)
                         {
-                                        FindingStatus find = new FindingStatus();
-                                        this.NavigationService.Navigate(find);
-                                        color1 = combo1.SelectedValue.ToString();
-                                        color2 = combo2.SelectedValue.ToString();
-                                        color3 = combo3.SelectedValue.ToString();
-                                        color4 = combo4.SelectedValue.ToString();
-                                        await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, ""));
-                                        checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            color3 = combo3.SelectedValue.ToString();
+                            color4 = combo4.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, color4, ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 3)
                         {
-                                    FindingStatus find = new FindingStatus();
-                                    this.NavigationService.Navigate(find);
-                                    color1 = combo1.SelectedValue.ToString();
-                                    color2 = combo2.SelectedValue.ToString();
-                                    color3 = combo3.SelectedValue.ToString();
-                                    await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, "", ""));
-                                    checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            color3 = combo3.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, color3, "", ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 2)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                color2 = combo2.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, "", "", ""));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            color2 = combo2.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, color2, "", "", ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 1)
                         {
-                                FindingStatus find = new FindingStatus();
-                                this.NavigationService.Navigate(find);
-                                color1 = combo1.SelectedValue.ToString();
-                                await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, "", "", "", ""));
-                                checkstop = true;
+                            FindingStatus find = new FindingStatus();
+                            this.NavigationService.Navigate(find);
+                            color1 = combo1.SelectedValue.ToString();
+                            await Task.Run(() => tlhscontroller.processGroupAll5(ncolor, color1, "", "", "", ""));
+                            checkstop = true;
                         }
                         else if (ncolor == 0)
                         {
