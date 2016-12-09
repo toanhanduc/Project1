@@ -126,6 +126,10 @@ namespace DataProcessing
 
                 sp = speed1;
                 totalcolor -= sp;
+                if(sp == 0)
+                {
+                    sp = 1;
+                }
 
                 if (giay == 1 && phut == 0 && gio == 0)
                 {
