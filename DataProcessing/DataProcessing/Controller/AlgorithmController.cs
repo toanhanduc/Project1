@@ -34,6 +34,7 @@ namespace DataProcessing.Controller
             exc.readExcelSortByValue(model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne());
             int n = model.getN();
             string print = "";
+            int limitedInputValue = model.getLimit();
             int currentValue1; // giá trị ở vòng 1
             int currentValue2; // giá trị ở vòng 2
             int currentValue3; // giá trị ở vòng 3
@@ -76,6 +77,10 @@ namespace DataProcessing.Controller
                 if (!checkList1.Any()) // màu đầu tiên full 1
                 {
                     biggestValue = currentValue1;
+                    if (biggestValue < limitedInputValue)
+                    {
+                        break;
+                    }
                     for (int j = i + 1; j < model.getColCount() - n + 1; j++)
                     {
                         if (value[j] == 0 && (canStop || (value[n - 1] == 0 && value[1] != 0)))
@@ -176,6 +181,10 @@ namespace DataProcessing.Controller
                                 if (currentValue2 > biggestValue)
                                 {
                                     biggestValue = currentValue2;
+                                    if (biggestValue < limitedInputValue)
+                                    {
+                                        continue;
+                                    }
                                     if (index[i] < index[j])
                                     {
 
@@ -190,6 +199,10 @@ namespace DataProcessing.Controller
                                 }
                                 else if (currentValue2 == biggestValue)
                                 {
+                                    if (biggestValue < limitedInputValue)
+                                    {
+                                        continue;
+                                    }
                                     if (index[i] < index[j])
                                     {
 
@@ -247,6 +260,10 @@ namespace DataProcessing.Controller
                             if (!checkList2.Any()) // 2 màu làm full 1 luôn
                             {
                                 biggestValue = currentValue2;
+                                if (biggestValue < limitedInputValue)
+                                {
+                                    break;
+                                }
 
                                 for (int q = 0; q < model.getColCount() - n + 2; q++)
                                 {
@@ -435,6 +452,10 @@ namespace DataProcessing.Controller
                                         if (currentValue3 > biggestValue)
                                         {
                                             biggestValue = currentValue3;
+                                            if (biggestValue < limitedInputValue)
+                                            {
+                                                continue;
+                                            }
 
                                             String[] colorOut = new String[3];
                                             int[] colorOutIndex = new int[3];
@@ -470,6 +491,10 @@ namespace DataProcessing.Controller
                                         else if (currentValue3 == biggestValue)
                                         {
                                             biggestValue = currentValue3;
+                                            if (biggestValue < limitedInputValue)
+                                            {
+                                                continue;
+                                            }
                                             String[] colorOut = new String[3];
                                             int[] colorOutIndex = new int[3];
 
@@ -545,6 +570,10 @@ namespace DataProcessing.Controller
                                     if (!checkList3.Any()) // 3 mau lam full 1
                                     {
                                         biggestValue = currentValue3;
+                                        if (biggestValue < limitedInputValue)
+                                        {
+                                            break;
+                                        }
 
                                         for (int k = 0; k < model.getColCount() - n + 3; k++)
                                         {
@@ -685,6 +714,10 @@ namespace DataProcessing.Controller
                                                 if (currentValue4 > biggestValue)
                                                 {
                                                     biggestValue = currentValue4;
+                                                    if (biggestValue < limitedInputValue)
+                                                    {
+                                                        continue;
+                                                    }
 
                                                     String[] colorOut = new String[4];
                                                     int[] colorOutIndex = new int[4];
@@ -722,6 +755,10 @@ namespace DataProcessing.Controller
                                                 }
                                                 else if (currentValue4 == biggestValue)
                                                 {
+                                                    if (biggestValue < limitedInputValue)
+                                                    {
+                                                        continue;
+                                                    }
                                                     String[] colorOut = new String[4];
                                                     int[] colorOutIndex = new int[4];
 
@@ -800,6 +837,10 @@ namespace DataProcessing.Controller
                                             if (!checkList4.Any()) // 4 mau full 1
                                             {
                                                 biggestValue = currentValue4;
+                                                if (biggestValue < limitedInputValue)
+                                                {
+                                                    continue;
+                                                }
 
                                                 for (int l = 0; l < model.getColCount() - n + 4; l++)
                                                 {
@@ -875,6 +916,10 @@ namespace DataProcessing.Controller
                                                     if (currentValue4 + currentCosts > biggestValue)
                                                     {
                                                         biggestValue = currentValue4 + currentCosts;
+                                                        if (biggestValue < limitedInputValue)
+                                                        {
+                                                            continue;
+                                                        }
 
                                                         String[] colorOut = new String[5];
                                                         int[] colorOutIndex = new int[5];
@@ -913,6 +958,10 @@ namespace DataProcessing.Controller
                                                     }
                                                     else if (currentValue4 + currentCosts == biggestValue)
                                                     {
+                                                        if (biggestValue < limitedInputValue)
+                                                        {
+                                                            continue;
+                                                        }
                                                         String[] colorOut = new String[5];
                                                         int[] colorOutIndex = new int[5];
 
@@ -1495,6 +1544,7 @@ namespace DataProcessing.Controller
             exc.readExcelSortByColor(nColorChose, model.getColor(), model.getValue(), model.getIndex(), model.getZeroOne(), color1, color2, color3, color4, color5);
             int n = model.getN();
             string print = "";
+            int limitedInputValue = model.getLimit();
             int biggestValue = 0; // giá trị lớn nhất khi gộp 2 cột
             int[] value = model.getValue();
             int[][] zeroOne = model.getZeroOne();
