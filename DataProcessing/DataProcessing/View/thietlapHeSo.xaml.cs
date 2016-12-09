@@ -267,6 +267,16 @@ namespace DataProcessing
                 }
                 else
                 {
+                    if (limit == "")
+                    {
+                        tlhscontroller.readLimit(0);
+                    }
+                    else
+                    {
+                        int limitvalue = Int32.Parse(limit);
+                        tlhscontroller.readLimit(limitvalue);
+                    }
+
                     if (group2) //in tất cả nhóm 2
                     {
                         if (ncolor == 2)
@@ -624,6 +634,11 @@ namespace DataProcessing
         private void RadioButtonTop_Unchecked(object sender, RoutedEventArgs e)
         {
             findmax = false;
+        }
+
+        private void inputvalue_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         private void RadioButtonAll_Checked(object sender, RoutedEventArgs e)

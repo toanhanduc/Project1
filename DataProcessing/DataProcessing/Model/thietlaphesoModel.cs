@@ -30,7 +30,7 @@ namespace DataProcessing.Model
         /// <returns></returns>
         public int getLimit()
         {
-            return limitvalue ;
+            return limitvalue;
         }
 
         /// <summary>
