@@ -22,16 +22,8 @@ namespace DataProcessing.Controller
                 {
                     string[] s = line.Split((":").ToCharArray());
                     s[1] = s[1].Trim();
-                    try
-                    {
-                        hashmap.Add(s[0], Int32.Parse(s[1]));
-                        color.Add(s[0]);
-                        value.Add(Int32.Parse(s[1]));
-                    }
-                    catch(Exception e)
-                    {
-                        continue;
-                    }
+                    color.Add(s[0]);
+                    value.Add(Int32.Parse(s[1]));
                 }
                 int tmp;
                 string tmpcolor;
@@ -52,12 +44,25 @@ namespace DataProcessing.Controller
                 }
             }
 
+            for (int i = 0; i < value.Count; i++)
+            {
+                try
+                {
+                    hashmap.Add(color[i], value[i]);
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+            }
+
             //In output mới
-            using (StreamWriter writetext = new StreamWriter(n +  "-output.txt"))
+            using (StreamWriter writetext = new StreamWriter(n + "-output.txt"))
             {
                 foreach (KeyValuePair<string, int> pair in hashmap)
                 {
                     writetext.WriteLine("{0}: {1}", pair.Key, pair.Value);
+                    Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
                 }
             }
         }

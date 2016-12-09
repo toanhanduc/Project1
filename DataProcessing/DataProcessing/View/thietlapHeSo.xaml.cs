@@ -93,24 +93,8 @@ namespace DataProcessing
             startdatetime = date1.SelectedValue == null ? "" : date1.SelectedValue.ToString();
             enddatetime = date2.SelectedValue == null ? "" : date2.SelectedValue.ToString();
             limit = inputvalue.Text;
-            Boolean blankcolor = false, checkdatevalid = false;
+            Boolean blankcolor = false;
             Boolean checkinputcolor = false;
-            MessageBox.Show(startdatetime);
-            if (startdatetime != "" && enddatetime != "")
-            {
-                string[] checkstartdate = startdatetime.Split('/');
-                string[] checkenddate = enddatetime.Split('/');
-                if (Int32.Parse(checkstartdate[2]) <= Int32.Parse(checkenddate[2]))
-                {
-                    if (Int32.Parse(checkstartdate[0]) <= Int32.Parse(checkenddate[0]))
-                    {
-                        if (Int32.Parse(checkstartdate[1]) < Int32.Parse(checkenddate[1]))
-                        {
-                            checkdatevalid = true;
-                        }
-                    }
-                }
-            }
 
 
             if (ncolor != 0)
@@ -213,10 +197,6 @@ namespace DataProcessing
             else if (enddatetime.Length == 0)
             {
                 MessageBox.Show("Ngày kết thúc không hợp lệ");
-            }
-            else if (!checkdatevalid)
-            {
-                MessageBox.Show("Ngày bắt đầu và ngày kết thúc không hợp lệ");
             }
             else if (!group2 && !group3 && !group4 && !group5)
             {
