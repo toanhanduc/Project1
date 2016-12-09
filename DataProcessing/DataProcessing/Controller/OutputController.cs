@@ -62,7 +62,6 @@ namespace DataProcessing.Controller
                 foreach (KeyValuePair<string, int> pair in hashmap)
                 {
                     writetext.WriteLine("{0}: {1}", pair.Key, pair.Value);
-                    Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
                 }
             }
         }
